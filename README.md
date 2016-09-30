@@ -73,7 +73,7 @@ This image has been tested on Docker Versions 1.12.1-beta26 or higher.
 
 MIT
 
-## License of .NET Framework images on Dockerhub 
+## License of .NET Framework Docker images 
 
 MICROSOFT SOFTWARE SUPPLEMENTAL LICENSE TERMS
 
