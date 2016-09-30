@@ -2,11 +2,11 @@
 
 # .NET Framework 4.6.2
 
-The .NET Framework 4.6.2 is included in the [Windows Server Core base image](https://hub.docker.com/r/microsoft/windowsservercore/). You can pull/FROM [microsoft/windowsservercore](microsoft/windowsservercore) to use .NET Framework 4.6.2.
+The .NET Framework 4.6.2 is included in the [Windows Server Core base image](https://hub.docker.com/r/microsoft/windowsservercore/). You can pull/FROM microsoft/windowsservercore to use .NET Framework 4.6.2.
 
 # .NET Framework 3.5
 
-.NET Framework 3.5 is an optional component in Windows Server Core. The official Docker image for the .NET Framework 3.5 is included in this Docker repository and is in preview. You can pull/FROM [microsoft/dotnet-framework](microsoft/windowsservercore) to use .NET Framework 3.5.
+.NET Framework 3.5 is an optional component in Windows Server Core. The official Docker image for the .NET Framework 3.5 is included in this Docker repository and is in preview. You can pull/FROM microsoft/dotnet-framework:3.5 to use .NET Framework 3.5.
 
 The following tags can be used for the .NET Framework 3.5 Docker image:
 
@@ -35,7 +35,7 @@ The .NET Framework can be used to build Windows and Windows Server applications.
 ## How to use this image?
 ### Create a Dockerfile with your application
 ```
-FROM microsoft/dotnet35
+FROM microsoft/dotnet-framework:3.5
 ADD MyDotNet35App.exe /MyDotNet35App.exe
 ENTRYPOINT MyDotNet35App.exe
 ```
