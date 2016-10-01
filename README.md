@@ -1,8 +1,8 @@
-The official docker images for .NET Framework on Windows ServerCore.
+The official Docker images for the .NET Framework on Windows Server Core.
 
 # .NET Framework Containers
 
-There are multiple flavors of .NET Framework Docker images avaialble, for both Web and Console application workloads.
+There are multiple flavors of the .NET Framework Docker images available, for both Web and Console application workloads.
 
 ## .NET Framework 4.6.2
 
@@ -22,10 +22,10 @@ To make discovery easier, we have also provided the same image (with a FROM wrap
 
 ## .NET Framework 4.6 and 3.5 and ASP.NET
 
-You should use the ASP.NET Docker images if you want to package an .NET Framework ASP.NET app with Docker. The following Docker images are available in the [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) Dockerhub repo.
+You should use the ASP.NET Docker images if you want to package a .NET Framework ASP.NET app with Docker. The following Docker images are available in the [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) Dockerhub repo.
 
 - microsoft/aspnet:4.6.2 - For .NET Framework 4.x ASP.NET applications.
-- microsoft/aspnet:3.5 - For .NET Frameowkr 3.5 ASP.NET applications.
+- microsoft/aspnet:3.5 - For .NET Framework 3.5 ASP.NET applications.
 
 Note: The .NET Framework 3.5 image also contains the .NET Framework 4.6.2. You may want to standardize on this image if you intend to host both .NET Framework 3.5 and 4.x web sites in the same environment.
 
