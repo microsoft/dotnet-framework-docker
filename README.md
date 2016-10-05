@@ -53,7 +53,7 @@ The .NET Framework can be used to build Windows and Windows Server applications.
 Create a Dockerfile for your application
 
 ```
-FROM microsoft/dotnet35
+FROM microsoft/dotnet-framework:3.5
 ADD MyDotNet35App.exe /MyDotNet35App.exe
 ENTRYPOINT MyDotNet35App.exe
 ```
