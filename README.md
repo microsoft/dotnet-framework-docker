@@ -1,3 +1,26 @@
+# Supported tags and respective `Dockerfile` links
+
+-       [`4.6.2`, `latest` (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
+-       [`3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
+
+For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/dotnet/dotnet-docker/pulls?utf8=%E2%9C%93&q=).
+
+[![Downloads from Docker Hub](https://img.shields.io/docker/pulls/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)
+[![Stars on Docker Hub](https://img.shields.io/docker/stars/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)
+
+# What is the .NET Framework?
+
+The .NET Framework is a general purpose development platform maintained by Microsoft. It is a popular choice for building applications for Windows and Windows Server. It is included with Windows, Windows Server and Windows Server Core.
+
+.NET has several capabilities that make development easier, including automatic memory management, (runtime) generic types, reflection, asynchrony, concurrency, and native interop. Millions of developers take advantage of these capabilities to efficiently build high-quality web and client applications.
+
+You can use C# to write .NET Core apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. Anyone familiar with C and similar languages will find it straightforward to write in C#.
+
+The .NET Framework was first released by Microsoft in 2001. The latest version is .NET Framework 4.6.2.
+
+> https://docs.microsoft.com/en-us/dotnet/articles/core/
+
+![logo](https://avatars0.githubusercontent.com/u/9141961?v=3&amp;s=100)
 The official Docker images for the .NET Framework on Windows Server Core.
 
 # .NET Framework Containers
