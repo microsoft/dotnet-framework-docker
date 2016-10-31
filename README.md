@@ -1,7 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
--       [`4.6.2`, `latest` (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
--       [`3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
+-       [`4.6.2`, `latest` (*4.6.2/Dockerfile*)](4.6.2/Dockerfile)
+-       [`3.5` (*3.5/Dockerfile*)](3.5/Dockerfile)
 
 For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/dotnet/dotnet-docker/pulls?utf8=%E2%9C%93&q=).
 
@@ -10,11 +10,11 @@ For more information about these images and their history, please see [the relev
 
 # What is the .NET Framework?
 
-The .NET Framework is a general purpose development platform maintained by Microsoft. It is a popular choice for building applications for Windows and Windows Server. It is included with Windows, Windows Server and Windows Server Core.
+The .NET Framework is a general purpose development platform maintained by Microsoft. It is the most popular way to build client and server applications for Windows and Windows Server. It is included with Windows, Windows Server and Windows Server Core. It includes server technologies such as ASP.NET Web Forms, ASP.NET MVC and Windows Communication Framework (WCF) applications, which you can run in Docker containers.
 
 .NET has several capabilities that make development easier, including automatic memory management, (runtime) generic types, reflection, asynchrony, concurrency, and native interop. Millions of developers take advantage of these capabilities to efficiently build high-quality web and client applications.
 
-You can use C# to write .NET Core apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. Anyone familiar with C and similar languages will find it straightforward to write in C#.
+You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. F# is a multi-paradigm programming language, enabling both functional and object-oriented patterns and practices. VB is a rapid development programming language with the deepest integration between the language and Visual Studio, providing the fastest path to a working app.   
 
 The .NET Framework was first released by Microsoft in 2001. The latest version is .NET Framework 4.6.2.
 
@@ -27,7 +27,22 @@ The official Docker images for the .NET Framework on Windows Server Core.
 
 ## Deploying a .NET Framework 4.x application with Docker
 
-The .NET Framework can be used to build Windows and Windows Server applications. It includes technologies such as ASP.NET Web Forms, ASP.NET MVC and Windows Communication Framework (WCF) applications. 
+You can deploy .NET Framework 4.x applications with Docker using the following instructions. 
+
+1. Build your application, in Visual Studio or at the command line. 
+2. Add the following Dockerfile file to your project. You will need to change the `mydotnetapp.exe` string to your app name. The Dockerfile assumes that your app is built to the `bin\Release` directory. Please update your Dockerfile as appropriate. 
+3. Type the following Docker commands at the command line, within your project directory.
+
+```Dockerfile
+FROM microsoft/dotnet-framework:4.6
+WORKDIR \app
+COPY bin\Release .
+ENTRYPOINT ["mydotnetapp.exe"]
+```
+
+
+
+The Docker image includes the .NET Framework 4.6.2, however, your application does not need to explicity target the .NET Framework 4.6.2. Applications that target .NET Framework 4.0 or latest should work correctly in this image.
 
 ## Deploying a .NET Framework 3.5 application with Docker
 
