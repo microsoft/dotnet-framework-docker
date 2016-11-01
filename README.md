@@ -26,7 +26,7 @@ The .NET Framework was first released by Microsoft in 2001. The latest version i
 
 ## Deploying a .NET Framework 4.x application with Docker
 
-You can deploy .NET Framework 4.x applications with Docker using the following instructions. You can also check out the [.NET Framework 4.6.2 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples) if you want to try a pre-made version that's ready go.
+It is easy to create a Docker image including a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.6.2 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
 2. Add the following Dockerfile file to your project. You will need to change the `dotnetapp.exe` string to your app name. The Dockerfile assumes that your app is built to the `bin\Release` directory`. Please update your Dockerfile as appropriate. 
@@ -49,7 +49,7 @@ The Docker image includes the .NET Framework 4.6.2, however, your application do
 
 ## Deploying a .NET Framework 3.5 application with Docker
 
-You can deploy .NET Framework 4.x applications with Docker using the following instructions. You can also check out the [.NET Framework 3.5 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples) if you want to try a pre-made version that's ready go.
+It is easy to create a Docker image including a .NET Framework 3.5 application. You can try the instructions below or check out the [.NET Framework 3.5 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
 2. Add the following Dockerfile file to your project. You will need to change the `dotnetapp.exe` string to your app name. The Dockerfile assumes that your app is built to the `bin\Release` directory`. Please update your Dockerfile as appropriate. 
