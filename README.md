@@ -126,4 +126,4 @@ You are invited to report issues or request features by creating a [GitHub issue
 
 You can read documentation for using the .NET Framework with Docker usage in the [.NET docs](https://docs.microsoft.com/dotnet/articles/framework/docker). The docs are also [open source on GitHub](https://github.com/dotnet/docs). Contributions are welcome!
 
-[win-containers]: https://msdn.microsoft.com/virtualization/windowscontainers/about/about_overview
+[win-containers]: http://aka.ms/windowscontainers
