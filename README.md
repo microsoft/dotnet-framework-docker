@@ -31,7 +31,7 @@ These images are based on [Windows Containers][win-containers]. You need to be W
 It is easy to create a Docker image for a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.6.2 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-4.6.2) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
-2. Add a `Dockerfile` file with the following content to your project. You will need to change the `dotnetapp.exe` string, below, to your app name. The Dockerfile assumes that your app is built to the `bin\Release` directory. Please update your Dockerfile as appropriate. 
+2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate. 
 
 ```Dockerfile
 FROM microsoft/dotnet-framework:4.6.2
@@ -54,7 +54,7 @@ The Docker image includes the .NET Framework 4.6.2, however, your application do
 It is easy to create a Docker image for a .NET Framework 3.5 application. You can try the instructions below or check out the [.NET Framework 3.5 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-3.5) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
-2. Add a `Dockerfile` file with the following content to your project. You will need to change the `dotnetapp.exe` string, below, to your app name. The Dockerfile assumes that your app is built to the `bin\Release` directory. Please update your Dockerfile as appropriate. 
+2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.  
 
 ```Dockerfile
 FROM microsoft/dotnet-framework:3.5
