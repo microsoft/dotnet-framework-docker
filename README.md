@@ -114,7 +114,7 @@ Microsoft Corporation (or based on where you live, one of its affiliates) (refer
 
 This image is officially supported on Docker version 1.12.2.
 
-Please see [the Docker installation documentation](https://docs.docker.com/installation/) for details on how to upgrade your Docker daemon.
+Please see [Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/) for details on how to install or upgrade Docker to use Windows Containers.
 
 # User Feedback
 
