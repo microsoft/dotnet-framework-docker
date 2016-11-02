@@ -94,9 +94,9 @@ See [.NET Framework and Docker](https://docs.microsoft.com/dotnet/articles/frame
 
 See the following related repos for other application types:
 
-- [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC applications.
-- [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core applications.
-- [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core applications.
+- [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
+- [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
+- [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core images.
 
 You can read more about [Windows Containers][win-containers] to learn how to use Docker with Windows.
 
