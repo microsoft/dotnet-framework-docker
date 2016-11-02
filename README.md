@@ -20,7 +20,7 @@ The .NET Framework was first released by Microsoft in 2001. The latest version i
 
 > https://docs.microsoft.com/dotnet/articles/framework/
 
-![logo](https://cloud.githubusercontent.com/assets/2608468/19942003/7b215428-a0ef-11e6-8252-0a2972837842.png)
+![dotnet-icon](https://cloud.githubusercontent.com/assets/2608468/19943483/d57d102e-a0f4-11e6-849b-0d997148bc0a.png)
 
 # How to use these Images
 
