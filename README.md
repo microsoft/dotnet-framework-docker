@@ -33,19 +33,19 @@ It is easy to create a Docker image for a .NET Framework 4.x application. You ca
 1. Build your application in Visual Studio or at the command line. 
 2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate. 
 
-```Dockerfile
-FROM microsoft/dotnet-framework:4.6.2
-WORKDIR \app
-COPY bin\Release .
-ENTRYPOINT ["dotnetapp.exe"]
-```
+    ```Dockerfile
+    FROM microsoft/dotnet-framework:4.6.2
+    WORKDIR \app
+    COPY bin\Release .
+    ENTRYPOINT ["dotnetapp.exe"]
+    ```
 
 3. Type the following Docker commands at the command line, within your project directory (beside Program.cs). You can change the tag name (`dotnetapp`) to your own string, as you like.
 
-```console
-docker build -t dotnetapp .
-docker run dotnetapp
-```
+    ```console
+    docker build -t dotnetapp .
+    docker run dotnetapp
+    ```
 
 The Docker image includes the .NET Framework 4.6.2, however, your application does not need to explicity target the .NET Framework 4.6.2. Applications that target .NET Framework 4.0 or later should work correctly with this image.
 
@@ -56,19 +56,19 @@ It is easy to create a Docker image for a .NET Framework 3.5 application. You ca
 1. Build your application in Visual Studio or at the command line. 
 2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.  
 
-```Dockerfile
-FROM microsoft/dotnet-framework:3.5
-WORKDIR \app
-COPY bin\Release .
-ENTRYPOINT ["dotnetapp.exe"]
-```
+    ```Dockerfile
+    FROM microsoft/dotnet-framework:3.5
+    WORKDIR \app
+    COPY bin\Release .
+    ENTRYPOINT ["dotnetapp.exe"]
+    ```
 
 3. Type the following Docker commands at the command line, within your project directory (beside Program.cs). You can change the tag name (`dotnetapp`) to your own string, as you like.
 
-```console
-docker build -t dotnetapp .
-docker run dotnetapp
-```
+    ```console
+    docker build -t dotnetapp .
+    docker run dotnetapp
+    ```
 
 The Docker image includes the .NET Framework 3.5, however, your application does not need to explicity target the .NET Framework 3.5. Applications that target .NET Framework 1.0 through 3.5 should work correctly with this image.
 
