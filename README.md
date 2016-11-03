@@ -1,79 +1,108 @@
-The official Docker images for the .NET Framework on Windows Server Core.
+# Supported tags and respective `Dockerfile` links
 
-# .NET Framework Containers
+-       [`4.6.2`, `latest` (*4.6.2/Dockerfile*)](4.6.2/Dockerfile)
+-       [`3.5` (*3.5/Dockerfile*)](3.5/Dockerfile)
 
-There are multiple flavors of the .NET Framework Docker images available, for both Web and Console application workloads.
+For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/microsoft/dotnet-framework-docker/pulls?utf8=%E2%9C%93&q=).
 
-## .NET Framework 4.6.2
+[![Downloads from Docker Hub](https://img.shields.io/docker/pulls/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)
+[![Stars on Docker Hub](https://img.shields.io/docker/stars/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)
 
-The .NET Framework 4.6.2 is included in the [Windows Server Core base image](https://hub.docker.com/r/microsoft/windowsservercore/). You can pull/FROM microsoft/windowsservercore to use .NET Framework 4.6.2.
+# What is the .NET Framework?
 
-To make discovery easier, we have also provided the same image (with a FROM wrapper) in this repo, enabling you to pull `microsoft/dotnet-framework`.
+The [.NET Framework](https://www.microsoft.com/net/framework) is a general purpose development platform maintained by Microsoft. It is the most popular way to build client and server applications for Windows and Windows Server. It is included with Windows, Windows Server and Windows Server Core. It includes server technologies such as ASP.NET Web Forms, ASP.NET MVC and Windows Communication Framework (WCF) applications, which you can run in Docker containers.
 
-- Optional tags: `latest`, `4.6.2`
-- Dockerfile: [4.6.2/Dockerfile](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
+.NET has several capabilities that make development easier, including automatic memory management, (runtime) generic types, reflection, asynchrony, concurrency, and native interop. Millions of developers take advantage of these capabilities to efficiently build high-quality web and client applications.
 
-## .NET Framework 3.5
+You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. F# is a multi-paradigm programming language, enabling both functional and object-oriented patterns and practices. VB is a rapid development programming language with the deepest integration between the language and Visual Studio, providing the fastest path to a working app.   
 
-.NET Framework 3.5 is an optional component in Windows Server Core. The official Docker image for the .NET Framework 3.5 is included in this Docker repository and is in preview. You can pull/FROM microsoft/dotnet-framework:3.5 to use .NET Framework 3.5.
+The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.6.2](https://www.microsoft.com/net/framework).
 
-- Required tag: `3.5`
-- Dockerfile: [3.5/Dockerfile](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
+> https://docs.microsoft.com/dotnet/articles/framework/
 
-## .NET Framework 4.6 and 3.5 and ASP.NET
+![dotnet-icon](https://cloud.githubusercontent.com/assets/2608468/19951790/a0458278-a11d-11e6-86e4-660aaa22aa3c.png)
 
-You should use the ASP.NET Docker images if you want to package a .NET Framework ASP.NET app with Docker. The following Docker images are available in the [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) Dockerhub repo.
+# How to use these Images
 
-- microsoft/aspnet:4.6.2 - For .NET Framework 4.x ASP.NET applications.
-- microsoft/aspnet:3.5 - For .NET Framework 3.5 ASP.NET applications.
+These images are based on [Windows Containers][win-containers]. You need to be Windows 10 or Windows Server 2016 to use them.
 
-Note: The .NET Framework 3.5 image also contains the .NET Framework 4.6.2. You may want to standardize on this image if you intend to host both .NET Framework 3.5 and 4.x web sites in the same environment.
+## Deploying a .NET Framework 4.x application with Docker
 
-## .NET Core
+It is easy to create a Docker image for a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.6.2 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-4.6.2) if you want to try a pre-made version that's ready go.
 
-You can get .NET Core images from the [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) Dockerhub repo.
+1. Build your application in Visual Studio or at the command line. 
+2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate. 
 
-# Learn more
+    ```Dockerfile
+    FROM microsoft/dotnet-framework:4.6.2
+    WORKDIR \app
+    COPY bin\Release .
+    ENTRYPOINT ["dotnetapp.exe"]
+    ```
 
-There are multiple resources that you can look at to learn more.
+3. Type the following Docker commands at the command line, within your project directory (beside Program.cs). You can change the tag name (`dotnetapp`) to your own string, as you like.
 
-## .NET Framework Containers
+    ```console
+    docker build -t dotnetapp .
+    docker run dotnetapp
+    ```
 
-Check out [Docker on .NET Framework](https://docs.microsoft.com/dotnet/articles/framework/docker) to learn more about running .NET Framework applications in Windows Containers. 
+The Docker image includes the .NET Framework 4.6.2, however, your application does not need to explicity target the .NET Framework 4.6.2. Applications that target .NET Framework 4.0 or later should work correctly with this image.
 
-## Windows Containers
+## Deploying a .NET Framework 3.5 application with Docker
 
-.NET Framework Docker images rely on the Container feature in Windows. You can read about [Windows Containers](https://msdn.microsoft.com/virtualization/windowscontainers/about/about_overview) to learn everything you need to know about using Docker with Windows.
+It is easy to create a Docker image for a .NET Framework 3.5 application. You can try the instructions below or check out the [.NET Framework 3.5 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-3.5) if you want to try a pre-made version that's ready go.
 
-## What is the .NET Framework?
-The .NET Framework can be used to build Windows and Windows Server applications. It includes technologies such as ASP.NET Web Forms, ASP.NET MVC and Windows Communication Framework (WCF) applications. 
+1. Build your application in Visual Studio or at the command line. 
+2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.  
 
-## How to use the .NET Framework 3.5 image?
+    ```Dockerfile
+    FROM microsoft/dotnet-framework:3.5
+    WORKDIR \app
+    COPY bin\Release .
+    ENTRYPOINT ["dotnetapp.exe"]
+    ```
 
-Create a Dockerfile for your application
+3. Type the following Docker commands at the command line, within your project directory (beside Program.cs). You can change the tag name (`dotnetapp`) to your own string, as you like.
 
-```
-FROM microsoft/dotnet-framework:3.5
-ADD MyDotNet35App.exe /MyDotNet35App.exe
-ENTRYPOINT MyDotNet35App.exe
-```
+    ```console
+    docker build -t dotnetapp .
+    docker run dotnetapp
+    ```
 
-You can then build and run the Docker image:
+The Docker image includes the .NET Framework 3.5, however, your application does not need to explicity target the .NET Framework 3.5. Applications that target .NET Framework 1.0 through 3.5 should work correctly with this image.
 
-```
-$ docker build -t my-dotnet35-app .
-$ docker run my-dotnet35-app
-```
+## Image variants
 
-## Supported Docker Versions
+The `microsoft/dotnet-framework` images come in different flavors, each designed for a specific use case.
 
-This image has been tested on Docker Versions 1.12.1-beta26 or higher.
+### `4.6.2`
 
-## License of this repository
+This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 
-MIT
+This image is for .NET Framework 4.0 and later version applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
-## License of .NET Framework Docker images 
+### `3.5`
+
+This image is for .NET Framework 3.5 and earlier version applications.  It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+
+## Related Repos and Examples
+
+See [.NET Framework Docker samples](https://github.com/Microsoft/dotnet-framework-docker-samples) to get started with pre-made samples.
+
+See [.NET Framework and Docker](https://docs.microsoft.com/dotnet/articles/framework/docker/) to learn more about using .NET Framework with Docker.
+
+See the following related repos for other application types:
+
+- [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
+- [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
+- [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core images.
+
+You can read more about [Windows Containers][win-containers] to learn how to use Docker with Windows.
+
+# License
+
+The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/r/microsoft/windowsservercore/), as follows:
 
 MICROSOFT SOFTWARE SUPPLEMENTAL LICENSE TERMS
 
@@ -81,6 +110,20 @@ CONTAINER OS IMAGE
 
 Microsoft Corporation (or based on where you live, one of its affiliates) (referenced as “us,” “we,” or “Microsoft”) licenses this Container OS Image supplement to you (“Supplement”). You are licensed to use this Supplement in conjunction with the underlying host operating system software (“Host Software”) solely to assist running the containers feature in the Host Software. The Host Software license terms apply to your use of the Supplement. You may not use it if you do not have a license for the Host Software. You may use this Supplement with each validly licensed copy of the Host Software.
 
-## User Feedback
+# Supported Docker versions
 
-Please reach out to the team with any issues or concerns through a [GitHub issue](https://github.com/Microsoft/dotnet-framework-docker/issues/new).
+This image is officially supported on Docker version 1.12.2.
+
+Please see [Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/) for details on how to install or upgrade Docker to use Windows Containers.
+
+# User Feedback
+
+## Issues and Contributing
+
+You are invited to report issues or request features by creating a [GitHub issue](https://github.com/microsoft/dotnet-framework-docker/issues).
+
+## Documentation
+
+You can read documentation for using the .NET Framework with Docker usage in the [.NET docs](https://docs.microsoft.com/dotnet/articles/framework/docker). The docs are [open source on GitHub](https://github.com/dotnet/docs). Contributions are welcome!
+
+[win-containers]: http://aka.ms/windowscontainers
