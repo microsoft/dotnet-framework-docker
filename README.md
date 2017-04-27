@@ -35,8 +35,8 @@ It is easy to create a Docker image for a .NET Framework 4.x application. You ca
 
     ```Dockerfile
     FROM microsoft/dotnet-framework:4.6.2
-    WORKDIR \app
-    COPY bin\Release .
+    WORKDIR /app
+    COPY bin/Release .
     ENTRYPOINT ["dotnetapp.exe"]
     ```
 
