@@ -1,6 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
--       [`4.6.2`, `latest` (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
+-       [`4.7`, `latest` (*4.7/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7/Dockerfile)
+-       [`4.6.2`, (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
 -       [`3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
 
 For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/microsoft/dotnet-framework-docker/pulls?utf8=%E2%9C%93&q=).
@@ -16,7 +17,7 @@ The [.NET Framework](https://www.microsoft.com/net/framework) is a general purpo
 
 You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. F# is a multi-paradigm programming language, enabling both functional and object-oriented patterns and practices. VB is a rapid development programming language with the deepest integration between the language and Visual Studio, providing the fastest path to a working app.   
 
-The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.6.2](https://www.microsoft.com/net/framework).
+The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7](https://www.microsoft.com/net/framework).
 
 > https://docs.microsoft.com/dotnet/articles/framework/
 
@@ -28,13 +29,13 @@ These images are based on [Windows Containers][win-containers]. You need to be W
 
 ## Deploying a .NET Framework 4.x application with Docker
 
-It is easy to create a Docker image for a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.6.2 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-4.6.2) if you want to try a pre-made version that's ready go.
+It is easy to create a Docker image for a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.7 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-4.7) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
 2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate. 
 
     ```Dockerfile
-    FROM microsoft/dotnet-framework:4.6.2
+    FROM microsoft/dotnet-framework:4.7
     WORKDIR /app
     COPY bin/Release .
     ENTRYPOINT ["dotnetapp.exe"]
@@ -47,7 +48,7 @@ It is easy to create a Docker image for a .NET Framework 4.x application. You ca
     docker run dotnetapp
     ```
 
-The Docker image includes the .NET Framework 4.6.2, however, your application does not need to explicity target the .NET Framework 4.6.2. Applications that target .NET Framework 4.0 or later should work correctly with this image.
+The Docker image includes the .NET Framework 4.7, however, your application does not need to explicity target the .NET Framework 4.7. Applications that target .NET Framework 4.0 or later should work correctly with this image.
 
 ## Deploying a .NET Framework 3.5 application with Docker
 
@@ -76,11 +77,16 @@ The Docker image includes the .NET Framework 3.5, however, your application does
 
 The `microsoft/dotnet-framework` images come in different flavors, each designed for a specific use case.
 
-### `4.6.2`
+
+### `4.7`
 
 This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 
 This image is for .NET Framework 4.0 and later version applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+
+### `4.6.2`
+
+This image is for .NET Framework 4.0-4.6.2 applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
 ### `3.5`
 
