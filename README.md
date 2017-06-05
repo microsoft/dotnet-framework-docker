@@ -19,7 +19,7 @@ You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, 
 
 The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7](https://www.microsoft.com/net/framework).
 
-> https://docs.microsoft.com/dotnet/articles/framework/
+> https://docs.microsoft.com/dotnet/framework/
 
 ![dotnet-icon](https://cloud.githubusercontent.com/assets/2608468/19951790/a0458278-a11d-11e6-86e4-660aaa22aa3c.png)
 
@@ -86,7 +86,7 @@ This image is for .NET Framework 4.0 and later version applications. It is based
 
 ### `4.6.2`
 
-This image is for .NET Framework 4.0-4.6.2 applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+This image is for applications that specifically need .NET Framework 4.6.2 and have not been tested with .NET Framework 4.7. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
 ### `3.5`
 
@@ -96,7 +96,7 @@ This image is for .NET Framework 3.5 and earlier version applications.  It is ba
 
 See [.NET Framework Docker samples](https://github.com/Microsoft/dotnet-framework-docker-samples) to get started with pre-made samples.
 
-See [.NET Framework and Docker](https://docs.microsoft.com/dotnet/articles/framework/docker/) to learn more about using .NET Framework with Docker.
+See [.NET Framework and Docker](https://docs.microsoft.com/dotnet/framework/docker/) to learn more about using .NET Framework with Docker.
 
 See the following related repos for other application types:
 
@@ -130,6 +130,6 @@ You are invited to report issues or request features by creating a [GitHub issue
 
 ## Documentation
 
-You can read documentation for using the .NET Framework with Docker usage in the [.NET docs](https://docs.microsoft.com/dotnet/articles/framework/docker). The docs are [open source on GitHub](https://github.com/dotnet/docs). Contributions are welcome!
+You can read documentation for using the .NET Framework with Docker usage in the [.NET docs](https://docs.microsoft.com/dotnet/framework/docker). The docs are [open source on GitHub](https://github.com/dotnet/docs). Contributions are welcome!
 
 [win-containers]: http://aka.ms/windowscontainers
