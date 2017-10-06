@@ -4,6 +4,12 @@
 - [`4.6.2-windowsservercore-10.0.14393.1358`, `4.6.2-windowsservercore`, `4.6.2`, (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
 - [`3.5-windowsservercore-10.0.14393.1358`, `3.5-windowsservercore`, `3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
 
+### Early access builds
+
+- [`4.7.1-windowsservercore-10.0.14393.1358`, `4.7.1-windowsservercore`, `4.7.1` (*4.7.1/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/Dockerfile)
+
+Note: [.NET Framework 4.7.1](https://github.com/Microsoft/dotnet-framework-early-access) is an early access build and is not intended for production.
+
 For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/microsoft/dotnet-framework-docker/pulls?utf8=%E2%9C%93&q=).
 
 [![Downloads from Docker Hub](https://img.shields.io/docker/pulls/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)

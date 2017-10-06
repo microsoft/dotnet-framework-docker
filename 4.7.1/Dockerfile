@@ -7,3 +7,4 @@ RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/5
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen install System.Web & \
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & \
     \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+    
