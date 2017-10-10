@@ -4,6 +4,5 @@ RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/D
     .\dotnet-framework-installer.exe /q & \ 
     del .\dotnet-framework-installer.exe & \
     set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & \
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen install System.Web & \
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & \
     \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
