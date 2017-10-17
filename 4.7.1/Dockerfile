@@ -1,6 +1,6 @@
 FROM microsoft/windowsservercore
 
-RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/5/B/D/5BD1CB75-43AA-4408-9147-B75FCDA6B062/NDP471-DevPack-ENU.exe" -OutFile dotnet-framework-installer.exe & \
+RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/9/E/6/9E63300C-0941-4B45-A0EC-0008F96DD480/NDP471-KB4033342-x86-x64-AllOS-ENU.exe" -OutFile dotnet-framework-installer.exe & \
     .\dotnet-framework-installer.exe /q & \ 
     del .\dotnet-framework-installer.exe & \
     set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & \

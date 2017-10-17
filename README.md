@@ -86,7 +86,7 @@ This image is for .NET Framework 4.0 and later version applications. It is based
 
 ### `4.7`, `4.6.2`
 
-These images are for applications that need a specific .NET Framework version and have not been tested with .NET Framework 4.7. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+These images are for applications that need a specific .NET Framework version and have not been tested with .NET Framework 4.7.1. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
 ### `3.5`
 
