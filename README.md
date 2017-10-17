@@ -1,6 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`4.7-windowsservercore-10.0.14393.1358`, `4.7-windowsservercore`, `4.7`, `latest` (*4.7/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7/Dockerfile)
+- [`4.7.1-windowsservercore-10.0.14393.1358`, `4.7.1-windowsservercore`, `4.7.1`, `latest` (*4.7.1/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/Dockerfile)
+- [`4.7-windowsservercore-10.0.14393.1358`, `4.7-windowsservercore`, `4.7` (*4.7/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7/Dockerfile)
 - [`4.6.2-windowsservercore-10.0.14393.1358`, `4.6.2-windowsservercore`, `4.6.2`, (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
 - [`3.5-windowsservercore-10.0.14393.1358`, `3.5-windowsservercore`, `3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
 
@@ -77,16 +78,15 @@ The Docker image includes the .NET Framework 3.5, however, your application does
 
 The `microsoft/dotnet-framework` images come in different flavors, each designed for a specific use case.
 
+### `4.7.1`
 
-### `4.7`
-
-This is the primary image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
+This is the primary image. If you are unsure about what your needs are, you probably want to use this one.
 
 This image is for .NET Framework 4.0 and later version applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
-### `4.6.2`
+### `4.7`, `4.6.2`
 
-This image is for applications that specifically need .NET Framework 4.6.2 and have not been tested with .NET Framework 4.7. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+These images are for applications that need a specific .NET Framework version and have not been tested with .NET Framework 4.7.1. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
 ### `3.5`
 
