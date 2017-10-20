@@ -1,4 +1,8 @@
-# Supported tags and respective `Dockerfile` links
+# Supported Windows Server 2016 Version 1709 (Fall Creators Update) amd64 tags
+
+- [`4.7.1-windowsservercore-1709` (*4.7.1-windowsservercore-1709/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/Dockerfile)
+
+# Supported Windows Server 2016 amd64 tags
 
 - [`4.7.1-windowsservercore-10.0.14393.1358`, `4.7.1-windowsservercore`, `4.7.1`, `latest` (*4.7.1/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/Dockerfile)
 - [`4.7-windowsservercore-10.0.14393.1358`, `4.7-windowsservercore`, `4.7` (*4.7/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7/Dockerfile)
