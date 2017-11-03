@@ -1,14 +1,14 @@
 # Supported Windows Server 2016 Version 1709 (Fall Creators Update) amd64 tags
 
-- [`4.7.1-windowsservercore-1709` (*4.7.1-windowsservercore-1709/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/Dockerfile)
-- [`3.5-windowsservercore-1709` (*3.5-windowsservercore-1709/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/Dockerfile)
+- [`4.7.1-windowsservercore-1709`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/Dockerfile)
+- [`3.5-windowsservercore-1709`, `3.5` (*3.5-windowsservercore-1709/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/Dockerfile)
 
 # Supported Windows Server 2016 amd64 tags
 
-- [`4.7.1-windowsservercore-10.0.14393.1770`, `4.7.1-windowsservercore`, `4.7.1`, `latest` (*4.7.1/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/Dockerfile)
-- [`4.7-windowsservercore-10.0.14393.1770`, `4.7-windowsservercore`, `4.7` (*4.7/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7/Dockerfile)
-- [`4.6.2-windowsservercore-10.0.14393.1770`, `4.6.2-windowsservercore`, `4.6.2`, (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
-- [`3.5-windowsservercore-10.0.14393.1770`, `3.5-windowsservercore`, `3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
+- [`4.7.1-windowsservercore-ltsc2016`, `4.7.1`, `latest` (*4.7.1/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/Dockerfile)
+- [`4.7-windowsservercore-ltsc2016`, `4.7` (*4.7/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7/Dockerfile)
+- [`4.6.2-windowsservercore-ltsc2016`, `4.6.2`, (*4.6.2/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2/Dockerfile)
+- [`3.5-windowsservercore-ltsc2016`, `3.5` (*3.5/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/Dockerfile)
 
 For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/microsoft/dotnet-framework-docker/pulls?utf8=%E2%9C%93&q=).
 
@@ -23,7 +23,7 @@ The [.NET Framework](https://www.microsoft.com/net/framework) is a general purpo
 
 You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. F# is a multi-paradigm programming language, enabling both functional and object-oriented patterns and practices. VB is a rapid development programming language with the deepest integration between the language and Visual Studio, providing the fastest path to a working app.   
 
-The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7](https://www.microsoft.com/net/framework).
+The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7.1](https://www.microsoft.com/net/framework).
 
 > https://docs.microsoft.com/dotnet/framework/
 
@@ -38,7 +38,7 @@ These images are based on [Windows Containers][win-containers]. You need to be W
 It is easy to create a Docker image for a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.7 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-4.7) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
-2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate. 
+2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.
 
     ```Dockerfile
     FROM microsoft/dotnet-framework:4.7
@@ -61,7 +61,7 @@ The Docker image includes the .NET Framework 4.7, however, your application does
 It is easy to create a Docker image for a .NET Framework 3.5 application. You can try the instructions below or check out the [.NET Framework 3.5 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-3.5) if you want to try a pre-made version that's ready go.
 
 1. Build your application in Visual Studio or at the command line. 
-2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.  
+2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.
 
     ```Dockerfile
     FROM microsoft/dotnet-framework:3.5
