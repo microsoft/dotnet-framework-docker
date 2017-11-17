@@ -8,13 +8,14 @@ RUN New-Item -Type Directory $Env:ProgramFiles\NuGet; \
 
 # Install VS Test Agent
 RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/100232757/8a386d27295953ee79281fd1f1832e2d/vs_TestAgent.exe -OutFile vs_TestAgent.exe; \
-    Start-Process vs_TestAgent.exe -ArgumentList '--passive', '--norestart', '--nocache' -NoNewWindow -Wait; \
+    Start-Process vs_TestAgent.exe -ArgumentList '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; \
     Remove-Item -Force vs_TestAgent.exe; \
 # Install VS Build Tools
     Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/100196686/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe -OutFile vs_BuildTools.exe; \
-    Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--passive', '--norestart', '--nocache' -NoNewWindow -Wait; \
+    Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; \
     Remove-Item -Force vs_buildtools.exe; \
-    Remove-Item -Force -Recurse $(${Env:ProgramFiles(x86)} + '\Microsoft Visual Studio\Installer')
+    Remove-Item -Force -Recurse $(${Env:ProgramFiles(x86)} + '\Microsoft Visual Studio\Installer'); \
+    Remove-Item -Force -Recurse $(${Env:TEMP} + '\*')
 
 # Set PATH in one layer to keep image size down.
 RUN setx /M PATH $(${Env:PATH} \
@@ -25,4 +26,5 @@ RUN setx /M PATH $(${Env:PATH} \
 # Install Targeting Pack
 RUN Invoke-WebRequest -UseBasicParsing https://dotnetweb.blob.core.windows.net/installer/NDP471-TargetingPack.exe -OutFile NDP471-TargetingPack.exe; \
     Start-Process NDP471-TargetingPack.exe -ArgumentList '/install', '/quiet' -NoNewWindow -Wait; \
-    Remove-Item -Force NDP471-TargetingPack.exe
+    Remove-Item -Force NDP471-TargetingPack.exe; \
+    Remove-Item -Force -Recurse $(${Env:TEMP} + '\*')
