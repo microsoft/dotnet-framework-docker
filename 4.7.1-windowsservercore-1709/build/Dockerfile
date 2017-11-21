@@ -14,17 +14,19 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
     Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/100196686/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe -OutFile vs_BuildTools.exe; \
     Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; \
     Remove-Item -Force vs_buildtools.exe; \
-    Remove-Item -Force -Recurse ${Env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer; \
-    Remove-Item -Force -Recurse ${Env:TEMP}\*
+    Remove-Item -Force -Recurse \"${Env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer\"; \
+    Remove-Item -Force -Recurse ${Env:TEMP}/*
 
 # Set PATH in one layer to keep image size down.
 RUN setx /M PATH $(${Env:PATH} \
-    + ';' + ${Env:ProgramFiles} + '\NuGet' \
-    + ';' + ${Env:ProgramFiles(x86)} + '\Microsoft Visual Studio\2017\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow' \
-    + ';' + ${Env:ProgramFiles(x86)} + '\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin')
+    + \";${Env:ProgramFiles}/NuGet\" \
+    + \";${Env:ProgramFiles(x86)}/Microsoft Visual Studio/2017/TestAgent/Common7/IDE/CommonExtensions/Microsoft/TestWindow\" \
+    + \";${Env:ProgramFiles(x86)}/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin\")
 
-# Install Targeting Pack
-RUN Invoke-WebRequest -UseBasicParsing https://dotnetweb.blob.core.windows.net/installer/NDP471-TargetingPack.exe -OutFile NDP471-TargetingPack.exe; \
-    Start-Process NDP471-TargetingPack.exe -ArgumentList '/install', '/quiet' -NoNewWindow -Wait; \
-    Remove-Item -Force NDP471-TargetingPack.exe; \
-    Remove-Item -Force -Recurse ${Env:TEMP}\*
+# Install Targeting Packs
+RUN @('4.0', '4.5.2', '4.6.2', '4.7.1') \
+    | %{ \
+        Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip -OutFile referenceassemblies.zip; \
+        Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}/Reference Assemblies/Microsoft/Framework/.NETFramework\"; \
+        Remove-Item -Force referenceassemblies.zip; \
+    }
