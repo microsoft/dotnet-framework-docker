@@ -1,21 +1,14 @@
 # Supported Windows Server 2016 Version 1709 (Fall Creators Update) amd64 tags
 
-- [`4.7.1-windowsservercore-1709`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/runtime/Dockerfile)
-- [`3.5-windowsservercore-1709`, `3.5` (*3.5-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/runtime/Dockerfile)
+- [`4.7.1-2017.11-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1-2017.11`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/build/Dockerfile)
 
 # Supported Windows Server 2016 amd64 tags
 
-- [`4.7.1-windowsservercore-ltsc2016`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.7-windowsservercore-ltsc2016`, `4.7` (*4.7-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.6.2-windowsservercore-ltsc2016`, `4.6.2` (*4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`3.5-windowsservercore-ltsc2016`, `3.5` (*3.5-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/runtime/Dockerfile)
-
->**Note:** .NET Core multi-arch tags, such as 2.0-runtime, have been updated to use nanoserver-1709 images if your host is Windows Server 1709 or higher or Windows 10 Fall Creators Update (Version 1709) or higher. You need Docker 17.10 or later to take advantage of these updated tags.
+- [`4.7.1-2017.11-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1-2017.11`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/build/Dockerfile)
 
 For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/microsoft/dotnet-framework-docker/pulls?utf8=%E2%9C%93&q=).
 
-[![Downloads from Docker Hub](https://img.shields.io/docker/pulls/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)
-[![Stars on Docker Hub](https://img.shields.io/docker/stars/microsoft/dotnet-framework.svg)](https://hub.docker.com/r/microsoft/dotnet-framework)
+>**Note:** .NET Core multi-arch tags, such as 2.0-runtime, have been updated to use nanoserver-1709 images if your host is Windows Server 1709 or higher or Windows 10 Fall Creators Update (Version 1709) or higher. You need Docker 17.10 or later to take advantage of these updated tags.
 
 # What is the .NET Framework?
 
@@ -35,9 +28,7 @@ The .NET Framework was first released by Microsoft in 2001. The latest version i
 
 These images are based on [Windows Containers][win-containers]. You need to be Windows 10 or Windows Server 2016 to use them.
 
-## Deploying a .NET Framework 4.x application with Docker
-
-It is easy to create a Docker image for a .NET Framework 4.x application. You can try the instructions below or check out the [.NET Framework 4.7 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-4.7) if you want to try a pre-made version that's ready go.
+## Building a .NET Framework 4.x application with a multi-stage Dockerfile
 
 .NET Framework Docker images can utilize the [multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/). This feature allows multiple FROM instructions to be used in one Dockerfile. Using this feature, you can build a .NET Framework app using an build image and then copy the published app into a lighter weight runtime image within a single Dockerfile.
 
@@ -66,46 +57,13 @@ It is easy to create a Docker image for a .NET Framework 4.x application. You ca
 
 The Docker runtime image used in this example includes the .NET Framework 4.7.1, however, your application does not need to explicity target the .NET Framework 4.7.1. Applications that target .NET Framework 4.0 or later should work correctly with this image.
 
-## Deploying a .NET Framework 3.5 application with Docker
-
-It is easy to create a Docker image for a .NET Framework 3.5 application. You can try the instructions below or check out the [.NET Framework 3.5 Docker sample](https://github.com/Microsoft/dotnet-framework-docker-samples/tree/master/dotnetapp-3.5) if you want to try a pre-made version that's ready go.
-
-1. Build your application in Visual Studio or at the command line. 
-2. Add a `Dockerfile` file with the following content to your project. The Dockerfile assumes that your app is built to the `bin\Release` directory and that your app name is `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.
-
-    ```Dockerfile
-    FROM microsoft/dotnet-framework:3.5
-    WORKDIR \app
-    COPY bin\Release .
-    ENTRYPOINT ["dotnetapp.exe"]
-    ```
-
-3. Type the following Docker commands at the command line, within your project directory (beside Program.cs). You can change the tag name (`dotnetapp`) to your own string, as you like.
-
-    ```console
-    docker build -t dotnetapp .
-    docker run dotnetapp
-    ```
-
-The Docker image includes the .NET Framework 3.5, however, your application does not need to explicity target the .NET Framework 3.5. Applications that target .NET Framework 1.0 through 3.5 should work correctly with this image.
-
 ## Image variants
 
-The `microsoft/dotnet-framework` images come in different flavors, each designed for a specific use case.
+The `microsoft/dotnet-framework-build` images come in different flavors, each designed for a specific use case.
 
 ### `4.7.1`
 
-This is the primary image. If you are unsure about what your needs are, you probably want to use this one.
-
-This image is for .NET Framework 4.0 and later version applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
-
-### `4.7`, `4.6.2`
-
-These images are for applications that need a specific .NET Framework version and have not been tested with .NET Framework 4.7.1. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
-
-### `3.5`
-
-This image is for .NET Framework 3.5 and earlier version applications.  It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+This image is for building .NET Framework 4.x version applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
 ## Related Repos and Examples
 
@@ -115,7 +73,7 @@ See [.NET Framework and Docker](https://docs.microsoft.com/dotnet/framework/dock
 
 See the following related repos for other application types:
 
-- [microsoft/dotnet-framework-build](https://hub.docker.com/r/microsoft/dotnet-framework-build/) for .NET Framework build images.
+- [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) for .NET Framework runtime images.
 - [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
 - [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
 - [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core images.
