@@ -11,7 +11,7 @@ Samples for these repos are available at [`microsoft/dotnet-framework-samples`](
 
 ## How to Engage, Contribute and Provide Feedback
 
-The .NET team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs.
+The .NET team encourages contributions, both issues and PRs.
 
 ## Licenses
 
