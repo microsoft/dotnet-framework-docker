@@ -4,7 +4,7 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 # Install NuGet CLI
 RUN New-Item -Type Directory $Env:ProgramFiles\NuGet; \
-    Invoke-WebRequest -UseBasicParsing https://dist.nuget.org/win-x86-commandline/v4.3.0/nuget.exe -OutFile $Env:ProgramFiles\NuGet\nuget.exe
+    Invoke-WebRequest -UseBasicParsing https://dist.nuget.org/win-x86-commandline/v4.4.1/nuget.exe -OutFile $Env:ProgramFiles\NuGet\nuget.exe
 
 # Install VS Test Agent
 RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/100232757/8a386d27295953ee79281fd1f1832e2d/vs_TestAgent.exe -OutFile vs_TestAgent.exe; \
