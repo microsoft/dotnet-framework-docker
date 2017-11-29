@@ -1,10 +1,20 @@
-dotnet-framework-docker
-=============
+# .NET Framework Docker Images
 
-This project is part of the .NET Framework. You can find samples, documentation and getting started instructions for the .NET Framework at <https://www.microsoft.com/net/framework>.
+This repo contains the source Dockerfiles and related content for [.NET Framework Docker images](https://hub.docker.com/r/microsoft/dotnet-framework).
 
-The repository is used to create multiple .NET Framework Docker images. Follow the links below for more details on each image.
+The following Docker images are created from this repository:
 
- - [`microsoft/dotnet-framework-build`](README.dotnet-framework-build.md)
- - [`microsoft/dotnet-framework`](README.dotnet-framework.md)
- 
+* [`microsoft/dotnet-framework`](https://hub.docker.com/r/microsoft/dotnet-framework)
+* [`microsoft/dotnet-framework-build`](https://hub.docker.com/r/microsoft/dotnet-framework-build/)
+
+Samples for these repos are available at [`microsoft/dotnet-framework-samples`](https://hub.docker.com/r/microsoft/dotnet-framework-samples).
+
+## How to Engage, Contribute and Provide Feedback
+
+The .NET team encourages [contributions](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/contributing.md), both issues and PRs.
+
+## Licenses
+
+The source found in this repo is licensed using the [MIT](LICENSE.TXT) license.
+
+The .NET Framework Docker images and the Windows Server images which they are based on are licensed with a [Microsoft Software License](https://hub.docker.com/r/microsoft/windowsservercore/).
