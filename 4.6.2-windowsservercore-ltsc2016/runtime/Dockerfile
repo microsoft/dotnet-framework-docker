@@ -1,4 +1,4 @@
-FROM microsoft/windowsservercore
+FROM microsoft/windowsservercore:ltsc2016
 
 RUN set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & \
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & \
