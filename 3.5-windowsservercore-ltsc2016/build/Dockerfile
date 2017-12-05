@@ -8,7 +8,7 @@ RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/9
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & \
     \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
 
-# Note: Can't set SHELL prior to installing 4.7.1 runtime - PowerShell being loaded prevents GAC from getting updated without restart
+# Can't set SHELL prior to installing 4.7.1 runtime - PowerShell being loaded prevents GAC from getting updated without restart
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Install NuGet CLI
