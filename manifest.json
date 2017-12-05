@@ -1,0 +1,140 @@
+{
+  "repos": [
+    {
+      "name": "microsoft/dotnet-framework",
+      "readmePath": "README.dotnet-framework.md",
+      "images": [
+        {
+          "sharedTags": {
+            "4.7.1": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.1-windowsservercore-ltsc2016/runtime",
+              "os": "windows",
+              "tags": {
+                "4.7.1-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "4.7.1-windowsservercore-1709/runtime",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "4.7.1-windowsservercore-1709": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7-windowsservercore-ltsc2016/runtime",
+              "os": "windows",
+              "tags": {
+                "4.7-windowsservercore-ltsc2016": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.6.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.6.2-windowsservercore-ltsc2016/runtime",
+              "os": "windows",
+              "tags": {
+                "4.6.2-windowsservercore-ltsc2016": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "3.5": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "3.5-windowsservercore-ltsc2016/runtime",
+              "os": "windows",
+              "tags": {
+                "3.5-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "3.5-windowsservercore-1709/runtime",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "3.5-windowsservercore-1709": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "microsoft/dotnet-framework-build",
+      "readmePath": "README.dotnet-framework-build.md",
+      "images": [
+        {
+          "sharedTags": {
+            "4.7.1-2017.12": {},
+            "4.7.1": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.1-windowsservercore-ltsc2016/build",
+              "os": "windows",
+              "tags": {
+                "4.7.1-2017.12-windowsservercore-ltsc2016": {},
+                "4.7.1-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "4.7.1-windowsservercore-1709/build",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "4.7.1-2017.12-windowsservercore-1709": {},
+                "4.7.1-windowsservercore-1709": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "3.5-2017.12": {},
+            "3.5": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "3.5-windowsservercore-ltsc2016/build",
+              "os": "windows",
+              "tags": {
+                "3.5-2017.12-windowsservercore-ltsc2016": {},
+                "3.5-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "3.5-windowsservercore-1709/build",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "3.5-2017.12-windowsservercore-1709": {},
+                "3.5-windowsservercore-1709": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
