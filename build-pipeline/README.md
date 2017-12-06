@@ -1,0 +1,1 @@
+The contents of the [build-pipeline](build-pipeline) folder are used by the .NET engineering infrastructure to build and publish the Docker images to [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) and [microsoft/dotnet-framework-build](https://hub.docker.com/r/microsoft/dotnet-framework-build/).
