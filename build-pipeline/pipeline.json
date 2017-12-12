@@ -16,25 +16,15 @@
         {
           "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "3.5-windowsservercore-ltsc2016/*"
+            "PB_image-builder_path": "3.5-windowsservercore-ltsc2016/*",
+            "PB_image-builder_testVars": "--test-var VersionFilter=3.5 --test-var OSFilter=windowsservercore-ltsc2016"
           }
         },
         {
           "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "4.6.2-windowsservercore-ltsc2016/*"
-          }
-        },
-        {
-          "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
-          "Parameters": {
-            "PB_image-builder_path": "4.7-windowsservercore-ltsc2016/*"
-          }
-        },
-        {
-          "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
-          "Parameters": {
-            "PB_image-builder_path": "4.7.1-windowsservercore-ltsc2016/*"
+            "PB_image-builder_path": "4.*-windowsservercore-ltsc2016/*",
+            "PB_image-builder_testVars": "--test-var VersionFilter=4.* --test-var OSFilter=windowsservercore-ltsc2016"
           }
         }
       ]
@@ -48,13 +38,15 @@
         {
           "Name": "dotnet-framework-docker-windows-1709-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "3.5-windowsservercore-1709/*"
+            "PB_image-builder_path": "3.5-windowsservercore-1709/*",
+            "PB_image-builder_testVars": "--test-var VersionFilter=3.5 --test-var OSFilter=windowsservercore-1709"
           }
         },
         {
           "Name": "dotnet-framework-docker-windows-1709-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "4.7.1-windowsservercore-1709/*"
+            "PB_image-builder_path": "4.*-windowsservercore-1709/*",
+            "PB_image-builder_testVars": "--test-var VersionFilter=4.* --test-var OSFilter=windowsservercore-1709"
           }
         }
       ]

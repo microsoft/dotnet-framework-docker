@@ -59,7 +59,7 @@
     },
     {
       "enabled": true,
-      "continueOnError": false,
+      "continueOnError": true,
       "alwaysRun": false,
       "displayName": "Update Readme",
       "timeoutInMinutes": 0,
@@ -141,7 +141,7 @@
       "allowOverride": true
     },
     "image-builder.imageName": {
-      "value": "microsoft/dotnet-buildtools-prereqs:image-builder-jessie-20171006102106"
+      "value": "microsoft/dotnet-buildtools-prereqs:image-builder-jessie-20180103080556"
     },
     "image-builder.common.args": {
       "value": "--manifest manifest.json --username $(PB_docker_username) --password $(PB_docker_password) $(PB_image-builder_customCommonArgs)",

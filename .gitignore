@@ -1,1 +1,11 @@
-3.5/source/
+# Visual Studio Code cache/options directory
+.vscode/
+.vs
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# dotnet install directory
+.dotnet/
