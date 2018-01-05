@@ -14,20 +14,20 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class ImageTests
     {
-        private const string WSC2016 = "windowsservercore-ltsc2016";
-        private const string WSC1709 = "windowsservercore-1709";
+        private const string WSC_LTSC2016 = "windowsservercore-ltsc2016";
+        private const string WSC_1709 = "windowsservercore-1709";
 
-        private static string OsFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
+        private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
             {
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC2016 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC1709 },
-                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.1", OsVariant = WSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC1709 },
+                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_1709 },
             };
 
         private DockerHelper DockerHelper { get; set; }
@@ -40,11 +40,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static IEnumerable<object[]> GetVerifyImagesData()
         {
             string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
-            string osFilterPattern = OsFilter != null ? GetFilterRegexPattern(OsFilter) : null;
+            string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
 
             // Filter out test data that does not match the active os and version filters.
             return TestData
-                .Where(imageDescriptor => OsFilter == null
+                .Where(imageDescriptor => OSFilter == null
                     || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
                 .Where(imageDescriptor => VersionFilter == null
                     || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))

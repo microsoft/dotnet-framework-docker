@@ -8,6 +8,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Hello Docker World!");
+        Console.WriteLine("Hello Docker World from .NET 3.5!");
     }
 }
