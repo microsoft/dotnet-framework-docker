@@ -1,34 +1,20 @@
 [cmdletbinding()]
 param(
-    [string]$VersionFilter,
-    [string]$OSFilter,
+    [string]$VersionFilter = "*",
+    [string]$OSFilter = "*",
     [switch]$IsDryRun
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$buildFilter = "*"
-if (-not [string]::IsNullOrEmpty($VersionFilter))
-{
-    $buildFilter = "$VersionFilter-$buildFilter"
-}
-if (-not [string]::IsNullOrEmpty($OSFilter))
-{
-    if ([string]::IsNullOrEmpty($VersionFilter))
-    {
-        $buildFilter = "$buildFilter-$OSFilter/*"
-    }
-    else
-    {
-        $buildFilter = "$buildFilter$OSFilter/*"
-    }
-}
+$buildFilter = "$VersionFilter-$OSFilter/*"
 
 function Get-ImageBuilder()
 {
-    $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180103080524'
+    $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180105103709'
     $imageBuilderContainerName = "ImageBuilder-$(Get-Date -Format yyyyMMddhhmmss)"
+    New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force | Out-Null
 
     $attempt = 0
     $maxRetries = 5
@@ -36,12 +22,7 @@ function Get-ImageBuilder()
     while ($attempt -lt $maxRetries)
     {
         try {
-            New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force | Out-Null
-
             Invoke-Expression "docker pull $imageBuilderImageName"
-            Invoke-Expression "docker create --name $imageBuilderContainerName $imageBuilderImageName"
-            Invoke-Expression "docker cp ${imageBuilderContainerName}:/image-builder $imageBuilderFolder"
-            Invoke-Expression "docker rmi -f $imageBuilderImageName"
             break
         }
         catch {
@@ -60,16 +41,21 @@ function Get-ImageBuilder()
             throw "Retry ${attempt}/${maxRetries} failed, no more retries left."
         }
     }
+
+    Invoke-Expression "docker create --name $imageBuilderContainerName $imageBuilderImageName"
+    # Copying the 'image-builder' folder and not just the content due to https://github.com/moby/moby/issues/34638
+    Invoke-Expression "docker cp ${imageBuilderContainerName}:/image-builder $imageBuilderFolder"
+    Invoke-Expression "docker rmi -f $imageBuilderImageName"
 }
 
 $imageBuilderFolder = [System.IO.Path]::Combine("$PSScriptRoot", ".Microsoft.DotNet.ImageBuilder")
-$imageBuilderExe = [System.IO.Path]::Combine($imageBuilderFolder, "image-builder", "Microsoft.DotNet.ImageBuilder.exe")
+$imageBuilderExe = [System.IO.Path]::Combine("$imageBuilderFolder", "image-builder", "Microsoft.DotNet.ImageBuilder.exe")
 if (-not (Test-Path -Path "$imageBuilderExe" -PathType Leaf))
 {
     Get-ImageBuilder
 }
 
-$imageBuilderArgs = 'build --path "$buildFilter"'
+$imageBuilderArgs = "build --path $buildFilter "
 if ($IsDryRun)
 {
     $imageBuilderArgs += " --dry-run"
@@ -79,3 +65,5 @@ Invoke-Expression "$imageBuilderExe $imageBuilderArgs"
 if ($LastExitCode -ne 0) {
     throw "Failed executing $imageBuilderExe $imageBuilderArgs"
 }
+
+./tests/run-tests.ps1 -VersionFilter $VersionFilter -OSFilter $OSFilter

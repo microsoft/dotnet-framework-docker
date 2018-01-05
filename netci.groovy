@@ -4,17 +4,11 @@ def project = GithubProject
 def branch = GithubBranchName
 def isPR = true
 def platformList = ['Windows_2016:WindowsServerCore-ltsc2016', 'Windows_2016:WindowsServerCore-1709']
+def versionList = ['3.5', '4.*']
 
 platformList.each { platform ->
     def(hostOS, containerOS) = platform.tokenize(':')
     def machineLabel = 'latest-docker'
-
-    if (containerOS == 'WindowsServerCore-1709') {
-        versionList = ['3.5', '4.7.1']
-    }
-    else {
-        versionList = ['3.5', '4.6.2', '4.7', '4.7.1']
-    }
 
     versionList.each { version ->
         def newJobName = Utilities.getFullJobName(project, "${version}_${containerOS}", isPR)
