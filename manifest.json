@@ -1,4 +1,9 @@
 {
+  "testCommands": {
+    "windows": [
+      "powershell -NoProfile -Command .\\tests\\run-tests.ps1 -VersionFilter $(VersionFilter) -OSFilter $(OSFilter)"
+    ]
+  },
   "repos": [
     {
       "name": "microsoft/dotnet-framework",
