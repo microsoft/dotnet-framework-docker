@@ -8,8 +8,6 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$(docker version) | ForEach-Object { Write-Host "$_" }
-
 $buildFilter = "*"
 if (-not [string]::IsNullOrEmpty($VersionFilter))
 {
@@ -17,24 +15,61 @@ if (-not [string]::IsNullOrEmpty($VersionFilter))
 }
 if (-not [string]::IsNullOrEmpty($OSFilter))
 {
-    $buildFilter = "$buildFilter$OSFilter/*"
+    if ([string]::IsNullOrEmpty($VersionFilter))
+    {
+        $buildFilter = "$buildFilter-$OSFilter/*"
+    }
+    else
+    {
+        $buildFilter = "$buildFilter$OSFilter/*"
+    }
 }
 
-$imageBuilderFolder = ".Microsoft.DotNet.ImageBuilder"
-if (-not (Test-Path -Path "$imageBuilderFolder" -PathType Container))
+function Get-ImageBuilder()
 {
-    New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force
     $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180103080524'
     $imageBuilderContainerName = "ImageBuilder-$(Get-Date -Format yyyyMMddhhmmss)"
 
-    Invoke-Expression "docker pull $imageBuilderImageName"
-    Invoke-Expression "docker create --name $imageBuilderContainerName $imageBuilderImageName"
-    Invoke-Expression "docker cp ${imageBuilderContainerName}:/image-builder $imageBuilderFolder"
-    Invoke-Expression "docker rmi -f $imageBuilderImageName"
+    $attempt = 0
+    $maxRetries = 5
+    $waitFactor = 6
+    while ($attempt -lt $maxRetries)
+    {
+        try {
+            New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force | Out-Null
+
+            Invoke-Expression "docker pull $imageBuilderImageName"
+            Invoke-Expression "docker create --name $imageBuilderContainerName $imageBuilderImageName"
+            Invoke-Expression "docker cp ${imageBuilderContainerName}:/image-builder $imageBuilderFolder"
+            Invoke-Expression "docker rmi -f $imageBuilderImageName"
+            break
+        }
+        catch {
+            Write-Warning "$_"
+        }
+
+        $attempt++
+        if ($attempt -ne $maxRetries)
+        {
+            $waitTime = $attempt * $waitFactor
+            Write-Host "Retry ${attempt}/${maxRetries} failed, retrying in $waitTime seconds..."
+            Start-Sleep -Seconds ($waitTime)
+            Remove-Item -Path "$imageBuilderFolder" -Recurse -Force -ErrorAction Continue
+        }
+        else {
+            throw "Retry ${attempt}/${maxRetries} failed, no more retries left."
+        }
+    }
 }
 
+$imageBuilderFolder = [System.IO.Path]::Combine("$PSScriptRoot", ".Microsoft.DotNet.ImageBuilder")
 $imageBuilderExe = [System.IO.Path]::Combine($imageBuilderFolder, "image-builder", "Microsoft.DotNet.ImageBuilder.exe")
-$imageBuilderArgs = 'build --repo microsoft/dotnet-framework --path "$buildFilter"'
+if (-not (Test-Path -Path "$imageBuilderExe" -PathType Leaf))
+{
+    Get-ImageBuilder
+}
+
+$imageBuilderArgs = 'build --path "$buildFilter"'
 if ($IsDryRun)
 {
     $imageBuilderArgs += " --dry-run"
