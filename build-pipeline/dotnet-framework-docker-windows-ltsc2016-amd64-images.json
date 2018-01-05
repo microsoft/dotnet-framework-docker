@@ -183,7 +183,7 @@
       "allowOverride": true
     },
     "image-builder.imageName": {
-      "value": "microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180103080524"
+      "value": "microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180105103709"
     },
     "image-builder.args": {
       "value": "build --manifest manifest.json --path $(PB_image-builder_path) --push --username $(PB_docker_username) --password $(PB_docker_password) $(PB_image-builder_testVars) $(PB_image-builder_customCommonArgs)",
