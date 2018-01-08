@@ -4,7 +4,7 @@ def project = GithubProject
 def branch = GithubBranchName
 def isPR = true
 def platformList = ['Windows_2016:WindowsServerCore-ltsc2016', 'Windows_2016:WindowsServerCore-1709']
-def versionList = ['3.5', '4.*']
+def versionList = ['3.5', '4.']
 
 platformList.each { platform ->
     def(hostOS, containerOS) = platform.tokenize(':')
