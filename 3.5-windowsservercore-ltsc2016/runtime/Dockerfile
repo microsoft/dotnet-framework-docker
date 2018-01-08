@@ -26,7 +26,7 @@ RUN powershell -Command `
         New-Item -Type Directory patch; `
         Start-Process expand -ArgumentList 'patch.msu', 'patch', '-F:*' -NoNewWindow -Wait; `
         Remove-Item -Force patch.msu; `
-        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4053579-x64.cab; `
+        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4056890-x64.cab; `
         Remove-Item -Force -Recurse \patch
 
 # ngen .NET Fx
