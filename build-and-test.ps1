@@ -2,7 +2,7 @@
 param(
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
-    [switch]$IsDryRun
+    [string]$ImageBuilderCustomArgs
 )
 
 Set-StrictMode -Version Latest
@@ -10,7 +10,7 @@ $ErrorActionPreference = 'Stop'
 
 $buildFilter = "$VersionFilter-$OSFilter/*"
 
-function ExecuteCommand {
+function ExecuteWithRetry {
     param(
         [Parameter(Mandatory=$true)]
         [string]$Command
@@ -45,7 +45,7 @@ function Get-ImageBuilder() {
     $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180105103709'
     $imageBuilderContainerName = "ImageBuilder-$(Get-Date -Format yyyyMMddhhmmss)"
     New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force | Out-Null
-    ExecuteCommand -Command "docker pull $imageBuilderImageName"
+    ExecuteWithRetry -Command "docker pull $imageBuilderImageName"
     Invoke-Expression "docker create --name $imageBuilderContainerName $imageBuilderImageName"
     # Copying the 'image-builder' folder and not just the content due to https://github.com/moby/moby/issues/34638
     Invoke-Expression "docker cp ${imageBuilderContainerName}:/image-builder $imageBuilderFolder"
@@ -59,8 +59,8 @@ if (-not (Test-Path -Path "$imageBuilderExe" -PathType Leaf)) {
 }
 
 $imageBuilderArgs = "build --path $buildFilter --test-var VersionFilter=$VersionFilter --test-var OSFilter=$OSFilter"
-if ($IsDryRun) {
-    $imageBuilderArgs += " --dry-run"
+if (-not [string]::IsNullOrWhiteSpace($ImageBuilderCustomArgs)) {
+    $imageBuilderArgs += " $ImageBuilderCustomArgs"
 }
 
 Invoke-Expression "$imageBuilderExe $imageBuilderArgs"
