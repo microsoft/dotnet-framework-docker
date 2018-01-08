@@ -9,3 +9,6 @@
 
 # dotnet install directory
 .dotnet/
+
+# ImageBuilder directory
+.Microsoft.DotNet.ImageBuilder
