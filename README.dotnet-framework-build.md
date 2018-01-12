@@ -8,9 +8,7 @@
 - [`4.7.1-2017.12-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1-2017.12`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/build/Dockerfile)
 - [`3.5-2017.12-windowsservercore-ltsc2016`, `3.5-windowsservercore-ltsc2016`, `3.5-2017.12`, `3.5` (*3.5-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/build/Dockerfile)
 
-For more information about these images and their history, please see [the relevent Dockerfile (`microsoft/dotnet-framework-docker`)](https://github.com/microsoft/dotnet-framework-docker/search?utf8=%E2%9C%93&q=FROM&type=Code). These images are updated via [pull requests to the `microsoft/dotnet-framework-docker` GitHub repo](https://github.com/microsoft/dotnet-framework-docker/pulls?utf8=%E2%9C%93&q=).
-
->**Note:** .NET Core multi-arch tags, such as 2.0-runtime, have been updated to use nanoserver-1709 images if your host is Windows Server 1709 or higher or Windows 10 Fall Creators Update (Version 1709) or higher. You need Docker 17.10 or later to take advantage of these updated tags.
+For more information about these images and their history, please see [(`microsoft/dotnet-framework-docker`)](https://github.com/Microsoft/dotnet-framework-docker). Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
 # What is the .NET Framework?
 
