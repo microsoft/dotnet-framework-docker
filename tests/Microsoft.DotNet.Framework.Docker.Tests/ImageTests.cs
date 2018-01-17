@@ -18,7 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private const string WSC_1709 = "windowsservercore-1709";
 
         private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
-        private static string RepoOwner => Environment.GetEnvironmentVariable("REPO_OWNER") ?? "Microsoft";
+        private static string RepoOwner => Environment.GetEnvironmentVariable("REPO_OWNER") ?? "microsoft";
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
