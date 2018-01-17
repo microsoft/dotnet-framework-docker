@@ -42,7 +42,7 @@ function ExecuteWithRetry {
 }
 
 function Get-ImageBuilder() {
-    $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180105103709'
+    $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180111160403'
     $imageBuilderContainerName = "ImageBuilder-$(Get-Date -Format yyyyMMddhhmmss)"
     New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force | Out-Null
     ExecuteWithRetry -Command "docker pull $imageBuilderImageName"
@@ -58,7 +58,7 @@ if (-not (Test-Path -Path "$imageBuilderExe" -PathType Leaf)) {
     Get-ImageBuilder
 }
 
-$imageBuilderArgs = "build --path $buildFilter --test-var VersionFilter=$VersionFilter --test-var OSFilter=$OSFilter"
+$imageBuilderArgs = "build --path $buildFilter --var VersionFilter=$VersionFilter --var OSFilter=$OSFilter"
 if (-not [string]::IsNullOrWhiteSpace($ImageBuilderCustomArgs)) {
     $imageBuilderArgs += " $ImageBuilderCustomArgs"
 }

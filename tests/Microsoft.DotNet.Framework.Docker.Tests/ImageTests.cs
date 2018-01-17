@@ -18,6 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private const string WSC_1709 = "windowsservercore-1709";
 
         private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
+        private static string RepoOwner => Environment.GetEnvironmentVariable("REPO_OWNER") ?? "microsoft";
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
@@ -60,10 +61,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImages(ImageDescriptor imageDescriptor)
         {
-            string baseBuildImage = $"microsoft/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
+            string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
-            string baseRuntimeImage = $"microsoft/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
+            string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseRuntimeImage);
 
             string appId = $"dotnetapp-{DateTime.Now.ToFileTime()}";

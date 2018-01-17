@@ -1,7 +1,7 @@
 {
   "testCommands": {
     "windows": [
-      "powershell -NoProfile -Command .\\tests\\run-tests.ps1 -VersionFilter $(VersionFilter) -OSFilter $(OSFilter)"
+      "powershell -NoProfile -Command .\\tests\\run-tests.ps1 -VersionFilter $(VersionFilter) -OSFilter $(OSFilter) -RepoOwner $(System:RepoOwner)"
     ]
   },
   "repos": [
