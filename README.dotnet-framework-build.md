@@ -1,12 +1,12 @@
 # Supported Windows Server 2016 Version 1709 (Fall Creators Update) amd64 tags
 
-- [`4.7.1-2017.12-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1-2017.12`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/build/Dockerfile)
-- [`3.5-2017.12-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5-2017.12`, `3.5` (*3.5-windowsservercore-1709/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/build/Dockerfile)
+- [`4.7.1-2018.1-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1-2018.1`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/build/Dockerfile)
+- [`3.5-2018.1-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5-2018.1`, `3.5` (*3.5-windowsservercore-1709/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/build/Dockerfile)
 
 # Supported Windows Server 2016 amd64 tags
 
-- [`4.7.1-2017.12-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1-2017.12`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/build/Dockerfile)
-- [`3.5-2017.12-windowsservercore-ltsc2016`, `3.5-windowsservercore-ltsc2016`, `3.5-2017.12`, `3.5` (*3.5-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/build/Dockerfile)
+- [`4.7.1-2018.1-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1-2018.1`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/build/Dockerfile)
+- [`3.5-2018.1-windowsservercore-ltsc2016`, `3.5-windowsservercore-ltsc2016`, `3.5-2018.1`, `3.5` (*3.5-windowsservercore-ltsc2016/build/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/build/Dockerfile)
 
 For more information about these images and their history, please see [(`microsoft/dotnet-framework-docker`)](https://github.com/Microsoft/dotnet-framework-docker). Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
