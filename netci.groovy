@@ -16,7 +16,7 @@ platformList.each { platform ->
 
         def newJob = job(newJobName) {
             steps { 
-                batchFile("powershell -NoProfile -Command .\\build-and-test.ps1 -VersionFilter \"${versionFilter}\" -OSFilter \"${containerOS}\"")
+                batchFile("powershell -NoProfile -Command .\\build-and-test.ps1 -VersionFilter \"${versionFilter}\" -OSFilter \"${containerOS}\" -CleanupDocker")
             }
         }
 
