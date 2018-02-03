@@ -15,7 +15,7 @@
       "inputs": {
         "scriptType": "filePath",
         "scriptName": "$(Build.SourcesDirectory)\\build-and-test.ps1",
-        "arguments": "-VersionFilter \"$(PB_image-builder_VersionFilter)\" -OSFilter \"$(PB_image-builder_OSFilter)\" -ImageBuilderCustomArgs \"$(image-builder.args)\" -CleanupDocker",
+        "arguments": "-VersionFilter $(PB_image-builder_versionFilter) -OSFilter $(PB_image-builder_osFilter) -ImageBuilderCustomArgs \"$(image-builder.customArgs)\" -CleanupDocker",
         "workingFolder": "$(Build.SourcesDirectory)",
         "inlineScript": "",
         "failOnStandardError": "false"
@@ -66,21 +66,21 @@
       "value": "false",
       "allowOverride": true
     },
-    "image-builder.args": {
-      "value": "--push --username $(PB_docker_username) --password $(PB_docker_password) $(PB_image-builder_customCommonArgs)",
+    "image-builder.customArgs": {
+      "value": "--push --username $(PB_docker_username) --password $(PB_docker_password) $(PB_image-builder_queueCustomArgs)",
       "allowOverride": true
     },
     "PB_docker_password": {
       "value": null,
       "isSecret": true
     },
-    "PB_image-builder_customCommonArgs": {
+    "PB_image-builder_queueCustomArgs": {
       "value": ""
     },
-    "PB_image-builder_VersionFilter": {
+    "PB_image-builder_versionFilter": {
       "value": ""
     },
-    "PB_image-builder_OSFilter": {
+    "PB_image-builder_osFilter": {
       "value": ""
     }
   },
