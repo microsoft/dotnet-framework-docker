@@ -16,15 +16,15 @@
         {
           "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "3.5-windowsservercore-ltsc2016/*",
-            "PB_image-builder_vars": "--var VersionFilter=3.5 --var OSFilter=windowsservercore-ltsc2016"
+            "PB_image-builder_versionFilter": "3.5",
+            "PB_image-builder_osFilter": "windowsservercore-ltsc2016"
           }
         },
         {
           "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "4.*-windowsservercore-ltsc2016/*",
-            "PB_image-builder_vars": "--var VersionFilter=4.* --var OSFilter=windowsservercore-ltsc2016"
+            "PB_image-builder_versionFilter": "4.*",
+            "PB_image-builder_osFilter": "windowsservercore-ltsc2016"
           }
         }
       ]
@@ -38,15 +38,15 @@
         {
           "Name": "dotnet-framework-docker-windows-1709-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "3.5-windowsservercore-1709/*",
-            "PB_image-builder_vars": "--var VersionFilter=3.5 --var OSFilter=windowsservercore-1709"
+            "PB_image-builder_versionFilter": "3.5",
+            "PB_image-builder_osFilter": "windowsservercore-1709"
           }
         },
         {
           "Name": "dotnet-framework-docker-windows-1709-amd64-images",
           "Parameters": {
-            "PB_image-builder_path": "4.*-windowsservercore-1709/*",
-            "PB_image-builder_vars": "--var VersionFilter=4.* --var OSFilter=windowsservercore-1709"
+            "PB_image-builder_versionFilter": "4.*",
+            "PB_image-builder_osFilter": "windowsservercore-1709"
           }
         }
       ]
