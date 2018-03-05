@@ -1,24 +1,10 @@
 param(
     [string]$Branch='master',
-    [string]$ImageBuilderImageName='microsoft/dotnet-buildtools-prereqs:image-builder-jessie-20171122115946',
-    [string]$RepoName
+    [string]$ImageBuilderImageName='microsoft/dotnet-buildtools-prereqs:image-builder-debian-20180228165057'
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Path "$PSScriptRoot" -Parent
-
-if ([String]::IsNullOrWhiteSpace($RepoName))
-{
-    $remoteUrl = $null
-    if ([Uri]::TryCreate(((git config --get remote.origin.url) | Out-String), [UriKind]::Absolute, [ref]$remoteUrl))
-    {
-        $RepoName = [System.IO.Path]::GetFileNameWithoutExtension($remoteUrl.ToString())
-    }
-    if ([String]::IsNullOrWhiteSpace($RepoName))
-    {
-        Write-Error 'Could not automatically determine repository name. Add -RepoName <REPO> to override.'
-    }
-}
 
 & docker pull $ImageBuilderImageName
 
@@ -27,4 +13,4 @@ if ([String]::IsNullOrWhiteSpace($RepoName))
     -v "${repoRoot}:/repo" `
     -w /repo `
     $ImageBuilderImageName `
-    generateTagsReadme --update-readme "https://github.com/Microsoft/${RepoName}/blob/${Branch}"
+    generateTagsReadme --update-readme "https://github.com/Microsoft/dotnet-framework-docker/blob/${Branch}"
