@@ -90,7 +90,7 @@
       "images": [
         {
           "sharedTags": {
-            "4.7.1-20180213": {},
+            "4.7.1-20180309": {},
             "4.7.1": {},
             "latest": {}
           },
@@ -99,7 +99,7 @@
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/build",
               "os": "windows",
               "tags": {
-                "4.7.1-20180213-windowsservercore-ltsc2016": {},
+                "4.7.1-20180309-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             },
@@ -108,7 +108,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.1-20180213-windowsservercore-1709": {},
+                "4.7.1-20180309-windowsservercore-1709": {},
                 "4.7.1-windowsservercore-1709": {}
               }
             }
@@ -116,7 +116,7 @@
         },
         {
           "sharedTags": {
-            "3.5-20180213": {},
+            "3.5-20180309": {},
             "3.5": {}
           },
           "platforms": [
@@ -124,7 +124,7 @@
               "dockerfile": "3.5-windowsservercore-ltsc2016/build",
               "os": "windows",
               "tags": {
-                "3.5-20180213-windowsservercore-ltsc2016": {},
+                "3.5-20180309-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -133,7 +133,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "3.5-20180213-windowsservercore-1709": {},
+                "3.5-20180309-windowsservercore-1709": {},
                 "3.5-windowsservercore-1709": {}
               }
             }
