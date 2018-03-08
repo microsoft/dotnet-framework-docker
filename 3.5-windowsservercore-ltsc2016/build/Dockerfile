@@ -19,11 +19,11 @@ RUN New-Item -Type Directory $Env:ProgramFiles\NuGet; `
     Invoke-WebRequest -UseBasicParsing https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe -OutFile $Env:ProgramFiles\NuGet\nuget.exe
 
 # Install VS Test Agent
-RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/11503730/8a386d27295953ee79281fd1f1832e2d/vs_TestAgent.exe -OutFile vs_TestAgent.exe; `
+RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/11796489/8a386d27295953ee79281fd1f1832e2d/vs_TestAgent.exe -OutFile vs_TestAgent.exe; `
     Start-Process vs_TestAgent.exe -ArgumentList '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
     Remove-Item -Force vs_TestAgent.exe; `
 # Install VS Build Tools
-    Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/11503713/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe -OutFile vs_BuildTools.exe; `
+    Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/11796503/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe -OutFile vs_BuildTools.exe; `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1; `
     Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
