@@ -104,7 +104,7 @@
     }
   ],
   "jobAuthorizationScope": "projectCollection",
-  "jobTimeoutInMinutes": 120,
+  "jobTimeoutInMinutes": 180,
   "jobCancelTimeoutInMinutes": 5,
   "repository": {
     "properties": {
