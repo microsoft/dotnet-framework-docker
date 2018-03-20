@@ -4,6 +4,9 @@
       "powershell -NoProfile -Command .\\tests\\run-tests.ps1 -VersionFilter $(VersionFilter) -OSFilter $(OSFilter) -RepoOwner $(System:RepoOwner)"
     ]
   },
+  "variables": {
+    "ReleaseDateStamp": "20180411"
+  },
   "repos": [
     {
       "name": "microsoft/dotnet-framework",
@@ -11,6 +14,7 @@
       "images": [
         {
           "sharedTags": {
+            "4.7.1-$(ReleaseDateStamp)": {},
             "4.7.1": {},
             "latest": {}
           },
@@ -19,6 +23,7 @@
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/runtime",
               "os": "windows",
               "tags": {
+                "4.7.1-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             },
@@ -27,6 +32,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
+                "4.7.1-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-windowsservercore-1709": {}
               }
             }
@@ -34,6 +40,7 @@
         },
         {
           "sharedTags": {
+            "4.7-$(ReleaseDateStamp)": {},
             "4.7": {}
           },
           "platforms": [
@@ -41,6 +48,7 @@
               "dockerfile": "4.7-windowsservercore-ltsc2016/runtime",
               "os": "windows",
               "tags": {
+                "4.7-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               }
             }
@@ -48,6 +56,7 @@
         },
         {
           "sharedTags": {
+            "4.6.2-$(ReleaseDateStamp)": {},
             "4.6.2": {}
           },
           "platforms": [
@@ -55,6 +64,7 @@
               "dockerfile": "4.6.2-windowsservercore-ltsc2016/runtime",
               "os": "windows",
               "tags": {
+                "4.6.2-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.6.2-windowsservercore-ltsc2016": {}
               }
             }
@@ -62,6 +72,7 @@
         },
         {
           "sharedTags": {
+            "3.5-$(ReleaseDateStamp)": {},
             "3.5": {}
           },
           "platforms": [
@@ -69,6 +80,7 @@
               "dockerfile": "3.5-windowsservercore-ltsc2016/runtime",
               "os": "windows",
               "tags": {
+                "3.5-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -77,6 +89,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
+                "3.5-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-windowsservercore-1709": {}
               }
             }
@@ -90,7 +103,7 @@
       "images": [
         {
           "sharedTags": {
-            "4.7.1-20180309": {},
+            "4.7.1-$(ReleaseDateStamp)": {},
             "4.7.1": {},
             "latest": {}
           },
@@ -99,7 +112,7 @@
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/build",
               "os": "windows",
               "tags": {
-                "4.7.1-20180309-windowsservercore-ltsc2016": {},
+                "4.7.1-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             },
@@ -108,7 +121,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.1-20180309-windowsservercore-1709": {},
+                "4.7.1-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-windowsservercore-1709": {}
               }
             }
@@ -116,7 +129,7 @@
         },
         {
           "sharedTags": {
-            "3.5-20180309": {},
+            "3.5-$(ReleaseDateStamp)": {},
             "3.5": {}
           },
           "platforms": [
@@ -124,7 +137,7 @@
               "dockerfile": "3.5-windowsservercore-ltsc2016/build",
               "os": "windows",
               "tags": {
-                "3.5-20180309-windowsservercore-ltsc2016": {},
+                "3.5-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -133,7 +146,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "3.5-20180309-windowsservercore-1709": {},
+                "3.5-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-windowsservercore-1709": {}
               }
             }
