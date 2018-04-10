@@ -1,14 +1,14 @@
 # Supported Windows Server, version 1709 amd64 tags
 
-- [`4.7.1-windowsservercore-1709`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/runtime/Dockerfile)
-- [`3.5-windowsservercore-1709`, `3.5` (*3.5-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/runtime/Dockerfile)
+- [`4.7.1-20180410-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1-20180410`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/runtime/Dockerfile)
+- [`3.5-20180410-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5-20180410`, `3.5` (*3.5-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/runtime/Dockerfile)
 
 # Supported Windows Server 2016 amd64 tags
 
-- [`4.7.1-windowsservercore-ltsc2016`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.7-windowsservercore-ltsc2016`, `4.7` (*4.7-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.6.2-windowsservercore-ltsc2016`, `4.6.2` (*4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`3.5-windowsservercore-ltsc2016`, `3.5` (*3.5-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.7.1-20180410-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1-20180410`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.7-20180410-windowsservercore-ltsc2016`, `4.7-windowsservercore-ltsc2016`, `4.7-20180410`, `4.7` (*4.7-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.6.2-20180410-windowsservercore-ltsc2016`, `4.6.2-windowsservercore-ltsc2016`, `4.6.2-20180410`, `4.6.2` (*4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`3.5-20180410-windowsservercore-ltsc2016`, `3.5-windowsservercore-ltsc2016`, `3.5-20180410`, `3.5` (*3.5-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/runtime/Dockerfile)
 
 For more information about these images and their history, please see [(`microsoft/dotnet-framework-docker`)](https://github.com/Microsoft/dotnet-framework-docker). Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
