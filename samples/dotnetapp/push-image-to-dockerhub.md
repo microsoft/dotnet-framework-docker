@@ -1,12 +1,12 @@
 # Push Docker Images to Docker Hub
 
-This sample demonstrates hot to push .NET Core images to the [Docker Hub](https://hub.docker.com/) container registry. The instructions are based on the [.NET Core Docker Sample](README.md).
+This sample demonstrates hot to push .NET Framework images to the [Docker Hub](https://hub.docker.com/) container registry. The instructions are based on the [.NET Framework Docker Sample](README.md).
 
 Similar instructions are also available to [push to Azure Container Registry](push-image-to-acr.md).
 
 ## Build the Image
 
-The following instructions are a subset of the [.NET Core Docker Sample](dotnetapp/README.md) instructions, which assume that you are starting from the root of the [dotnet-docker repo](https://github.com/dotnet/dotnet-docker).
+The following instructions are a subset of the [.NET Framework Docker Sample](README.md) instructions, which assume that you are starting from the root of the [dotnet-framework-docker repo](https://github.com/microsoft/dotnet-framework-docker).
 
 ```console
 cd samples
@@ -36,16 +36,8 @@ There are a couple ways of passing a password to `docker login`. These instructi
 
 > Note: The instructions use example values that need to be changed to for your environment, specifically the password location, and the user account. More simply, make sure to change "rich" and "richlander" to something else.
 
-Login on Windows:
-
 ```console
 type c:\users\rich\password-dh.txt | docker login -u richlander --password-stdin
-```
-
-Login on macOS or Linux:
-
-```console
-cat ~/password-dh.txt | docker login -u richlander --password-stdin
 ```
 
 Alternatively, pass your password to `docker login` as plain text via the `--password` argument.
