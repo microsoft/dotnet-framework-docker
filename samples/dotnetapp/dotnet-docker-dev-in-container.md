@@ -2,9 +2,9 @@
 
 You can use containers to establish a .NET Framework development environment with only Docker and optionally a code editor installed on your machine. The environment can be made to match your local machine, production or both. If you support multiple Windows versions, then this approach might become a key part of your development process.
 
-A common use case of Docker is to [containerize an application](README.md). You can define the environment necessary to run the application and even build the application itself within a Dockerfile. This document describes a much more iterative and dynamic use of Docker, defining the environment and running .NET Core SDK commands within containers via the commandline.
+A common use case of Docker is to [containerize an application](README.md). You can define the environment necessary to run the application and even build the application itself within a Dockerfile. This document describes a much more iterative and dynamic use of Docker, defining the environment and running .NET SDK commands within containers via the commandline.
 
-See [Develop ASP.NET Core Applications in a Container](../aspnetapp/aspnet-docker-dev-in-container.md) for ASP.NET Core-specific instructions.
+See [Develop ASP.NET Core Applications in a Container](../aspnetapp/aspnet-docker-dev-in-container.md) for ASP.NET-specific instructions.
 
 ## Getting the sample
 

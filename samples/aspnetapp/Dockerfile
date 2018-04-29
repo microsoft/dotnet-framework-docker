@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.0-sdk AS build
+FROM microsoft/dotnet-framework-build:4.7.1 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -12,7 +12,7 @@ WORKDIR /app/aspnetapp
 RUN dotnet publish -o out /p:PublishWithAspNetCoreTargetManifest="false"
 
 
-FROM microsoft/dotnet:2.0-runtime AS runtime
+FROM microsoft/dotnet-framework:4.7.1 AS runtime
 ENV ASPNETCORE_URLS http://+:80
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./

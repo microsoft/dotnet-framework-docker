@@ -1,57 +1,42 @@
-# Develop ASP.NET Core Applications in a Container
+# Develop ASP.NET Applications in a Container
 
-You can use containers to establish a .NET Core development environment with only Docker and optionally a code editor installed on your machine. The environment can be made to match your local machine, production or both. If you support multiple operating systems, then this approach might become a key part of your development process.
+You can use containers to establish a .NET Framework development environment with only Docker and optionally a code editor installed on your machine. The environment can be made to match your local machine, production or both. If you support multiple Windows versions, then this approach might become a key part of your development process.
 
-A common use case of Docker is to [containerize an application](README.md). You can define the environment necessary to run the application and even build the application itself within a Dockerfile. This document describes a much more iterative and dynamic use of Docker, defining the container environment primarily via the commandline. .NET Core includes a command called `dotnet watch` that can rerun your application or your tests on each code change. This document describes how to use the Docker CLI and `dotnet watch` to develop applications in a container.
+A common use case of Docker is to [containerize an application](README.md). You can define the environment necessary to run the application and even build the application itself within a Dockerfile. This document describes a much more iterative and dynamic use of Docker, defining the environment and running .NET SDK commands within containers via the commandline.
 
-See [Develop .NET Core Applications in a Container](../dotnetapp/dotnet-docker-dev-in-container.md) for .NET Core-specific instructions.
+See [Develop .NET Framework Applications in a Container](../dotnetapp/dotnet-docker-dev-in-container.md) for console app-specific instructions.
 
 ## Getting the sample
 
 The easiest way to get the sample is by cloning the samples repository with [git](https://git-scm.com/downloads), using the following instructions:
 
 ```console
-git clone https://github.com/dotnet/dotnet-docker/
+git clone https://github.com/microsoft/dotnet-framework-docker/
 ```
 
-You can also [download the repository as a zip](https://github.com/dotnet/dotnet-docker/archive/master.zip).
+You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/master.zip).
 
 ## Requirements
 
-The instructions below use .NET Core 2.1 Preview 2 images. It is possible to make this scenario work with .NET Core 2.0 images but requires extra work and a bit of magic. On your local machine, you can use either .NET Core 2.1 or .NET Core 2.0 projects to try out these instructions.
+The instructions below use .NET Framework 4.7.2 SDK images.
 
-It is recommended that you add a [Directory.Build.props](Directory.Build.props) file to your project to use different `obj` and `bin` folders for local and container use, to avoid conflicts between them. You should delete your existing obj and bin folders before making this change. You can also use `dotnet clean` for this purpose.
+This approach relies on [volume mounting](https://docs.docker.com/engine/admin/volumes/volumes/)(that's the `-v` argument in the following commands) to mount source into the container (without using a Dockerfile). You may need to [Enable shared drives](https://docs.docker.com/docker-for-windows/#shared-drives).
 
-This approach relies on [volume mounting](https://docs.docker.com/engine/admin/volumes/volumes/) (that's the `-v` argument in the following commands) to mount source into the container (without using a Dockerfile). You may need to [Enable shared drives (Windows)](https://docs.docker.com/docker-for-windows/#shared-drives) or [file sharing (macOS)](https://docs.docker.com/docker-for-mac/#file-sharing) first.
+To avoid conflicts between container usage and your local environment, you need to use a different set of `obj` and `bin` folders for each environment.
+
+ Make this change with the following steps:
+
+ 1. Delete your existing obj and bin folders manually or use `dotnet clean`.
+ 2. Add a [Directory.Build.props](Directory.Build.props) file to your project to use a different set of `obj` and `bin` folders for your local and container environments.
 
 ## Run your application in a container while you Develop
 
-You can re-run your application in a container with every local code change. This scenario works for both console applications and websites. The syntax differs a bit for Windows and Linux containers.
+You can rerun your application in a container with every local code change. This scenario works for both console applications and websites.
 
-The instructions assume that you are in the root of the repository. You can use the following commands, given your environment:
-
-**Windows** using **Linux containers**
+The instructions assume that you are in the root of the repository.
 
 ```console
-docker run --rm -it -p 8000:80 -v c:\git\dotnet-docker\samples\aspnetapp:/app/ -w /app/aspnetapp microsoft/dotnet:2.1-sdk dotnet watch run
-```
-
-Navigate to the site at `http://localhost:8000` in your browser. You can use CTRL-C to terminate `dotnet watch`. It can take up to 20s to terminate.
-
-**macOS or Linux** using **Linux containers**
-
-```console
-docker run --rm -it -p 8000:80 -v ~/git/dotnet-docker/samples/aspnetapp:/app/ -w /app/aspnetapp microsoft/dotnet:2.1-sdk dotnet watch run
-```
-
-Navigate to the site at `http://localhost:8000` in your browser. You can use CTRL-C to terminate `dotnet watch`. It can take up to 20s to terminate.
-
-**Windows** using **Windows containers**
-
-`dotnet watch run` is not working correctly in containers at this time. The instructions are still documented while we work on enabling this scenario.
-
-```console
-docker run --rm -it -p 8000:80 -v c:\git\dotnet-docker\samples\aspnetapp:c:\app\ -w \app\aspnetapp --name aspnetappsample microsoft/dotnet:2.1-sdk dotnet watch run
+docker run --rm -it -p 8000:80 -v c:\git\dotnet-framework-docker\samples\aspnetapp:c:\app\ -w \app\aspnetapp --name aspnetappsample microsoft/dotnet-framework-build:4.7.2 dotnet watch run
 ```
 
 In another command window, type `docker exec aspnetappsample ipconfig`. Navigate to the IP address you see in your browser.

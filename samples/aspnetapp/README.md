@@ -1,14 +1,14 @@
-# ASP.NET Core Docker Sample
+# ASP.NET Docker Sample
 
-This [sample](Dockerfile) demonstrates how to use ASP.NET Core and Docker together. The sample works with both Linux and Windows containers and can also be used without Docker. There are also instructions that demonstrate how to push the sample to [Azure Container Registry](../dotnetapp/push-image-to-acr.md) and test it with [Azure Container Instance](deploy-container-to-aci.md).
+This [sample](Dockerfile) demonstrates how to use ASP.NET and Docker together. The sample can also be used without Docker. There are also instructions that demonstrate how to push the sample to [Azure Container Registry](../dotnetapp/push-image-to-acr.md) and test it with [Azure Container Instance](deploy-container-to-aci.md).
 
-The sample builds the application in a container based on the larger [.NET Core SDK Docker image](https://hub.docker.com/r/microsoft/dotnet/). It builds and tests the application and then copies the final build result into a Docker image based on the smaller [ASP.NET Core Docker Runtime image](https://hub.docker.com/r/microsoft/aspnetcore/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
+The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-build/). It builds the application and then copies the final build result into a Docker image based on the smaller [.NET Framework Runtime Docker image](https://hub.docker.com/r/microsoft/dotnet-framework/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
-This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://www.docker.com/products/docker).
+This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
-## Try a pre-built ASP.NET Core Docker Image
+## Try a pre-built ASP.NET Docker Image
 
-You can quickly try a pre-built [sample ASP.NET Core Docker image](https://hub.docker.com/r/microsoft/dotnet-samples/), based on this sample.
+You can quickly try a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-samples/), based on this sample.
 
 Type the following command to run a sample with [Docker](https://www.docker.com/products/docker):
 
@@ -16,17 +16,17 @@ Type the following command to run a sample with [Docker](https://www.docker.com/
 docker run --name aspnetcore_sample --rm -it -p 8000:80 microsoft/dotnet-samples:aspnetapp
 ```
 
-After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for Windows containers, which is demonstrated in the [View the ASP.NET Core app in a running container on Windows](#view-the-aspnet-core-app-in-a-running-container-on-windows) section.
+After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for Windows containers, which is demonstrated in the [View the ASP.NET Core app in a running container on Windows](#view-the-aspnet-app-in-a-running-container-on-windows) section.
 
 ## Getting the sample
 
-The easiest way to get the sample is by cloning the samples repository with git, using the following instructions:
+The easiest way to get the sample is by cloning the samples repository with [git](https://git-scm.com/downloads), using the following instructions:
 
 ```console
-git clone https://github.com/dotnet/dotnet-docker/
+git clone https://github.com/microsoft/dotnet-framework-docker/
 ```
 
-You can also [download the repository as a zip](https://github.com/dotnet/dotnet-docker/archive/master.zip).
+You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/master.zip).
 
 ## Build and run the sample with Docker
 
