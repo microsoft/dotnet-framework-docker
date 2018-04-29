@@ -64,7 +64,7 @@ You can push the image to a container registry so that you can pull and run it o
 
 ## Build and run the sample locally
 
-You can build and run the sample locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository. 
+You can build and run the sample locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
 
 You must have the [.NET Framework 4.7.1 or later](https://www.microsoft.com/net/download/Windows/run) installed and the .NET Framework 4.7.1 targeting pack (easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build)).
 
@@ -74,13 +74,13 @@ cd dotnetapp
 dotnet run
 ```
 
-You can produce an application that is ready to deploy to production locally using the following command.
+You can produce an application that is ready to deploy to production using the following command:
 
 ```console
 dotnet publish -c release -o out
 ```
 
-You can run the published application using the following command. You can copy this application to another machine with .NET Framework 4.7.1 or later installed.
+You can run the published application using the following command.
 
 ```console
 out\dotnetapp.exe

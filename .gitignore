@@ -7,6 +7,9 @@
 [Oo]bj/
 [Oo]ut/
 
+# packages
+[Pp]ackages/
+
 # dotnet install directory
 .dotnet/
 
