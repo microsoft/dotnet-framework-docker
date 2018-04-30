@@ -12,6 +12,6 @@ WORKDIR /app/aspnetapp
 RUN msbuild
 
 
-FROM FROM microsoft/aspnet:4.7.1 AS runtime
+FROM FROM microsoft/aspnet:4.7.1-windowsservercore-ltsc2016 AS runtime
 WORKDIR /inetpub/wwwroot
 COPY --from=build /app/aspnetapp/. ./

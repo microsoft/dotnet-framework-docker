@@ -1,10 +1,10 @@
-# Deploy ASP.NET Core Applications to Azure Container Instances
+# Deploy ASP.NET Applications to Azure Container Instances
 
-You can deploy ASP.NET Core applications to Azure Container Instances (ACI) with Docker. ACI is a great option for application testing and can also be used for production deployment (not covered here). These instructions are based on the [ASP.NET Core Docker Sample](README.md).
+You can deploy ASP.NET applications to Azure Container Instances (ACI) with Docker. ACI is a great option for application testing and can also be used for production deployment (not covered here). These instructions are based on the [ASP.NET Docker Sample](README.md).
 
 ## Build Application
 
-Build the application per the [ASP.NET Core Docker Sample](README.md) instructions. The following is a summarized version of those instructions. The instructions assume that you are in the root of the repository.
+Build the application per the [ASP.NET Docker Sample](README.md) instructions. The following is a summarized version of those instructions. The instructions assume that you are in the root of the repository.
 
 ```console
 cd samples
