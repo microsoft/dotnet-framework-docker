@@ -1,14 +1,22 @@
 # Supported Windows Server, version 1709 amd64 tags
 
-- [`4.7.1-20180410-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1-20180410`, `4.7.1`, `latest` (*4.7.1-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/runtime/Dockerfile)
-- [`3.5-20180410-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5-20180410`, `3.5` (*3.5-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/runtime/Dockerfile)
+- [`4.7.2-runtime-20180430-windowsservercore-1709`, `4.7.2-runtime-windowsservercore-1709`, `4.7.2-runtime`, `runtime`, `latest` (*4.7.2-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-1709/runtime/Dockerfile)
+- [`4.7.2-sdk-20180430-windowsservercore-1709`, `4.7.2-sdk-windowsservercore-1709`, `4.7.2-sdk`, `sdk` (*4.7.2-windowsservercore-1709/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-1709/sdk/Dockerfile)
+- [`4.7.1-runtime-20180410-windowsservercore-1709`, `4.7.1-runtime-windowsservercore-1709`, `4.7.1-runtime` (*4.7.1-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/runtime/Dockerfile)
+- [`4.7.1-sdk-20180410-windowsservercore-1709`, `4.7.1-sdk-windowsservercore-1709`, `4.7.1-sdk` (*4.7.1-windowsservercore-1709/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-1709/sdk/Dockerfile)
+- [`3.5-runtime-20180410-windowsservercore-1709`, `3.5-runtime-windowsservercore-1709`, `3.5-runtime` (*3.5-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/runtime/Dockerfile)
+- [`3.5-sdk-20180430-windowsservercore-1709`, `3.5-sdk-windowsservercore-1709`, `3.5-sdk` (*3.5-windowsservercore-1709/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/sdk/Dockerfile)
 
 # Supported Windows Server 2016 amd64 tags
 
-- [`4.7.1-20180410-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1-20180410`, `4.7.1`, `latest` (*4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.7-20180410-windowsservercore-ltsc2016`, `4.7-windowsservercore-ltsc2016`, `4.7-20180410`, `4.7` (*4.7-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.6.2-20180410-windowsservercore-ltsc2016`, `4.6.2-windowsservercore-ltsc2016`, `4.6.2-20180410`, `4.6.2` (*4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`3.5-20180410-windowsservercore-ltsc2016`, `3.5-windowsservercore-ltsc2016`, `3.5-20180410`, `3.5` (*3.5-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.7.2-runtime-20180430-windowsservercore-ltsc2016`, `4.7.2-runtime-windowsservercore-ltsc2016`, `4.7.2-runtime`, `runtime`, `latest` (*4.7.2-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.7.2-sdk-20180430-windowsservercore-ltsc2016`, `4.7.2-sdk-windowsservercore-ltsc2016`, `4.7.2-sdk`, `sdk` (*4.7.2-windowsservercore-ltsc2016/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-ltsc2016/sdk/Dockerfile)
+- [`4.7.1-runtime-20180410-windowsservercore-ltsc2016`, `4.7.1-runtime-windowsservercore-ltsc2016`, `4.7.1-runtime` (*4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.7.1-sdk-20180410-windowsservercore-ltsc2016`, `4.7.1-sdk-windowsservercore-ltsc2016`, `4.7.1-sdk` (*4.7.1-windowsservercore-ltsc2016/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1-windowsservercore-ltsc2016/sdk/Dockerfile)
+- [`4.7-runtime-20180410-windowsservercore-ltsc2016`, `4.7-runtime-windowsservercore-ltsc2016`, `4.7-runtime` (*4.7-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`4.6.2-runtime-20180410-windowsservercore-ltsc2016`, `4.6.2-runtime-windowsservercore-ltsc2016`, `4.6.2-runtime` (*4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.6.2-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`3.5-runtime-20180410-windowsservercore-ltsc2016`, `3.5-runtime-windowsservercore-ltsc2016`, `3.5-runtime` (*3.5-windowsservercore-ltsc2016/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/runtime/Dockerfile)
+- [`3.5-sdk-20180430-windowsservercore-ltsc2016`, `3.5-sdk-windowsservercore-ltsc2016`, `3.5-sdk` (*3.5-windowsservercore-ltsc2016/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/sdk/Dockerfile)
 
 For more information about these images and their history, please see [(`microsoft/dotnet-framework-docker`)](https://github.com/Microsoft/dotnet-framework-docker). Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
@@ -20,7 +28,7 @@ The [.NET Framework](https://www.microsoft.com/net/framework) is a general purpo
 
 You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. F# is a multi-paradigm programming language, enabling both functional and object-oriented patterns and practices. VB is a rapid development programming language with the deepest integration between the language and Visual Studio, providing the fastest path to a working app.   
 
-The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7.1](https://www.microsoft.com/net/framework).
+The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7.2](https://www.microsoft.com/net/framework).
 
 > https://docs.microsoft.com/dotnet/framework/
 
@@ -39,14 +47,14 @@ It is easy to create a Docker image for a .NET Framework 4.x application. You ca
 1. Add a `Dockerfile` file with the following content to your project. The `Dockerfile` and the Docker commands assume that your application is called `dotnetapp.exe`. Please update your `Dockerfile` as appropriate.
 
     ```dockerfile
-    FROM microsoft/dotnet-framework-build:4.7.1 AS build-env
+    FROM microsoft/dotnet-framework-build:4.7.2 AS build-env
     
     WORKDIR /app
     COPY . .
     
     RUN msbuild.exe /t:Build /p:Configuration=Release /p:OutputPath=out
     
-    FROM microsoft/dotnet-framework:4.7.1
+    FROM microsoft/dotnet-framework:4.7.2
     WORKDIR /app
     COPY --from=build-env /app/out ./
     ENTRYPOINT ["dotnetapp.exe"]
@@ -59,7 +67,7 @@ It is easy to create a Docker image for a .NET Framework 4.x application. You ca
     docker run --rm dotnetapp
     ```
 
-The Docker runtime image used in this example includes the .NET Framework 4.7.1, however, your application does not need to explicity target the .NET Framework 4.7.1. Applications that target .NET Framework 4.0 or later should work correctly with this image.
+The Docker runtime image used in this example includes the .NET Framework 4.7.2, however, your application does not need to explicitly target the .NET Framework 4.7.2. Applications that target .NET Framework 4.0 or later should work correctly with this image.
 
 ## Deploying a .NET Framework 3.5 application with Docker
 
@@ -82,21 +90,21 @@ It is easy to create a Docker image for a .NET Framework 3.5 application. You ca
     docker run dotnetapp
     ```
 
-The Docker image includes the .NET Framework 3.5, however, your application does not need to explicity target the .NET Framework 3.5. Applications that target .NET Framework 1.0 through 3.5 should work correctly with this image.
+The Docker image includes the .NET Framework 3.5, however, your application does not need to explicitly target the .NET Framework 3.5. Applications that target .NET Framework 1.0 through 3.5 should work correctly with this image.
 
 ## Image variants
 
 The `microsoft/dotnet-framework` images come in different flavors, each designed for a specific use case.
 
-### `4.7.1`
+### `4.7.2`
 
 This is the primary image. If you are unsure about what your needs are, you probably want to use this one.
 
 This image is for .NET Framework 4.0 and later version applications. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
-### `4.7`, `4.6.2`
+### `4.7`, `4.6.2`, `4.7.1`
 
-These images are for applications that need a specific .NET Framework version and have not been tested with .NET Framework 4.7.1. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
+These images are for applications that need a specific .NET Framework version and have not been tested with .NET Framework 4.7.2. It is based on the [Windows Server Core image](https://hub.docker.com/r/microsoft/windowsservercore/).
 
 ### `3.5`
 
