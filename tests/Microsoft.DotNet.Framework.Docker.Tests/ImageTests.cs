@@ -26,9 +26,15 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1709 },
                 new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.2", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1709 },
             };
 
         private DockerHelper DockerHelper { get; set; }
@@ -61,10 +67,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImages(ImageDescriptor imageDescriptor)
         {
-            string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
+            string baseBuildImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
-            string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
+            string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseRuntimeImage);
 
             string appId = $"dotnetapp-{DateTime.Now.ToFileTime()}";

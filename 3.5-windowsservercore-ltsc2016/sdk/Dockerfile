@@ -1,7 +1,18 @@
 # escape=`
 
-FROM microsoft/dotnet-framework:3.5-windowsservercore-1709
+FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-ltsc2016
 
+# Install .NET 4.7.2
+RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/5/A/3/5A3607CA-53B1-4717-8845-4389B11931FA/NDP472-KB4054530-x86-x64-AllOS-ENU.exe" -OutFile dotnet-framework-installer.exe & `
+    .\dotnet-framework-installer.exe /q & `
+    del .\dotnet-framework-installer.exe
+
+# ngen .NET Fx
+RUN set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & `
+    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
+    \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+
+# Can't set SHELL prior to installing 4.7.2 runtime - PowerShell being loaded prevents GAC from getting updated without restart
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Install NuGet CLI
@@ -39,7 +50,7 @@ RUN setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\")
 
 # Install Targeting Packs
-RUN @('4.0', '4.5.2', '4.6.2', '4.7.1') `
+RUN @('4.0', '4.5.2', '4.6.2', '4.7.2') `
     | %{ `
         Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip -OutFile referenceassemblies.zip; `
         Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
