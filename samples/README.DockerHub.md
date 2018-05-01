@@ -2,8 +2,8 @@
 
 The following tags are the latest stable versions of the most commonly used images. The complete set of tags is listed further down.
 
-- [`4.7.2`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-1709/runtime/Dockerfile)
-- [`3.5`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1709/runtime/Dockerfile)
+- [`dotnetapp`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+- [`aspnetapp`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
 
 The [.NET Framework Docker samples](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/README.md) show various ways to use .NET Framework and Docker together. See [Building Docker Images for .NET Framework Applications](https://docs.microsoft.com/dotnet/framework/docker/) to learn more.
 
@@ -29,7 +29,15 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 ## Complete set of Tags
 
-tags here
+# Windows Server 2016 amd64 tags
+
+- [`dotnetapp-windowsservercore-ltsc2016`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+- [`aspnetapp-windowsservercore-ltsc2016`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+
+# Windows Server, version 1709 amd64 tags
+
+- [`dotnetapp-windowsservercore-1709`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+- [`aspnetapp-windowsservercore-1709`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
 
 # What is the .NET Framework?
 
@@ -51,12 +59,12 @@ If you have any problems with or questions about this image, please contact us t
 
 ## Licenses
 
-- [Windows Server Core license](https://hub.docker.com/r/microsoft/windowsservercore/)
+* [Windows Server Core license](https://hub.docker.com/r/microsoft/windowsservercore/)
 
 ## Related Repos
 
 See the following related repos for other application types:
 
-- [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
-- [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
-- [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) for .NET Framework images (for web applications, see microsoft/aspnet).
+* [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
+* [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
+* [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) for .NET Framework images (for web applications, see microsoft/aspnet).

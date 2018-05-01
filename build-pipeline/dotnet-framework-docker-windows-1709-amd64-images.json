@@ -15,7 +15,7 @@
       "inputs": {
         "scriptType": "filePath",
         "scriptName": "$(Build.SourcesDirectory)\\build-and-test.ps1",
-        "arguments": "-VersionFilter $(PB_image-builder_versionFilter) -OSFilter $(PB_image-builder_osFilter) -ImageBuilderCustomArgs \"$(image-builder.customArgs)\" -CleanupDocker",
+        "arguments": "-VersionFilter $(PB_image-builder_versionFilter) -OSFilter $(PB_image-builder_osFilter) -ImageBuilderCustomArgs \"$(imageBuilder.customArgs)\" -CleanupDocker",
         "workingFolder": "$(Build.SourcesDirectory)",
         "inlineScript": "",
         "failOnStandardError": "false"
@@ -66,9 +66,14 @@
       "value": "false",
       "allowOverride": true
     },
-    "image-builder.customArgs": {
-      "value": "--push --username $(PB_docker_username) --password $(PB_docker_password) $(PB_image-builder_queueCustomArgs)",
-      "allowOverride": true
+    "imageBuilder.customArgs": {
+      "value": "--manifest $(imageBuilder.manifest) --push --username $(PB_docker_username) --password $(PB_docker_password) $(imageBuilder.pipelineArgs) $(PB_image-builder_queueCustomArgs)"
+    },
+    "imageBuilder.manifest": {
+      "value": "manifest.json"
+    },
+    "imageBuilder.pipelineArgs": {
+      "value": ""
     },
     "PB_docker_password": {
       "value": null,
