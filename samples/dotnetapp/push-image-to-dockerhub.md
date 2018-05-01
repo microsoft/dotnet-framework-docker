@@ -1,12 +1,12 @@
 # Push Docker Images to Docker Hub
 
-This sample demonstrates hot to push .NET Framework images to the [Docker Hub](https://hub.docker.com/) container registry. The instructions are based on the [.NET Framework Docker Sample](README.md).
+This sample demonstrates hot to push .NET Framework images to the [Docker Hub](https://hub.docker.com/) container registry. The instructions are based on the [.NET Framework Console Docker Sample](README.md).
 
 Similar instructions are also available to [push to Azure Container Registry](push-image-to-acr.md).
 
 ## Build the Image
 
-The following instructions are a subset of the [.NET Framework Docker Sample](README.md) instructions, which assume that you are starting from the root of the [dotnet-framework-docker repo](https://github.com/microsoft/dotnet-framework-docker).
+The following instructions are a subset of the [.NET Framework Console Docker Sample](README.md) instructions, which assume that you are starting from the root of the [dotnet-framework-docker repo](https://github.com/microsoft/dotnet-framework-docker).
 
 ```console
 cd samples
@@ -56,7 +56,7 @@ You can now pull the image from another device. You need to `docker login` if yo
 
 Update the path locations, registry, and user names to the ones you are using.
 
-Now pull and run the image:
+Now pull and run the image (the first command isn't strictly necessary):
 
 ```console
 docker pull richlander/dotnetapp
@@ -65,5 +65,5 @@ docker run --rm richlander/dotnetapp
 
 ## More Samples
 
-* [.NET Core Docker Samples](../README.md)
-* [.NET Framework Docker Samples](https://github.com/microsoft/dotnet-framework-docker-samples/)
+* [.NET Framework Docker Samples](../README.md)
+* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)

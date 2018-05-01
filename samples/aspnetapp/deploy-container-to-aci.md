@@ -9,8 +9,10 @@ Build the application per the [ASP.NET Docker Sample](README.md) instructions. T
 ```console
 cd samples
 cd aspnetapp
-docker build --pull -t aspnetapp -f Dockerfile .
+docker build --pull -t aspnetapp -f Dockerfile.windowsservercore-ltsc2016 .
 ```
+
+For Windows containers, you will need to build with a [Dockerfile](Dockerfile.windowsservercore-ltsc2016) that uses a Windows Server 2016 image.
 
 ## Create ACR Registry
 
@@ -49,17 +51,19 @@ docker push richlander.azurecr.io/aspnetapp
 
 ## Deploy Image to Azure Container Instance (ACI)
 
-```console
-az container create --name aspnetapp --image richlander.azurecr.io/aspnetapp --resource-group richlander-containers --ip-address public
-```
-
-Specify `--os-type Windows` for Windows images. Windows Server, version 1709 images are not yet supported.
-
 During deployment, you'll need to enter your password. Type or copy/paste it in. Get your password beforehand from the following command:
 
 ```console
 az acr credential show -n richlander --query passwords[0].value --output tsv
 ```
+
+You can deploy Windows images with the following command, which includes `--os-type Windows`:
+
+```console
+az container create --name aspnetapp --image richlander.azurecr.io/aspnetapp --resource-group richlander-containers --ip-address public --os-type Windows
+```
+
+> Note: Azure Container Instances only supports Windows Server 2016 Nano Server and Server Core images, not Windows Server, version 1709 or later.
 
 ## Running the Image
 
@@ -84,5 +88,5 @@ az group exists --name richlander-containers
 
 ## More Samples
 
-* [.NET Core Docker Samples](../README.md)
-* [.NET Framework Docker Samples](https://github.com/microsoft/dotnet-framework-docker-samples/)
+* [.NET Framework Docker Samples](../README.md)
+* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)

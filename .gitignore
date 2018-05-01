@@ -2,6 +2,9 @@
 .vscode/
 .vs
 
+# Visual Studio user files
+*.csproj.user
+
 # Build output
 [Bb]in/
 [Oo]bj/

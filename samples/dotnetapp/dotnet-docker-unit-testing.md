@@ -1,12 +1,12 @@
 # Running .NET Framework Unit Tests with Docker
 
-You can run .NET Core unit tests in Docker with either `docker build` or `docker run`.
+You can run .NET Framework unit tests in Docker with either `docker build` or `docker run`.
 
 Running tests via `docker build` is useful as a means of getting early feedback, primarily pass/fail results printed via the console/terminal.
 
 Running tests via `docker run` is useful as a means of getting complete test results captured with volume mounting.
 
-These instructions are based on the [.NET Framework Docker Sample](README.md).
+These instructions are based on the [.NET Framework Console Docker Sample](README.md).
 
 ## Getting the sample
 
@@ -80,5 +80,5 @@ You should find a `.trx` file in the TestResults folder. You can open this file 
 
 ## More Samples
 
-* [.NET Core Docker Samples](../README.md)
-* [.NET Framework Docker Samples](https://github.com/microsoft/dotnet-framework-docker-samples/)
+* [.NET Framework Docker Samples](../README.md)
+* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)

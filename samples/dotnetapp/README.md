@@ -8,9 +8,9 @@ This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker
 
 ## Try a pre-built .NET Framework Docker Image
 
-You can quickly try a pre-built [sample .NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on this sample.
+You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [.NET Framework console sample](dotnetapp/README.md).
 
-Type the following command to run a sample with [Docker](https://store.docker.com/editions/community/docker-ce-desktop-windows):
+Type the following [Docker](https://www.docker.com/products/docker) command:
 
 ```console
 docker run --rm microsoft/dotnet-framework-samples
@@ -48,12 +48,8 @@ You can mount a volume while running the image in order to save the test results
 
 Multiple variations of this sample have been provided, as follows. Some of these example Dockerfiles are demonstrated later. Specify an alternate Dockerfile via the `-f` argument.
 
-* [Multi-arch sample with build and unit testing](Dockerfile)
-* [Multi-arch basic sample](Dockerfile.basic)
-
-## Develop ASP.NET Core Applications in a container
-
-You can develop applications without a .NET Core installation on your machine with the [Develop .NET Core applications in a container](dotnet-docker-dev-in-container.md) instructions. These instructions are also useful if your development and production environments do not match.
+* [Sample with build and unit testing](Dockerfile)
+* [Sample with basic build](Dockerfile.basic)
 
 ## Run Docker Image on Another Device
 
@@ -62,11 +58,11 @@ You can push the image to a container registry so that you can pull and run it o
 * [Push Docker Images to Azure Container Registry](push-image-to-acr.md)
 * [Push Docker Images to DockerHub](push-image-to-dockerhub.md)
 
-## Build and run the sample locally
+## Build and run the sample locally with the .NET Core SDK
 
-You can build and run the sample locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
+You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
 
-You must have the [.NET Framework 4.7.1 or later](https://www.microsoft.com/net/download/Windows/run) installed and the .NET Framework 4.7.1 targeting pack (easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build)).
+You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) with the Visual Studio Installer.
 
 ```console
 cd samples
@@ -88,12 +84,28 @@ out\dotnetapp.exe
 
 Note: The `-c release` argument builds the application in release mode (the default is debug mode). See the [dotnet run reference](https://docs.microsoft.com/dotnet/core/tools/dotnet-run) for more information on commandline parameters.
 
+## Build and run the sample locally with MSBuild
+
+You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2017`.
+
+You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) with the Visual Studio Installer.
+
+```console
+cd samples
+cd dotnetapp
+msbuild /t:restore
+msbuild
+dotnetapp\bin\Debug\net471\dotnetapp.exe
+```
+
+Note: The `-c release` argument builds the application in release mode (the default is debug mode). See the [dotnet run reference](https://docs.microsoft.com/dotnet/core/tools/dotnet-run) for more information on commandline parameters.
+
 ## .NET Resources
 
 More Samples
 
-* [.NET Core Docker Samples](../README.md)
-* [.NET Framework Docker Samples](https://github.com/microsoft/dotnet-framework-docker-samples/)
+* [.NET Framework Docker Samples](../README.md)
+* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
 
 Docs and More Information:
 

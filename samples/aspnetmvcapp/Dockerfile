@@ -3,16 +3,16 @@ WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY aspnetapp/*.csproj ./aspnetapp/
-COPY aspnetapp/*.config ./aspnetapp/
+COPY aspnetmvcapp/*.csproj ./aspnetmvcapp/
+COPY aspnetmvcapp/*.config ./aspnetmvcapp/
 RUN nuget restore
 
 # copy everything else and build app
-COPY aspnetapp/. ./aspnetapp/
-WORKDIR /app/aspnetapp
+COPY aspnetmvcapp/. ./aspnetmvcapp/
+WORKDIR /app/aspnetmvcapp
 RUN msbuild
 
 
 FROM microsoft/aspnet:4.7.2 AS runtime
 WORKDIR /inetpub/wwwroot
-COPY --from=build /app/aspnetapp/. ./
+COPY --from=build /app/aspnetmvcapp/. ./

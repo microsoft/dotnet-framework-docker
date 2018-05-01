@@ -1,4 +1,4 @@
-FROM microsoft/dotnet-framework-build:4.7.1 AS build
+FROM microsoft/dotnet-framework:4.7.2-sdk AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -29,7 +29,7 @@ WORKDIR /app/dotnetapp
 RUN dotnet publish -c Release -o out
 
 
-FROM microsoft/dotnet-framework:4.7.1 AS runtime
+FROM microsoft/dotnet-framework:4.7.2-runtime AS runtime
 WORKDIR /app
 COPY --from=publish /app/dotnetapp/out ./
 ENTRYPOINT ["dotnetapp.exe"]

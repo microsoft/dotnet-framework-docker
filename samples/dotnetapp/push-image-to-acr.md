@@ -1,6 +1,6 @@
 # Push Docker Images to Azure Container Registry
 
-This sample demonstrates how to push .NET Framework images to [Azure Container Registry (ACR)](https://docs.microsoft.com/azure/container-registry/container-registry-get-started-portal). The instructions are based on the [.NET Framework Docker Sample](README.md).
+This sample demonstrates how to push .NET Framework images to [Azure Container Registry (ACR)](https://docs.microsoft.com/azure/container-registry/container-registry-get-started-portal). The instructions are based on the [.NET Framework Console Docker Sample](README.md).
 
 These instructions use the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) and the [Docker client](https://www.docker.com/products/docker).
 
@@ -60,7 +60,7 @@ az acr credential show -n richlander
 
 There are a few ways to login with these credentials, some of which are demonstrated in the following examples.
 
-The easiest approach is to get the credentials and login in a single command, piping the result of the `az acr credential` command to `docker login` [via stdin](https://github.com/docker/cli/pull/218). This approach works on Windows, macOS, and Linux.
+The easiest approach is to get the credentials and login in a single command, piping the result of the `az acr credential` command to `docker login` [via stdin](https://github.com/docker/cli/pull/218).
 
 ```console
 az acr credential show -n richlander --query passwords[0].value --output tsv | docker login richlander.azurecr.io -u richlander --password-stdin
@@ -68,18 +68,9 @@ az acr credential show -n richlander --query passwords[0].value --output tsv | d
 
 Alternatively, you can persist your password across logins with the following technique. Make sure to save to a location not managed by source control (to avoid accidental disclosure).
 
-Login on Windows:
-
 ```console
 az acr credential show -n richlander --query passwords[0].value --output tsv > %USERPROFILE%\password-acr.txt
 type %USERPROFILE%\password-acr.txt | docker login richlander.azurecr.io -u richlander --password-stdin
-```
-
-Login on macOS or Linux:
-
-```console
-az acr credential show -n richlander --query passwords[0].value --output tsv > ~\password-acr.txt
-cat ~\password-acr.txt | docker login richlander.azurecr.io -u richlander --password-stdin
 ```
 
 ## Push the Image
@@ -96,7 +87,7 @@ First, `docker login` to ACR before you can pull the image from another device, 
 
 Update the path locations, registry, and user names to the ones you are using.
 
-Now pull and run the image:
+Now pull and run the image (the first command isn't strictly necessary):
 
 ```console
 docker pull richlander.azurecr.io/dotnetapp
@@ -105,5 +96,6 @@ docker run --rm richlander.azurecr.io/dotnetapp
 
 ## More Samples
 
-* [.NET Core Docker Samples](../README.md)
-* [.NET Framework Docker Samples](https://github.com/microsoft/dotnet-framework-docker-samples/)
+* [.NET Framework Docker Samples](../README.md)
+* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+
