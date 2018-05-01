@@ -3,7 +3,8 @@ param(
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
     [string]$ImageBuilderCustomArgs,
-    [switch]$CleanupDocker
+    [switch]$CleanupDocker,
+    [switch]$ExcludePathFilter
 )
 
 Set-StrictMode -Version Latest
@@ -56,7 +57,7 @@ function ExecuteWithRetry {
 }
 
 function Get-ImageBuilder() {
-    $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180111160403'
+    $imageBuilderImageName = 'microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180227141513'
     $imageBuilderContainerName = "ImageBuilder-$(Get-Date -Format yyyyMMddhhmmss)"
     New-Item -Path "$imageBuilderFolder" -ItemType Directory -Force | Out-Null
     ExecuteWithRetry -Command "docker pull $imageBuilderImageName"
@@ -67,19 +68,24 @@ function Get-ImageBuilder() {
 }
 
 Invoke-CleanupDocker
-$buildFilter = "$VersionFilter-$OSFilter/*"
 $imageBuilderFolder = [System.IO.Path]::Combine("$PSScriptRoot", ".Microsoft.DotNet.ImageBuilder")
 $imageBuilderExe = [System.IO.Path]::Combine("$imageBuilderFolder", "image-builder", "Microsoft.DotNet.ImageBuilder.exe")
 if (-not (Test-Path -Path "$imageBuilderExe" -PathType Leaf)) {
     Get-ImageBuilder
 }
 
-$imageBuilderArgs = "build --path $buildFilter --var VersionFilter=$VersionFilter --var OSFilter=$OSFilter"
+$buildFilter = ""
+if (-not $ExcludePathFilter) {
+    $buildFilter = "--path $VersionFilter-$OSFilter/*"
+}
+
+$imageBuilderArgs = "build $buildFilter --var VersionFilter=$VersionFilter --var OSFilter=$OSFilter"
 if (-not [string]::IsNullOrWhiteSpace($ImageBuilderCustomArgs)) {
     $imageBuilderArgs += " $ImageBuilderCustomArgs"
 }
 
 try {
+    Write-host "Executing '$imageBuilderExe $imageBuilderArgs'"
     Invoke-Expression "$imageBuilderExe $imageBuilderArgs"
     if ($LastExitCode -ne 0) {
         throw "Failed executing $imageBuilderExe $imageBuilderArgs"
