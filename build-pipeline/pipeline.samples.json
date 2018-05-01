@@ -16,6 +16,7 @@
         {
           "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
           "Parameters": {
+            "buildAndTest.customArgs": "-ExcludePathFilter",
             "imageBuilder.manifest": "manifest.samples.json",
             "imageBuilder.pipelineArgs": "--os-version ltsc2016"
           }
@@ -31,6 +32,7 @@
         {
           "Name": "dotnet-framework-docker-windows-1709-amd64-images",
           "Parameters": {
+            "buildAndTest.customArgs": "-ExcludePathFilter",
             "imageBuilder.manifest": "manifest.samples.json",
             "imageBuilder.pipelineArgs": "--os-version 1709"
           }
@@ -44,7 +46,10 @@
       },
       "Definitions": [
         {
-          "Name": "dotnet-framework-docker-post-image-build"
+          "Name": "dotnet-framework-docker-post-image-build",
+          "Parameters": {
+            "imageBuilder.manifest": "manifest.samples.json"
+          }
         }
       ],
       "DependsOn": [
