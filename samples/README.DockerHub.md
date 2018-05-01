@@ -29,15 +29,15 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 ## Complete set of Tags
 
-# Windows Server 2016 amd64 tags
-
-- [`dotnetapp-windowsservercore-ltsc2016`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
-- [`aspnetapp-windowsservercore-ltsc2016`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
-
 # Windows Server, version 1709 amd64 tags
 
 - [`dotnetapp-windowsservercore-1709`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
 - [`aspnetapp-windowsservercore-1709`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+
+# Windows Server 2016 amd64 tags
+
+- [`dotnetapp-windowsservercore-ltsc2016`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+- [`aspnetapp-windowsservercore-ltsc2016`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
 
 # What is the .NET Framework?
 
