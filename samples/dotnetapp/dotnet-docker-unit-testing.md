@@ -51,7 +51,7 @@ docker build -t dotnetapp .
 
 You can run [unit tests](tests) as part of `docker run` using the following commands. Running tests in this way is useful to get complete tests results for Docker images. The [sample Dockerfile](Dockerfile) exposes multiple [Dockerfile stages](https://docs.docker.com/engine/reference/commandline/build/#specifying-target-build-stage-target) that you can separately target as part of `docker build` and run. The sample Dockerfile includes a `testrunner` stage with a separate `ENTRYPOINT` for unit testing, which is required to maintain a single Dockerfile.
 
-The following commands rely on [volume mounting](https://docs.docker.com/engine/admin/volumes/volumes/) (that's the `-v` argument in the following commands) to enable the test runner to write test log files to your local drive. Without that, running tests as part of `docker run` isn't as useful. You may need to [Enable shared drives](https://docs.docker.com/docker-for-windows/#shared-drives) first.
+The following commands rely on [volume mounting](https://docs.docker.com/engine/admin/volumes/volumes/) (that's the `-v` argument in the following commands) to enable the test runner to write test log files to your local drive. Without that, running tests as part of `docker run` isn't as useful. 
 
 #### Build the testrunner stage
 

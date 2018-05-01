@@ -10,7 +10,7 @@ RUN nuget restore
 # copy everything else and build app
 COPY aspnetmvcapp/. ./aspnetmvcapp/
 WORKDIR /app/aspnetmvcapp
-RUN msbuild
+RUN msbuild /p:Configuration=Release
 
 
 FROM microsoft/aspnet:4.7.2 AS runtime

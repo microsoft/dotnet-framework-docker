@@ -8,7 +8,7 @@ Similar instructions are also available to [push to DockerHub](push-image-to-doc
 
 ## Build the Image
 
-The following instructions are a subset of the [dotnetapp sample](dotnetapp/README.md) instruction, assuming that you are starting from the root of the [dotnet-docker repo](https://github.com/dotnet/dotnet-docker).
+The following instructions are a subset of the [dotnetapp sample](dotnetapp/README.md) instruction, assuming that you are starting from the root of the [dotnet-framework-docker repo](https://github.com/microsoft/dotnet-framework-docker).
 
 ```console
 cd samples
