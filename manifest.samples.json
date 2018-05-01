@@ -1,0 +1,57 @@
+{
+  "repos": [
+    {
+      "name": "microsoft/dotnet-framework-samples",
+      "readmePath": "samples/README.DockerHub.md",
+      "images": [
+        {
+          "sharedTags": {
+            "dotnetapp": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "os": "windows",
+              "osVersion": "ltsc2016",
+              "tags": {
+                "dotnetapp-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "dotnetapp-windowsservercore-1709": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "aspnetapp": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "os": "windows",
+              "osVersion": "ltsc2016",
+              "tags": {
+                "aspnetapp-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "aspnetapp-windowsservercore-1709": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
