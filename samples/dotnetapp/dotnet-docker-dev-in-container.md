@@ -36,7 +36,7 @@ You can rerun your application in a container with every local code change. This
 The instructions assume that you are in the root of the repository.
 
 ```console
-docker run --rm -it -v c:\git\dotnet-docker\samples\dotnetapp:c:\app\ -w \app\dotnetapp microsoft/dotnet-framework:4.7.2-sdk dotnet watch run
+docker run --rm -it -v c:\git\dotnet-framework-docker\samples\dotnetapp:c:\app\ -w \app\dotnetapp microsoft/dotnet-framework:4.7.2-sdk dotnet watch run
 ```
 
 ## Test your application in a container while you develop
