@@ -2,7 +2,7 @@
 
 The samples show various ways to use .NET Framework and Docker together. You can use the samples as the basis of your own Docker images or just to play.
 
-The samples exercise various levels of functionality. The [.NET Framework Docker sample](dotnetapp/README.md) includes the most functionality, including build, unit testing, and pushing images to a container registry. The [ASP.NET Core Docker sample](aspnetapp/README.md) includes instructions for testing images with [Azure Container Instances](https://azure.microsoft.com/services/container-instances/). The samples include detailed instructions for use with and without Docker.
+The samples exercise various levels of functionality. The [.NET Framework Docker sample](dotnetapp/README.md) includes the most functionality, including build, unit testing, and pushing images to a container registry. The [ASP.NET Docker sample](aspnetapp/README.md) includes instructions for testing images with [Azure Container Instances](https://azure.microsoft.com/services/container-instances/). The samples include detailed instructions for use with and without Docker.
 
 ## Try a pre-built .NET Framework Docker Image
 
@@ -14,7 +14,7 @@ Type the following [Docker](https://www.docker.com/products/docker) command:
 docker run --rm microsoft/dotnet-framework-samples
 ```
 
-## Building .NET Core Apps with Docker
+## Building .NET Framework Apps with Docker
 
 * [.NET Framework Console Docker Sample](dotnetapp/README.md) - This [sample](dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
 * [ASP.NET Web Forms Docker Sample](aspnetapp/README.md) - This [sample](aspnetapp/Dockerfile) demonstrates using Docker with an ASP.NET Web Forms app.
