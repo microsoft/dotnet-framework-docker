@@ -93,6 +93,39 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
+        [Theory]
+        [MemberData(nameof(GetVerifyImagesData))]
+        public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
+            VerifyImageExist(baseBuildImage);
+
+            string webAppId = $"webapp-{DateTime.Now.ToFileTime()}";
+            string webWorkDir = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "projects",
+                $"webapp-{imageDescriptor.RuntimeVersion}");
+
+            try
+            {
+                DockerHelper.Build(
+                    tag: webAppId,
+                    dockerfile: Path.Combine(webWorkDir, "Dockerfile"),
+                    buildContextPath: webWorkDir,
+                    buildArgs: new string[]
+                    {
+                        $"BASE_BUILD_IMAGE={baseBuildImage}",
+                    });
+
+                DockerHelper.Run(image: webAppId, containerName: webAppId);
+            }
+            finally
+            {
+                DockerHelper.DeleteImage(webAppId);
+            }
+        }
+
+
         private void VerifyImageExist(string image)
         {
             Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");

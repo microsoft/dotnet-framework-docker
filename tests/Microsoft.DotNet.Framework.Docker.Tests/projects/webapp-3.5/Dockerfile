@@ -7,4 +7,4 @@ COPY . ./
 
 RUN msbuild SimpleWebApplication.csproj /verbosity:quiet /p:Configuration=Release
 
-RUN dir ./bin/SimpleWebApplication.dll
+ENTRYPOINT dir ./bin/SimpleWebApplication.dll
