@@ -6,7 +6,8 @@
   },
   "variables": {
     "ReleaseDateStamp": "20180410",
-    "472ReleaseDateStamp": "20180430"
+    "472ReleaseDateStamp": "20180430",
+    "VS157ReleaseDateStamp": "20180507"
   },
   "repos": [
     {
@@ -49,7 +50,7 @@
               "dockerfile": "4.7.2-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "4.7.2-sdk-$(472ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-sdk-$(VS157ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-sdk-windowsservercore-ltsc2016": {}
               }
             },
@@ -58,7 +59,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.2-sdk-$(472ReleaseDateStamp)-windowsservercore-1709": {},
+                "4.7.2-sdk-$(VS157ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-sdk-windowsservercore-1709": {}
               }
             }
@@ -115,7 +116,7 @@
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "4.7.1-sdk-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-sdk-$(VS157ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-sdk-windowsservercore-ltsc2016": {}
               }
             },
@@ -124,7 +125,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.1-sdk-$(ReleaseDateStamp)-windowsservercore-1709": {},
+                "4.7.1-sdk-$(VS157ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-sdk-windowsservercore-1709": {}
               }
             }
@@ -235,7 +236,7 @@
               "dockerfile": "3.5-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "3.5-sdk-$(472ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-sdk-$(VS157ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-sdk-windowsservercore-ltsc2016": {}
               }
             },
@@ -244,7 +245,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "3.5-sdk-$(472ReleaseDateStamp)-windowsservercore-1709": {},
+                "3.5-sdk-$(VS157ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-sdk-windowsservercore-1709": {}
               }
             }
@@ -259,17 +260,13 @@
         {
           "sharedTags": {
             "4.7.1": {},
-            "latest": {},
-            "4.7.1-$(ReleaseDateStamp)": {
-              "isUndocumented": true
-            }
+            "latest": {}
           },
           "platforms": [
             {
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "4.7.1-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             },
@@ -278,7 +275,6 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.1-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-windowsservercore-1709": {}
               }
             }
@@ -286,17 +282,13 @@
         },
         {
           "sharedTags": {
-            "3.5": {},
-            "3.5-$(472ReleaseDateStamp)": {
-              "isUndocumented": true
-            }
+            "3.5": {}
           },
           "platforms": [
             {
               "dockerfile": "3.5-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "3.5-$(472ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -305,7 +297,6 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "3.5-$(472ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-windowsservercore-1709": {}
               }
             }

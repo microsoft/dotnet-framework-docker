@@ -27,6 +27,7 @@ platformList.each { platform ->
             Utilities.setMachineAffinity(newJob, hostOS, machineLabel)
         }
         Utilities.standardJobSetup(newJob, project, isPR, "*/${branch}")
+        Utilities.setJobTimeout(newJob, 180)
         Utilities.addGithubPRTriggerForBranch(newJob, branch, "${containerOS} - ${version} Dockerfiles")
     }
 }
