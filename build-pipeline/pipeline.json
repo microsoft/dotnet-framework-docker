@@ -52,6 +52,28 @@
       ]
     },
     {
+      "Name": "Build Windows 1803 AMD64 Images",
+      "Parameters": {
+        "TreatWarningsAsErrors": "false"
+      },
+      "Definitions": [
+        {
+          "Name": "dotnet-framework-docker-windows-1803-amd64-images",
+          "Parameters": {
+            "PB_image-builder_versionFilter": "3.5",
+            "PB_image-builder_osFilter": "windowsservercore-1803"
+          }
+        },
+        {
+          "Name": "dotnet-framework-docker-windows-1803-amd64-images",
+          "Parameters": {
+            "PB_image-builder_versionFilter": "4.*",
+            "PB_image-builder_osFilter": "windowsservercore-1803"
+          }
+        }
+      ]
+    },
+    {
       "Name": "Post Image Build",
       "Parameters": {
         "TreatWarningsAsErrors": "false"
@@ -62,6 +84,7 @@
         }
       ],
       "DependsOn": [
+        "Build Windows 1803 AMD64 Images",
         "Build Windows 1709 AMD64 Images",
         "Build Windows ltsc2016 AMD64 Images"
       ]
