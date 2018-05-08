@@ -5,9 +5,7 @@
     ]
   },
   "variables": {
-    "ReleaseDateStamp": "20180410",
-    "472ReleaseDateStamp": "20180430",
-    "VS157ReleaseDateStamp": "20180507"
+    "ReleaseDateStamp": "20180508"
   },
   "repos": [
     {
@@ -25,7 +23,7 @@
               "dockerfile": "4.7.2-windowsservercore-ltsc2016/runtime",
               "os": "windows",
               "tags": {
-                "4.7.2-runtime-$(472ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-runtime-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-runtime-windowsservercore-ltsc2016": {}
               }
             },
@@ -34,7 +32,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.2-runtime-$(472ReleaseDateStamp)-windowsservercore-1709": {},
+                "4.7.2-runtime-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-runtime-windowsservercore-1709": {}
               }
             }
@@ -50,7 +48,7 @@
               "dockerfile": "4.7.2-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "4.7.2-sdk-$(VS157ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-sdk-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-sdk-windowsservercore-ltsc2016": {}
               }
             },
@@ -59,7 +57,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.2-sdk-$(VS157ReleaseDateStamp)-windowsservercore-1709": {},
+                "4.7.2-sdk-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-sdk-windowsservercore-1709": {}
               }
             }
@@ -68,9 +66,6 @@
         {
           "sharedTags": {
             "4.7.1-runtime": {},
-            "4.7.1-$(ReleaseDateStamp)": {
-              "isUndocumented": true
-            },
             "4.7.1": {
               "isUndocumented": true
             }
@@ -82,9 +77,6 @@
               "tags": {
                 "4.7.1-runtime-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-runtime-windowsservercore-ltsc2016": {},
-                "4.7.1-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {
-                  "isUndocumented": true
-                },
                 "4.7.1-windowsservercore-ltsc2016": {
                   "isUndocumented": true
                 }
@@ -97,9 +89,6 @@
               "tags": {
                 "4.7.1-runtime-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-runtime-windowsservercore-1709": {},
-                "4.7.1-$(ReleaseDateStamp)-windowsservercore-1709": {
-                  "isUndocumented": true
-                },
                 "4.7.1-windowsservercore-1709": {
                   "isUndocumented": true
                 }
@@ -116,7 +105,7 @@
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "4.7.1-sdk-$(VS157ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-sdk-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-sdk-windowsservercore-ltsc2016": {}
               }
             },
@@ -125,7 +114,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "4.7.1-sdk-$(VS157ReleaseDateStamp)-windowsservercore-1709": {},
+                "4.7.1-sdk-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-sdk-windowsservercore-1709": {}
               }
             }
@@ -134,9 +123,6 @@
         {
           "sharedTags": {
             "4.7-runtime": {},
-            "4.7-$(ReleaseDateStamp)": {
-              "isUndocumented": true
-            },
             "4.7": {
               "isUndocumented": true
             }
@@ -148,9 +134,6 @@
               "tags": {
                 "4.7-runtime-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-runtime-windowsservercore-ltsc2016": {},
-                "4.7-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {
-                  "isUndocumented": true
-                },
                 "4.7-windowsservercore-ltsc2016": {
                   "isUndocumented": true
                 }
@@ -161,9 +144,6 @@
         {
           "sharedTags": {
             "4.6.2-runtime": {},
-            "4.6.2-$(ReleaseDateStamp)": {
-              "isUndocumented": true
-            },
             "4.6.2": {
               "isUndocumented": true
             }
@@ -175,9 +155,6 @@
               "tags": {
                 "4.6.2-runtime-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.6.2-runtime-windowsservercore-ltsc2016": {},
-                "4.6.2-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {
-                  "isUndocumented": true
-                },
                 "4.6.2-windowsservercore-ltsc2016": {
                   "isUndocumented": true
                 }
@@ -188,9 +165,6 @@
         {
           "sharedTags": {
             "3.5-runtime": {},
-            "3.5-$(ReleaseDateStamp)": {
-              "isUndocumented": true
-            },
             "3.5": {
               "isUndocumented": true
             }
@@ -202,9 +176,6 @@
               "tags": {
                 "3.5-runtime-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-runtime-windowsservercore-ltsc2016": {},
-                "3.5-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {
-                  "isUndocumented": true
-                },
                 "3.5-windowsservercore-ltsc2016": {
                   "isUndocumented": true
                 }
@@ -217,9 +188,6 @@
               "tags": {
                 "3.5-runtime-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-runtime-windowsservercore-1709": {},
-                "3.5-$(ReleaseDateStamp)-windowsservercore-1709": {
-                  "isUndocumented": true
-                },
                 "3.5-windowsservercore-1709": {
                   "isUndocumented": true
                 }
@@ -236,7 +204,7 @@
               "dockerfile": "3.5-windowsservercore-ltsc2016/sdk",
               "os": "windows",
               "tags": {
-                "3.5-sdk-$(VS157ReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-sdk-$(ReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-sdk-windowsservercore-ltsc2016": {}
               }
             },
@@ -245,7 +213,7 @@
               "os": "windows",
               "osVersion": "1709",
               "tags": {
-                "3.5-sdk-$(VS157ReleaseDateStamp)-windowsservercore-1709": {},
+                "3.5-sdk-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-sdk-windowsservercore-1709": {}
               }
             }
