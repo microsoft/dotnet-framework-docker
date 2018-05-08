@@ -25,8 +25,7 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 SHELL ["cmd", "/S", "/C"]
-RUN set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     # Workaround VS installer/ngen issue with VSWebLauncher
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft Visual Studio\2017\TestAgent\Common7\IDE\VSWebLauncher.exe" `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update

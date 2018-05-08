@@ -22,6 +22,6 @@ RUN powershell -Command `
         Remove-Item -Force -Recurse \patch
 
 # ngen .NET Fx
-RUN set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & `
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
+RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
     \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update

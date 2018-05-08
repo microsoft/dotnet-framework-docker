@@ -8,6 +8,6 @@ RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/5
     del .\dotnet-framework-installer.exe
 
 # ngen .NET Fx
-RUN set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & `
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
+RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
     \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
