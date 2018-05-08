@@ -31,6 +31,13 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 ## Complete set of Tags
 
+# Windows Server, version 1803 amd64 tags
+
+- [`4.7.2-runtime-20180508-windowsservercore-1803`, `4.7.2-runtime-windowsservercore-1803`, `4.7.2-runtime`, `runtime`, `latest` (*4.7.2-windowsservercore-1803/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-1803/runtime/Dockerfile)
+- [`4.7.2-sdk-20180508-windowsservercore-1803`, `4.7.2-sdk-windowsservercore-1803`, `4.7.2-sdk`, `sdk` (*4.7.2-windowsservercore-1803/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-1803/sdk/Dockerfile)
+- [`3.5-runtime-20180508-windowsservercore-1803`, `3.5-runtime-windowsservercore-1803`, `3.5-runtime` (*3.5-windowsservercore-1803/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1803/runtime/Dockerfile)
+- [`3.5-sdk-20180508-windowsservercore-1803`, `3.5-sdk-windowsservercore-1803`, `3.5-sdk` (*3.5-windowsservercore-1803/sdk/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-1803/sdk/Dockerfile)
+
 # Windows Server, version 1709 amd64 tags
 
 - [`4.7.2-runtime-20180508-windowsservercore-1709`, `4.7.2-runtime-windowsservercore-1709`, `4.7.2-runtime`, `runtime`, `latest` (*4.7.2-windowsservercore-1709/runtime/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-1709/runtime/Dockerfile)

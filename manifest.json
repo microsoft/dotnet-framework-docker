@@ -35,6 +35,15 @@
                 "4.7.2-runtime-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-runtime-windowsservercore-1709": {}
               }
+            },
+            {
+              "dockerfile": "4.7.2-windowsservercore-1803/runtime",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "4.7.2-runtime-$(ReleaseDateStamp)-windowsservercore-1803": {},
+                "4.7.2-runtime-windowsservercore-1803": {}
+              }
             }
           ]
         },
@@ -59,6 +68,15 @@
               "tags": {
                 "4.7.2-sdk-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-sdk-windowsservercore-1709": {}
+              }
+            },
+            {
+              "dockerfile": "4.7.2-windowsservercore-1803/sdk",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "4.7.2-sdk-$(ReleaseDateStamp)-windowsservercore-1803": {},
+                "4.7.2-sdk-windowsservercore-1803": {}
               }
             }
           ]
@@ -193,6 +211,16 @@
                 }
               }
             }
+            ,
+            {
+              "dockerfile": "3.5-windowsservercore-1803/runtime",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "3.5-runtime-$(ReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-runtime-windowsservercore-1803": {}
+              }
+            }
           ]
         },
         {
@@ -215,6 +243,15 @@
               "tags": {
                 "3.5-sdk-$(ReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-sdk-windowsservercore-1709": {}
+              }
+            },
+            {
+              "dockerfile": "3.5-windowsservercore-1803/sdk",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "3.5-sdk-$(ReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-sdk-windowsservercore-1803": {}
               }
             }
           ]
