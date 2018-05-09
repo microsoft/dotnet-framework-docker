@@ -25,6 +25,14 @@
               "tags": {
                 "dotnetapp-windowsservercore-1709": {}
               }
+            },
+            {
+              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "dotnetapp-windowsservercore-1803": {}
+              }
             }
           ]
         },
@@ -47,6 +55,14 @@
               "osVersion": "1709",
               "tags": {
                 "aspnetapp-windowsservercore-1709": {}
+              }
+            },
+            {
+              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "aspnetapp-windowsservercore-1803": {}
               }
             }
           ]

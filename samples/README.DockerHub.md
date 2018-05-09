@@ -29,6 +29,11 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 ## Complete set of Tags
 
+# Windows Server, version 1803 tags
+
+- [`dotnetapp-windowsservercore-1803`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+- [`aspnetapp-windowsservercore-1803`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+
 # Windows Server, version 1709 amd64 tags
 
 - [`dotnetapp-windowsservercore-1709`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
