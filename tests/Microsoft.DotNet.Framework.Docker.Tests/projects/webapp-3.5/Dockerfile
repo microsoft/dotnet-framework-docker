@@ -5,6 +5,6 @@ FROM $BASE_BUILD_IMAGE
 WORKDIR /app
 COPY . ./
 
-RUN msbuild SimpleWebApplication.csproj /verbosity:quiet /p:Configuration=Release
+RUN msbuild SimpleWebApplication.csproj /p:Configuration=Release
 
-ENTRYPOINT dir ./bin/SimpleWebApplication.dll
+RUN dir ./bin/SimpleWebApplication.dll

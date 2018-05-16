@@ -9,4 +9,4 @@ RUN nuget restore SimpleWebApplication.csproj -SolutionDirectory -NoCache
 
 RUN msbuild SimpleWebApplication.csproj /p:Configuration=Release
 
-ENTRYPOINT dir ./bin/SimpleWebApplication.dll
+RUN dir ./bin/SimpleWebApplication.dll

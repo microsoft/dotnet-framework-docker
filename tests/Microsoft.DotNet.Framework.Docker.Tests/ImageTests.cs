@@ -59,19 +59,47 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [MemberData(nameof(GetVerifyImagesData))]
-        public void VerifyImages(ImageDescriptor imageDescriptor)
+        public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
+        {
+            VerifyImages(imageDescriptor, "dotnetapp", true);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetVerifyImagesData))]
+        public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
+        {
+            VerifyImages(imageDescriptor, "webapp", false);
+        }
+
+        private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, bool includeRuntime)
         {
             string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
-            string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
-            VerifyImageExist(baseRuntimeImage);
+            string [] appBuildArgs;
+            if (includeRuntime)
+            {
+                string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
+                VerifyImageExist(baseRuntimeImage);
+                appBuildArgs = new string[]
+                 {
+                        $"BASE_BUILD_IMAGE={baseBuildImage}",
+                        $"BASE_RUNTIME_IMAGE={baseRuntimeImage}",
+                 };
+            }
+            else
+            {
+                appBuildArgs = new string[]
+                 {
+                        $"BASE_BUILD_IMAGE={baseBuildImage}",
+                 };
+            }
 
-            string appId = $"dotnetapp-{DateTime.Now.ToFileTime()}";
+            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 "projects",
-                $"dotnetapp-{imageDescriptor.RuntimeVersion}");
+                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
 
             try
             {
@@ -79,11 +107,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
                     buildContextPath: workDir,
-                    buildArgs: new string[]
-                    {
-                        $"BASE_BUILD_IMAGE={baseBuildImage}",
-                        $"BASE_RUNTIME_IMAGE={baseRuntimeImage}",
-                    });
+                    buildArgs: appBuildArgs);
 
                 DockerHelper.Run(image: appId, containerName: appId);
             }
@@ -91,38 +115,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 DockerHelper.DeleteImage(appId);
             }
-        }
 
-        [Theory]
-        [MemberData(nameof(GetVerifyImagesData))]
-        public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
-        {
-            string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
-            VerifyImageExist(baseBuildImage);
-
-            string webAppId = $"webapp-{DateTime.Now.ToFileTime()}";
-            string webWorkDir = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "projects",
-                $"webapp-{imageDescriptor.RuntimeVersion}");
-
-            try
-            {
-                DockerHelper.Build(
-                    tag: webAppId,
-                    dockerfile: Path.Combine(webWorkDir, "Dockerfile"),
-                    buildContextPath: webWorkDir,
-                    buildArgs: new string[]
-                    {
-                        $"BASE_BUILD_IMAGE={baseBuildImage}",
-                    });
-
-                DockerHelper.Run(image: webAppId, containerName: webAppId);
-            }
-            finally
-            {
-                DockerHelper.DeleteImage(webAppId);
-            }
         }
 
 
