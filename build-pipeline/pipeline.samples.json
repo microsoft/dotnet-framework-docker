@@ -1,0 +1,78 @@
+{
+  "Repository": "dotnet-framework-docker",
+  "Definitions": {
+    "Path": ".",
+    "Type": "VSTS",
+    "BaseUrl": "https://devdiv.visualstudio.com/DefaultCollection",
+    "SkipBranchAndVersionOverrides": "false"
+  },
+  "Pipelines": [
+    {
+      "Name": "Build Windows ltsc2016 AMD64 Images",
+      "Parameters": {
+        "TreatWarningsAsErrors": "false"
+      },
+      "Definitions": [
+        {
+          "Name": "dotnet-framework-docker-windows-ltsc2016-amd64-images",
+          "Parameters": {
+            "buildAndTest.customArgs": "-ExcludePathFilter",
+            "imageBuilder.manifest": "manifest.samples.json",
+            "imageBuilder.pipelineArgs": "--os-version ltsc2016"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Build Windows 1709 AMD64 Images",
+      "Parameters": {
+        "TreatWarningsAsErrors": "false"
+      },
+      "Definitions": [
+        {
+          "Name": "dotnet-framework-docker-windows-1709-amd64-images",
+          "Parameters": {
+            "buildAndTest.customArgs": "-ExcludePathFilter",
+            "imageBuilder.manifest": "manifest.samples.json",
+            "imageBuilder.pipelineArgs": "--os-version 1709"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Build Windows 1803 AMD64 Images",
+      "Parameters": {
+        "TreatWarningsAsErrors": "false"
+      },
+      "Definitions": [
+        {
+          "Name": "dotnet-framework-docker-windows-1803-amd64-images",
+          "Parameters": {
+            "buildAndTest.customArgs": "-ExcludePathFilter",
+            "imageBuilder.manifest": "manifest.samples.json",
+            "imageBuilder.pipelineArgs": "--os-version 1803"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "Post Image Build",
+      "Parameters": {
+        "TreatWarningsAsErrors": "false"
+      },
+      "Definitions": [
+        {
+          "Name": "dotnet-framework-docker-post-image-build",
+          "Parameters": {
+            "imageBuilder.manifest": "manifest.samples.json"
+          }
+        }
+      ],
+      "DependsOn": [
+        "Build Windows 1803 AMD64 Images",
+        "Build Windows 1709 AMD64 Images",
+        "Build Windows ltsc2016 AMD64 Images"
+      ]
+    }
+  ]
+}

@@ -2,13 +2,22 @@
 .vscode/
 .vs
 
+# Visual Studio user files
+*.csproj.user
+
 # Build output
 [Bb]in/
 [Oo]bj/
 [Oo]ut/
 
+# packages
+[Pp]ackages/
+
 # dotnet install directory
 .dotnet/
+
+# Test files
+*.trx
 
 # ImageBuilder directory
 .Microsoft.DotNet.ImageBuilder
