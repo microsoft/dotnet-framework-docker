@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -78,7 +77,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "webapp", $"powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+            VerifyImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -86,7 +85,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string baseBuildImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
-            StringCollection appBuildArgs = new StringCollection { $"BASE_BUILD_IMAGE={baseBuildImage}"};
+            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
             if (includeRuntime)
             {
                 string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
