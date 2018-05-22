@@ -1,0 +1,3 @@
+FROM microsoft/windowsservercore:1803
+
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0

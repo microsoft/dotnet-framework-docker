@@ -17,6 +17,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     {
         private const string WSC_LTSC2016 = "windowsservercore-ltsc2016";
         private const string WSC_1709 = "windowsservercore-1709";
+        private const string WSC_1803 = "windowsservercore-1803";
 
         private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
         private static string RepoOwner => Environment.GetEnvironmentVariable("REPO_OWNER") ?? "microsoft";
@@ -26,10 +27,18 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
                 new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.2", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1709 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
             };
 
         private DockerHelper DockerHelper { get; set; }
@@ -74,7 +83,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
-            string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
+            string baseBuildImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
             StringCollection appBuildArgs = new StringCollection { $"BASE_BUILD_IMAGE={baseBuildImage}"};

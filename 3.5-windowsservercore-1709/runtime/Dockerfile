@@ -21,17 +21,17 @@ RUN powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2018/01/windows10.0-kb4056892-x64_a41a378cf9ae609152b505c40e691ca1228e28ea.msu" `
+            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2018/05/windows10.0-kb4103727-x64_c217e7d5e2efdf9ff8446871e509e96fdbb8cb99.msu" `
             -OutFile patch.msu; `
         New-Item -Type Directory patch; `
         Start-Process expand -ArgumentList 'patch.msu', 'patch', '-F:*' -NoNewWindow -Wait; `
         Remove-Item -Force patch.msu; `
-        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4056892-x64.cab; `
+        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4103727-x64.cab; `
         Remove-Item -Force -Recurse \patch
 
 # ngen .NET Fx
-RUN set COMPLUS_NGenProtectedProcess_FeatureEnabled=0 & `
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
+RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
     \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update & `
     \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update & `
     \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update
