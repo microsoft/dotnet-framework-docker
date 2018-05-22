@@ -23,7 +23,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string buildArgsOption = null;
             if (buildArgs != null)
             {
-                foreach (Object arg in buildArgs)
+                foreach (string arg in buildArgs)
                 {
                     buildArgsOption += $" --build-arg {arg}";
                 }
