@@ -18,7 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             OutputHelper = outputHelper;
         }
 
-        public void Build(string tag, string dockerfile, string buildContextPath, List<string> buildArgs)
+        public void Build(string tag, string dockerfile, string buildContextPath, IEnumerable<string> buildArgs)
         {
             string buildArgsOption = null;
             if (buildArgs != null)
