@@ -6,5 +6,3 @@ WORKDIR /app
 COPY . ./
 
 RUN msbuild SimpleWebApplication.csproj /p:Configuration=Release
-
-RUN dir ./bin/SimpleWebApplication.dll

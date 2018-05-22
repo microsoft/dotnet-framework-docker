@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -61,38 +62,27 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "dotnetapp", true);
+            VerifyImages(imageDescriptor, "dotnetapp", "", true);
         }
 
         [Theory]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "webapp", false);
+            VerifyImages(imageDescriptor, "webapp", $"powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
-        private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, bool includeRuntime)
+        private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
             string baseBuildImage = $"{RepoOwner}/dotnet-framework-build:{imageDescriptor.BuildVersion}-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
-            string [] appBuildArgs;
+            StringCollection appBuildArgs = new StringCollection { $"BASE_BUILD_IMAGE={baseBuildImage}"};
             if (includeRuntime)
             {
                 string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
                 VerifyImageExist(baseRuntimeImage);
-                appBuildArgs = new string[]
-                 {
-                        $"BASE_BUILD_IMAGE={baseBuildImage}",
-                        $"BASE_RUNTIME_IMAGE={baseRuntimeImage}",
-                 };
-            }
-            else
-            {
-                appBuildArgs = new string[]
-                 {
-                        $"BASE_BUILD_IMAGE={baseBuildImage}",
-                 };
+                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
@@ -109,15 +99,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     buildContextPath: workDir,
                     buildArgs: appBuildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId);
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
             }
             finally
             {
                 DockerHelper.DeleteImage(appId);
             }
-
         }
-
 
         private void VerifyImageExist(string image)
         {
