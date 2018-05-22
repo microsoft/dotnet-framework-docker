@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Xunit.Abstractions;
@@ -17,7 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             OutputHelper = outputHelper;
         }
 
-        public void Build(string tag, string dockerfile, string buildContextPath, params string[] buildArgs)
+        public void Build(string tag, string dockerfile, string buildContextPath, IEnumerable<string> buildArgs)
         {
             string buildArgsOption = null;
             if (buildArgs != null)
@@ -71,9 +72,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return process.ExitCode == 0 && stdOutput != "";
         }
 
-        public void Run(string image, string containerName)
+        public void Run(string image, string containerName, string command)
         {
-            Execute($"run --rm --name {containerName} {image}");
+            Execute($"run --rm --name {containerName} {image} {command}");
         }
     }
 }
