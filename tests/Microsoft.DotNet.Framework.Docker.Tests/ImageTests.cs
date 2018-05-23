@@ -88,7 +88,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
             if (includeRuntime)
             {
-                string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-{imageDescriptor.OsVariant}";
+                string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
                 VerifyImageExist(baseRuntimeImage);
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
