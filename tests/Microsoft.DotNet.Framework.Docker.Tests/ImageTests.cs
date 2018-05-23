@@ -68,19 +68,36 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [MemberData(nameof(GetVerifyImagesData))]
-        public void VerifyImages(ImageDescriptor imageDescriptor)
+        public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
+        {
+            VerifyImages(imageDescriptor, "dotnetapp", "", true);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetVerifyImagesData))]
+        public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
+        {
+            VerifyImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+        }
+
+        private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
             string baseBuildImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
             VerifyImageExist(baseBuildImage);
 
-            string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
-            VerifyImageExist(baseRuntimeImage);
+            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
+            if (includeRuntime)
+            {
+                string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
+                VerifyImageExist(baseRuntimeImage);
+                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
+            }
 
-            string appId = $"dotnetapp-{DateTime.Now.ToFileTime()}";
+            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 "projects",
-                $"dotnetapp-{imageDescriptor.RuntimeVersion}");
+                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
 
             try
             {
@@ -88,13 +105,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
                     buildContextPath: workDir,
-                    buildArgs: new string[]
-                    {
-                        $"BASE_BUILD_IMAGE={baseBuildImage}",
-                        $"BASE_RUNTIME_IMAGE={baseRuntimeImage}",
-                    });
+                    buildArgs: appBuildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId);
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
             }
             finally
             {
