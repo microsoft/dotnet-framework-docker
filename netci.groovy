@@ -3,7 +3,7 @@ import jobs.generation.Utilities
 def project = GithubProject
 def branch = GithubBranchName
 def isPR = true
-def platformList = ['Windows_2016:WindowsServerCore-ltsc2016', 'Windows_2016:WindowsServerCore-1709']
+def platformList = ['Windows_2016:WindowsServerCore-ltsc2016', 'Windows_2016:WindowsServerCore-1709', 'Windows_2016:WindowsServerCore-1803']
 def versionList = ['3.5', '4.']
 
 platformList.each { platform ->
@@ -20,7 +20,10 @@ platformList.each { platform ->
             }
         }
 
-        if (containerOS == 'WindowsServerCore-1709') {
+        if (containerOS == 'WindowsServerCore-1803') {
+            newJob.with {label('windows.10.amd64.serverrs4.open')}
+        }
+        else if (containerOS == 'WindowsServerCore-1709') {
             newJob.with {label('windows.10.amd64.serverrs3.open')}
         }
         else {
