@@ -1,50 +1,63 @@
-# WCF Docker Container Samples
-These samples demonstrate how to dockerize WCF services, either IIS-hosted or self-hosted. A simple "hello world" service contract is used in all samples for both HTTP and NET.TCP transport bindings.
+# WCF Docker Sample
+This sample demonstrates how to dockerize WCF services, either IIS-hosted or self-hosted. A simple "hello world" service contract is used in all samples for both HTTP and NET.TCP transport bindings. The sample can also be used without Docker.
 
-## Prepare Your Environment
-After cloning or downloading this repository, build the solution in the `wcfapp` folder either in Visual Studio or using command line `msbuild wcfapp.sln` in a VS console window. You will need environment and software below installed to complete these samples.
+The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-build/). It builds the application and then copies the final build result into a Docker image based on the smaller [WCF Runtime Docker image](https://hub.docker.com/r/microsoft/wcf/) or [.NET Framework Runtime Docker image](https://hub.docker.com/r/microsoft/dotnet-framework/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
-* [Windows 10](https://www.microsoft.com/en-us/windows/get-windows-10) (or [Windows Server 2016](https://www.microsoft.com/en-us/cloud-platform/windows-server)) with **'Containers'** feature enabled.
-* [Docker for Windows](https://docs.docker.com/docker-for-windows/) with **'Switch to Windows Containers...'** by right clicking on the Docker whale icon in system tray
-* [Visual Studio 2017](https://www.visualstudio.com/vs/)
+This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
-## Run WCF Service in Container
+## Try a pre-built .NET Framework Docker Image
+
+## Getting the sample
+
+The easiest way to get the sample is by cloning the samples repository with [git](https://git-scm.com/downloads), using the following instructions.
+
+```console
+git clone https://github.com/microsoft/dotnet-framework-docker/
+```
+
+You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/master.zip).
+
+## Build and run the sample with Docker
 WCF service is supported on .NET Framework, which can run in Windows Server Core based containers. For simplicity, we disabled security in these samples.
 
 ### Build a Container with IIS-hosted WCF Service
-Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](WcfServiceWebApp/Dockerfile) is added to the project. We use `microsoft/wcf` image as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use WCF image with tag `4.6.2` for .NET Framework 4.6.2 in this example, but you can change it to use other tags (eg. `microsoft/wcf:4.7` with tag `4.7`) for WCF images with different versions of .NET Framework. The complete list of [WCF image tags](https://hub.docker.com/r/microsoft/wcf/tags/) can be found from Docker Hub. 
+Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](/Dockerfile.web) is added to the project. We use `microsoft/wcf` image as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use WCF image with tag `4.7.2` for .NET Framework 4.7.2 in this example, but you can change it to use other tags (eg. `microsoft/wcf:4.7` with tag `4.7`) for WCF images with different versions of .NET Framework. The complete list of [WCF image tags](https://hub.docker.com/r/microsoft/wcf/tags/) can be found from Docker Hub. 
 
 Run commands below to build the container image with name `wcfservice:iis-hosted` and start an instance of it named `myservice1`. Docker parameter `-d` will run the container in background (detached mode).
 ```
-C:\wcfapp\WcfServiceWebApp>docker build -t wcfservice:iis-hosted .
-C:\wcfapp\WcfServiceWebApp>docker run -d --name myservice1 wcfservice:iis-hosted
+cd samples
+cd wcfapp
+docker build -t wcfservice:iis-hosted -f Dockerfile.web .
+docker run -d --name myservice1 wcfservice:iis-hosted
 ```
 Find the IP address of the container instance. This will be used later for a WCF client to connect to the service.
 ```
-C:\wcfapp\WcfServiceWebApp>docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice1
+docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice1
 172.23.70.146
 ```
 ### Build a Container with Self-hosted WCF Service
-Project `WcfServiceConsoleApp` is created from Windows Classic Desktop 'Console App' template in Visual Studio. We added a [Dockerfile](WcfServiceConsoleApp/Dockerfile) to the project. We use `microsoft/dotnet-framework` image as the base image and expose ports 80 (for HTTP) and 808 (for NET.TCP) for the container.
+Project `WcfServiceConsoleApp` is created from Windows Classic Desktop 'Console App' template in Visual Studio. We added a [Dockerfile](/Dockerfile.console) to the project. We use `microsoft/dotnet-framework` image as the base image and expose ports 80 (for HTTP) and 808 (for NET.TCP) for the container.
 
-Make sure you build project `WcfServiceConsoleApp` first. Then run commands below to build the container image with name `wcfservice:self-hosted` and start an instance of it named `myservice2`.
+Run commands below to build the container image with name `wcfservice:self-hosted` and start an instance of it named `myservice2`.
 ```
-C:\wcfapp\WcfServiceConsoleApp>docker build -t wcfservice:self-hosted .
-C:\wcfapp\WcfServiceConsoleApp>docker run -it --rm --name myservice2 wcfservice:self-hosted
-The service is ready at http://localhost/Service1.svc
-The service is ready at net.tcp://localhost/Service1.svc
-The service is running...
+docker build -t wcfservice:self-hosted -f Dockerfile.console .
+docker run -it --rm --name myservice2 wcfservice:self-hosted
 ```
 Open another console window to find the IP address of the self-hosted WCF service (alternatively, you can run the self-hosted WCF service container in detached mode by `docker run -d --name myservice2 wcfservice:self-hosted`).
 ```
 C:\wcfapp\WcfClientNetCore>docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice2
 172.23.69.75
 ```
-### Run WCF Client against the Service in Container
-Now that we have WCF services running in containers. Let's run the WCF client against the them. The IP address of the WCF service is passed through the environment variable `host`. *In this example, the WCF client runs on the same machine that hosts the container instance.* 
+### Build a Container to run WCF Client against the Service
+Now that we have WCF services running in containers. Let's run the WCF client against them. Run commands below to build the container image with name `wcfclient`.  
 ```
-C:\wcfapp\WcfClient>set host=172.23.70.146
-C:\wcfapp\WcfClient>bin\Debug\WcfClient.exe
+docker build -t wcfclient -f Dockerfile.client .
+docker run -it --name myclient wcfclient
+```
+The IP address of the WCF service is passed through the environment variable `host`. Then start running WcfClient.exe which was built inside the container.
+```
+C:\>set host=172.23.70.146
+C:\>WcfClient.exe
 Client OS: Microsoft Windows NT 6.2.9200.0
 Service Host: 172.23.70.146
 Hello WCF via Http from Container!
@@ -57,3 +70,49 @@ The result above is from running the WCF client against the IIS-hosted WCF servi
 C:\wcfapp\WcfServiceConsoleApp>docker run -d -p 80:80 -p 808:808 --name myservice3 wcfservice:self-hosted
 ```
 Then for the WCF client to connect to the service, we need to set the `host` to be the IP address (or DNS name) of the container host machine (instead of the IP address of the container instance). The rest will be the same to start the WCF client.
+
+## Build the sample locally
+
+You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2017`.
+
+You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) with the Visual Studio Installer.
+
+```console
+cd samples
+cd wcfapp
+msbuild wcfapp.sln
+```
+
+You can also build, test and debug the application with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build).
+
+## .NET Resources
+
+More Samples
+
+* [.NET Framework Docker Samples](../README.md)
+* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+
+Docs and More Information:
+
+* [.NET Docs](https://docs.microsoft.com/dotnet/)
+* [WCF Docs](https://docs.microsoft.com/en-us/dotnet/framework/wcf/)
+* [ASP.NET Docs](https://docs.microsoft.com/aspnet/)
+* [dotnet/core](https://github.com/dotnet/core) for starting with .NET Core on GitHub.
+* [dotnet/announcements](https://github.com/dotnet/announcements/issues) for .NET announcements.
+
+## Related Repositories
+
+.NET Core Docker Hub repos:
+
+* [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core images.
+* [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
+* [microsoft/dotnet-nightly](https://hub.docker.com/r/microsoft/dotnet-nightly/) for .NET Core preview images.
+* [microsoft/dotnet-samples](https://hub.docker.com/r/microsoft/dotnet-samples/) for .NET Core sample images.
+
+.NET Framework Docker Hub repos:
+
+* [microsoft/wcf](https://hub.docker.com/r/microsoft/wcf/) for WCF images.
+* [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
+* [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) for .NET Framework images.
+* [microsoft/dotnet-framework-build](https://hub.docker.com/r/microsoft/dotnet-framework-build/) for building .NET Framework applications with Docker.
+* [microsoft/dotnet-framework-samples](https://hub.docker.com/r/microsoft/dotnet-framework-samples/) for .NET Framework and ASP.NET sample images.

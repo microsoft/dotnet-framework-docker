@@ -1,0 +1,12 @@
+FROM microsoft/dotnet-framework:4.7.2-sdk AS build
+WORKDIR /app
+COPY WcfServiceConsoleApp/. ./WcfServiceConsoleApp/
+WORKDIR /app/WcfServiceConsoleApp
+RUN msbuild
+
+FROM microsoft/dotnet-framework:4.7.2-runtime AS runtime
+EXPOSE 80
+EXPOSE 808
+WORKDIR /app
+COPY --from=build /app/WcfServiceConsoleApp/bin/Debug/ ./
+CMD WcfServiceConsoleApp.exe
