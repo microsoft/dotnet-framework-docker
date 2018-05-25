@@ -5,7 +5,7 @@ The sample builds the application in a container based on the larger [.NET Frame
 
 This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
-## Try a pre-built .NET Framework Docker Image
+## Try a pre-built WCF Docker Image
 
 ## Getting the sample
 
@@ -27,7 +27,7 @@ Run commands below to build the container image with name `wcfservice:iis-hosted
 ```
 cd samples
 cd wcfapp
-docker build -t wcfservice:iis-hosted -f Dockerfile.web .
+docker build --pull -t wcfservice:iis-hosted -f Dockerfile.web .
 docker run -d --name myservice1 wcfservice:iis-hosted
 ```
 Find the IP address of the container instance. This will be used later for a WCF client to connect to the service.
@@ -40,7 +40,7 @@ Project `WcfServiceConsoleApp` is created from Windows Classic Desktop 'Console 
 
 Run commands below to build the container image with name `wcfservice:self-hosted` and start an instance of it named `myservice2`.
 ```
-docker build -t wcfservice:self-hosted -f Dockerfile.console .
+docker build --pull -t wcfservice:self-hosted -f Dockerfile.console .
 docker run -it --rm --name myservice2 wcfservice:self-hosted
 ```
 Open another console window to find the IP address of the self-hosted WCF service (alternatively, you can run the self-hosted WCF service container in detached mode by `docker run -d --name myservice2 wcfservice:self-hosted`).
@@ -51,7 +51,7 @@ C:\wcfapp\WcfClientNetCore>docker inspect --format="{{.NetworkSettings.Networks.
 ### Build a Container to run WCF Client against the Service
 Now that we have WCF services running in containers. Let's run the WCF client against them. Run commands below to build the container image with name `wcfclient`.  
 ```
-docker build -t wcfclient -f Dockerfile.client .
+docker build --pull -t wcfclient -f Dockerfile.client .
 docker run -it --name myclient wcfclient
 ```
 The IP address of the WCF service is passed through the environment variable `host`. Then start running WcfClient.exe which was built inside the container.

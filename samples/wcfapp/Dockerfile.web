@@ -6,5 +6,4 @@ RUN msbuild
 
 FROM microsoft/wcf:4.7.2 AS runtime
 WORKDIR /inetpub/wwwroot
-COPY --from=build /app/WcfServiceWebApp/bin/Debug/ ./
-CMD WcfServiceWebApp.exe
+COPY --from=build /app/WcfServiceWebApp/ ./
