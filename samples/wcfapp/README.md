@@ -5,7 +5,22 @@ The sample builds the application in a container based on the larger [.NET Frame
 
 This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
-## Try a pre-built WCF Docker Image
+## Try pre-built WCF Docker Images
+You can quickly run a container with a pre-built [sample WCF Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the WCF Docker sample.
+
+Type the following [Docker](https://www.docker.com/products/docker) command to start a WCF service container:
+```console
+docker run --name wcfservicesample --rm -it microsoft/dotnet-framework-samples:wcfservice
+```
+Find the IP address of the container instance.
+```console
+docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" wcfservicesample
+172.26.236.119
+```
+Type the following Docker command to start a WCF client container, set environment variable HOST to the IP address of the wcfservicesample container:
+```console
+docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 microsoft/dotnet-framework-samples:wcfclient
+```
 
 ## Getting the sample
 
@@ -23,12 +38,12 @@ WCF service is supported on .NET Framework, which can run in Windows Server Core
 ### Build a Container with IIS-hosted WCF Service
 Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](/Dockerfile.web) is added to the project. We use `microsoft/wcf` image as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use WCF image with tag `4.7.2` for .NET Framework 4.7.2 in this example, but you can change it to use other tags (eg. `microsoft/wcf:4.7` with tag `4.7`) for WCF images with different versions of .NET Framework. The complete list of [WCF image tags](https://hub.docker.com/r/microsoft/wcf/tags/) can be found from Docker Hub. 
 
-Run commands below to build the container image with name `wcfservice:iis-hosted` and start an instance of it named `myservice1`. Docker parameter `-d` will run the container in background (detached mode).
+Run commands below to build the container image with name `iishostedwcfservice` and start an instance of it named `myservice1`. Docker parameter `-d` will run the container in background (detached mode).
 ```
 cd samples
 cd wcfapp
-docker build --pull -t wcfservice:iis-hosted -f Dockerfile.web .
-docker run -d --name myservice1 wcfservice:iis-hosted
+docker build --pull -t iishostedwcfservice -f Dockerfile.web .
+docker run -d --rm --name myservice1 iishostedwcfservice
 ```
 Find the IP address of the container instance. This will be used later for a WCF client to connect to the service.
 ```
@@ -38,26 +53,21 @@ docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice1
 ### Build a Container with Self-hosted WCF Service
 Project `WcfServiceConsoleApp` is created from Windows Classic Desktop 'Console App' template in Visual Studio. We added a [Dockerfile](/Dockerfile.console) to the project. We use `microsoft/dotnet-framework` image as the base image and expose ports 80 (for HTTP) and 808 (for NET.TCP) for the container.
 
-Run commands below to build the container image with name `wcfservice:self-hosted` and start an instance of it named `myservice2`.
+Run commands below to build the container image with name `selfhostedwcfservice` and start an instance of it named `myservice2`.
 ```
-docker build --pull -t wcfservice:self-hosted -f Dockerfile.console .
-docker run -it --rm --name myservice2 wcfservice:self-hosted
+docker build --pull -t selfhostedwcfservice -f Dockerfile.console .
+docker run -it --rm --name myservice2 selfhostedwcfservice
 ```
-Open another console window to find the IP address of the self-hosted WCF service (alternatively, you can run the self-hosted WCF service container in detached mode by `docker run -d --name myservice2 wcfservice:self-hosted`).
+Open another console window to find the IP address of the self-hosted WCF service (alternatively, you can run the self-hosted WCF service container in detached mode by `docker run -d --rm --name myservice2 selfhostedwcfservice`).
 ```
-C:\wcfapp\WcfClientNetCore>docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice2
+docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice2
 172.23.69.75
 ```
 ### Build a Container to run WCF Client against the Service
-Now that we have WCF services running in containers. Let's run the WCF client against them. Run commands below to build the container image with name `wcfclient`.  
+Now that we have WCF services running in containers. Let's run the WCF client against them. Run commands below to build the container image with name `wcfclient`. The IP address of the WCF service is passed through the environment variable `host`.
 ```
 docker build --pull -t wcfclient -f Dockerfile.client .
-docker run -it --name myclient wcfclient
-```
-The IP address of the WCF service is passed through the environment variable `host`. Then start running WcfClient.exe which was built inside the container.
-```
-C:\>set host=172.23.70.146
-C:\>WcfClient.exe
+docker run -it --rm -e HOST=172.23.70.146 --name myclient wcfclient
 Client OS: Microsoft Windows NT 6.2.9200.0
 Service Host: 172.23.70.146
 Hello WCF via Http from Container!
@@ -67,7 +77,7 @@ The result above is from running the WCF client against the IIS-hosted WCF servi
 
 *To run WCF client on a different machine other than the one that hosts container instance*, we will need to map ports of a container to ports of its host by using Docker parameter `-p` when we start a constainer instance. For example, the command below started an instance of the self-hosted WCF service container named `myservice3` with its ports 80 and 808 mapped to ports 80 and 808 of its host machine respectively.
 ```
-C:\wcfapp\WcfServiceConsoleApp>docker run -d -p 80:80 -p 808:808 --name myservice3 wcfservice:self-hosted
+C:\wcfapp\WcfServiceConsoleApp>docker run -d -p 80:80 -p 808:808 --name myservice3 selfhostedwcfservice
 ```
 Then for the WCF client to connect to the service, we need to set the `host` to be the IP address (or DNS name) of the container host machine (instead of the IP address of the container instance). The rest will be the same to start the WCF client.
 
@@ -80,9 +90,10 @@ You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com
 ```console
 cd samples
 cd wcfapp
-msbuild wcfapp.sln
+msbuild wcfapp.sln /p:Configuration=Release
 ```
 
+Note: The /p:Configuration=Release argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/en-us/library/ms164311.aspx) for more information on commandline parameters.
 You can also build, test and debug the application with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build).
 
 ## .NET Resources

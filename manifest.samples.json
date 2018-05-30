@@ -50,6 +50,68 @@
               }
             }
           ]
+        },
+        {
+          "sharedTags": {
+            "wcfservice":{}
+          },
+          "platforms": [
+            {
+              "dockerfile": "samples/wcfapp/Dockerfile.web",
+              "os": "windows",
+              "osVersion": "ltsc2016",
+              "tags": {
+                "wcfservice-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "samples/wcfapp/Dockerfile.web",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "wcfservice-windowsservercore-1709": {}
+              }
+            },
+            {
+              "dockerfile": "samples/wcfapp/Dockerfile.web",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "wcfservice-windowsservercore-1803": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "wcfclient":{}
+          },
+          "platforms": [
+            {
+              "dockerfile": "samples/wcfapp/Dockerfile.client",
+              "os": "windows",
+              "osVersion": "ltsc2016",
+              "tags": {
+                "wcfclient-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "samples/wcfapp/Dockerfile.client",
+              "os": "windows",
+              "osVersion": "1709",
+              "tags": {
+                "wcfclient-windowsservercore-1709": {}
+              }
+            },
+            {
+              "dockerfile": "samples/wcfapp/Dockerfile.client",
+              "os": "windows",
+              "osVersion": "1803",
+              "tags": {
+                "wcfclient-windowsservercore-1803": {}
+              }
+            }
+          ]
         }
       ]
     }

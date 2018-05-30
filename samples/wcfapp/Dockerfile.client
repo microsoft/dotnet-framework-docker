@@ -1,8 +1,9 @@
 FROM microsoft/dotnet-framework:4.7.2-sdk AS build
 WORKDIR /app
-COPY WcfClient/. ./WcfClient/
-WORKDIR /app/WcfClient
-RUN msbuild
+COPY WcfClient/. .
+RUN msbuild /p:Configuration=Release
 
-FROM microsoft/dotnet-framework:4.7.2-runtime
-COPY --from=build /app/WcfClient/bin/Debug/ ./
+FROM microsoft/dotnet-framework:4.7.2-runtime AS runtime
+WORKDIR /app
+COPY --from=build /app/bin/Release .
+CMD WcfClient.exe
