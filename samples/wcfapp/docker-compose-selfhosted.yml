@@ -1,0 +1,14 @@
+version: '3'
+services:
+  wcfserviceconsoleapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.console
+  wcfclient:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on: 
+      - wcfserviceconsoleapp
+    environment:
+        Host: wcfserviceconsoleapp
