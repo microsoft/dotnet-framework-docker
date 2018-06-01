@@ -8,4 +8,4 @@ EXPOSE 80
 EXPOSE 808
 WORKDIR /app
 COPY --from=build /app/bin/Release .
-CMD WcfServiceConsoleApp.exe
+ENTRYPOINT WcfServiceConsoleApp.exe

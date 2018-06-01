@@ -82,14 +82,15 @@ C:\wcfapp\WcfServiceConsoleApp>docker run -d -p 80:80 -p 808:808 --name myservic
 Then for the WCF client to connect to the service, we need to set the `host` to be the IP address (or DNS name) of the container host machine (instead of the IP address of the container instance). The rest will be the same to start the WCF client.
 
 ## Build and run the sample with Docker Compose
-[Docker Compose](https://docs.docker.com/compose/overview/) is a tool for defining and running multi-container Docker applications. In this sample, we also added YML files to configure WCF server and client applications. You can directly start and run service and client applications without finding IP address of service container.
+[Docker Compose](https://docs.docker.com/compose/overview/) is a tool for defining and running multi-container Docker applications. In this sample, we also added YML files to configure WCF server and client applications. You can directly start and run service and client applications without having to do any work to hookup the client to the WCF service.
+
 Type the following Docker Compose command to start both iis-hosted  WCF service container and client container:
 ```
-docker-compose --file docker-compose-iishosted.yml up
+docker-compose -f docker-compose-iishosted.yml up
 ```
 Alternatively, if you want to build and run self-hosted WCF service container, run commands below:
 ```
-docker-compose --file "docker-compose-selfhosted.yml" up
+docker-compose -f docker-compose-selfhosted.yml up
 ```
 
 ## Build the sample locally

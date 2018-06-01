@@ -6,4 +6,4 @@ RUN msbuild /p:Configuration=Release
 FROM microsoft/dotnet-framework:4.7.2-runtime AS runtime
 WORKDIR /app
 COPY --from=build /app/bin/Release .
-CMD WcfClient.exe
+ENTRYPOINT WcfClient.exe
