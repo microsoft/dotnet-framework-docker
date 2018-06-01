@@ -1,0 +1,14 @@
+version: '3'
+services:
+  wcfservicewebapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+  wcfclient:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on: 
+      - wcfservicewebapp
+    environment:
+        Host: wcfservicewebapp
