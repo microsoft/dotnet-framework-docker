@@ -29,14 +29,22 @@ docker run -it --rm -p 8000:80 --name aspnet_sample microsoft/dotnet-framework-s
 
 After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
 
-### Container sample: Run a WCF service application
+### Container sample: Run WCF service and client applications
 
 Type the following command to run a sample WCF service application with Docker:
 
 ```console
 docker run -it --rm --name wcfservice_sample microsoft/dotnet-framework-samples:wcfservie
 ```
-After the container starts, you can find IP address of the container and then hookup the client application to the service. See [Try pre-built WCF Docker Images](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/README.md#try-pre-built-wcf-docker-images) for more details.
+After the container starts, find the IP address of the container instance:
+```console
+docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" wcfservice_sample
+172.26.236.119
+```
+Type the following Docker command to start a WCF client container, set environment variable HOST to the IP address of the wcfservice_sample container:
+```console
+docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 microsoft/dotnet-framework-samples:wcfclient
+```
 
 ## Complete set of Tags
 
