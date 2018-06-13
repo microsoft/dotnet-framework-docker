@@ -14,6 +14,18 @@ Type the following [Docker](https://www.docker.com/products/docker) command:
 docker run --rm microsoft/dotnet-framework-samples
 ```
 
+## Try a pre-built ASP.NET Docker Image
+
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-samples/), based on the [ASP.NET Docker sample].
+
+Type the following [Docker](https://www.docker.com/products/docker) command:
+
+```console
+docker run --name aspnet_sample --rm -it -p 8000:80 microsoft/dotnet-samples:aspnetapp
+```
+
+After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
+
 ## Building .NET Framework Apps with Docker
 
 * [.NET Framework Console Docker Sample](dotnetapp/README.md) - This [sample](dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
