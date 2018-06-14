@@ -80,9 +80,9 @@ The [.NET Framework Docker samples](https://github.com/Microsoft/dotnet-framewor
 
 ### Building .NET Framework Apps with Docker
 
-* [.NET Framework Console Docker Sample](dotnetapp/README.md) - This [sample](dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
-* [ASP.NET Web Forms Docker Sample](aspnetapp/README.md) - This [sample](aspnetapp/Dockerfile) demonstrates using Docker with an ASP.NET Web Forms app.
-* [ASP.NET MVC Docker Sample](aspnetmvcapp/README.md) - This [sample](aspnetmvcapp/Dockerfile) demonstrates using Docker with an ASP.NET MVC app.
+* [.NET Framework Console Docker Sample](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/dotnetapp/README.md) - This [sample](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
+* [ASP.NET Web Forms Docker Sample](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/aspnetapp/README.md) - This [sample](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/aspnetapp/Dockerfile) demonstrates using Docker with an ASP.NET Web Forms app.
+* [ASP.NET MVC Docker Sample](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/aspnetmvcapp/README.md) - This [sample](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/aspnetmvcapp/Dockerfile) demonstrates using Docker with an ASP.NET MVC app.
 
 ## Image variants
 
