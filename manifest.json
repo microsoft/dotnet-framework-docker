@@ -1,7 +1,7 @@
 {
   "testCommands": {
     "windows": [
-      "powershell -NoProfile -Command .\\tests\\run-tests.ps1 -VersionFilter $(VersionFilter) -OSFilter $(OSFilter) -RepoOwner $(System:RepoOwner)"
+      "powershell -NoProfile -Command .\\tests\\run-tests.ps1 -VersionFilter $(VersionFilter) -OSFilter $(OSFilter) -IsLocalRun"
     ]
   },
   "variables": {
@@ -23,6 +23,7 @@
             {
               "dockerfile": "4.7.2-windowsservercore-ltsc2016/runtime",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.7.2-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-runtime-windowsservercore-ltsc2016": {}
@@ -31,7 +32,7 @@
             {
               "dockerfile": "4.7.2-windowsservercore-1709/runtime",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "4.7.2-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-runtime-windowsservercore-1709": {}
@@ -40,7 +41,7 @@
             {
               "dockerfile": "4.7.2-windowsservercore-1803/runtime",
               "os": "windows",
-              "osVersion": "1803",
+              "osVersion": "windowsservercore-1803",
               "tags": {
                 "4.7.2-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
                 "4.7.2-runtime-windowsservercore-1803": {}
@@ -57,6 +58,7 @@
             {
               "dockerfile": "4.7.2-windowsservercore-ltsc2016/sdk",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.7.2-sdk-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-sdk-windowsservercore-ltsc2016": {}
@@ -65,7 +67,7 @@
             {
               "dockerfile": "4.7.2-windowsservercore-1709/sdk",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "4.7.2-sdk-$(SdkReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-sdk-windowsservercore-1709": {}
@@ -74,7 +76,7 @@
             {
               "dockerfile": "4.7.2-windowsservercore-1803/sdk",
               "os": "windows",
-              "osVersion": "1803",
+              "osVersion": "windowsservercore-1803",
               "tags": {
                 "4.7.2-sdk-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
                 "4.7.2-sdk-windowsservercore-1803": {}
@@ -93,6 +95,7 @@
             {
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/runtime",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.7.1-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-runtime-windowsservercore-ltsc2016": {},
@@ -104,7 +107,7 @@
             {
               "dockerfile": "4.7.1-windowsservercore-1709/runtime",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "4.7.1-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-runtime-windowsservercore-1709": {},
@@ -123,6 +126,7 @@
             {
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/sdk",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.7.1-sdk-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-sdk-windowsservercore-ltsc2016": {}
@@ -131,7 +135,7 @@
             {
               "dockerfile": "4.7.1-windowsservercore-1709/sdk",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "4.7.1-sdk-$(SdkReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-sdk-windowsservercore-1709": {}
@@ -150,6 +154,7 @@
             {
               "dockerfile": "4.7-windowsservercore-ltsc2016/runtime",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.7-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-runtime-windowsservercore-ltsc2016": {},
@@ -171,6 +176,7 @@
             {
               "dockerfile": "4.6.2-windowsservercore-ltsc2016/runtime",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.6.2-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.6.2-runtime-windowsservercore-ltsc2016": {},
@@ -192,6 +198,7 @@
             {
               "dockerfile": "3.5-windowsservercore-ltsc2016/runtime",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "3.5-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-runtime-windowsservercore-ltsc2016": {},
@@ -203,7 +210,7 @@
             {
               "dockerfile": "3.5-windowsservercore-1709/runtime",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "3.5-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-runtime-windowsservercore-1709": {},
@@ -216,7 +223,7 @@
             {
               "dockerfile": "3.5-windowsservercore-1803/runtime",
               "os": "windows",
-              "osVersion": "1803",
+              "osVersion": "windowsservercore-1803",
               "tags": {
                 "3.5-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
                 "3.5-runtime-windowsservercore-1803": {}
@@ -232,6 +239,7 @@
             {
               "dockerfile": "3.5-windowsservercore-ltsc2016/sdk",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "3.5-sdk-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-sdk-windowsservercore-ltsc2016": {}
@@ -240,7 +248,7 @@
             {
               "dockerfile": "3.5-windowsservercore-1709/sdk",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "3.5-sdk-$(SdkReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-sdk-windowsservercore-1709": {}
@@ -249,7 +257,7 @@
             {
               "dockerfile": "3.5-windowsservercore-1803/sdk",
               "os": "windows",
-              "osVersion": "1803",
+              "osVersion": "windowsservercore-1803",
               "tags": {
                 "3.5-sdk-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
                 "3.5-sdk-windowsservercore-1803": {}
@@ -272,6 +280,7 @@
             {
               "dockerfile": "4.7.1-windowsservercore-ltsc2016/sdk",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
@@ -279,7 +288,7 @@
             {
               "dockerfile": "4.7.1-windowsservercore-1709/sdk",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "4.7.1-windowsservercore-1709": {}
               }
@@ -294,6 +303,7 @@
             {
               "dockerfile": "3.5-windowsservercore-ltsc2016/sdk",
               "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "3.5-windowsservercore-ltsc2016": {}
               }
@@ -301,7 +311,7 @@
             {
               "dockerfile": "3.5-windowsservercore-1709/sdk",
               "os": "windows",
-              "osVersion": "1709",
+              "osVersion": "windowsservercore-1709",
               "tags": {
                 "3.5-windowsservercore-1709": {}
               }

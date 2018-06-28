@@ -1,0 +1,103 @@
+parameters:
+  imageBuilderLinuxImage: microsoft/dotnet-buildtools-prereqs:image-builder-debian-20180627140652
+  imageBuilderWindowsImage: microsoft/dotnet-buildtools-prereqs:image-builder-nanoserver-20180627070723
+  manifest: manifest.json
+  repo: null
+  matrixWindowsLtsc2016Amd64: {}
+  matrixWindows1709Amd64: {}
+  matrixWindows1803Amd64: {}
+phases:
+  ################################################################################
+  # Build Images
+  ################################################################################
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_NanoServerSac2016_amd64
+      imageBuilderImage: ${{ parameters.imageBuilderWindowsImage }}
+      manifest: ${{ parameters.manifest }}
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: ${{ parameters.matrixWindowsLtsc2016Amd64 }}
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_NanoServer1709_amd64
+      imageBuilderImage: ${{ parameters.imageBuilderWindowsImage }}
+      manifest: ${{ parameters.manifest }}
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
+      matrix: ${{ parameters.matrixWindows1709Amd64 }}
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_NanoServer1803_amd64
+      imageBuilderImage: ${{ parameters.imageBuilderWindowsImage }}
+      manifest: ${{ parameters.manifest }}
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: ${{ parameters.matrixWindows1803Amd64 }}
+
+  ################################################################################
+  # Test Images
+  ################################################################################
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_NanoServerSac2016_amd64
+      dependsOn: Build_NanoServerSac2016_amd64
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: ${{ parameters.matrixWindowsLtsc2016Amd64 }}
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_NanoServer1709_amd64
+      dependsOn: Build_NanoServer1709_amd64
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
+      matrix: ${{ parameters.matrixWindows1709Amd64 }}
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_NanoServer1803_amd64
+      dependsOn: Build_NanoServer1803_amd64
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: ${{ parameters.matrixWindows1803Amd64 }}
+
+  ################################################################################
+  # Publish Images
+  ################################################################################
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_NanoServerSac2016_amd64
+      imageBuilderImage: ${{ parameters.imageBuilderWindowsImage }}
+      manifest: ${{ parameters.manifest }}
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: ${{ parameters.matrixWindowsLtsc2016Amd64 }}
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_NanoServer1709_amd64
+      imageBuilderImage: ${{ parameters.imageBuilderWindowsImage }}
+      manifest: ${{ parameters.manifest }}
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
+      matrix: ${{ parameters.matrixWindows1709Amd64 }}
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_NanoServer1803_amd64
+      imageBuilderImage: ${{ parameters.imageBuilderWindowsImage }}
+      manifest: ${{ parameters.manifest }}
+      repo: ${{ parameters.repo }}
+      demands:
+        - VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: ${{ parameters.matrixWindows1803Amd64 }}
+
+  - template: publish-finalize.yml
+    parameters:
+      imageBuilderImage: ${{ parameters.imageBuilderLinuxImage }}
+      manifest: ${{ parameters.manifest }}
