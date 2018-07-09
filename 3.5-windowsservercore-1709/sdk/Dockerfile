@@ -3,7 +3,7 @@
 FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-1709
 
 # Install .NET 4.7.2
-RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/5/A/3/5A3607CA-53B1-4717-8845-4389B11931FA/NDP472-KB4054530-x86-x64-AllOS-ENU.exe" -OutFile dotnet-framework-installer.exe & `
+RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/6/E/4/6E48E8AB-DC00-419E-9704-06DD46E5F81D/NDP472-KB4054530-x86-x64-AllOS-ENU.exe" -OutFile dotnet-framework-installer.exe & `
     .\dotnet-framework-installer.exe /q & `
     del .\dotnet-framework-installer.exe
 
