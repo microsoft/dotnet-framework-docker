@@ -22,6 +22,7 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
         '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', `
         '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', `
         '--add', 'Microsoft.Net.Component.4.7.1.SDK', `
+        '--add', 'Microsoft.Component.ClickOnce.MSBuild', `
         '--quiet', '--norestart', '--nocache' `
       -NoNewWindow -Wait; `
     Remove-Item -Force vs_buildtools.exe; `
@@ -40,7 +41,7 @@ ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\201
 SHELL ["cmd", "/S", "/C"]
 
 RUN `
-    # Workaround VS installer/ngen issue with 32 bit assemblies being 64 bit ngen'ed
+    # Workaround for issue with 32 bit assemblies from Microsoft.Net.Component.4.7.1.SDK being 64 bit ngen'ed
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.1 Tools\SecAnnotate.exe" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.1 Tools\WinMDExp.exe" `
     `
@@ -57,7 +58,9 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 RUN setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\")
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.1 Tools\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
 # Install Targeting Packs
 RUN @('4.0', '4.5.2', '4.6.2', '4.7.2') `
