@@ -76,5 +76,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             Execute($"run --rm --name {containerName} {image} {command}");
         }
+
+        public void Pull(string image)
+        {
+            Execute($"pull {image}");
+        }
     }
 }

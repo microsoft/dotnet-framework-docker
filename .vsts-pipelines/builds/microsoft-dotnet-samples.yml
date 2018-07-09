@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - samples/*
+      - manifest.samples.json
+phases:
+  - template: ../phases/build-all.yml
+    parameters:
+      manifest: manifest.samples.json
+      repo: dotnet-framework-samples
+      matrixWindowsLtsc2016Amd64:
+        Build:
+          dotnetVersion: ''
+          imageBuilder.path: '*'
+          osVersion: windowsservercore-ltsc2016
+      matrixWindows1709Amd64:
+        Build:
+          dotnetVersion: ''
+          imageBuilder.path: '*'
+          osVersion: windowsservercore-1709
+      matrixWindows1803Amd64:
+        Build:
+          dotnetVersion: ''
+          imageBuilder.path: '*'
+          osVersion: windowsservercore-1803
