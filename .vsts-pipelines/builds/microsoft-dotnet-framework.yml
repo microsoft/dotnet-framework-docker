@@ -2,6 +2,7 @@ trigger: none
 phases:
  - template: ../phases/build-all.yml
    parameters:
+     manifest: manifest.json
      repo: dotnet-framework
      matrixWindowsLtsc2016Amd64:
        3_5:
