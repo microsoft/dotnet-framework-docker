@@ -4,36 +4,3 @@ phases:
    parameters:
      manifest: manifest.json
      repo: dotnet-framework
-     matrixWindowsLtsc2016Amd64:
-       3_5:
-         dotnetVersion: 3.5
-         osVersion: windowsservercore-ltsc2016
-       4_6_2:
-         dotnetVersion: 4.6.2
-         osVersion: windowsservercore-ltsc2016
-       4_7:
-         dotnetVersion: 4.7
-         osVersion: windowsservercore-ltsc2016
-       4_7_1:
-         dotnetVersion: 4.7.1
-         osVersion: windowsservercore-ltsc2016
-       4_7_2:
-         dotnetVersion: 4.7.2
-         osVersion: windowsservercore-ltsc2016
-     matrixWindows1709Amd64:
-       3_5:
-         dotnetVersion: 3.5
-         osVersion: windowsservercore-1709
-       4_7_1:
-         dotnetVersion: 4.7.1
-         osVersion: windowsservercore-1709
-       4_7_2:
-         dotnetVersion: 4.7.2
-         osVersion: windowsservercore-1709
-     matrixWindows1803Amd64:
-       3_5:
-         dotnetVersion: 3.5
-         osVersion: windowsservercore-1803
-       4_7_2:
-         dotnetVersion: 4.7.2
-         osVersion: windowsservercore-1803
