@@ -5,8 +5,8 @@
     ]
   },
   "variables": {
-    "RuntimeReleaseDateStamp": "20180814",
-    "SdkReleaseDateStamp": "20180814"
+    "RuntimeReleaseDateStamp": "20180911",
+    "SdkReleaseDateStamp": "20180911"
   },
   "repos": [
     {
