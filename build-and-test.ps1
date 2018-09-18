@@ -76,7 +76,7 @@ if (-not (Test-Path -Path "$imageBuilderExe" -PathType Leaf)) {
 
 $buildFilter = ""
 if (-not $ExcludePathFilter) {
-    $buildFilter = "--path $VersionFilter-$OSFilter/*"
+    $buildFilter = "--path $VersionFilter/*/$OSFilter"
 }
 
 $imageBuilderArgs = "build $buildFilter --var VersionFilter=$VersionFilter --var OSFilter=$OSFilter"
