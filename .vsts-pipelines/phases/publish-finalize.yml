@@ -3,11 +3,11 @@ parameters:
   manifest: null
 phases:
   - phase: Publish_Finalize
-    condition: and(succeeded('Copy_Images_NanoServerSac2016_amd64'), succeeded('Copy_Images_NanoServer1709_amd64'), succeeded('Copy_Images_NanoServer1803_amd64'))
+    condition: and(succeeded('Copy_Images_WindowsServerCoreLtsc2016_amd64'), succeeded('Copy_Images_WindowsServerCore1709_amd64'), succeeded('Copy_Images_WindowsServerCore1803_amd64'))
     dependsOn:
-      - Copy_Images_NanoServerSac2016_amd64
-      - Copy_Images_NanoServer1709_amd64
-      - Copy_Images_NanoServer1803_amd64
+      - Copy_Images_WindowsServerCoreLtsc2016_amd64
+      - Copy_Images_WindowsServerCore1709_amd64
+      - Copy_Images_WindowsServerCore1803_amd64
     queue:
       name: DotNet-Build
       demands:
