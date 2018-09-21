@@ -24,4 +24,3 @@ steps:
       continueOnError: true
     - script: echo "##vso[task.setvariable variable=runImageBuilderCmd]$(Build.BinariesDirectory)\Microsoft.DotNet.ImageBuilder\Microsoft.DotNet.ImageBuilder.exe
       displayName: Define runImageBuilderCmd Variable
-    - script: set
