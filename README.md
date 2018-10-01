@@ -2,10 +2,10 @@
 
 The following tags are the latest stable versions of the most commonly used images. The complete set of tags is listed further down.
 
-- [`4.7.2-runtime`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`4.7.2-sdk`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2-windowsservercore-ltsc2016/sdk/Dockerfile)
-- [`3.5-runtime`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/runtime/Dockerfile)
-- [`3.5-sdk`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5-windowsservercore-ltsc2016/sdk/Dockerfile)
+- [`4.7.2-runtime`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/runtime/windowsservercore-ltsc2016/Dockerfile)
+- [`4.7.2-sdk`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-ltsc2016/Dockerfile)
+- [`3.5-runtime`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/runtime/windowsservercore-ltsc2016/Dockerfile)
+- [`3.5-sdk`](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/sdk/windowsservercore-ltsc2016/Dockerfile)
 
 The [.NET Framework Docker samples](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/README.md) show various ways to use .NET Framework and Docker together.
 
