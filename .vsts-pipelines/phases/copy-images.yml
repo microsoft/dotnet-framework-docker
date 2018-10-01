@@ -1,5 +1,6 @@
 parameters:
   phase: null
+  osVersion: null
   demands: []
   matrix: {}
 phases:
@@ -15,8 +16,10 @@ phases:
       demands: ${{ parameters.demands }}
       parallel: 100
       matrix: ${{ parameters.matrix }}
+    variables:
+      osVersion: ${{ parameters.osVersion }}
     steps:
       - template: ../steps/docker-init-windows.yml
-      - script: $(runImageBuilderCmd) copyImages --manifest $(manifest) $(imageBuilderPaths) --source-server $(acr.server) --source-username $(acr.userName) --source-password $(BotAccount-dotnet-docker-acr-bot-password) --destination-username $(dockerRegistry.userName) --destination-password $(BotAccount-dotnet-dockerhub-bot-password) $(imageBuilder.queueArgs) $(imageBuilder.publishQueueArgs) $(acr.server)/$(repo)-$(stagingRepo.suffix)
+      - script: $(runImageBuilderCmd) copyImages --manifest $(manifest) $(imageBuilderPaths) --os-version $(osVersion) --source-server $(acr.server) --source-username $(acr.userName) --source-password $(BotAccount-dotnet-docker-acr-bot-password) --destination-username $(dockerRegistry.userName) --destination-password $(BotAccount-dotnet-dockerhub-bot-password) $(imageBuilder.queueArgs) $(imageBuilder.publishQueueArgs) $(acr.server)/$(repo)-$(stagingRepo.suffix)
         displayName: Copy Images
       - template: ../steps/docker-cleanup-windows.yml
