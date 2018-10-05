@@ -17,7 +17,7 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
     Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/12210059/e64d79b40219aea618ce2fe10ebd5f0d/vs_BuildTools.exe -OutFile vs_BuildTools.exe; `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1; `
-    Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', '--add', 'Microsoft.Net.Component.4.7.1.SDK', '--add', 'Microsoft.Component.ClickOnce.MSBuild', '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
+    Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', '--add', 'Microsoft.Net.Component.4.7.2.SDK', '--add', 'Microsoft.Component.ClickOnce.MSBuild', '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
     Remove-Item -Force vs_buildtools.exe; `
     Remove-Item -Force -Recurse \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\"; `
     Remove-Item -Force -Recurse ${Env:TEMP}\*; `
@@ -32,11 +32,10 @@ ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\201
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 SHELL ["cmd", "/S", "/C"]
-
 RUN `
-    # Workaround for issue with 32 bit assemblies from Microsoft.Net.Component.4.7.1.SDK being 64 bit ngen'ed
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.1 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.1 Tools\WinMDExp.exe" `
+    # Workaround for issue with 32 bit assemblies from Microsoft.Net.Component.4.7.2.SDK being 64 bit ngen'ed
+    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\SecAnnotate.exe" `
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\WinMDExp.exe" `
     `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     `
@@ -44,7 +43,6 @@ RUN `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft Visual Studio\2017\TestAgent\Common7\IDE\VSWebLauncher.exe" `
     `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
-
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Set PATH in one layer to keep image size down.
@@ -52,13 +50,13 @@ RUN setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.1 Tools\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
 # Install Targeting Packs
 RUN @('4.0', '4.5.2', '4.6.2', '4.7.2') `
     | %{ `
-        Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip -OutFile referenceassemblies.zip; `
-        Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
-        Remove-Item -Force referenceassemblies.zip; `
+    Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip -OutFile referenceassemblies.zip; `
+    Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
+    Remove-Item -Force referenceassemblies.zip; `
     }
