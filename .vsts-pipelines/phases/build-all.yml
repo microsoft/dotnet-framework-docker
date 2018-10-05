@@ -1,0 +1,89 @@
+phases:
+  ################################################################################
+  # Initialization - Generate the VSTS build matrix
+  ################################################################################
+  - phase: GenerateMatrices
+    queue:
+      name: DotNet-Build
+      demands: agent.os -equals linux
+    steps:
+      - template: ../steps/docker-init-linux.yml
+      - script: $(runImageBuilderCmd) generateBuildMatrix --manifest $(manifest) --type build
+        name: buildMatrix
+      - script: $(runImageBuilderCmd) generateBuildMatrix --manifest $(manifest) --type test
+        name: testMatrix
+      - template: ../steps/docker-cleanup-linux.yml
+
+  ################################################################################
+  # Build Images
+  ################################################################################
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_WindowsServerCoreLtsc2016_amd64
+      osVersion: windowsservercore-ltsc2016
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2016Amd64'] ]
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_WindowsServerCore1709_amd64
+      osVersion: windowsservercore-1709
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1709Amd64'] ]
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_WindowsServerCore1803_amd64
+      osVersion: windowsservercore-1803
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1803Amd64'] ]
+
+  ################################################################################
+  # Test Images
+  ################################################################################
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_WindowsServerCoreLtsc2016_amd64
+      dependsOn:
+        - Build_WindowsServerCoreLtsc2016_amd64
+        - GenerateMatrices
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: $[ dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercoreLtsc2016Amd64'] ]
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_WindowsServerCore1709_amd64
+      dependsOn:
+        - Build_WindowsServerCore1709_amd64
+        - GenerateMatrices
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
+      matrix: $[ dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1709Amd64'] ]
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_WindowsServerCore1803_amd64
+      dependsOn:
+        - Build_WindowsServerCore1803_amd64
+        - GenerateMatrices
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: $[ dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1803Amd64'] ]
+
+  ################################################################################
+  # Publish Images
+  ################################################################################
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_WindowsServerCoreLtsc2016_amd64
+      osVersion: windowsservercore-ltsc2016
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2016Amd64'] ]
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_WindowsServerCore1709_amd64
+      osVersion: windowsservercore-1709
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1709Amd64'] ]
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_WindowsServerCore1803_amd64
+      osVersion: windowsservercore-1803
+      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1803Amd64'] ]
+
+  - template: publish-finalize.yml

@@ -18,8 +18,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private const string WSC_1709 = "windowsservercore-1709";
         private const string WSC_1803 = "windowsservercore-1803";
 
+        private static bool IsLocalRun = Environment.GetEnvironmentVariable("LOCAL_RUN") != null;
         private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
-        private static string RepoOwner => Environment.GetEnvironmentVariable("REPO_OWNER") ?? "microsoft";
+        private static string Repo => Environment.GetEnvironmentVariable("REPO") ?? "microsoft/dotnet-framework";
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
@@ -82,14 +83,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
-            string baseBuildImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
-            VerifyImageExist(baseBuildImage);
+            string baseBuildImage = $"{Repo}:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
+            EnsureImageExist(baseBuildImage);
 
             List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
             if (includeRuntime)
             {
-                string baseRuntimeImage = $"{RepoOwner}/dotnet-framework:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
-                VerifyImageExist(baseRuntimeImage);
+                string baseRuntimeImage = $"{Repo}:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
+                EnsureImageExist(baseRuntimeImage);
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
@@ -115,9 +116,16 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        private void VerifyImageExist(string image)
+        private void EnsureImageExist(string image)
         {
-            Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
+            if (IsLocalRun)
+            {
+                Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
+            }
+            else
+            {
+                DockerHelper.Pull(image);
+            }
         }
     }
 }

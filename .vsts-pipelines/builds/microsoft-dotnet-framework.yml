@@ -1,0 +1,6 @@
+trigger: none
+variables:
+  manifest: manifest.json
+  repo: dotnet-framework
+phases:
+ - template: ../phases/build-all.yml
