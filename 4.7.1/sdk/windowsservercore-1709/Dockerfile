@@ -13,11 +13,18 @@ RUN New-Item -Type Directory $Env:ProgramFiles\NuGet; `
 RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/aaa9f801-39de-47ad-9333-9b607c71a271/f78504e5f20d0f135bf5282f06447e67/vs_testagent.exe -OutFile vs_TestAgent.exe; `
     Start-Process vs_TestAgent.exe -ArgumentList '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
     Remove-Item -Force vs_TestAgent.exe; `
-# Install VS Build Tools
+    # Install VS Build Tools
     Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/bea50589-003e-423f-b887-9bf2d70e998c/acfe10c084a64949c1fff4d864ed9b35/vs_buildtools.exe -OutFile vs_BuildTools.exe; `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1; `
-    Start-Process vs_BuildTools.exe -ArgumentList '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', '--add', 'Microsoft.Net.Component.4.7.1.SDK', '--add', 'Microsoft.Component.ClickOnce.MSBuild', '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
+    Start-Process vs_BuildTools.exe `
+        -ArgumentList `
+            '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', `
+            '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', `
+            '--add', 'Microsoft.Net.Component.4.7.1.SDK', `
+            '--add', 'Microsoft.Component.ClickOnce.MSBuild', `
+            '--quiet', '--norestart', '--nocache' `
+        -NoNewWindow -Wait; `
     Remove-Item -Force vs_buildtools.exe; `
     Remove-Item -Force -Recurse \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\"; `
     Remove-Item -Force -Recurse ${Env:TEMP}\*; `
