@@ -46,6 +46,15 @@
                 "4.7.2-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
                 "4.7.2-runtime-windowsservercore-1803": {}
               }
+            },
+            {
+              "dockerfile": "4.7.2/runtime/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.7.2-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-runtime-windowsservercore-ltsc2019": {}
+              }
             }
           ]
         },
@@ -80,6 +89,15 @@
               "tags": {
                 "4.7.2-sdk-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
                 "4.7.2-sdk-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "4.7.2/sdk/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.7.2-sdk-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-sdk-windowsservercore-ltsc2019": {}
               }
             }
           ]
@@ -218,8 +236,7 @@
                   "isUndocumented": true
                 }
               }
-            }
-            ,
+            },
             {
               "dockerfile": "3.5/runtime/windowsservercore-1803",
               "os": "windows",
@@ -227,6 +244,15 @@
               "tags": {
                 "3.5-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
                 "3.5-runtime-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "3.5-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-runtime-windowsservercore-ltsc2019": {}
               }
             }
           ]
@@ -261,6 +287,15 @@
               "tags": {
                 "3.5-sdk-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
                 "3.5-sdk-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/sdk/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "3.5-sdk-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-sdk-windowsservercore-ltsc2019": {}
               }
             }
           ]

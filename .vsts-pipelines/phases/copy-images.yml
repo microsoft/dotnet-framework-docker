@@ -5,12 +5,13 @@ parameters:
   matrix: {}
 phases:
   - phase: ${{ parameters.phase }}
-    condition: or(eq(variables['singlePhase'], 'publish'), and(eq(variables['singlePhase'], ''), or(succeeded(), and(eq(variables['repo'], 'dotnet-framework-samples'), eq(variables['singlePhase'], ''), succeeded('Build_WindowsServerCoreLtsc2016_amd64'), succeeded('Build_WindowsServerCore1709_amd64'), succeeded('Build_WindowsServerCore1803_amd64')))))
+    condition: or(eq(variables['singlePhase'], 'publish'), and(eq(variables['singlePhase'], ''), or(succeeded(), and(eq(variables['repo'], 'dotnet-framework-samples'), eq(variables['singlePhase'], ''), succeeded('Build_WindowsServerCoreLtsc2016_amd64'), succeeded('Build_WindowsServerCore1709_amd64'), succeeded('Build_WindowsServerCore1803_amd64'), succeeded('Build_WindowsServerCoreLtsc2019_amd64')))))
     dependsOn:
       - GenerateMatrices
       - Test_WindowsServerCoreLtsc2016_amd64
       - Test_WindowsServerCore1709_amd64
       - Test_WindowsServerCore1803_amd64
+      - Test_WindowsServerCoreLtsc2019_amd64
     queue:
       name: DotNetCore-Infra
       demands: ${{ parameters.demands }}

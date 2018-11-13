@@ -48,6 +48,13 @@ docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 microsoft/dot
 
 ## Complete set of Tags
 
+# Windows Server 2019 amd64 tags
+
+- [`dotnetapp-windowsservercore-ltsc2019`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+- [`aspnetapp-windowsservercore-ltsc2019`, `aspnetapp` (*samples/aspnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+- [`wcfservice-windowsservercore-ltsc2019`, `wcfservice` (*samples/wcfapp/Dockerfile.web*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
+- [`wcfclient-windowsservercore-ltsc2019`, `wcfclient` (*samples/wcfapp/Dockerfile.client*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
+
 # Windows Server, version 1803 tags
 
 - [`dotnetapp-windowsservercore-1803`, `dotnetapp`, `latest` (*samples/dotnetapp/Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
