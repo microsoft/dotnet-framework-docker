@@ -35,6 +35,12 @@ phases:
       osVersion: windowsservercore-1803
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
       matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1803Amd64'] ]
+  - template: build-amd64.yml
+    parameters:
+      phase: Build_WindowsServerCoreLtsc2019_amd64
+      osVersion: windowsservercore-ltsc2019
+      demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2019Amd64'] ]
 
   ################################################################################
   # Test Images
@@ -63,6 +69,14 @@ phases:
         - GenerateMatrices
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
       matrix: $[ dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1803Amd64'] ]
+  - template: test-amd64.yml
+    parameters:
+      phase: Test_WindowsServerCoreLtsc2019_amd64
+      dependsOn:
+        - Build_WindowsServerCoreLtsc2019_amd64
+        - GenerateMatrices
+      demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
+      matrix: $[ dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercoreLtsc2019Amd64'] ]
 
   ################################################################################
   # Publish Images
@@ -85,5 +99,11 @@ phases:
       osVersion: windowsservercore-1803
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
       matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1803Amd64'] ]
+  - template: copy-images.yml
+    parameters:
+      phase: Copy_Images_WindowsServerCoreLtsc2019_amd64
+      osVersion: windowsservercore-ltsc2019
+      demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
+      matrix: $[ dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2019Amd64'] ]
 
   - template: publish-finalize.yml
