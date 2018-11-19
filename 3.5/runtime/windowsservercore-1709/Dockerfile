@@ -1,6 +1,6 @@
 # escape=`
 
-FROM microsoft/windowsservercore:1709
+FROM mcr.microsoft.com/windows/servercore:1709
 
 # Install .NET Fx 3.5
 RUN powershell -Command `
