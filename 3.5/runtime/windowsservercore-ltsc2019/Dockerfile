@@ -20,7 +20,7 @@ RUN curl -SL --output patch.msu http://download.windowsupdate.com/d/msdownload/u
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /online /Add-Package /PackagePath:C:\patch\Windows10.0-KB4470502-x64.cab `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-KB4470502-x64.cab `
     && rmdir /S /Q patch
 
 # ngen .NET 3.5 Fx
