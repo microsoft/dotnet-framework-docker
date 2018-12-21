@@ -1,20 +1,20 @@
-## Complete set of Tags
+# Complete set of Tags
 
-# Windows Server 2019 amd64 tags
+## Windows Server 2019 amd64 tags
 
 $(TagDoc:4.7.2-runtime-windowsservercore-ltsc2019)
 $(TagDoc:4.7.2-sdk-windowsservercore-ltsc2019)
 $(TagDoc:3.5-runtime-windowsservercore-ltsc2019)
 $(TagDoc:3.5-sdk-windowsservercore-ltsc2019)
 
-# Windows Server, version 1803 amd64 tags
+## Windows Server, version 1803 amd64 tags
 
 $(TagDoc:4.7.2-runtime-windowsservercore-1803)
 $(TagDoc:4.7.2-sdk-windowsservercore-1803)
 $(TagDoc:3.5-runtime-windowsservercore-1803)
 $(TagDoc:3.5-sdk-windowsservercore-1803)
 
-# Windows Server, version 1709 amd64 tags
+## Windows Server, version 1709 amd64 tags
 
 $(TagDoc:4.7.2-runtime-windowsservercore-1709)
 $(TagDoc:4.7.2-sdk-windowsservercore-1709)
@@ -23,7 +23,7 @@ $(TagDoc:4.7.1-sdk-windowsservercore-1709)
 $(TagDoc:3.5-runtime-windowsservercore-1709)
 $(TagDoc:3.5-sdk-windowsservercore-1709)
 
-# Windows Server 2016 amd64 tags
+## Windows Server 2016 amd64 tags
 
 $(TagDoc:4.7.2-runtime-windowsservercore-ltsc2016)
 $(TagDoc:4.7.2-sdk-windowsservercore-ltsc2016)
