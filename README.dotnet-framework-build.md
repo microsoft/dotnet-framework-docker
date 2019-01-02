@@ -1,1 +1,0 @@
-The .NET Framework build images have moved to [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/). This repository will be deleted on 1/1/2019. See the [announcement](https://github.com/Microsoft/dotnet-framework-docker/issues/125) for additional details.
