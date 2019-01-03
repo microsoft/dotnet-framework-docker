@@ -35,7 +35,7 @@ platformList.each { platform ->
             Utilities.setMachineAffinity(newJob, 'Windows_2016', 'latest-docker')
         }
         Utilities.standardJobSetup(newJob, project, isPR, "*/${branch}")
-        Utilities.setJobTimeout(newJob, 180)
+        Utilities.setJobTimeout(newJob, 210)
         Utilities.addGithubPRTriggerForBranch(newJob, branch, "${platform} - ${version} Dockerfiles")
     }
 }

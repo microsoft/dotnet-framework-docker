@@ -1,7 +1,7 @@
 # WCF Docker Sample
 This sample demonstrates how to dockerize WCF services, either IIS-hosted or self-hosted. A simple "hello world" service contract is used in all samples for both HTTP and NET.TCP transport bindings. The sample can also be used without Docker.
 
-The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-build/). It builds the application and then copies the final build result into a Docker image based on the smaller [WCF Runtime Docker image](https://hub.docker.com/r/microsoft/wcf/) or [.NET Framework Runtime Docker image](https://hub.docker.com/r/microsoft/dotnet-framework/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
+The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/r/microsoft/dotnet-framework/). It builds the application and then copies the final build result into a Docker image based on the smaller [WCF Runtime Docker image](https://hub.docker.com/r/microsoft/wcf/) or [.NET Framework Runtime Docker image](https://hub.docker.com/r/microsoft/dotnet-framework/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
 This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
@@ -137,5 +137,4 @@ Docs and More Information:
 * [microsoft/wcf](https://hub.docker.com/r/microsoft/wcf/) for WCF images.
 * [microsoft/aspnet](https://hub.docker.com/r/microsoft/aspnet/) for ASP.NET Web Forms and MVC images.
 * [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) for .NET Framework images.
-* [microsoft/dotnet-framework-build](https://hub.docker.com/r/microsoft/dotnet-framework-build/) for building .NET Framework applications with Docker.
 * [microsoft/dotnet-framework-samples](https://hub.docker.com/r/microsoft/dotnet-framework-samples/) for .NET Framework and ASP.NET sample images.
