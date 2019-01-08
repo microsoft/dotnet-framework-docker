@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:1803
+FROM mcr.microsoft.com/windows/servercore:1803_KB4467702
 
 # Install .NET Fx 3.5
 RUN powershell -Command `
