@@ -5,9 +5,8 @@
     ]
   },
   "variables": {
-    "RuntimeReleaseDateStamp": "20181211",
-    "SdkReleaseDateStamp": "20181211",
-    "1803-3.5-ReleaseDateStamp": "20181113"
+    "RuntimeReleaseDateStamp": "20190108",
+    "SdkReleaseDateStamp": "20190108",
   },
   "repos": [
     {
@@ -243,7 +242,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
-                "3.5-runtime-$(1803-3.5-ReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-runtime-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
                 "3.5-runtime-windowsservercore-1803": {}
               }
             },
@@ -286,7 +285,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
-                "3.5-sdk-$(1803-3.5-ReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-sdk-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
                 "3.5-sdk-windowsservercore-1803": {}
               }
             },
