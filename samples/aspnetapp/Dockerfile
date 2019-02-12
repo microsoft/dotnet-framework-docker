@@ -13,6 +13,6 @@ WORKDIR /app/aspnetapp
 RUN msbuild /p:Configuration=Release
 
 
-FROM microsoft/aspnet:4.7.2 AS runtime
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.7.2 AS runtime
 WORKDIR /inetpub/wwwroot
 COPY --from=build /app/aspnetapp/. ./
