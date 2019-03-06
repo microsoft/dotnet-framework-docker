@@ -1,6 +1,7 @@
 # escape=`
 
-FROM microsoft/dotnet-framework:3.5-runtime-windowsservercore-1709
+ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
+FROM $REPO:3.5-windowsservercore-1709
 
 # Install .NET 4.7.2
 RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/6/E/4/6E48E8AB-DC00-419E-9704-06DD46E5F81D/NDP472-KB4054530-x86-x64-AllOS-ENU.exe" -OutFile dotnet-framework-installer.exe & `

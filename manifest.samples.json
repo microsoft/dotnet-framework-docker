@@ -1,8 +1,9 @@
 {
+  "registry": "mcr.microsoft.com",
   "repos": [
     {
-      "name": "microsoft/dotnet-framework-samples",
-      "readmePath": "samples/README.DockerHub.md",
+      "name": "dotnet/framework/samples",
+      "readmePath": "README.samples.md",
       "images": [
         {
           "sharedTags": {
@@ -11,7 +12,7 @@
           },
           "platforms": [
             {
-              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "dockerfile": "samples/dotnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -19,7 +20,7 @@
               }
             },
             {
-              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "dockerfile": "samples/dotnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-1709",
               "tags": {
@@ -27,7 +28,7 @@
               }
             },
             {
-              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "dockerfile": "samples/dotnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
@@ -35,7 +36,7 @@
               }
             },
             {
-              "dockerfile": "samples/dotnetapp/Dockerfile",
+              "dockerfile": "samples/dotnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
@@ -50,7 +51,7 @@
           },
           "platforms": [
             {
-              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "dockerfile": "samples/aspnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -58,7 +59,7 @@
               }
             },
             {
-              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "dockerfile": "samples/aspnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-1709",
               "tags": {
@@ -66,7 +67,7 @@
               }
             },
             {
-              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "dockerfile": "samples/aspnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
@@ -74,7 +75,7 @@
               }
             },
             {
-              "dockerfile": "samples/aspnetapp/Dockerfile",
+              "dockerfile": "samples/aspnetapp",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
