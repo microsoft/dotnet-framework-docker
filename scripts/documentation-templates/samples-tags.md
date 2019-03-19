@@ -1,4 +1,4 @@
-# Complete set of Tags
+# Full Tag Listing
 
 ## Windows Server 2019 amd64 tags
 

@@ -7,7 +7,8 @@
 param(
     [string]$VersionFilter,
     [string]$OSFilter,
-    [string]$Repo,
+    [string]$Registry,
+    [string]$RepoPrefix,
     [switch]$IsLocalRun
 )
 
@@ -33,7 +34,8 @@ if ($LASTEXITCODE -ne 0) { throw "Failed to install the .NET Core SDK" }
 # Run Tests
 $env:IMAGE_OS_FILTER = $OSFilter
 $env:IMAGE_VERSION_FILTER = $VersionFilter
-$env:REPO = $Repo
+$env:REGISTRY = $Registry
+$env:REPO_PREFIX = $RepoPrefix
 
 if ($IsLocalRun) {
     $env:LOCAL_RUN = 1

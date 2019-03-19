@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -21,7 +22,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private static bool IsLocalRun = Environment.GetEnvironmentVariable("LOCAL_RUN") != null;
         private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
-        private static string Repo => Environment.GetEnvironmentVariable("REPO") ?? "microsoft/dotnet-framework";
+        public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
+        public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
@@ -86,14 +88,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
-            string baseBuildImage = $"{Repo}:{imageDescriptor.BuildVersion}-sdk-{imageDescriptor.OsVariant}";
-            EnsureImageExist(baseBuildImage);
+            string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
             List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
             if (includeRuntime)
             {
-                string baseRuntimeImage = $"{Repo}:{imageDescriptor.RuntimeVersion}-runtime-{imageDescriptor.OsVariant}";
-                EnsureImageExist(baseRuntimeImage);
+                string baseRuntimeImage = GetImage("runtime", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
@@ -119,8 +119,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        private void EnsureImageExist(string image)
+        private string GetImage(string imageType, string version, string osVariant)
         {
+            string image = $"{Registry}/{RepoPrefix}dotnet/framework/{imageType}:{version}-{osVariant}";
+
+            // Ensure image exists locally
             if (IsLocalRun)
             {
                 Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
@@ -129,6 +132,15 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 DockerHelper.Pull(image);
             }
+
+            return image;
+        }
+
+        private static string GetManifestRegistry()
+        {
+            string manifestJson = File.ReadAllText("manifest.json");
+            JObject manifest = JObject.Parse(manifestJson);
+            return (string)manifest["registry"];
         }
     }
 }

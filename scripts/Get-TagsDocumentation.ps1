@@ -1,38 +1,52 @@
-param(
-    [string]$Branch='master',
-    [string]$ImageBuilderImageName='microsoft/dotnet-buildtools-prereqs:image-builder-debian-20181221161902'
-)
-
+#!/usr/bin/env pwsh
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Path "$PSScriptRoot" -Parent
 
-function GenerateDoc {
-    param ([string] $Manifest, [string] $Repo, [string] $ReadmePath, [string] $Template)
+function Log {
+    param ([string] $Message)
 
-    & docker run --rm `
-        -v /var/run/docker.sock:/var/run/docker.sock `
-        -v "${repoRoot}:/repo" `
-        -w /repo `
-        $ImageBuilderImageName `
-            generateTagsReadme `
-            --manifest $Manifest `
-            --repo $Repo `
-            --update-readme `
-            --readme-path $ReadmePath `
-            --template $Template `
-            "https://github.com/Microsoft/dotnet-framework-docker/blob/${Branch}"
+    Write-Output $Message
 }
 
-& docker pull $ImageBuilderImageName
+function Exec {
+    param ([string] $Cmd)
 
-GenerateDoc `
-    -Manifest manifest.json `
-    -Repo microsoft/dotnet-framework `
-    -ReadmePath ./README.md `
-    -Template ./scripts/ReadmeTagsDocumentationTemplate.md
+    Log "Executing: '$Cmd'"
+    Invoke-Expression $Cmd
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed: '$Cmd'"
+    }
+}
 
-GenerateDoc `
-    -Manifest manifest.samples.json `
-    -Repo microsoft/dotnet-framework-samples `
-    -ReadmePath ./samples/README.DockerHub.md `
-    -Template ./scripts/SamplesReadmeTagsDocumentationTemplate.md
+function GenerateDoc {
+    param (
+        [string] $Template,
+        [string] $Repo,
+        [string] $ReadmePath,
+        [string] $Manifest,
+        [string] $Branch,
+        [switch] $ReuseImageBuilderImage
+    )
+
+    $onTagsGenerated = {
+        param($ContainerName)
+        Exec "docker cp ${ContainerName}:/repo/$ReadmePath $repoRoot/$ReadmePath"
+    }
+
+    $imageBuilderArgs = "generateTagsReadme" `
+        + " --update-readme" `
+        + " --manifest $Manifest" `
+        + " --repo $Repo" `
+        + " --template ./scripts/documentation-templates/$Template" `
+        + " $skipValidationOption" `
+        + " https://github.com/dotnet/dotnet-docker/blob/master"
+
+    & "$PSScriptRoot/Invoke-ImageBuilder.ps1" `
+        -ImageBuilderArgs $imageBuilderArgs `
+        -ReuseImageBuilderImage:$ReuseImageBuilderImage `
+        -OnCommandExecuted $onTagsGenerated
+}
+
+GenerateDoc runtime-tags.md dotnet/framework/runtime README.runtime.md manifest.json
+GenerateDoc sdk-tags.md dotnet/framework/sdk README.sdk.md manifest.json -ReuseImageBuilderImage
+GenerateDoc samples-tags.md dotnet/framework/samples README.samples.md manifest.samples.json -ReuseImageBuilderImage
