@@ -4,8 +4,7 @@ jobs:
   ################################################################################
 - job: GenerateMatrices
   pool: # linuxAmd64Pool
-    name: DotNet-Build
-    demands: agent.os -equals linux
+    name: Hosted Ubuntu 1604
   steps:
   - template: ../steps/init-docker-linux.yml
   - script: >
@@ -29,28 +28,28 @@ jobs:
   parameters:
     name: Build_WindowsServerCoreLtsc2016_amd64
     pool: # windows1607Amd64Pool
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
     matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2016Amd64']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCore1709_amd64
     pool: # windows1709Amd64Pool
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
     matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1709Amd64']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCore1803_amd64
     pool: # windows1803Amd64Pool
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
     matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1803Amd64']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCoreLtsc2019_amd64
     pool: # windows1809Amd64
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
     matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2019Amd64']
 
@@ -62,7 +61,7 @@ jobs:
     name: Test_WindowsServerCoreLtsc2016_amd64
     buildDependencies: Build_WindowsServerCoreLtsc2016_amd64
     pool: # windows1607Amd64Pool
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
     matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercoreLtsc2016Amd64']
 - template: test-images.yml
@@ -70,7 +69,7 @@ jobs:
     name: Test_WindowsServerCore1709_amd64
     buildDependencies: Build_WindowsServerCore1709_amd64
     pool: # windows1709Amd64Pool
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
     matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1709Amd64']
 - template: test-images.yml
@@ -78,7 +77,7 @@ jobs:
     name: Test_WindowsServerCore1803_amd64
     buildDependencies: Build_WindowsServerCore1803_amd64
     pool: # windows1803Amd64Pool
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
     matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1803Amd64']
 - template: test-images.yml
@@ -86,7 +85,7 @@ jobs:
     name: Test_WindowsServerCoreLtsc2019_amd64
     buildDependencies: Build_WindowsServerCoreLtsc2019_amd64
     pool: # windows1809Amd64
-      name: DotNetCore-Infra
+      name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
     matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercoreLtsc2019Amd64']
 
@@ -96,12 +95,10 @@ jobs:
 - template: copy-images.yml
   parameters:
     pool: # linuxAmd64Pool
-      name: DotNet-Build
-      demands: agent.os -equals linux
+      name: Hosted Ubuntu 1604
     matrix: dependencies.GenerateMatrices.outputs['publishMatrix.publishMatrix']
 
 - template: publish-finalize.yml
   parameters:
     pool: # linuxAmd64Pool
-      name: DotNet-Build
-      demands: agent.os -equals linux
+      name: Hosted Ubuntu 1604
