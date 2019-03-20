@@ -42,7 +42,7 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 Type the following command to run a sample WCF service application with Docker:
 
 ```console
-docker run -it --rm --name wcfservice_sample mcr.microsoft.com/dotnet/framework/samples:wcfservie
+docker run -it --rm --name wcfservice_sample mcr.microsoft.com/dotnet/framework/samples:wcfservice
 ```
 After the container starts, find the IP address of the container instance:
 ```console
@@ -111,4 +111,4 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 # License
 
-The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/r/microsoft/windowsservercore/).
+The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).

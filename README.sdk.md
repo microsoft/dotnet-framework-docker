@@ -85,4 +85,4 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 # License
 
-The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/r/microsoft/windowsservercore/).
+The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
