@@ -1,3 +1,8 @@
+parameters:
+  buildMatrixType: platformDependencyGraph
+  testMatrixType: platformVersionedOs
+  publishMatrixType: dependencyGraph
+  
 jobs:
   ################################################################################
   # Initialization - Generate the VSTS build matrix
@@ -7,18 +12,18 @@ jobs:
     name: Hosted Ubuntu 1604
   steps:
   - template: ../steps/init-docker-linux.yml
-  - script: >
-      $(runImageBuilderCmd) generateBuildMatrix
-      --manifest $(manifest) --type build --os-type '*' --architecture '*' $(imageBuilder.generateMatrixQueueArgs)
-    name: buildMatrix
-  - script: >
-      $(runImageBuilderCmd) generateBuildMatrix
-      --manifest $(manifest) --type test --os-type '*' --architecture '*' $(imageBuilder.generateMatrixQueueArgs)
-    name: testMatrix
-  - script: >
-      $(runImageBuilderCmd) generateBuildMatrix
-      --manifest $(manifest) --type publish --os-type '*' --architecture '*' $(imageBuilder.generateMatrixQueueArgs)
-    name: publishMatrix
+  - template: ../steps/generate-matrix.yml
+    parameters:
+      matrixType: ${{ parameters.buildMatrixType }}
+      name: buildMatrix
+  - template: ../steps/generate-matrix.yml
+    parameters:
+      matrixType: ${{ parameters.testMatrixType }}
+      name: testMatrix
+  - template: ../steps/generate-matrix.yml
+    parameters:
+      matrixType: ${{ parameters.publishMatrixType }}
+      name: publishMatrix
   - template: ../steps/cleanup-docker-linux.yml
 
   ################################################################################
@@ -30,28 +35,28 @@ jobs:
     pool: # windows1607Amd64Pool
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
-    matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2016Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercoreLtsc2016Amd64', parameters.buildMatrixType) }}']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCore1709_amd64
     pool: # windows1709Amd64Pool
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
-    matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1709Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercore1709Amd64', parameters.buildMatrixType) }}']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCore1803_amd64
     pool: # windows1803Amd64Pool
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
-    matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercore1803Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercore1803Amd64', parameters.buildMatrixType) }}']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCoreLtsc2019_amd64
     pool: # windows1809Amd64
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
-    matrix: dependencies.GenerateMatrices.outputs['buildMatrix.buildMatrixWindowsservercoreLtsc2019Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercoreLtsc2019Amd64', parameters.buildMatrixType) }}']
 
   ################################################################################
   # Test Images
@@ -63,7 +68,7 @@ jobs:
     pool: # windows1607Amd64Pool
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
-    matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercoreLtsc2016Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercoreLtsc2016Amd64', parameters.testMatrixType) }}']
 - template: test-images.yml
   parameters:
     name: Test_WindowsServerCore1709_amd64
@@ -71,7 +76,7 @@ jobs:
     pool: # windows1709Amd64Pool
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS3
-    matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1709Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercore1709Amd64', parameters.testMatrixType) }}']
 - template: test-images.yml
   parameters:
     name: Test_WindowsServerCore1803_amd64
@@ -79,7 +84,7 @@ jobs:
     pool: # windows1803Amd64Pool
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
-    matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercore1803Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercore1803Amd64', parameters.testMatrixType) }}']
 - template: test-images.yml
   parameters:
     name: Test_WindowsServerCoreLtsc2019_amd64
@@ -87,7 +92,7 @@ jobs:
     pool: # windows1809Amd64
       name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
-    matrix: dependencies.GenerateMatrices.outputs['testMatrix.testMatrixWindowsservercoreLtsc2019Amd64']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercoreLtsc2019Amd64', parameters.testMatrixType) }}']
 
   ################################################################################
   # Publish Images
@@ -96,7 +101,7 @@ jobs:
   parameters:
     pool: # linuxAmd64Pool
       name: Hosted Ubuntu 1604
-    matrix: dependencies.GenerateMatrices.outputs['publishMatrix.publishMatrix']
+    matrix: dependencies.GenerateMatrices.outputs['${{ format('publishMatrix.{0}Matrix', parameters.publishMatrixType) }}']
 
 - template: publish-finalize.yml
   parameters:
