@@ -39,7 +39,7 @@ function GenerateDoc {
         + " --repo $Repo" `
         + " --template ./scripts/documentation-templates/$Template" `
         + " $skipValidationOption" `
-        + " https://github.com/dotnet/dotnet-docker/blob/master"
+        + " https://github.com/Microsoft/dotnet-framework-docker/blob/master"
 
     & "$PSScriptRoot/Invoke-ImageBuilder.ps1" `
         -ImageBuilderArgs $imageBuilderArgs `
