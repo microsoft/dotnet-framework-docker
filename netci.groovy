@@ -5,7 +5,6 @@ def branch = GithubBranchName
 def isPR = true
 def platformList = [
         'WindowsServerCore-ltsc2016',
-        'WindowsServerCore-1709',
         'WindowsServerCore-1803',
         'WindowsServerCore-ltsc2019'
     ]
@@ -27,9 +26,6 @@ platformList.each { platform ->
         }
         else if (platform == 'WindowsServerCore-1803') {
             newJob.with {label('windows.10.amd64.serverrs4.open')}
-        }
-        else if (platform == 'WindowsServerCore-1709') {
-            newJob.with {label('windows.10.amd64.serverrs3.open')}
         }
         else {
             Utilities.setMachineAffinity(newJob, 'Windows_2016', 'latest-docker')
