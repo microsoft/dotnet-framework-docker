@@ -7,7 +7,8 @@
 param(
     [string]$VersionFilter,
     [string]$OSFilter,
-    [string]$Repo,
+    [string]$Registry,
+    [string]$RepoPrefix,
     [switch]$IsLocalRun
 )
 
@@ -23,7 +24,7 @@ if (!(Test-Path "$dotnetInstallDir")) {
 $dotnetInstallScript = "dotnet-install.ps1";
 $dotnetInstallScriptPath = "$dotnetInstallDir/$DotnetInstallScript"
 if (!(Test-Path $dotnetInstallScriptPath)) {
-    $dotnetInstallScriptUrl = "https://raw.githubusercontent.com/dotnet/cli/release/2.0.0/scripts/obtain/$dotnetInstallScript"
+    $dotnetInstallScriptUrl = "https://raw.githubusercontent.com/dotnet/cli/release/2.1/scripts/obtain/$dotnetInstallScript"
     Invoke-WebRequest $dotnetInstallScriptUrl -OutFile $dotnetInstallScriptPath
 }
 
@@ -33,7 +34,12 @@ if ($LASTEXITCODE -ne 0) { throw "Failed to install the .NET Core SDK" }
 # Run Tests
 $env:IMAGE_OS_FILTER = $OSFilter
 $env:IMAGE_VERSION_FILTER = $VersionFilter
-$env:REPO = $Repo
+$env:REGISTRY = $Registry
+$env:REPO_PREFIX = $RepoPrefix
+
+if ($IsLocalRun) {
+    $env:LOCAL_RUN = 1
+}
 
 & dotnet test -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
 if ($LASTEXITCODE -ne 0) { throw "Tests Failed" }
