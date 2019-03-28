@@ -52,12 +52,6 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 - [`4.7.2-20190312-windowsservercore-1803`, `4.7.2-windowsservercore-1803`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/runtime/windowsservercore-1803/Dockerfile)
 - [`3.5-20190312-windowsservercore-1803`, `3.5-windowsservercore-1803`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/runtime/windowsservercore-1803/Dockerfile)
 
-## Windows Server, version 1709 amd64 tags
-
-- [`4.7.2-20190312-windowsservercore-1709`, `4.7.2-windowsservercore-1709`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/runtime/windowsservercore-1709/Dockerfile)
-- [`4.7.1-20190312-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/runtime/windowsservercore-1709/Dockerfile)
-- [`3.5-20190312-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/runtime/windowsservercore-1709/Dockerfile)
-
 ## Windows Server 2016 amd64 tags
 
 - [`4.7.2-20190312-windowsservercore-ltsc2016`, `4.7.2-windowsservercore-ltsc2016`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/runtime/windowsservercore-ltsc2016/Dockerfile)
