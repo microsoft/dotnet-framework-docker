@@ -13,8 +13,7 @@ RUN powershell -Command `
         Expand-Archive microsoft-windows-netfx3.zip; `
         Remove-Item -Force microsoft-windows-netfx3.zip; `
         Add-WindowsPackage -Online -PackagePath .\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab; `
-        Remove-Item -Force -Recurse microsoft-windows-netfx3; `
-        Remove-Item -Force -Recurse ${Env:TEMP}\*
+        Remove-Item -Force -Recurse microsoft-windows-netfx3
 
 # Apply latest patch
 RUN powershell -Command `
