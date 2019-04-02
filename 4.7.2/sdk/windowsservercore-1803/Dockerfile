@@ -11,11 +11,11 @@ RUN New-Item -Type Directory $Env:ProgramFiles\NuGet; `
     Invoke-WebRequest -UseBasicParsing https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe -OutFile $Env:ProgramFiles\NuGet\nuget.exe
 
 # Install VS Test Agent
-RUN Invoke-WebRequest -UseBasicParsing https://TODO_VS_TEST_AGENT_URL -OutFile vs_TestAgent.exe; `
+RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/446c5efe-9162-41a1-b380-704c82d13afa/8c6c6f404ed99e477007f16a336f99a6/vs_testagent.exe -OutFile vs_TestAgent.exe; `
     Start-Process vs_TestAgent.exe -ArgumentList '--quiet', '--norestart', '--nocache' -NoNewWindow -Wait; `
     Remove-Item -Force vs_TestAgent.exe; `
     # Install VS Build Tools
-    Invoke-WebRequest -UseBasicParsing https://TODO_VS_BUILD_TOOLS_URL -OutFile vs_BuildTools.exe; `
+    Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.com/download/pr/df649173-11e9-4af2-8eb7-0eb02ba8958a/cadb5bdac41e55bb8f6a6b7c45273370/vs_buildtools.exe -OutFile vs_BuildTools.exe; `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1; `
     Start-Process vs_BuildTools.exe `
@@ -32,7 +32,7 @@ RUN Invoke-WebRequest -UseBasicParsing https://TODO_VS_TEST_AGENT_URL -OutFile v
     Remove-Item -Force -Recurse \"${Env:ProgramData}\Microsoft\VisualStudio\Packages\"; `
     Remove-Item -Force -Recurse \"${Env:ProgramData}\Package Cache\"
 
-RUN Invoke-WebRequest -UseBasicParsing https://TODO_WEB_TARGETS_URL -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip;`
+RUN Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2019.0.zip -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip;`
     Expand-Archive MSBuild.Microsoft.VisualStudio.Web.targets.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0\"; `
     Remove-Item -Force MSBuild.Microsoft.VisualStudio.Web.targets.zip
 

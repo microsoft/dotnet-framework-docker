@@ -3,7 +3,7 @@
   "registry": "mcr.microsoft.com",
   "variables": {
     "RuntimeReleaseDateStamp": "20190312",
-    "SdkReleaseDateStamp": "TODO_SDK_DATESTAMP"
+    "SdkReleaseDateStamp": "20190402"
   },
   "repos": [
     {
