@@ -60,9 +60,9 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 ## Windows Server, version 1709 amd64 tags
 
-- [`4.7.2-20190402-windowsservercore-1709`, `4.7.2-windowsservercore-1709`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-1709/Dockerfile)
-- [`4.7.1-20190402-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/sdk/windowsservercore-1709/Dockerfile)
-- [`3.5-20190402-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/sdk/windowsservercore-1709/Dockerfile)
+- [`4.7.2-20190312-windowsservercore-1709`, `4.7.2-windowsservercore-1709`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-1709/Dockerfile)
+- [`4.7.1-20190312-windowsservercore-1709`, `4.7.1-windowsservercore-1709`, `4.7.1` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/sdk/windowsservercore-1709/Dockerfile)
+- [`3.5-20190312-windowsservercore-1709`, `3.5-windowsservercore-1709`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/sdk/windowsservercore-1709/Dockerfile)
 
 ## Windows Server 2016 amd64 tags
 
