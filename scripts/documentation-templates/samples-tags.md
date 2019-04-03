@@ -1,5 +1,12 @@
 # Full Tag Listing
 
+## Windows Server, version 1903 amd64 tags
+
+$(TagDoc:dotnetapp-windowsservercore-1903)
+$(TagDoc:aspnetapp-windowsservercore-1903)
+$(TagDoc:wcfservice-windowsservercore-1903)
+$(TagDoc:wcfclient-windowsservercore-1903)
+
 ## Windows Server 2019 amd64 tags
 
 $(TagDoc:dotnetapp-windowsservercore-ltsc2019)

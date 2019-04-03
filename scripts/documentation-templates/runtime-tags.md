@@ -1,5 +1,10 @@
 # Full Tag Listing
 
+## Windows Server, version 1903 amd64 tags
+
+$(TagDoc:4.8-windowsservercore-1903)
+$(TagDoc:3.5-windowsservercore-1903)
+
 ## Windows Server 2019 amd64 tags
 
 $(TagDoc:4.7.2-windowsservercore-ltsc2019)

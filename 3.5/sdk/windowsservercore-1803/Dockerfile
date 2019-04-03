@@ -3,6 +3,19 @@
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:3.5-windowsservercore-1803
 
+# Install .NET 4.8 Fx
+RUN powershell -Command `
+        $ProgressPreference = 'SilentlyContinue'; `
+        Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe" -OutFile dotnet-framework-installer.exe & `
+    .\dotnet-framework-installer.exe /q & `
+    del .\dotnet-framework-installer.exe & `
+    powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
+
+# ngen .NET Fx
+RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
+    \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+
+# Can't set SHELL prior to installing 4.8 runtime - PowerShell being loaded prevents GAC from getting updated without restart
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Install NuGet CLI
@@ -22,7 +35,6 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
         -ArgumentList `
             '--add', 'Microsoft.VisualStudio.Workload.MSBuildTools', `
             '--add', 'Microsoft.VisualStudio.Workload.NetCoreBuildTools', `
-            '--add', 'Microsoft.Net.Component.4.7.2.SDK', `
             '--add', 'Microsoft.Component.ClickOnce.MSBuild', `
             '--quiet', '--norestart', '--nocache' `
         -NoNewWindow -Wait; `
@@ -31,6 +43,13 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
     Remove-Item -Force -Recurse ${Env:TEMP}\*; `
     Remove-Item -Force -Recurse \"${Env:ProgramData}\Microsoft\VisualStudio\Packages\"; `
     Remove-Item -Force -Recurse \"${Env:ProgramData}\Package Cache\"
+
+# Install .NET 4.8 SDK
+RUN Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/dockerassets/sdk_tools48.zip -OutFile sdk_tools48.zip; `
+    Expand-Archive sdk_tools48.zip; `
+    Start-Process msiexec -ArgumentList '/i', 'sdk_tools48\sdk_tools48.msi', '/quiet', 'VSEXTUI=1' -NoNewWindow -Wait; `
+    Remove-Item -Force -Recurse sdk_tools48; `
+    Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Install web targets
 RUN Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2019.04.zip -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip;`
@@ -42,9 +61,9 @@ ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\201
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 SHELL ["cmd", "/S", "/C"]
 RUN `
-    # Workaround for issue with 32 bit assemblies from Microsoft.Net.Component.4.7.2.SDK being 64 bit ngen'ed
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\WinMDExp.exe" `
+    # Workaround for issue with 32 bit assemblies from .NET Framework 4.8 SDK being 64 bit ngen'ed
+    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     `
@@ -61,11 +80,11 @@ RUN setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
 # Install Targeting Packs
-RUN @('4.0', '4.5.2', '4.6.2', '4.7.2') `
+RUN @('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8') `
     | %{ `
         Invoke-WebRequest -UseBasicParsing https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip -OutFile referenceassemblies.zip; `
         Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `

@@ -42,6 +42,11 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 
 # Full Tag Listing
 
+## Windows Server, version 1903 amd64 tags
+
+- [`4.8-20190312-windowsservercore-1903`, `4.8-windowsservercore-1903`, `4.8` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/runtime/windowsservercore-1903/Dockerfile)
+- [`3.5-20190312-windowsservercore-1903`, `3.5-windowsservercore-1903`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/runtime/windowsservercore-1903/Dockerfile)
+
 ## Windows Server 2019 amd64 tags
 
 - [`4.7.2-20190409-windowsservercore-ltsc2019`, `4.7.2-windowsservercore-ltsc2019`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/runtime/windowsservercore-ltsc2019/Dockerfile)

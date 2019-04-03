@@ -1,21 +1,8 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-windowsservercore-ltsc2019
+FROM $REPO:4.7.2-windowsservercore-1803
 
-# Install .NET 4.8 Fx
-RUN powershell -Command `
-        $ProgressPreference = 'SilentlyContinue'; `
-        Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe" -OutFile dotnet-framework-installer.exe & `
-    .\dotnet-framework-installer.exe /q & `
-    del .\dotnet-framework-installer.exe & `
-    powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
-
-# ngen .NET Fx
-RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
-    \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
-
-# Can't set SHELL prior to installing 4.8 runtime - PowerShell being loaded prevents GAC from getting updated without restart
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 # Install NuGet CLI
