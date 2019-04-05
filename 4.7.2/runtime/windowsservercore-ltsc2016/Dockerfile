@@ -5,7 +5,8 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2016
 # Install .NET 4.7.2
 RUN powershell Invoke-WebRequest -Uri "https://download.microsoft.com/download/6/E/4/6E48E8AB-DC00-419E-9704-06DD46E5F81D/NDP472-KB4054530-x86-x64-AllOS-ENU.exe" -OutFile dotnet-framework-installer.exe & `
     .\dotnet-framework-installer.exe /q & `
-    del .\dotnet-framework-installer.exe
+    del .\dotnet-framework-installer.exe & `
+    powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Apply latest patch
 RUN powershell -Command `

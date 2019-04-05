@@ -13,7 +13,8 @@ RUN powershell -Command `
         Expand-Archive microsoft-windows-netfx3.zip; `
         Remove-Item -Force microsoft-windows-netfx3.zip; `
         Add-WindowsPackage -Online -PackagePath .\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab; `
-        Remove-Item -Force -Recurse microsoft-windows-netfx3
+        Remove-Item -Force -Recurse microsoft-windows-netfx3; `
+        Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Apply latest patch
 RUN curl -SL --output patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2019/02/windows10.0-kb4486553-x64_0c3111b07c3e2a33d66fed4a66c67dec989950a0.msu `
