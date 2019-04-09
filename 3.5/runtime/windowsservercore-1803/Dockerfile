@@ -22,12 +22,12 @@ RUN powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/03/windows10.0-kb4489868-x64_e5aaf33c58b19b162cbbbf559b9cbb5306df1a67.msu" `
+            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/04/windows10.0-kb4493464-x64_600727950855f0c510f998f9fb285ab26435969c.msu" `
             -OutFile patch.msu; `
         New-Item -Type Directory patch; `
         Start-Process expand -ArgumentList 'patch.msu', 'patch', '-F:*' -NoNewWindow -Wait; `
         Remove-Item -Force patch.msu; `
-        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4489868-x64.cab; `
+        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4493464-x64.cab; `
         Remove-Item -Force -Recurse \patch
 
 # ngen .NET 3.5 Fx
