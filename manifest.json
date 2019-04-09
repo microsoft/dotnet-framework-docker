@@ -2,8 +2,8 @@
   "readmePath": "README.md",
   "registry": "mcr.microsoft.com",
   "variables": {
-    "RuntimeReleaseDateStamp": "20190312",
-    "SdkReleaseDateStamp": "20190402"
+    "RuntimeReleaseDateStamp": "20190409",
+    "SdkReleaseDateStamp": "20190409"
   },
   "repos": [
     {
@@ -188,7 +188,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1709",
               "tags": {
-                "4.7.2-20190312-windowsservercore-1709": {},
+                "4.7.2-$(SdkReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.2-windowsservercore-1709": {}
               }
             },
@@ -243,7 +243,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1709",
               "tags": {
-                "4.7.1-20190312-windowsservercore-1709": {},
+                "4.7.1-$(SdkReleaseDateStamp)-windowsservercore-1709": {},
                 "4.7.1-windowsservercore-1709": {}
               }
             }
@@ -274,7 +274,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1709",
               "tags": {
-                "3.5-20190312-windowsservercore-1709": {},
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1709": {},
                 "3.5-windowsservercore-1709": {}
               }
             },

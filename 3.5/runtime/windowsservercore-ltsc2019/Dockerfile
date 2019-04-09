@@ -16,11 +16,11 @@ RUN powershell -Command `
         Remove-Item -Force -Recurse microsoft-windows-netfx3
 
 # Apply latest patch
-RUN curl -SL --output patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2019/02/windows10.0-kb4486553-x64_0c3111b07c3e2a33d66fed4a66c67dec989950a0.msu `
+RUN curl -SL --output patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/03/windows10.0-kb4489192-x64_872afd1aabdc1ee545f0e654ac550997d9548aae.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-KB4486553-x64.cab `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-KB4489192-x64.cab `
     && rmdir /S /Q patch
 
 # ngen .NET 3.5 Fx
