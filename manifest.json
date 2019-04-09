@@ -2,8 +2,8 @@
   "readmePath": "README.md",
   "registry": "mcr.microsoft.com",
   "variables": {
-    "RuntimeReleaseDateStamp": "20190312",
-    "SdkReleaseDateStamp": "20190402"
+    "RuntimeReleaseDateStamp": "20190409",
+    "SdkReleaseDateStamp": "20190409"
   },
   "repos": [
     {
