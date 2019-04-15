@@ -16,13 +16,11 @@ jobs:
               contains(variables['manifest'], 'samples'),
               eq(variables['singlePhase'], ''),
               succeeded('Build_WindowsServerCoreLtsc2016_amd64'),
-              succeeded('Build_WindowsServerCore1709_amd64'),
               succeeded('Build_WindowsServerCore1803_amd64'),
               succeeded('Build_WindowsServerCoreLtsc2019_amd64'))))))"
   dependsOn:
   - GenerateMatrices
   - Test_WindowsServerCoreLtsc2016_amd64
-  - Test_WindowsServerCore1709_amd64
   - Test_WindowsServerCore1803_amd64
   - Test_WindowsServerCoreLtsc2019_amd64
   pool: ${{ parameters.pool }}

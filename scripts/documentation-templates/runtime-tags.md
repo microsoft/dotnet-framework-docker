@@ -10,12 +10,6 @@ $(TagDoc:3.5-windowsservercore-ltsc2019)
 $(TagDoc:4.7.2-windowsservercore-1803)
 $(TagDoc:3.5-windowsservercore-1803)
 
-## Windows Server, version 1709 amd64 tags
-
-$(TagDoc:4.7.2-windowsservercore-1709)
-$(TagDoc:4.7.1-windowsservercore-1709)
-$(TagDoc:3.5-windowsservercore-1709)
-
 ## Windows Server 2016 amd64 tags
 
 $(TagDoc:4.7.2-windowsservercore-ltsc2016)
