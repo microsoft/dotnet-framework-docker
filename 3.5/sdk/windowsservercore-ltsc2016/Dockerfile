@@ -41,7 +41,6 @@ RUN Invoke-WebRequest -UseBasicParsing https://download.visualstudio.microsoft.c
     Remove-Item -Force vs_buildtools.exe; `
     Remove-Item -Force -Recurse \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\"; `
     Remove-Item -Force -Recurse ${Env:TEMP}\*; `
-    Remove-Item -Force -Recurse \"${Env:ProgramData}\Microsoft\VisualStudio\Packages\"; `
     Remove-Item -Force -Recurse \"${Env:ProgramData}\Package Cache\"
 
 # Install .NET 4.8 SDK
