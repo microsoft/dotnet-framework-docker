@@ -2,16 +2,19 @@
 
 ## Windows Server 2019 amd64 tags
 
+$(TagDoc:4.8-windowsservercore-ltsc2019)
 $(TagDoc:4.7.2-windowsservercore-ltsc2019)
 $(TagDoc:3.5-windowsservercore-ltsc2019)
 
 ## Windows Server, version 1803 amd64 tags
 
+$(TagDoc:4.8-windowsservercore-1803)
 $(TagDoc:4.7.2-windowsservercore-1803)
 $(TagDoc:3.5-windowsservercore-1803)
 
 ## Windows Server 2016 amd64 tags
 
+$(TagDoc:4.8-windowsservercore-ltsc2016)
 $(TagDoc:4.7.2-windowsservercore-ltsc2016)
 $(TagDoc:4.7.1-windowsservercore-ltsc2016)
 $(TagDoc:4.7-windowsservercore-ltsc2016)
