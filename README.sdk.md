@@ -1,7 +1,7 @@
 # Featured Tags
 
-* `4.7.2`
-  * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.7.2`
+* `4.8`
+  * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8`
 * `3.5`
   * `docker pull mcr.microsoft.com/dotnet/framework/sdk:3.5`
 
@@ -50,20 +50,20 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 ## Windows Server 2019 amd64 tags
 
-- [`4.8-20190418-windowsservercore-ltsc2019`, `4.8-windowsservercore-ltsc2019`, `4.8` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/sdk/windowsservercore-ltsc2019/Dockerfile)
-- [`4.7.2-20190409-windowsservercore-ltsc2019`, `4.7.2-windowsservercore-ltsc2019`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-ltsc2019/Dockerfile)
+- [`4.8-20190418-windowsservercore-ltsc2019`, `4.8-windowsservercore-ltsc2019`, `4.8`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/sdk/windowsservercore-ltsc2019/Dockerfile)
+- [`4.7.2-20190409-windowsservercore-ltsc2019`, `4.7.2-windowsservercore-ltsc2019`, `4.7.2` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-ltsc2019/Dockerfile)
 - [`3.5-20190418-windowsservercore-ltsc2019`, `3.5-windowsservercore-ltsc2019`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/sdk/windowsservercore-ltsc2019/Dockerfile)
 
 ## Windows Server, version 1803 amd64 tags
 
-- [`4.8-20190418-windowsservercore-1803`, `4.8-windowsservercore-1803`, `4.8` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/sdk/windowsservercore-1803/Dockerfile)
-- [`4.7.2-20190409-windowsservercore-1803`, `4.7.2-windowsservercore-1803`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-1803/Dockerfile)
+- [`4.8-20190418-windowsservercore-1803`, `4.8-windowsservercore-1803`, `4.8`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/sdk/windowsservercore-1803/Dockerfile)
+- [`4.7.2-20190409-windowsservercore-1803`, `4.7.2-windowsservercore-1803`, `4.7.2` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-1803/Dockerfile)
 - [`3.5-20190418-windowsservercore-1803`, `3.5-windowsservercore-1803`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/sdk/windowsservercore-1803/Dockerfile)
 
 ## Windows Server 2016 amd64 tags
 
-- [`4.8-20190418-windowsservercore-ltsc2016`, `4.8-windowsservercore-ltsc2016`, `4.8` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/sdk/windowsservercore-ltsc2016/Dockerfile)
-- [`4.7.2-20190409-windowsservercore-ltsc2016`, `4.7.2-windowsservercore-ltsc2016`, `4.7.2`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-ltsc2016/Dockerfile)
+- [`4.8-20190418-windowsservercore-ltsc2016`, `4.8-windowsservercore-ltsc2016`, `4.8`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.8/sdk/windowsservercore-ltsc2016/Dockerfile)
+- [`4.7.2-20190409-windowsservercore-ltsc2016`, `4.7.2-windowsservercore-ltsc2016`, `4.7.2` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.2/sdk/windowsservercore-ltsc2016/Dockerfile)
 - [`4.7.1-20190409-windowsservercore-ltsc2016`, `4.7.1-windowsservercore-ltsc2016`, `4.7.1` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/4.7.1/sdk/windowsservercore-ltsc2016/Dockerfile)
 - [`3.5-20190418-windowsservercore-ltsc2016`, `3.5-windowsservercore-ltsc2016`, `3.5` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/3.5/sdk/windowsservercore-ltsc2016/Dockerfile)
 

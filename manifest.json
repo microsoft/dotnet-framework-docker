@@ -14,7 +14,8 @@
       "images": [
         {
           "sharedTags": {
-            "4.8": {}
+            "4.8": {},
+            "latest": {}
           },
           "platforms": [
             {
@@ -48,8 +49,7 @@
         },
         {
           "sharedTags": {
-            "4.7.2": {},
-            "latest": {}
+            "4.7.2": {}
           },
           "platforms": [
             {
@@ -172,7 +172,8 @@
       "images": [
         {
           "sharedTags": {
-            "4.8": {}
+            "4.8": {},
+            "latest": {}
           },
           "platforms": [
             {
@@ -215,8 +216,7 @@
         },
         {
           "sharedTags": {
-            "4.7.2": {},
-            "latest": {}
+            "4.7.2": {}
           },
           "platforms": [
             {
