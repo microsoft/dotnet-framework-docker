@@ -18,7 +18,6 @@ jobs:
               succeeded('Build_WindowsServerCoreLtsc2016_amd64'),
               succeeded('Build_WindowsServerCore1803_amd64'),
               succeeded('Build_WindowsServerCoreLtsc2019_amd64'))))))"
-
   dependsOn:
   - GenerateMatrices
   - Test_WindowsServerCoreLtsc2016_amd64
