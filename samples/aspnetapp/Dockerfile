@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/framework/sdk:4.7.2 AS build
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -13,6 +13,6 @@ WORKDIR /app/aspnetapp
 RUN msbuild /p:Configuration=Release
 
 
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.7.2 AS runtime
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8 AS runtime
 WORKDIR /inetpub/wwwroot
 COPY --from=build /app/aspnetapp/. ./
