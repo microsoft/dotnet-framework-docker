@@ -14,7 +14,7 @@ The [.NET Framework](https://www.microsoft.com/net/framework) is a general purpo
 
 You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, type-safe, and object-oriented while retaining the expressiveness and elegance of C-style languages. F# is a multi-paradigm programming language, enabling both functional and object-oriented patterns and practices. VB is a rapid development programming language with the deepest integration between the language and Visual Studio, providing the fastest path to a working app.
 
-The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.7.2](https://www.microsoft.com/net/framework).
+The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.8](https://www.microsoft.com/net/framework).
 
 > https://docs.microsoft.com/dotnet/framework/
 
