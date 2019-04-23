@@ -59,7 +59,16 @@
               "tags": {
                 "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
-              }
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
             },
             {
               "dockerfile": "4.7.2/runtime/windowsservercore-1803",
@@ -68,7 +77,16 @@
               "tags": {
                 "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
                 "4.7.2-windowsservercore-1803": {}
-              }
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
             },
             {
               "dockerfile": "4.7.2/runtime/windowsservercore-ltsc2019",
@@ -77,7 +95,16 @@
               "tags": {
                 "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.7.2-windowsservercore-ltsc2019": {}
-              }
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -99,7 +126,11 @@
                   "name": "pr-build",
                   "dependencies": [
                     "$(Repo:runtime):4.7.2-windowsservercore-ltsc2016",
-                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016"
+                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:runtime):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]
@@ -126,7 +157,9 @@
                     "$(Repo:runtime):4.7.1-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.7.1-windowsservercore-ltsc2016",
                     "$(Repo:runtime):4.7.2-windowsservercore-ltsc2016",
-                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016"
+                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]
@@ -153,7 +186,9 @@
                     "$(Repo:runtime):4.7.1-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.7.1-windowsservercore-ltsc2016",
                     "$(Repo:runtime):4.7.2-windowsservercore-ltsc2016",
-                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016"
+                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]

@@ -1,14 +1,8 @@
-parameters:
-  useRemoteDockerServer: false
-
 steps:
 - script: |
     echo "##vso[task.setvariable variable=testRunner.container]testrunner-$(Build.BuildId)-$(System.JobId)"
 
     optionalTestArgs=""
-    if [ "${{ parameters.useRemoteDockerServer }}" == "true" ]; then
-      optionalTestArgs="-DisableHttpVerification"
-    fi
     if [ "${{ eq(variables['System.TeamProject'], 'public') }}" == "False" ]; then
       optionalTestArgs="$optionalTestArgs -Registry $(acr.server) -RepoPrefix $(stagingRepoPrefix)"
     else
@@ -18,7 +12,6 @@ steps:
   displayName: Set Test Variables
 - template: init-docker-linux.yml
   parameters:
-    setupRemoteDockerServer: ${{ parameters.useRemoteDockerServer }}
     setupImageBuilder: false
     setupTestRunner: true
     cleanupDocker: ${{ eq(variables['System.TeamProject'], 'internal') }}
@@ -73,5 +66,3 @@ steps:
   continueOnError: true
 - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
   - template: cleanup-docker-linux.yml
-    parameters:
-      cleanupRemoteDockerServer: ${{ parameters.useRemoteDockerServer }}
