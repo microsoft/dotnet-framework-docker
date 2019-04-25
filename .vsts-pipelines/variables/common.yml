@@ -2,5 +2,6 @@ variables:
 - template: docker-images.yml
 - name: skipComponentGovernanceDetection
   value: true
-- group: DotNet-Docker-Common
-- group: DotNet-Docker-Secrets
+- ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+  - group: DotNet-Docker-Common
+  - group: DotNet-Docker-Secrets

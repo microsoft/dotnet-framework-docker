@@ -2,6 +2,7 @@ parameters:
   buildMatrixType: platformDependencyGraph
   testMatrixType: platformVersionedOs
   publishMatrixType: dependencyGraph
+  customBuildLegGrouping: ""
   
 jobs:
   ################################################################################
@@ -18,15 +19,17 @@ jobs:
     parameters:
       matrixType: ${{ parameters.buildMatrixType }}
       name: buildMatrix
-  - template: ../steps/generate-matrix.yml
-    parameters:
-      matrixType: ${{ parameters.testMatrixType }}
-      name: testMatrix
-  - template: ../steps/generate-matrix.yml
-    parameters:
-      matrixType: ${{ parameters.publishMatrixType }}
-      name: publishMatrix
-  - template: ../steps/cleanup-docker-linux.yml
+      customBuildLegGrouping: ${{ parameters.customBuildLegGrouping }}
+  - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+    - template: ../steps/generate-matrix.yml
+      parameters:
+        matrixType: ${{ parameters.testMatrixType }}
+        name: testMatrix
+    - template: ../steps/generate-matrix.yml
+      parameters:
+        matrixType: ${{ parameters.publishMatrixType }}
+        name: publishMatrix
+    - template: ../steps/cleanup-docker-linux.yml
 
   ################################################################################
   # Build Images
@@ -35,62 +38,72 @@ jobs:
   parameters:
     name: Build_WindowsServerCoreLtsc2016_amd64
     pool: # windows1607Amd64Pool
-      name: DotNetCore-Docker
+      ${{ if eq(variables['System.TeamProject'], 'public') }}:
+        name: DotNetCore-Docker-Public
+      ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+        name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
     matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercoreLtsc2016Amd64', parameters.buildMatrixType) }}']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCore1803_amd64
     pool: # windows1803Amd64Pool
-      name: DotNetCore-Docker
+      ${{ if eq(variables['System.TeamProject'], 'public') }}:
+        name: DotNetCore-Docker-Public
+      ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+        name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
     matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercore1803Amd64', parameters.buildMatrixType) }}']
 - template: build-images.yml
   parameters:
     name: Build_WindowsServerCoreLtsc2019_amd64
     pool: # windows1809Amd64
-      name: DotNetCore-Docker
+      ${{ if eq(variables['System.TeamProject'], 'public') }}:
+        name: DotNetCore-Docker-Public
+      ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+        name: DotNetCore-Docker
       demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
     matrix: dependencies.GenerateMatrices.outputs['${{ format('buildMatrix.{0}MatrixWindowsservercoreLtsc2019Amd64', parameters.buildMatrixType) }}']
 
-  ################################################################################
-  # Test Images
-  ################################################################################
-- template: test-images.yml
-  parameters:
-    name: Test_WindowsServerCoreLtsc2016_amd64
-    buildDependencies: Build_WindowsServerCoreLtsc2016_amd64
-    pool: # windows1607Amd64Pool
-      name: DotNetCore-Docker
-      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
-    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercoreLtsc2016Amd64', parameters.testMatrixType) }}']
-- template: test-images.yml
-  parameters:
-    name: Test_WindowsServerCore1803_amd64
-    buildDependencies: Build_WindowsServerCore1803_amd64
-    pool: # windows1803Amd64Pool
-      name: DotNetCore-Docker
-      demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
-    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercore1803Amd64', parameters.testMatrixType) }}']
-- template: test-images.yml
-  parameters:
-    name: Test_WindowsServerCoreLtsc2019_amd64
-    buildDependencies: Build_WindowsServerCoreLtsc2019_amd64
-    pool: # windows1809Amd64
-      name: DotNetCore-Docker
-      demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
-    matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercoreLtsc2019Amd64', parameters.testMatrixType) }}']
+- ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+    ################################################################################
+    # Test Images
+    ################################################################################
+  - template: test-images.yml
+    parameters:
+      name: Test_WindowsServerCoreLtsc2016_amd64
+      buildDependencies: Build_WindowsServerCoreLtsc2016_amd64
+      pool: # windows1607Amd64Pool
+        name: DotNetCore-Docker
+        demands: VSTS_OS -equals Windows_Server_2016_Data_Center_with_Containers
+      matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercoreLtsc2016Amd64', parameters.testMatrixType) }}']
+  - template: test-images.yml
+    parameters:
+      name: Test_WindowsServerCore1803_amd64
+      buildDependencies: Build_WindowsServerCore1803_amd64
+      pool: # windows1803Amd64Pool
+        name: DotNetCore-Docker
+        demands: VSTS_OS -equals Windows_Server_2016_Data_Center_RS4
+      matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercore1803Amd64', parameters.testMatrixType) }}']
+  - template: test-images.yml
+    parameters:
+      name: Test_WindowsServerCoreLtsc2019_amd64
+      buildDependencies: Build_WindowsServerCoreLtsc2019_amd64
+      pool: # windows1809Amd64
+        name: DotNetCore-Docker
+        demands: VSTS_OS -equals Windows_Server_2019_Data_Center_RS5
+      matrix: dependencies.GenerateMatrices.outputs['${{ format('testMatrix.{0}MatrixWindowsservercoreLtsc2019Amd64', parameters.testMatrixType) }}']
 
-  ################################################################################
-  # Publish Images
-  ################################################################################
-- template: copy-images.yml
-  parameters:
-    pool: # linuxAmd64Pool
-      name: Hosted Ubuntu 1604
-    matrix: dependencies.GenerateMatrices.outputs['${{ format('publishMatrix.{0}Matrix', parameters.publishMatrixType) }}']
+    ################################################################################
+    # Publish Images
+    ################################################################################
+  - template: copy-images.yml
+    parameters:
+      pool: # linuxAmd64Pool
+        name: Hosted Ubuntu 1604
+      matrix: dependencies.GenerateMatrices.outputs['${{ format('publishMatrix.{0}Matrix', parameters.publishMatrixType) }}']
 
-- template: publish-finalize.yml
-  parameters:
-    pool: # linuxAmd64Pool
-      name: Hosted Ubuntu 1604
+  - template: publish-finalize.yml
+    parameters:
+      pool: # linuxAmd64Pool
+        name: Hosted Ubuntu 1604

@@ -15,9 +15,19 @@ jobs:
   pool: ${{ parameters.pool }}
   strategy:
     matrix: $[ ${{ parameters.matrix }} ]
-  timeoutInMinutes: 180
+  timeoutInMinutes: 240
   variables:
     osVersion: ${{ parameters.osVersion }}
+    ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+      imageBuilderBuildArgs: >
+        --registry-override $(acr.server)
+        --repo-prefix $(stagingRepoPrefix)
+        --push
+        --username $(acr.userName)
+        --password $(BotAccount-dotnet-docker-acr-bot-password)
+        $(imageBuilder.queueArgs)
+    ${{ if eq(variables['System.TeamProject'], 'public') }}:
+      imageBuilderBuildArgs: $(imageBuilder.queueArgs)
   steps:
   - template: ../steps/init-docker-windows.yml
   - script:  >
@@ -27,12 +37,9 @@ jobs:
       --os-type $(osType)
       --os-version "$(osVersion)"
       --architecture $(architecture)
-      --registry-override $(acr.server)
-      --repo-prefix $(stagingRepoPrefix)
       --retry
-      --push
-      --username $(acr.userName)
-      --password $(BotAccount-dotnet-docker-acr-bot-password)
-      $(imageBuilder.queueArgs)
+      $(imageBuilderBuildArgs)
     displayName: Build Images
+  - ${{ if eq(variables['System.TeamProject'], 'public') }}:
+    - template: ../steps/test-images-windows-client.yml
   - template: ../steps/cleanup-docker-windows.yml
