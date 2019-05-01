@@ -1,6 +1,8 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+Restart-Service docker
+
 docker ps -a -q | ForEach-Object { docker rm -f $_ }
 
 docker volume prune -f
