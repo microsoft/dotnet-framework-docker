@@ -15,7 +15,7 @@ jobs:
   pool: ${{ parameters.pool }}
   strategy:
     matrix: $[ ${{ parameters.matrix }} ]
-  timeoutInMinutes: 240
+  timeoutInMinutes: 300
   variables:
     osVersion: ${{ parameters.osVersion }}
     ${{ if eq(variables['System.TeamProject'], 'internal') }}:

@@ -125,8 +125,6 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:runtime):4.7.2-windowsservercore-ltsc2016",
-                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016",
                     "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
                   ]
