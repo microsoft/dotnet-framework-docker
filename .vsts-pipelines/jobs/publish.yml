@@ -1,10 +1,7 @@
 parameters:
   pool: {}
 jobs:
-- job: Publish_Finalize
-  condition: succeeded('Copy_Images')
-  dependsOn:
-  - Copy_Images
+- job: Publish
   pool: ${{ parameters.pool }}
   variables:
     imageBuilder.commonCmdArgs: >
@@ -14,10 +11,27 @@ jobs:
   steps:
   - template: ../steps/init-docker-linux.yml
   - script: >
+      $(runImageBuilderCmd) copyAcrImages
+      $(stagingRepoPrefix)
+      $(acr.servicePrincipalName)
+      $(app-dotnetdockerbuild-client-secret)
+      $(acr.servicePrincipalTenant)
+      $(acr.subscription)
+      $(acr.resourceGroup)
+      --os-type '*'
+      --architecture '*'
+      --repo-prefix $(publishRepoPrefix)
+      $(imageBuilder.pathArgs)
+      $(imageBuilder.commonCmdArgs)
+    displayName: Copy Images
+  - script: >
       $(runImageBuilderCmd) publishManifest
       --repo-prefix $(publishRepoPrefix)
       --username $(acr.userName)
       --password $(BotAccount-dotnet-docker-acr-bot-password)
+      --os-type '*'
+      --architecture '*'
+      $(imageBuilder.pathArgs)
       $(imageBuilder.commonCmdArgs)
     displayName: Publish Manifest
   - script: >
@@ -27,4 +41,6 @@ jobs:
       $(dotnet-bot-user-repo-adminrepohook-pat)
       $(imageBuilder.commonCmdArgs)
     displayName: Publish Readme
+  - task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0
+    displayName: Component Detection
   - template: ../steps/cleanup-docker-linux.yml
