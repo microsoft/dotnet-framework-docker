@@ -17,11 +17,11 @@ RUN powershell -Command `
         Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Apply latest patch
-RUN curl -SL --output patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/03/windows10.0-kb4489192-x64_872afd1aabdc1ee545f0e654ac550997d9548aae.msu `
+RUN curl -SL --output patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/05/windows10.0-kb4495590-x64_d746e135ff19912a8fd20a53bcc89fd20cbd3b6a.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-KB4489192-x64.cab `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4495590-x64.cab `
     && rmdir /S /Q patch
 
 # ngen .NET 3.5 Fx

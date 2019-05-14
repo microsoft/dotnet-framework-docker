@@ -10,6 +10,20 @@ RUN powershell -Command `
     del .\dotnet-framework-installer.exe & `
     powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
+# Apply latest patch
+RUN powershell -Command `
+        $ErrorActionPreference = 'Stop'; `
+        $ProgressPreference = 'SilentlyContinue'; `
+        Invoke-WebRequest `
+            -UseBasicParsing `
+            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/05/windows10.0-kb4494440-x64_390f926659a23a56cc9cbb331e5940e132ad257d.msu" `
+            -OutFile patch.msu; `
+        New-Item -Type Directory patch; `
+        Start-Process expand -ArgumentList 'patch.msu', 'patch', '-F:*' -NoNewWindow -Wait; `
+        Remove-Item -Force patch.msu; `
+        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-kb4494440-x64.cab; `
+        Remove-Item -Force -Recurse \patch
+
 # ngen .NET Fx
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
 RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
