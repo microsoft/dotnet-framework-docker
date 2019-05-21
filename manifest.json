@@ -43,6 +43,15 @@
                 "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
               }
+            },
+            {
+              "dockerfile": "4.8/runtime/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-windowsservercore-1903": {}
+              }
             }
           ]
         },
@@ -217,6 +226,15 @@
                 "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "3.5-windowsservercore-ltsc2019": {}
               }
+            },
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
+                "3.5-windowsservercore-1903": {}
+              }
             }
           ]
         }
@@ -267,6 +285,18 @@
               "tags": {
                 "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/sdk/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-windowsservercore-1903": {}
               }
             }
           ]
@@ -372,6 +402,18 @@
               "tags": {
                 "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "3.5-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/sdk/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "3.5-windowsservercore-1903": {}
               }
             }
           ]

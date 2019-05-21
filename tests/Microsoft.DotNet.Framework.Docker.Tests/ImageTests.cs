@@ -18,6 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private const string WSC_LTSC2016 = "windowsservercore-ltsc2016";
         private const string WSC_1803 = "windowsservercore-1803";
         private const string WSC_LTSC2019 = "windowsservercore-ltsc2019";
+        private const string WSC_1903 = "windowsservercore-1903";
 
         private static bool IsLocalRun = Environment.GetEnvironmentVariable("LOCAL_RUN") != null;
         private static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
@@ -30,6 +31,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
                 new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
@@ -43,6 +45,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
                 new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
             };
 
         private DockerHelper DockerHelper { get; set; }
