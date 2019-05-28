@@ -18,6 +18,7 @@ ENV NUGET_VERSION 4.4.1
 RUN mkdir "%ProgramFiles%\NuGet" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
 
+# Install VS components
 RUN `
     # Install VS Test Agent
     curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/4eef3cca-9da8-417a-889f-53212671e83b/50a7f7a24b21910a7cbe093fa150fd31/vs_testagent.exe `
