@@ -8,10 +8,12 @@ ENV NUGET_VERSION 4.4.1
 RUN mkdir "%ProgramFiles%\NuGet" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
 
-# Install VS Test Agent
-RUN curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/4eef3cca-9da8-417a-889f-53212671e83b/50a7f7a24b21910a7cbe093fa150fd31/vs_testagent.exe `
+RUN `
+    # Install VS Test Agent
+    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/4eef3cca-9da8-417a-889f-53212671e83b/50a7f7a24b21910a7cbe093fa150fd31/vs_testagent.exe `
     && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
     && del vs_TestAgent.exe `
+    `
     # Install VS Build Tools
     && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/4da568ff-b8aa-43ab-92ec-a8129370b49a/6fb89b999fed6f395622e004bfe442eb/vs_buildtools.exe `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
@@ -22,6 +24,8 @@ RUN curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/down
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --quiet --norestart --nocache --wait `
     && del vs_BuildTools.exe `
+    `
+    #Cleanup
     && rmdir /S /Q "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer" `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"

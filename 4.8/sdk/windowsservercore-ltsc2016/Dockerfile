@@ -13,8 +13,9 @@ RUN mkdir "%ProgramFiles%\NuGet" `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
             -OutFile $Env:ProgramFiles\NuGet\nuget.exe
 
-# Install VS Test Agent
-RUN powershell -Command `
+RUN `
+    # Install VS Test Agent
+    powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
@@ -22,6 +23,7 @@ RUN powershell -Command `
             -OutFile vs_TestAgent.exe `
     && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
     && del vs_TestAgent.exe `
+    `
     # Install VS Build Tools
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
@@ -37,6 +39,8 @@ RUN powershell -Command `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --quiet --norestart --nocache --wait `
     && del vs_BuildTools.exe `
+    `
+    # Cleanup
     && rmdir /S /Q "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer" `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
