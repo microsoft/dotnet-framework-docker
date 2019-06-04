@@ -2,8 +2,10 @@
   "registry": "mcr.microsoft.com",
   "repos": [
     {
+      "id": "samples",
       "name": "dotnet/framework/samples",
       "readmePath": "README.samples.md",
+      "mcrTagsMetadataTemplatePath": "scripts/mcr-tags-metadata-templates/samples-tags.yml",
       "images": [
         {
           "sharedTags": {

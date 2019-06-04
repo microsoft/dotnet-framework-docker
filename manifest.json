@@ -10,6 +10,7 @@
       "id": "runtime",
       "name": "dotnet/framework/runtime",
       "readmePath": "README.runtime.md",
+      "mcrTagsMetadataTemplatePath": "scripts/mcr-tags-metadata-templates/runtime-tags.yml",
       "images": [
         {
           "sharedTags": {
@@ -244,6 +245,7 @@
       "id": "sdk",
       "name": "dotnet/framework/sdk",
       "readmePath": "README.sdk.md",
+      "mcrTagsMetadataTemplatePath": "scripts/mcr-tags-metadata-templates/sdk-tags.yml",
       "images": [
         {
           "sharedTags": {

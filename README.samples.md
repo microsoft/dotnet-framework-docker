@@ -70,33 +70,39 @@ docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 mcr.microsoft
 
 # Full Tag Listing
 
-## Windows Server, version 1903 amd64 tags
+## Windows Server, version 1903 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+dotnetapp-windowsservercore-1903, dotnetapp, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+aspnetapp-windowsservercore-1903, aspnetapp | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+wcfservice-windowsservercore-1903, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
+wcfclient-windowsservercore-1903, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
 
-- [`dotnetapp-windowsservercore-1903`, `dotnetapp`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
-- [`aspnetapp-windowsservercore-1903`, `aspnetapp` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
-- [`wcfservice-windowsservercore-1903`, `wcfservice` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
-- [`wcfclient-windowsservercore-1903`, `wcfclient` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
+## Windows Server 2019 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+dotnetapp-windowsservercore-ltsc2019, dotnetapp, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+aspnetapp-windowsservercore-ltsc2019, aspnetapp | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+wcfservice-windowsservercore-ltsc2019, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
+wcfclient-windowsservercore-ltsc2019, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
 
-## Windows Server 2019 amd64 tags
+## Windows Server, version 1803 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+dotnetapp-windowsservercore-1803, dotnetapp, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+aspnetapp-windowsservercore-1803, aspnetapp | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+wcfservice-windowsservercore-1803, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
+wcfclient-windowsservercore-1803, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
 
-- [`dotnetapp-windowsservercore-ltsc2019`, `dotnetapp`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
-- [`aspnetapp-windowsservercore-ltsc2019`, `aspnetapp` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
-- [`wcfservice-windowsservercore-ltsc2019`, `wcfservice` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
-- [`wcfclient-windowsservercore-ltsc2019`, `wcfclient` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
+## Windows Server 2016 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+dotnetapp-windowsservercore-ltsc2016, dotnetapp, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
+aspnetapp-windowsservercore-ltsc2016, aspnetapp | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
+wcfservice-windowsservercore-ltsc2016, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
+wcfclient-windowsservercore-ltsc2016, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
 
-## Windows Server, version 1803 amd64 tags
-
-- [`dotnetapp-windowsservercore-1803`, `dotnetapp`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
-- [`aspnetapp-windowsservercore-1803`, `aspnetapp` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
-- [`wcfservice-windowsservercore-1803`, `wcfservice` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
-- [`wcfclient-windowsservercore-1803`, `wcfclient` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
-
-## Windows Server 2016 amd64 tags
-
-- [`dotnetapp-windowsservercore-ltsc2016`, `dotnetapp`, `latest` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
-- [`aspnetapp-windowsservercore-ltsc2016`, `aspnetapp` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
-- [`wcfservice-windowsservercore-ltsc2016`, `wcfservice` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
-- [`wcfclient-windowsservercore-ltsc2016`, `wcfclient` (*Dockerfile*)](https://github.com/Microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
+You can retrieve a list of all available tags for dotnet/framework/samples at https://mcr.microsoft.com/v2/dotnet/framework/samples/tags/list.
 
 # Support
 

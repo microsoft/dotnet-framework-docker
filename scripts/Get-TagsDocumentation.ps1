@@ -20,11 +20,9 @@ function Exec {
 
 function GenerateDoc {
     param (
-        [string] $Template,
         [string] $Repo,
         [string] $ReadmePath,
         [string] $Manifest,
-        [string] $Branch,
         [switch] $ReuseImageBuilderImage
     )
 
@@ -34,12 +32,9 @@ function GenerateDoc {
     }
 
     $imageBuilderArgs = "generateTagsReadme" `
-        + " --update-readme" `
         + " --manifest $Manifest" `
         + " --repo $Repo" `
-        + " --template ./scripts/documentation-templates/$Template" `
-        + " $skipValidationOption" `
-        + " https://github.com/Microsoft/dotnet-framework-docker/blob/master"
+        + " https://github.com/microsoft/dotnet-framework-docker/blob/master"
 
     & "$PSScriptRoot/Invoke-ImageBuilder.ps1" `
         -ImageBuilderArgs $imageBuilderArgs `
@@ -47,6 +42,6 @@ function GenerateDoc {
         -OnCommandExecuted $onTagsGenerated
 }
 
-GenerateDoc runtime-tags.md dotnet/framework/runtime README.runtime.md manifest.json
-GenerateDoc sdk-tags.md dotnet/framework/sdk README.sdk.md manifest.json -ReuseImageBuilderImage
-GenerateDoc samples-tags.md dotnet/framework/samples README.samples.md manifest.samples.json -ReuseImageBuilderImage
+GenerateDoc dotnet/framework/runtime README.runtime.md manifest.json
+GenerateDoc dotnet/framework/sdk README.sdk.md manifest.json -ReuseImageBuilderImage
+GenerateDoc dotnet/framework/samples README.samples.md manifest.samples.json -ReuseImageBuilderImage
