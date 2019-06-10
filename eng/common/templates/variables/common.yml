@@ -1,7 +1,8 @@
 variables:
 - template: docker-images.yml
-- name: publicGitRepoUri
-  value: https://github.com/microsoft/dotnet-framework-docker
+- template: common-paths.yml
+- name: stagingRepoPrefix
+  value: build-staging/$(sourceBuildId)/
 - name: skipComponentGovernanceDetection
   value: true
 - ${{ if eq(variables['System.TeamProject'], 'internal') }}:

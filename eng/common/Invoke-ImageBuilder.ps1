@@ -52,30 +52,29 @@ function Exec {
     }
 }
 
-
 $imageBuilderContainerName = "ImageBuilder-$(Get-Date -Format yyyyMMddhhmmss)"
 $containerCreated = $false
 
-pushd $PSScriptRoot/../
-
-# Load common image names
-Get-Content ./.vsts-pipelines/variables/docker-images.yml |
+pushd $PSScriptRoot/../../
+try {
+    # Load common image names
+    Get-Content ./eng/common/templates/variables/docker-images.yml |
     Where-Object { $_.Trim() -notlike 'variables:' } |
     ForEach-Object { 
         $parts = $_.Split(':', 2)
         Set-Variable -Name $parts[0].Trim() -Value $parts[1].Trim()
     }
 
-try {
     $activeOS = docker version -f "{{ .Server.Os }}"
     if ($activeOS -eq "linux") {
         # On Linux, ImageBuilder is run within a container.
         $imageBuilderImageName = "microsoft-dotnet-imagebuilder-withrepo"
         if ($ReuseImageBuilderImage -ne $True) {
-            ./scripts/Invoke-PullImage ${imageNames.imageBuilder.linux}
-            Exec "docker build -t $imageBuilderImageName --build-arg IMAGE=${imageNames.imageBuilder.linux} -f ./scripts/Dockerfile.WithRepo ."
+            ./eng/common/Invoke-WithRetry.ps1 "docker pull ${imageNames.imagebuilder.linux}"
+            Exec ("docker build -t $imageBuilderImageName --build-arg " `
+                + "IMAGE=${imageNames.imagebuilder.linux} -f eng/common/Dockerfile.WithRepo .")
         }
-        
+
         $imageBuilderCmd = "docker run --name $imageBuilderContainerName -v /var/run/docker.sock:/var/run/docker.sock $imageBuilderImageName"
         $containerCreated = $true
     }
@@ -84,8 +83,8 @@ try {
         $imageBuilderFolder = ".Microsoft.DotNet.ImageBuilder"
         $imageBuilderCmd = [System.IO.Path]::Combine($imageBuilderFolder, "Microsoft.DotNet.ImageBuilder.exe")
         if (-not (Test-Path -Path "$imageBuilderCmd" -PathType Leaf)) {
-            ./scripts/Invoke-PullImage ${imageNames.imageBuilder.windows}
-            Exec "docker create --name $imageBuilderContainerName ${imageNames.imageBuilder.windows}"
+            ./eng/common/Invoke-WithRetry.ps1 "docker pull ${imageNames.imagebuilder.windows}"
+            Exec "docker create --name $imageBuilderContainerName ${imageNames.imagebuilder.windows}"
             $containerCreated = $true
             if (Test-Path -Path $imageBuilderFolder)
             {

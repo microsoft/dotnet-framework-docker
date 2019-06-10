@@ -1,0 +1,18 @@
+parameters:
+  name: null
+  pool: {}
+  matrix: {}
+  useRemoteDockerServer: false
+jobs:
+- job: ${{ parameters.name }}
+  condition: and(succeeded(), ${{ parameters.matrix }})
+  dependsOn: GenerateTestMatrix
+  pool: ${{ parameters.pool }}
+  strategy:
+    matrix: $[ ${{ parameters.matrix }} ]
+  steps:
+  - template: ../steps/test-images-linux-client.yml
+    parameters:
+      useRemoteDockerServer: ${{ parameters.useRemoteDockerServer }}
+      setupImageBuilder: false
+      setupTestRunner: true

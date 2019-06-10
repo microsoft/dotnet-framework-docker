@@ -1,3 +1,0 @@
-variables:
-  imageNames.imageBuilder.linux: mcr.microsoft.com/dotnet-buildtools/image-builder:debian-20190603212604
-  imageNames.imageBuilder.windows: mcr.microsoft.com/dotnet-buildtools/image-builder:nanoserver-20190603212604
