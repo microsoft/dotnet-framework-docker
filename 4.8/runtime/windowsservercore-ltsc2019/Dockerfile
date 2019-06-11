@@ -8,7 +8,7 @@ RUN curl -fSLo dotnet-framework-installer.exe https://download.visualstudio.micr
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
-# Apply latest 
+# Apply latest patch
 RUN curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/05/windows10.0-kb4495618-x64_2d3245836cfd2467024a907947837e7879463a3b.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
