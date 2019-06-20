@@ -1,5 +1,8 @@
 steps:
-- powershell: $(Build.Repository.LocalPath)/scripts/Invoke-CleanupDocker.ps1
+  ################################################################################
+  # Cleanup Docker Resources
+  ################################################################################
+- powershell: $(engCommonPath)/Invoke-CleanupDocker.ps1
   displayName: Cleanup Docker Images
   condition: always()
   continueOnError: true
