@@ -9,7 +9,8 @@ variables:
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:
-    windowsAmdBuildJobTimeout: 180
+    ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+      windowsAmdBuildJobTimeout: 180
     ${{ if eq(variables['System.TeamProject'], 'public') }}:
       buildMatrixType: platformVersionedOs
       customBuildLegGrouping: pr-build
