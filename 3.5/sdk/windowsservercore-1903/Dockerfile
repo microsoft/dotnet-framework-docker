@@ -35,8 +35,7 @@ RUN `
 RUN curl -fSLo sdk_tools48.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/sdk_tools48.zip `
     && tar -zxf sdk_tools48.zip `
     && start /w msiexec /i sdk_tools48.msi /quiet VSEXTUI=1 `
-    && del sdk_tools48.msi `
-    && del sdk_tools48.zip `
+    && del sdk_tools48.* `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Install web targets
