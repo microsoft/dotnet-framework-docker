@@ -32,10 +32,11 @@ RUN `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
 # Install .NET 4.8 SDK
-RUN curl -fSLo sdk_tools48.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/sdk_tools48.zip `
-    && tar -zxf sdk_tools48.zip `
-    && start /w msiexec /i sdk_tools48.msi /quiet VSEXTUI=1 `
-    && del sdk_tools48.* `
+RUN mkdir sdk_tools48 `
+    && curl -fSLo sdk_tools48/sdk_tools48.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/sdk_tools48.zip `
+    && tar -zxf sdk_tools48/sdk_tools48.zip -C sdk_tools48 `
+    && start /w msiexec /i sdk_tools48/sdk_tools48.msi /quiet VSEXTUI=1 `
+    && rmdir /S /Q sdk_tools48 `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Install web targets
