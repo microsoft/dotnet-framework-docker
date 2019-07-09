@@ -2,6 +2,14 @@
 
 FROM mcr.microsoft.com/windows/servercore:1903
 
+# Apply latest patch
+RUN curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/07/windows10.0-kb4506991-x64_a0962ce8ceeb7faf10c6c95696eca09b36563f76.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4506991-x64.cab `
+    && rmdir /S /Q patch
+
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
 
 RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
