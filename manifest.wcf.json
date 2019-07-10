@@ -1,0 +1,193 @@
+{
+  "readmePath": "README.md",
+  "registry": "mcr.microsoft.com",
+  "variables": {
+    "WcfReleaseDateStamp": "20190709"
+  },
+  "repos": [
+    {
+      "id": "wcf",
+      "name": "dotnet/framework/wcf",
+      "readmePath": "README.wcf.md",
+      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/wcf-tags.yml",
+      "images": [
+        {
+          "sharedTags": {
+            "4.8": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.8/wcf/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/wcf/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.8-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/wcf/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.8-$(WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/wcf/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-windowsservercore-1903": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.2/wcf/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            },
+            {
+              "dockerfile": "4.7.2/wcf/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-1803": {},
+                "4.7.2-windowsservercore-1803": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:aspnet):4.8-windowsservercore-1803"
+                  ]
+                }
+              ]
+            },
+            {
+              "dockerfile": "4.7.2/wcf/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-windowsservercore-ltsc2019": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2019"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.1": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.1/wcf/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.1-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7/wcf/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:aspnet):4.7.1-windowsservercore-ltsc2016",
+                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.6.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.6.2/wcf/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.6.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.6.2-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:aspnet):4.7.2-windowsservercore-ltsc2016"
+                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
