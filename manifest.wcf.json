@@ -72,7 +72,7 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]
@@ -89,7 +89,7 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:aspnet):4.8-windowsservercore-1803"
+                    "$(Repo:wcf):4.8-windowsservercore-1803"
                   ]
                 }
               ]
@@ -106,7 +106,7 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2019"
+                    "$(Repo:wcf):4.8-windowsservercore-ltsc2019"
                   ]
                 }
               ]
@@ -130,7 +130,7 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]
@@ -154,8 +154,8 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:aspnet):4.7.1-windowsservercore-ltsc2016",
-                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                    "$(Repo:wcf):4.7.1-windowsservercore-ltsc2016",
+                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]
@@ -179,8 +179,8 @@
                 {
                   "name": "pr-build",
                   "dependencies": [
-                    "$(Repo:aspnet):4.7.2-windowsservercore-ltsc2016"
-                    "$(Repo:aspnet):4.8-windowsservercore-ltsc2016"
+                    "$(Repo:wcf):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
                   ]
                 }
               ]
