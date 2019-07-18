@@ -1,12 +1,16 @@
+parameters:
+  filterTests: ''
 steps:
 - powershell: |
     if ("${{ eq(variables['System.TeamProject'], 'public') }}" -eq "False") {
-      $optionalTestArgs="-Registry $env:ACR_SERVER -RepoPrefix $env:STAGINGREPOPREFIX -TestCategory $(filterTests)"
+      $optionalTestArgs="-Registry $env:ACR_SERVER -RepoPrefix $env:STAGINGREPOPREFIX -TestCategory $env:FILTERTESTS"
     } else {
-      $optionalTestArgs="-IsLocalRun -TestCategory $(filterTests)"
+      $optionalTestArgs="-IsLocalRun -TestCategory $env:FILTERTESTS"
     }
     echo "##vso[task.setvariable variable=optionalTestArgs]$optionalTestArgs"
   displayName: Set Test Variables
+  env:
+    FILTERTESTS: ${{ parameters.filterTests }}
 - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
   - template: init-docker-windows.yml
     parameters:
