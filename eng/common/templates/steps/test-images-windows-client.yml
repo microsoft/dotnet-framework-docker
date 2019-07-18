@@ -1,9 +1,9 @@
 steps:
 - powershell: |
     if ("${{ eq(variables['System.TeamProject'], 'public') }}" -eq "False") {
-      $optionalTestArgs="-Registry $env:ACR_SERVER -RepoPrefix $env:STAGINGREPOPREFIX"
+      $optionalTestArgs="-Registry $env:ACR_SERVER -RepoPrefix $env:STAGINGREPOPREFIX -TestCategory $(filterTests)"
     } else {
-      $optionalTestArgs="-IsLocalRun"
+      $optionalTestArgs="-IsLocalRun -TestCategory $(filterTests)"
     }
     echo "##vso[task.setvariable variable=optionalTestArgs]$optionalTestArgs"
   displayName: Set Test Variables

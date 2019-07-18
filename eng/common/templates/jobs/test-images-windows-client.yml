@@ -11,3 +11,5 @@ jobs:
     matrix: $[ ${{ parameters.matrix }} ]
   steps:
   - template: ../steps/test-images-windows-client.yml
+    parameters:
+      filterTests: $(_testCategory)
