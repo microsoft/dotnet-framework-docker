@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -75,6 +76,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Category("Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -82,10 +84,22 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Category("Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
             VerifyImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+        }
+
+        [Theory]
+        [Category("WCF")]
+        [MemberData(nameof(GetVerifyImagesData))]
+        public void VerifyWCFImagesWithApps(ImageDescriptor imageDescriptor)
+        {
+            if (imageDescriptor.RuntimeVersion != "3.5")
+            {
+                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command ", false);
+            }
         }
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -119,6 +133,40 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 DockerHelper.DeleteImage(appId);
             }
+        }
+
+        private void VerifyWCFImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        {
+            string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
+
+            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
+            //TODO - will enable this scenario in the following checkin
+            //if (includeRuntime)
+            //{
+            //    string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+            //    appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
+            //}
+
+            //string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
+            //string workDir = Path.Combine(
+            //    Directory.GetCurrentDirectory(),
+            //    "projects",
+            //    $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
+
+            //try
+            //{
+            //    DockerHelper.Build(
+            //        tag: appId,
+            //        dockerfile: Path.Combine(workDir, "Dockerfile"),
+            //        buildContextPath: workDir,
+            //        buildArgs: appBuildArgs);
+
+            //    DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
+            //}
+            //finally
+            //{
+            //    DockerHelper.DeleteImage(appId);
+            //}
         }
 
         private string GetImage(string imageType, string version, string osVariant)
