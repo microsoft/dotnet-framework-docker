@@ -75,6 +75,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -82,10 +83,19 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
             VerifyImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+        }
+
+        [Theory]
+        [Trait("Category", "ASPNET")]
+        [MemberData(nameof(GetVerifyImagesData))]
+        public void VerifyAspnetImagesWithWebApps(ImageDescriptor imageDescriptor)
+        {
+            VerifyAspnetImages(imageDescriptor, "aspnet", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", true);
         }
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -93,6 +103,36 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
             List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
+            if (includeRuntime)
+            {
+                string baseRuntimeImage = GetImage("runtime", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
+            }
+
+            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
+            string workDir = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "projects",
+                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
+
+            try
+            {
+                DockerHelper.Build(
+                    tag: appId,
+                    dockerfile: Path.Combine(workDir, "Dockerfile"),
+                    buildContextPath: workDir,
+                    buildArgs: appBuildArgs);
+
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
+            }
+            finally
+            {
+                DockerHelper.DeleteImage(appId);
+            }
+        }
+        private void VerifyAspnetImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        {
+            List<string> appBuildArgs = new List<string> { };
             if (includeRuntime)
             {
                 string baseRuntimeImage = GetImage("runtime", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
