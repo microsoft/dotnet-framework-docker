@@ -91,11 +91,22 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+<<<<<<< Updated upstream
         [Trait("Category", "ASPNET")]
+=======
+        [Trait("Category", "WCF")]
+>>>>>>> Stashed changes
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyAspnetImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
+<<<<<<< Updated upstream
             VerifyAspnetImages(imageDescriptor, "aspnet", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", true);
+=======
+            if (imageDescriptor.RuntimeVersion != "3.5")
+            {
+                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command ", true);
+            }
+>>>>>>> Stashed changes
         }
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -145,6 +156,22 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 "projects",
                 $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
 
+<<<<<<< Updated upstream
+=======
+            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
+            if (includeRuntime)
+            {
+                string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
+            }
+
+            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
+            string workDir = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "projects",
+                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
+
+>>>>>>> Stashed changes
             try
             {
                 DockerHelper.Build(
