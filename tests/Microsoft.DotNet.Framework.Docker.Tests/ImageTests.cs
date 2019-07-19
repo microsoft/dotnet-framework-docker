@@ -76,7 +76,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Category("Runtime")]
+        [Trait("Category", "Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -84,7 +84,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Category("Runtime")]
+        [Trait("Category", "Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
@@ -92,7 +92,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Category("WCF")]
+        [Trait("Category", "WCF")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyWCFImagesWithApps(ImageDescriptor imageDescriptor)
         {
