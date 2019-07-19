@@ -93,9 +93,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [Theory]
         [Trait("Category", "ASPNET")]
         [MemberData(nameof(GetVerifyImagesData))]
-        public void VerifyAspnetImagesWithWebApps(ImageDescriptor imageDescriptor)
+        public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyAspnetImages(imageDescriptor, "aspnet", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", true);
+            VerifyAspnetImages(imageDescriptor, "aspnet", "powershell -command \"Hello World!", true);
         }
 
         private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -135,7 +135,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             List<string> appBuildArgs = new List<string> {  };
             if (includeRuntime)
             {
-                string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+                string baseRuntimeImage = GetImage("aspnet", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 

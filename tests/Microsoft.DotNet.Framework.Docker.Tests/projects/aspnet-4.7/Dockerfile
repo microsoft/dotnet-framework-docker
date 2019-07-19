@@ -1,5 +1,6 @@
 ARG BASE_RUNTIME_IMAGE
 
+FROM $BASE_RUNTIME_IMAGE
 COPY ./entrypoint.ps1 .
 
 WORKDIR  "c:\inetpub\wwwroot"

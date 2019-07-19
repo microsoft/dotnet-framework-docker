@@ -1,12 +1,11 @@
-ARG IMAGE
-FROM ${IMAGE}
+ARG BASE_RUNTIME_IMAGE
 
-ARG VER
+FROM $BASE_RUNTIME_IMAGE
+
+COPY ./entrypoint.ps1 .
 
 WORKDIR  "c:\inetpub\wwwroot"
-
-COPY ./$VER/web.config .
-COPY ./entrypoint.bat .
+COPY ./web.config .
 COPY ./hello-world.aspx .
 
-ENTRYPOINT ["powershell", "c:/inetpub/wwwroot/Entrypoint.ps1"]
+ENTRYPOINT ["powershell", "/Entrypoint.ps1"]

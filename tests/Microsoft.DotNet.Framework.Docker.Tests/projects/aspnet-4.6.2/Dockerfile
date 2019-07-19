@@ -1,6 +1,7 @@
 ARG BASE_RUNTIME_IMAGE
 
-COPY ./entrypoint.bat .
+FROM $BASE_RUNTIME_IMAGE
+COPY ./entrypoint.ps1 .
 
 WORKDIR  "c:\inetpub\wwwroot"
 COPY ./web.config .
