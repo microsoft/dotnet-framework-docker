@@ -98,7 +98,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             if (imageDescriptor.RuntimeVersion != "3.5")
             {
-                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command ", false);
+                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command \"StatusCode        : 200\"", false);
             }
         }
 
@@ -140,33 +140,32 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
             List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
-            //TODO - will enable this scenario in the following checkin
-            //if (includeRuntime)
-            //{
-            //    string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
-            //    appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
-            //}
+            if (includeRuntime)
+            {
+                string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
+            }
 
-            //string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
-            //string workDir = Path.Combine(
-            //    Directory.GetCurrentDirectory(),
-            //    "projects",
-            //    $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
+            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
+            string workDir = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "projects",
+                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
 
-            //try
-            //{
-            //    DockerHelper.Build(
-            //        tag: appId,
-            //        dockerfile: Path.Combine(workDir, "Dockerfile"),
-            //        buildContextPath: workDir,
-            //        buildArgs: appBuildArgs);
+            try
+            {
+                DockerHelper.Build(
+                    tag: appId,
+                    dockerfile: Path.Combine(workDir, "Dockerfile"),
+                    buildContextPath: workDir,
+                    buildArgs: appBuildArgs);
 
-            //    DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
-            //}
-            //finally
-            //{
-            //    DockerHelper.DeleteImage(appId);
-            //}
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
+            }
+            finally
+            {
+                DockerHelper.DeleteImage(appId);
+            }
         }
 
         private string GetImage(string imageType, string version, string osVariant)

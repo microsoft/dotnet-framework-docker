@@ -7,10 +7,9 @@ COPY . .
 RUN msbuild /p:Configuration=Release
 
 FROM $BASE_RUNTIME_IMAGE AS runtime
-WORKDIR /inetpub/wwroot
-COPY --from=build /app/ .
 COPY ./EntryPoint.ps1 .
 
-RUN dir /inetpub/wwroot
+WORKDIR /inetpub/wwwroot
+COPY --from=build /app/ .
 
-ENTRYPOINT ["powershell", "c:\\inetpub\\wwwroot\\EntryPoint.ps1"]
+ENTRYPOINT ["powershell", "/EntryPoint.ps1"]
