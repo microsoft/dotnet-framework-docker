@@ -98,7 +98,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             if (imageDescriptor.RuntimeVersion != "3.5")
             {
-                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command \"StatusCode        : 200\"", false);
+                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command \"StatusCode        : 200\"", true);
             }
         }
 
@@ -137,9 +137,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyWCFImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
-            string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
-
-            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
+            List<string> appBuildArgs = new List<string> {  };
             if (includeRuntime)
             {
                 string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
