@@ -6,8 +6,8 @@ variables:
 - template: variables/common.yml
 - name: manifest
   value: manifest.json
-- name: testCategory
-  value: Runtime
+- name: repoTestArgs
+  value: "-TestCategory Runtime"
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:

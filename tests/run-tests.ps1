@@ -42,5 +42,5 @@ if ($IsLocalRun) {
     $env:LOCAL_RUN = 1
 }
 
-& dotnet test --filter Category=$TestCategory -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
+& dotnet test --filter -Category=$TestCategory -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
 if ($LASTEXITCODE -ne 0) { throw "Tests Failed" }

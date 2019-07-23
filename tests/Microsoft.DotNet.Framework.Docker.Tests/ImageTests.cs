@@ -80,7 +80,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "dotnetapp", "", true);
+            VerifyFxImages(imageDescriptor, "dotnetapp", "", true);
         }
 
         [Theory]
@@ -88,21 +88,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+            VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
         [Theory]
         [Trait("Category", "WCF")]
         [MemberData(nameof(GetVerifyImagesData))]
-        public void VerifyWCFImagesWithApps(ImageDescriptor imageDescriptor)
+        public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
             if (imageDescriptor.RuntimeVersion != "3.5")
             {
-                VerifyWCFImages(imageDescriptor, "wcf", "powershell -command \"StatusCode        : 200\"", true);
+                VerifyWcfImages(imageDescriptor, "wcf", "powershell -command \"StatusCode        : 200\"", true);
             }
         }
 
-        private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
             string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
@@ -135,7 +135,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        private void VerifyWCFImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        private void VerifyWcfImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
             List<string> appBuildArgs = new List<string> {  };
             if (includeRuntime)
