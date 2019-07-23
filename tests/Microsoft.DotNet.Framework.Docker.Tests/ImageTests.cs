@@ -76,7 +76,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -84,7 +83,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "Runtime")]
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {

@@ -6,8 +6,8 @@ variables:
 - template: variables/common.yml
 - name: manifest
   value: manifest.wcf.json
-- name: testCategory
-  value: WCF
+- name: repoTestArgs 
+  value: "--filter -Category WCF"
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:
