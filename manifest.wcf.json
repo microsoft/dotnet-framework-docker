@@ -67,15 +67,7 @@
               "tags": {
                 "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
-              },
-              "customBuildLegGrouping": [
-                {
-                  "name": "pr-build",
-                  "dependencies": [
-                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
-                  ]
-                }
-              ]
+              }
             },
             {
               "dockerfile": "4.7.2/wcf/windowsservercore-1803",
@@ -84,15 +76,7 @@
               "tags": {
                 "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-1803": {},
                 "4.7.2-windowsservercore-1803": {}
-              },
-              "customBuildLegGrouping": [
-                {
-                  "name": "pr-build",
-                  "dependencies": [
-                    "$(Repo:wcf):4.8-windowsservercore-1803"
-                  ]
-                }
-              ]
+              }
             },
             {
               "dockerfile": "4.7.2/wcf/windowsservercore-ltsc2019",
@@ -101,15 +85,7 @@
               "tags": {
                 "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.7.2-windowsservercore-ltsc2019": {}
-              },
-              "customBuildLegGrouping": [
-                {
-                  "name": "pr-build",
-                  "dependencies": [
-                    "$(Repo:wcf):4.8-windowsservercore-ltsc2019"
-                  ]
-                }
-              ]
+              }
             }
           ]
         },
@@ -125,15 +101,7 @@
               "tags": {
                 "4.7.1-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
-              },
-              "customBuildLegGrouping": [
-                {
-                  "name": "pr-build",
-                  "dependencies": [
-                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
-                  ]
-                }
-              ]
+              }
             }
           ]
         },
@@ -149,16 +117,7 @@
               "tags": {
                 "4.7-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
-              },
-              "customBuildLegGrouping": [
-                {
-                  "name": "pr-build",
-                  "dependencies": [
-                    "$(Repo:wcf):4.7.1-windowsservercore-ltsc2016",
-                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
-                  ]
-                }
-              ]
+              }
             }
           ]
         },
@@ -174,16 +133,7 @@
               "tags": {
                 "4.6.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.6.2-windowsservercore-ltsc2016": {}
-              },
-              "customBuildLegGrouping": [
-                {
-                  "name": "pr-build",
-                  "dependencies": [
-                    "$(Repo:wcf):4.7.2-windowsservercore-ltsc2016",
-                    "$(Repo:wcf):4.8-windowsservercore-ltsc2016"
-                  ]
-                }
-              ]
+              }
             }
           ]
         }

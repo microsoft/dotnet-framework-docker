@@ -10,7 +10,3 @@ variables:
   value: "--filter -Category WCF"
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
-  parameters:
-    ${{ if eq(variables['System.TeamProject'], 'public') }}:
-      buildMatrixType: platformVersionedOs
-      customBuildLegGrouping: pr-build
