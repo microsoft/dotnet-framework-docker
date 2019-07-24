@@ -9,7 +9,7 @@
 
 ASP.NET is a high productivity framework for building Web Applications using Web Forms, MVC, Web API and SignalR.
 
-This repository contains `Dockerfile` definitions for ASP.NET Docker images. These images use the [IIS image](https://hub.docker.com/r/microsoft/iis/) as their base.
+This repository contains `Dockerfile` definitions for ASP.NET Docker images. 
 
 This image contains:
 - Windows Server Core as the base OS
@@ -21,7 +21,7 @@ This image contains:
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/README.md) show various ways to use .NET Framework and Docker together.
 
-There is no need to specify an `ENTRYPOINT` in your Dockerfile since the `microsoft/aspnet` base image already includes an entrypoint application that monitors the status of the IIS World Wide Web Publishing Service (W3SVC).
+There is no need to specify an `ENTRYPOINT` in your Dockerfile since the `microsoft/framework/aspnet` base image already includes an entrypoint application that monitors the status of the IIS World Wide Web Publishing Service (W3SVC).
 
 ### Verify in the browser
 
