@@ -79,7 +79,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "dotnetapp", "", true);
+            VerifyFxImages(imageDescriptor, "dotnetapp", "", true);
         }
 
         [Theory]
@@ -87,7 +87,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
-            VerifyImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+            VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
         [Theory]
@@ -98,7 +98,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyAspnetImages(imageDescriptor, "aspnet", "powershell -command \"Hello World!", true);
         }
 
-        private void VerifyImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
             string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
