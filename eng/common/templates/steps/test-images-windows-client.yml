@@ -6,7 +6,7 @@ steps:
       $optionalTestArgs="-IsLocalRun"
     }
     if ($env:REPOTESTARGS) {
-      $optionalTestArgs += "$env:REPOTESTARGS"
+      $optionalTestArgs += " $env:REPOTESTARGS"
     }
     echo "##vso[task.setvariable variable=optionalTestArgs]$optionalTestArgs"
   displayName: Set Test Variables
