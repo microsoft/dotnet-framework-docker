@@ -27,7 +27,7 @@ There is no need to specify an `ENTRYPOINT` in your Dockerfile since the `micros
 
 > With the current release, you can't use `http://localhost` to browse your site from the container host. This is because of a known behavior in WinNAT, and will be resolved in future. Until that is addressed, you need to use the IP address of the container.
 
-Once the container starts, you'll need to finds its IP address so that you can connect to your running container from a browser. You use the `docker inspect` command to do that:
+Once the container starts, you'll need to find its IP address so that you can connect to your running container from a browser. You use the `docker inspect` command to do that:
 
 `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" my-running-site`
 
@@ -43,7 +43,7 @@ For a comprehensive tutorial on running an ASP.NET app in a container, check out
 
 ## Image variants
 
-The `microsoft/aspnet` images come in different flavors, each designed for a specific use case.
+The `mcr.microsoft.com/dotnet/framework/aspnet` images come in different flavors, each designed for a specific use case.
 
 # Full Tag Listing
 

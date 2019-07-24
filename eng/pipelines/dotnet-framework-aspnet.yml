@@ -5,9 +5,9 @@ pr:
 variables:
 - template: variables/common.yml
 - name: manifest
-  value: manifest.json
-- name: testCategory
-  value: Runtime
+  value: manifest.aspnet.json
+- name: repoTestArgs 
+  value: "-TestCategory ASPNET"
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:
@@ -15,5 +15,4 @@ stages:
       windowsAmdBuildJobTimeout: 180
     ${{ if eq(variables['System.TeamProject'], 'public') }}:
       buildMatrixType: platformVersionedOs
-      customBuildLegGrouping: pr-build
       windowsAmdBuildJobTimeout: 360
