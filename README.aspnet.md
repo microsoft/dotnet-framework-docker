@@ -5,7 +5,7 @@
 * `3.5`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:3.5`
 
-# What is ASP.NET
+# About This Image
 
 ASP.NET is a high productivity framework for building Web Applications using Web Forms, MVC, Web API and SignalR.
 
@@ -41,9 +41,19 @@ You can connect the running container using the IP address and configured port, 
 
 For a comprehensive tutorial on running an ASP.NET app in a container, check out [the tutorial on the docs site](https://docs.microsoft.com/en-us/dotnet/articles/framework/docker/aspnetmvc).
 
-## Image variants
+# Related Repos
 
-The `mcr.microsoft.com/dotnet/framework/aspnet` images come in different flavors, each designed for a specific use case.
+.NET Framework:
+
+* [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/): .NET Framework
+* [dotnet/framework/sdk](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/): .NET Framework SDK
+* [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
+
+.NET Core:
+
+* [dotnet/core](https://hub.docker.com/_/microsoft-dotnet-core/): .NET Core
+* [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core applications.
+
 
 # Full Tag Listing
 
@@ -80,13 +90,6 @@ Tag | Dockerfile
 You can retrieve a list of all available tags for dotnet/framework/runtime at https://mcr.microsoft.com/v2/dotnet/framework/aspnet/tags/list.
 
 
-# Related Repos
-
-See the following related repos for other application types:
-
-- [microsoft/dotnet-framework](https://hub.docker.com/r/microsoft/dotnet-framework/) for .NET Framework applications.
-- [microsoft/aspnetcore](https://hub.docker.com/r/microsoft/aspnetcore/) for ASP.NET Core applications.
-- [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
 
 # Support
 
