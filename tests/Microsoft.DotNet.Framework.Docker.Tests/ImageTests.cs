@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -28,7 +29,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
-            {
+        {
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
@@ -98,7 +99,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             if (imageDescriptor.RuntimeVersion != "3.5")
             {
-                VerifyWcfImages(imageDescriptor, "wcf", "powershell -command \"StatusCode        : 200\"", true);
+                VerifyWcfImages(imageDescriptor, "wcf", "", true);
             }
         }
 
@@ -158,10 +159,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     buildContextPath: workDir,
                     buildArgs: appBuildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, web: true);
+                DockerHelper.VerifyHttpResponseFromContainer(appId, "/Service1.svc");
             }
             finally
             {
+                DockerHelper.Stop(containerName: appId);
                 DockerHelper.DeleteImage(appId);
             }
         }
@@ -189,5 +192,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
         }
+
     }
 }

@@ -11,4 +11,3 @@ WORKDIR /inetpub/wwwroot/App_Code
 COPY IService1.cs .
 COPY Service1.svc.cs .
 
-ENTRYPOINT ["powershell", "/EntryPoint.ps1"]
