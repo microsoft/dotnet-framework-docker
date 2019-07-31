@@ -21,23 +21,16 @@ This image contains:
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/README.md) show various ways to use .NET Framework and Docker together.
 
-There is no need to specify an `ENTRYPOINT` in your Dockerfile since the `microsoft/framework/aspnet` base image already includes an entrypoint application that monitors the status of the IIS World Wide Web Publishing Service (W3SVC).
+## Container sample: Run an ASP.NET application
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the [ASP.NET Docker sample].
 
-### Verify in the browser
+Type the following [Docker](https://www.docker.com/products/docker) command:
 
-> With the current release, you can't use `http://localhost` to browse your site from the container host. This is because of a known behavior in WinNAT, and will be resolved in future. Until that is addressed, you need to use the IP address of the container.
-
-Once the container starts, you'll need to find its IP address so that you can connect to your running container from a browser. You use the `docker inspect` command to do that:
-
-`docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" my-running-site`
-
-You will see an output similar to this:
-
-```
-172.28.103.186
+```console
+docker run --name aspnet_sample --rm -it -p 8000:80 mcr.microsoft.com/dotnet/framework/samples:aspnetapp
 ```
 
-You can connect the running container using the IP address and configured port, `http://172.28.103.186` in the example shown.
+After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
 
 For a comprehensive tutorial on running an ASP.NET app in a container, check out [the tutorial on the docs site](https://docs.microsoft.com/en-us/dotnet/articles/framework/docker/aspnetmvc).
 
@@ -97,8 +90,8 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 # Feedback
 
-* [File a .NET Framework Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
-* [Report a .NET Framework problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
+* [File an ASP.NET Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
+* [Report an ASP.NET problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
 * [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 

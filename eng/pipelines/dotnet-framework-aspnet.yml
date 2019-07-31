@@ -13,3 +13,4 @@ stages:
   parameters:
     ${{ if eq(variables['System.TeamProject'], 'public') }}:
       buildMatrixType: platformVersionedOs
+      windowsAmdBuildJobTimeout: 120
