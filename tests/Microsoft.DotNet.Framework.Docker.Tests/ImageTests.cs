@@ -95,7 +95,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyAspnetImages(imageDescriptor, "aspnet", "powershell -command \"Hello World!", true);
+            VerifyAspnetImages(imageDescriptor, "aspnet", "", true);
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -153,10 +153,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     buildContextPath: workDir,
                     buildArgs: appBuildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, web: true);
+                DockerHelper.VerifyHttpResponseFromContainer(appId, "/hello-world.aspx");
             }
             finally
             {
+                DockerHelper.Stop(containerName: appId);
                 DockerHelper.DeleteImage(appId);
             }
         }
