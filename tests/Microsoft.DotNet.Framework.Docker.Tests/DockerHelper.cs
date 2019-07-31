@@ -78,16 +78,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public void Run(string image, string containerName, string command, bool web = false)
         {
-            if (!web)
-            {
-                Execute($"run --rm --name {containerName} {image} {command}");
-            }
-            else
-            {
-                // will run container detached, and enable port 81 for web scenarios
-                Execute($"run --rm --name {containerName} -d {image} {command}");
-
-            }
+            string options = web ? "run --rm -d --name" : "run --rm --name";
+            Execute($"{options} {containerName} {image} {command}");
         }
 
         public void Pull(string image)
