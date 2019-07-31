@@ -1,4 +1,4 @@
-$(McrTagsYmlRepo:runtime)
+$(McrTagsYmlRepo:wcf)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-1903)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-ltsc2019)
 $(McrTagsYmlTagGroup:4.7.2-windowsservercore-ltsc2019)

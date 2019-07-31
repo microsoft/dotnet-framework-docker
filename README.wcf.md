@@ -4,47 +4,28 @@
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8`
 
 ## About This Image
-The Windows Communication Foundation (WCF) is  a framework for building service-oriented applications. Using WCF, you can send data as asynchronous messages from one service endpoint to another. A service endpoint can be part of a continuously available service hosted by IIS, or it can be a service hosted in an application.
+The Windows Communication Foundation (WCF) is a framework for building service-oriented applications. Using WCF, you can send data as asynchronous messages from one service endpoint to another. A service endpoint can be part of a continuously available service hosted by IIS, or it can be a service hosted in an application.
 
-## How to use this image?
-### Create a Dockerfile with your WCF service IIS Hosted or selfhosted
+# How to Use the Image
+
+The [WCF Docker samples](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/wcfapp) show various ways to use WCF and Docker together.
+
+## Container sample: Run a WCF application
+You can quickly run a container with a pre-built [sample WCF Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the WCF Docker sample.
+
+Type the following [Docker](https://www.docker.com/products/docker) command to start a WCF service container:
+```console
+docker run --name wcfservicesample --rm -it mcr.microsoft.com/dotnet/framework/samples:wcfservice
 ```
-FROM mcr.microsoft.com/dotnet/framework/wcf
-
-WORKDIR WcfService
-
-RUN powershell -NoProfile -Command \
-    Import-module IISAdministration; \
-    New-IISSite -Name "WcfService" -PhysicalPath C:\WcfService -BindingInformation "*:83:"
-
-EXPOSE 83
-
-COPY content/ .
+Find the IP address of the container instance.
+```console
+docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" wcfservicesample
+172.26.236.119
 ```
-You can then build and run the Docker image:
+Type the following Docker command to start a WCF client container, set environment variable HOST to the IP address of the wcfservicesample container:
+```console
+docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.com/dotnet/framework/samples:wcfclient
 ```
-$ docker build -t wcfserviceimage .
-$ docker run -d -p 83:83 --name my-wcfservice wcfserviceimage
-```
-
-There is no need to specify an `ENTRYPOINT` in your Dockerfile since an entrypoint application is already specified that monitors the status of the IIS World Wide Web Publishing Service (W3SVC).
-
-### Verify in the browser
-
-For Windows version 1803 or higher, you can connect to the running container using 'http://localhost:83/<wcfservice.svc>` in the example shown.
-
-For Windows versions prior to 1803, you cannot use `http://localhost` to browse your site from the container host. This is because of a known behavior in WinNAT for those versions which requires you to use the IP address of the container.
-
-Once the container starts, you'll need to find its IP address so that you can connect to your running container from a browser. You use the `docker inspect` command to do that:	
- `docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" my-wcfservice`	
- You will see an output similar to this:	
- ```	
-172.28.103.001	
-```	
- You can connect to the running container using the IP address and configured port, `http://172.28.103.001:83/<wcfservice.svc>` in the example shown.
-
-For a comprehensive tutorial on running an WCF service in a container, check out [WCF service samples in container](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/wcfapp)
-
 
 # Related Repos
 
@@ -98,8 +79,8 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 # Feedback
 
-* [File a .NET Framework Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
-* [Report a .NET Framework problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
+* [File a WCF Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
+* [Report a WCF problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
 * [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
