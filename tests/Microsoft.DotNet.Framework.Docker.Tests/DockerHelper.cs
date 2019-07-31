@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Text;
 using Xunit.Abstractions;
 
@@ -40,7 +41,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        private void Execute(string args)
+        private string Execute(string args)
         {
             OutputHelper.WriteLine($"Executing : docker {args}");
             ProcessStartInfo startInfo = new ProcessStartInfo("docker", args);
@@ -51,7 +52,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Action<object, DataReceivedEventArgs> errorDataReceived = (sender, e) => stdError.AppendLine(e.Data);
             process.ErrorDataReceived += new DataReceivedEventHandler(errorDataReceived);
 
-            OutputHelper.WriteLine(process.StandardOutput.ReadToEnd());
+            string result = process.StandardOutput.ReadToEnd();
+            OutputHelper.WriteLine(result);
             process.BeginErrorReadLine();
             process.WaitForExit();
 
@@ -60,6 +62,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 string msg = $"Failed to execute {startInfo.FileName} {startInfo.Arguments}{Environment.NewLine}{stdError}";
                 throw new InvalidOperationException(msg);
             }
+
+            return result;
         }
 
         public static bool ImageExists(string tag)
@@ -72,14 +76,60 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return process.ExitCode == 0 && stdOutput != "";
         }
 
-        public void Run(string image, string containerName, string command)
+        public void Run(string image, string containerName, string command, bool web = false)
         {
-            Execute($"run --rm --name {containerName} {image} {command}");
+            string options = web ? "run --rm -d --name" : "run --rm --name";
+            Execute($"{options} {containerName} {image} {command}");
         }
 
         public void Pull(string image)
         {
             Execute($"pull {image}");
+        }
+
+        public void VerifyHttpResponseFromContainer(string containerName, string urlPath)
+        {
+            var retries = 30;
+
+            var url = $"http://{GetContainerAddress(containerName)}" + urlPath;
+
+            using (HttpClient client = new HttpClient())
+            {
+                while (retries > 0)
+                {
+                    retries--;
+                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
+                    try
+                    {
+                        using (HttpResponseMessage result = client.GetAsync(url).Result)
+                        {
+                            result.EnsureSuccessStatusCode();
+                        }
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        OutputHelper.WriteLine($"Request to {url} failed - retrying: {ex.ToString()}");
+                    }
+
+                }
+
+            }
+
+            throw new TimeoutException($"Timed out attempting to access the endpoint {url} on container {containerName}");
+
+        }
+
+        public void Stop(string containerName)
+        {
+            Execute($"stop {containerName}");
+        }
+
+        public string GetContainerAddress(string container)
+        {
+            string address = Execute("inspect -f \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\" " + container);
+            //remove the last character of the address
+            return address.Remove(address.Length - 1);
         }
     }
 }
