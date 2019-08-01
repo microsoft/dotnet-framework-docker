@@ -48,6 +48,25 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
             };
 
+        private static ImageDescriptor[] AspnetTestData = new ImageDescriptor[]
+            {
+                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1803 },
+                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1903 },
+                new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "4.8",  OsVariant = WSC_1903 },
+            };
+
         private DockerHelper DockerHelper { get; set; }
 
         public ImageTests(ITestOutputHelper outputHelper)
@@ -55,13 +74,27 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             DockerHelper = new DockerHelper(outputHelper);
         }
 
-        public static IEnumerable<object[]> GetVerifyImagesData()
+        public static IEnumerable<object[]> GetVerifyImagesData(ImageDescriptor[] Data)
         {
             string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
             string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
 
             // Filter out test data that does not match the active os and version filters.
-            return TestData
+            return Data
+                .Where(imageDescriptor => OSFilter == null
+                    || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor => VersionFilter == null
+                    || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                .Select(imageDescriptor => new object[] { imageDescriptor });
+        }
+
+        public static IEnumerable<object[]> GetVerifyAspnetImagesData()
+        {
+            string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
+            string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
+
+            // Filter out test data that does not match the active os and version filters.
+            return AspnetTestData
                 .Where(imageDescriptor => OSFilter == null
                     || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
                 .Where(imageDescriptor => VersionFilter == null
@@ -92,7 +125,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "ASPNET")]
-        [MemberData(nameof(GetVerifyImagesData))]
+        [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
             VerifyAspnetImages(imageDescriptor, "aspnet", "", true);
@@ -102,43 +135,43 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
-            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
+            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
             if (includeRuntime)
             {
                 string baseRuntimeImage = GetImage("runtime", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
-            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
-            string workDir = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "projects",
-                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
-
-            try
-            {
-                DockerHelper.Build(
-                    tag: appId,
-                    dockerfile: Path.Combine(workDir, "Dockerfile"),
-                    buildContextPath: workDir,
-                    buildArgs: appBuildArgs);
-
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
-            }
-            finally
-            {
-                DockerHelper.DeleteImage(appId);
-            }
+            VerifyImages(
+                imageDescriptor: imageDescriptor,
+                buildArgs: appBuildArgs,
+                appDescriptor: appDescriptor,
+                runCommand: runCommand,
+                testUrl: ""
+                );
         }
         private void VerifyAspnetImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
             List<string> appBuildArgs = new List<string> {  };
-            if (includeRuntime)
-            {
-                string baseRuntimeImage = GetImage("aspnet", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
-                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
-            }
 
+            string baseAspnetImage = GetImage("aspnet", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+            appBuildArgs.Add($"BASE_ASPNET_IMAGE={baseAspnetImage}");
+
+            VerifyImages(
+                imageDescriptor: imageDescriptor,
+                buildArgs: appBuildArgs,
+                appDescriptor: appDescriptor,
+                runCommand: "",
+                testUrl: "/helllo-world.aspx"
+                );
+        }
+        private void VerifyImages(
+            ImageDescriptor imageDescriptor,
+            IEnumerable<string> buildArgs,
+            string appDescriptor,
+            string runCommand,
+            string testUrl)
+        {
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
                 Directory.GetCurrentDirectory(),
@@ -151,14 +184,16 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
                     buildContextPath: workDir,
-                    buildArgs: appBuildArgs);
+                    buildArgs: buildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, web: true);
-                DockerHelper.VerifyHttpResponseFromContainer(appId, "/hello-world.aspx");
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
             }
             finally
             {
-                DockerHelper.Stop(containerName: appId);
+                if (!string.IsNullOrEmpty(testUrl) && DockerHelper.ImageRunning(appId))
+                {
+                    DockerHelper.Stop(appId);
+                }
                 DockerHelper.DeleteImage(appId);
             }
         }
