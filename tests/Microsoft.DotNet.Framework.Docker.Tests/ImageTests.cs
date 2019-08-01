@@ -3,10 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Newtonsoft.Json.Linq;
@@ -29,7 +31,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
-        {
+            {
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
                 new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
@@ -50,6 +52,19 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
             };
 
+        private static ImageDescriptor[] WCFTestData = new ImageDescriptor[]
+            {
+                new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
+                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
+                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1903 },
+            };
         private DockerHelper DockerHelper { get; set; }
 
         public ImageTests(ITestOutputHelper outputHelper)
@@ -64,6 +79,20 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             // Filter out test data that does not match the active os and version filters.
             return TestData
+                .Where(imageDescriptor => OSFilter == null
+                    || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor => VersionFilter == null
+                    || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                .Select(imageDescriptor => new object[] { imageDescriptor });
+        }
+
+        public static IEnumerable<object[]> GetVerifyWCFImagesData()
+        {
+            string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
+            string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
+
+            // Filter out test data that does not match the active os and version filters.
+            return WCFTestData
                 .Where(imageDescriptor => OSFilter == null
                     || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
                 .Where(imageDescriptor => VersionFilter == null
@@ -94,13 +123,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "WCF")]
-        [MemberData(nameof(GetVerifyImagesData))]
+        [MemberData(nameof(GetVerifyWCFImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            if (imageDescriptor.RuntimeVersion != "3.5")
-            {
-                VerifyWcfImages(imageDescriptor, "wcf", "", true);
-            }
+            VerifyWcfImages(imageDescriptor, "wcf");
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -114,37 +140,39 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
-            string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
-            string workDir = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "projects",
-                $"{appDescriptor}-{imageDescriptor.RuntimeVersion}");
+            VerifyImages(
+                imageDescriptor: imageDescriptor,
+                buildArgs: appBuildArgs,
+                appDescriptor: appDescriptor,
+                runCommand: runCommand,
+                testUrl: ""
+                );
 
-            try
-            {
-                DockerHelper.Build(
-                    tag: appId,
-                    dockerfile: Path.Combine(workDir, "Dockerfile"),
-                    buildContextPath: workDir,
-                    buildArgs: appBuildArgs);
-
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand);
-            }
-            finally
-            {
-                DockerHelper.DeleteImage(appId);
-            }
         }
 
-        private void VerifyWcfImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        private void VerifyWcfImages(ImageDescriptor imageDescriptor, string appDescriptor)
         {
             List<string> appBuildArgs = new List<string> {  };
-            if (includeRuntime)
-            {
-                string baseRuntimeImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
-                appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
-            }
 
+            string baseWCFImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+            appBuildArgs.Add($"BASE_WCF_IMAGE={baseWCFImage}");
+
+            VerifyImages(
+                imageDescriptor: imageDescriptor,
+                buildArgs: appBuildArgs,
+                appDescriptor: appDescriptor,
+                runCommand: "",
+                testUrl: "/Service1.svc"
+                );
+
+        }
+        private void VerifyImages(
+            ImageDescriptor imageDescriptor,
+            IEnumerable<string> buildArgs,
+            string appDescriptor, 
+            string runCommand, 
+            string testUrl)
+        {
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
                 Directory.GetCurrentDirectory(),
@@ -157,18 +185,19 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
                     buildContextPath: workDir,
-                    buildArgs: appBuildArgs);
+                    buildArgs: buildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, web: true);
-                DockerHelper.VerifyHttpResponseFromContainer(appId, "/Service1.svc");
+                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
             }
             finally
             {
-                DockerHelper.Stop(containerName: appId);
+                if(!string.IsNullOrEmpty(testUrl) && DockerHelper.ImageRunning(appId))
+                {
+                    DockerHelper.Stop(appId);
+                }
                 DockerHelper.DeleteImage(appId);
             }
         }
-
         private string GetImage(string imageType, string version, string osVariant)
         {
             string image = $"{Registry}/{RepoPrefix}dotnet/framework/{imageType}:{version}-{osVariant}";
@@ -191,6 +220,35 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string manifestJson = File.ReadAllText("manifest.json");
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
+        }
+        private void VerifyHttpResponseFromContainer(string containerName, string urlPath)
+        {
+            var retries = 30;
+
+            // Can't use localhost when running inside containers or Windows.
+            var url = $"http://{DockerHelper.GetContainerAddress(containerName)}" + urlPath;
+
+            using (HttpClient client = new HttpClient())
+            {
+                while (retries > 0)
+                {
+                    retries--;
+                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
+                    try
+                    {
+                        using (HttpResponseMessage result = client.GetAsync(url).Result)
+                        {
+                            result.EnsureSuccessStatusCode();
+                        }
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        DockerHelper.OutputHelper.WriteLine($"Request to {url} failed - retrying: {ex.ToString()}");
+                    }
+                }
+            }
+            throw new TimeoutException($"Timed out attempting to access the endpoint {url} on container {containerName}");
         }
 
     }

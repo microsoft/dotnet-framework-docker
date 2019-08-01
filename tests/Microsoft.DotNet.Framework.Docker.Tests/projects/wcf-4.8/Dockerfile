@@ -1,6 +1,6 @@
-ARG BASE_RUNTIME_IMAGE
+ARG BASE_WCF_IMAGE
 
-FROM $BASE_RUNTIME_IMAGE AS runtime
+FROM $BASE_WCF_IMAGE AS runtime
 
 WORKDIR /inetpub/wwwroot
 COPY web.config .
