@@ -185,10 +185,17 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     buildArgs: buildArgs);
 
                 DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
-                VerifyHttpResponseFromContainer(appId, testUrl);
+                if (!string.IsNullOrEmpty(testUrl))
+                {
+                    VerifyHttpResponseFromContainer(appId, testUrl);
+                }
             }
             finally
             {
+                if (!string.IsNullOrEmpty(testUrl) && DockerHelper.IsContainerRunning(appId))
+                {
+                    DockerHelper.Stop(appId);
+                }
                 DockerHelper.DeleteImage(appId);
             }
         }

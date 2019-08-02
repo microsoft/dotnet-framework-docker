@@ -36,7 +36,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             if (ContainerExists(tag))
             {
-                Execute($"container rm -f {tag}");
+                Execute($"image rm -f {tag}");
             }
         }
 
@@ -65,16 +65,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return result;
         }
 
-        public static bool ContainerExists(string tag)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo("docker", $"image ls -q {tag}");
-            startInfo.RedirectStandardOutput = true;
-            Process process = Process.Start(startInfo);
-            string stdOutput = process.StandardOutput.ReadToEnd().Trim();
-            process.WaitForExit();
-            return process.ExitCode == 0 && stdOutput != "";
-        }
-
         public void Run(string image, string containerName, string command, bool detach = false)
         {
             string options = detach ? "run --rm -d --name" : "run --rm --name";
@@ -85,11 +75,34 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             Execute($"pull {image}");
         }
+        public void Stop(string image)
+        {
+            Execute($"stop {image}");
+        }
+
         public string GetContainerAddress(string container)
         {
             string address = Execute("inspect -f \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\" " + container);
             //remove the last character of the address
             return address.Remove(address.Length - 1);
+        }
+        public static bool ContainerExists(string tag)
+        {
+            return CheckContainerStatus(tag, "image ls -q");
+        }
+        public static bool IsContainerRunning(string tag)
+        {
+            return CheckContainerStatus(tag, "inspect -f '{{.State.Running}}'");
+        }
+
+        public static bool CheckContainerStatus(string tag, string command)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("docker", $"{command} {tag}");
+            startInfo.RedirectStandardOutput = true;
+            Process process = Process.Start(startInfo);
+            string stdOutput = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+            return process.ExitCode == 0 && stdOutput != "";
         }
     }
 }
