@@ -29,6 +29,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
+        private ITestOutputHelper _outputHelper;
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
             {
@@ -52,7 +53,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
             };
 
-        private static ImageDescriptor[] WCFTestData = new ImageDescriptor[]
+        private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
             {
                 new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
                 new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
@@ -69,30 +70,26 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public ImageTests(ITestOutputHelper outputHelper)
         {
+            _outputHelper = outputHelper;
             DockerHelper = new DockerHelper(outputHelper);
         }
 
-        public static IEnumerable<object[]> GetVerifyImagesData()
+        public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
         {
-            string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
-            string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
-
-            // Filter out test data that does not match the active os and version filters.
-            return TestData
-                .Where(imageDescriptor => OSFilter == null
-                    || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
-                .Where(imageDescriptor => VersionFilter == null
-                    || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
-                .Select(imageDescriptor => new object[] { imageDescriptor });
+            return GetVerifyImagesData(TestData);
+        }
+        public static IEnumerable<object[]> GetVerifyWcfImagesData()
+        {
+            return GetVerifyImagesData(WcfTestData);
         }
 
-        public static IEnumerable<object[]> GetVerifyWCFImagesData()
+        public static IEnumerable<object[]> GetVerifyImagesData(IEnumerable<ImageDescriptor> imageDescriptors)
         {
             string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
             string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
 
             // Filter out test data that does not match the active os and version filters.
-            return WCFTestData
+            return imageDescriptors
                 .Where(imageDescriptor => OSFilter == null
                     || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
                 .Where(imageDescriptor => VersionFilter == null
@@ -107,7 +104,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "Runtime")]
-        [MemberData(nameof(GetVerifyImagesData))]
+        [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "dotnetapp", "", true);
@@ -115,7 +112,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "Runtime")]
-        [MemberData(nameof(GetVerifyImagesData))]
+        [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
@@ -123,10 +120,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "WCF")]
-        [MemberData(nameof(GetVerifyWCFImagesData))]
+        [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyWcfImages(imageDescriptor, "wcf");
+            VerifyWcfImages(imageDescriptor, "");
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -150,7 +147,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         }
 
-        private void VerifyWcfImages(ImageDescriptor imageDescriptor, string appDescriptor)
+        private void VerifyWcfImages(ImageDescriptor imageDescriptor, string runCommand)
         {
             List<string> appBuildArgs = new List<string> {  };
 
@@ -160,7 +157,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyImages(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
-                appDescriptor: appDescriptor,
+                appDescriptor: "wcf",
                 runCommand: "",
                 testUrl: "/Service1.svc"
                 );
@@ -188,10 +185,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     buildArgs: buildArgs);
 
                 DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                if (!string.IsNullOrEmpty(testUrl))
+                {
+                    VerifyHttpResponseFromContainer(appId, testUrl);
+                }
             }
             finally
             {
-                if(!string.IsNullOrEmpty(testUrl) && DockerHelper.ImageRunning(appId))
+                if (!string.IsNullOrEmpty(testUrl) && DockerHelper.IsContainerRunning(appId))
                 {
                     DockerHelper.Stop(appId);
                 }
@@ -205,7 +206,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Ensure image exists locally
             if (IsLocalRun)
             {
-                Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
+                Assert.True(DockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
             }
             else
             {
@@ -244,7 +245,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     }
                     catch (Exception ex)
                     {
-                        DockerHelper.OutputHelper.WriteLine($"Request to {url} failed - retrying: {ex.ToString()}");
+                        _outputHelper.WriteLine($"Request to {url} failed - retrying: {ex.ToString()}");
                     }
                 }
             }
