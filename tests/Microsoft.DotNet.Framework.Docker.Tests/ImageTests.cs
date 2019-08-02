@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -25,6 +27,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
+        private ITestOutputHelper _outputHelper;
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
             {
@@ -71,37 +74,33 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public ImageTests(ITestOutputHelper outputHelper)
         {
+            _outputHelper = outputHelper;
             DockerHelper = new DockerHelper(outputHelper);
         }
 
-        public static IEnumerable<object[]> GetVerifyImagesData(ImageDescriptor[] Data)
+        public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
         {
-            string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
-            string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
-
-            // Filter out test data that does not match the active os and version filters.
-            return Data
-                .Where(imageDescriptor => OSFilter == null
-                    || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
-                .Where(imageDescriptor => VersionFilter == null
-                    || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
-                .Select(imageDescriptor => new object[] { imageDescriptor });
+            return GetVerifyImagesData(TestData);
         }
 
         public static IEnumerable<object[]> GetVerifyAspnetImagesData()
         {
+            return GetVerifyImagesData(AspnetTestData);
+        }
+
+        public static IEnumerable<object[]> GetVerifyImagesData(IEnumerable<ImageDescriptor> imageDescriptors)
+        {
             string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
             string osFilterPattern = OSFilter != null ? GetFilterRegexPattern(OSFilter) : null;
 
             // Filter out test data that does not match the active os and version filters.
-            return AspnetTestData
+            return imageDescriptors
                 .Where(imageDescriptor => OSFilter == null
                     || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
                 .Where(imageDescriptor => VersionFilter == null
                     || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
                 .Select(imageDescriptor => new object[] { imageDescriptor });
         }
-
         private static string GetFilterRegexPattern(string filter)
         {
             return $"^{Regex.Escape(filter).Replace(@"\*", ".*").Replace(@"\?", ".")}$";
@@ -109,7 +108,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "Runtime")]
-        [MemberData(nameof(GetVerifyImagesData))]
+        [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "dotnetapp", "", true);
@@ -117,7 +116,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "Runtime")]
-        [MemberData(nameof(GetVerifyImagesData))]
+        [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
@@ -128,7 +127,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyAspnetImages(imageDescriptor, "aspnet", "", true);
+            VerifyAspnetImages(imageDescriptor, "");
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -146,11 +145,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: appDescriptor,
-                runCommand: runCommand,
-                testUrl: ""
+                runCommand: runCommand
                 );
         }
-        private void VerifyAspnetImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        private void VerifyAspnetImages(ImageDescriptor imageDescriptor, string runCommand)
         {
             List<string> appBuildArgs = new List<string> {  };
 
@@ -160,9 +158,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyImages(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
-                appDescriptor: appDescriptor,
+                appDescriptor: "aspnet",
                 runCommand: "",
-                testUrl: "/helllo-world.aspx"
+                testUrl: "/hello-world.aspx"
                 );
         }
         private void VerifyImages(
@@ -170,7 +168,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             IEnumerable<string> buildArgs,
             string appDescriptor,
             string runCommand,
-            string testUrl)
+            string testUrl = null)
         {
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
@@ -187,13 +185,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     buildArgs: buildArgs);
 
                 DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                VerifyHttpResponseFromContainer(appId, testUrl);
             }
             finally
             {
-                if (!string.IsNullOrEmpty(testUrl) && DockerHelper.ImageRunning(appId))
-                {
-                    DockerHelper.Stop(appId);
-                }
                 DockerHelper.DeleteImage(appId);
             }
         }
@@ -205,7 +200,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Ensure image exists locally
             if (IsLocalRun)
             {
-                Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
+                Assert.True(DockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
             }
             else
             {
@@ -220,6 +215,35 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string manifestJson = File.ReadAllText("manifest.json");
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
+        }
+        private void VerifyHttpResponseFromContainer(string containerName, string urlPath)
+        {
+            var retries = 30;
+
+            // Can't use localhost when running inside containers or Windows.
+            var url = $"http://{DockerHelper.GetContainerAddress(containerName)}" + urlPath;
+
+            using (HttpClient client = new HttpClient())
+            {
+                while (retries > 0)
+                {
+                    retries--;
+                    Thread.Sleep(TimeSpan.FromSeconds(2));
+                    try
+                    {
+                        using (HttpResponseMessage result = client.GetAsync(url).Result)
+                        {
+                            result.EnsureSuccessStatusCode();
+                        }
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        _outputHelper.WriteLine($"Request to {url} failed - retrying: {ex.ToString()}");
+                    }
+                }
+            }
+            throw new TimeoutException($"Timed out attempting to access the endpoint {url} on container {containerName}");
         }
     }
 }

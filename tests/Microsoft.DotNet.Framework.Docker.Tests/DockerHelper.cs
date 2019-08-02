@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class DockerHelper
     {
-        public ITestOutputHelper OutputHelper { get; set; }
+        private ITestOutputHelper OutputHelper { get; set; }
 
         public DockerHelper(ITestOutputHelper outputHelper)
         {
@@ -34,9 +34,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public void DeleteImage(string tag)
         {
-            if (ImageExists(tag))
+            if (ContainerExists(tag))
             {
-                Execute($"image rm -f {tag}");
+                Execute($"container rm -f {tag}");
             }
         }
 
@@ -65,9 +65,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return result;
         }
 
-        public static bool ImageExists(string tag)
+        public static bool ContainerExists(string tag)
         {
-            return VerifyImageStatus(tag, "image ls -q");
+            ProcessStartInfo startInfo = new ProcessStartInfo("docker", $"image ls -q {tag}");
+            startInfo.RedirectStandardOutput = true;
+            Process process = Process.Start(startInfo);
+            string stdOutput = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+            return process.ExitCode == 0 && stdOutput != "";
         }
 
         public void Run(string image, string containerName, string command, bool detach = false)
@@ -80,31 +85,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             Execute($"pull {image}");
         }
-        public void Stop(string containerName)
-        {
-            Execute($"stop {containerName}");
-        }
-
         public string GetContainerAddress(string container)
         {
             string address = Execute("inspect -f \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\" " + container);
             //remove the last character of the address
             return address.Remove(address.Length - 1);
-        }
-        public static bool ImageRunning(string tag)
-        {
-            return VerifyImageStatus(tag, "inspect -f '{{.State.Running}}'");
-        }
-
-        private static bool VerifyImageStatus(string tag, string command)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo("docker", $"{command} {tag}");
-            startInfo.RedirectStandardOutput = true;
-            Process process = Process.Start(startInfo);
-            string stdOutput = process.StandardOutput.ReadToEnd().Trim();
-            process.WaitForExit();
-            return process.ExitCode == 0 && stdOutput != "";
-
         }
     }
 }
