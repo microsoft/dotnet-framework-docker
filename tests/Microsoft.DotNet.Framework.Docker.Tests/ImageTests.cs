@@ -3,9 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -29,55 +27,56 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
-        private ITestOutputHelper _outputHelper;
-
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
-            {
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
-                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
-            };
+        {
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
+            new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
+        };
 
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
-            {
-                new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1903 },
-            };
-        private DockerHelper DockerHelper { get; set; }
+        {
+            new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1903 },
+        };
+
+        private DockerHelper _dockerHelper;
+        private ITestOutputHelper _outputHelper;
 
         public ImageTests(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
-            DockerHelper = new DockerHelper(outputHelper);
+            _dockerHelper = new DockerHelper(outputHelper);
         }
 
         public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
         {
             return GetVerifyImagesData(TestData);
         }
+
         public static IEnumerable<object[]> GetVerifyWcfImagesData()
         {
             return GetVerifyImagesData(WcfTestData);
@@ -123,7 +122,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyWcfImages(imageDescriptor, "");
+            VerifyWcfImages(imageDescriptor);
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -147,7 +146,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         }
 
-        private void VerifyWcfImages(ImageDescriptor imageDescriptor, string runCommand)
+        private void VerifyWcfImages(ImageDescriptor imageDescriptor)
         {
             List<string> appBuildArgs = new List<string> {  };
 
@@ -163,6 +162,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 );
 
         }
+
         private void VerifyImages(
             ImageDescriptor imageDescriptor,
             IEnumerable<string> buildArgs,
@@ -178,13 +178,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             try
             {
-                DockerHelper.Build(
+                _dockerHelper.Build(
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
                     buildContextPath: workDir,
                     buildArgs: buildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                _dockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
                 if (!string.IsNullOrEmpty(testUrl))
                 {
                     VerifyHttpResponseFromContainer(appId, testUrl);
@@ -192,13 +192,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
             finally
             {
-                if (!string.IsNullOrEmpty(testUrl) && DockerHelper.IsContainerRunning(appId))
-                {
-                    DockerHelper.Stop(appId);
-                }
-                DockerHelper.DeleteImage(appId);
+                _dockerHelper.DeleteContainer(appId, !string.IsNullOrEmpty(testUrl));
+                _dockerHelper.DeleteImage(appId);
             }
         }
+
         private string GetImage(string imageType, string version, string osVariant)
         {
             string image = $"{Registry}/{RepoPrefix}dotnet/framework/{imageType}:{version}-{osVariant}";
@@ -206,11 +204,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Ensure image exists locally
             if (IsLocalRun)
             {
-                Assert.True(DockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
+                Assert.True(_dockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
             }
             else
             {
-                DockerHelper.Pull(image);
+                _dockerHelper.Pull(image);
             }
 
             return image;
@@ -222,25 +220,28 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
         }
+
         private void VerifyHttpResponseFromContainer(string containerName, string urlPath)
         {
             var retries = 30;
 
             // Can't use localhost when running inside containers or Windows.
-            var url = $"http://{DockerHelper.GetContainerAddress(containerName)}" + urlPath;
+            var url = $"http://{_dockerHelper.GetContainerAddress(containerName)}" + urlPath;
 
             using (HttpClient client = new HttpClient())
             {
                 while (retries > 0)
                 {
                     retries--;
-                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
+                    Thread.Sleep(TimeSpan.FromSeconds(2));
                     try
                     {
                         using (HttpResponseMessage result = client.GetAsync(url).Result)
                         {
                             result.EnsureSuccessStatusCode();
                         }
+
+                        _outputHelper.WriteLine($"Successfully accessed {url}");
                         return;
                     }
                     catch (Exception ex)
@@ -249,8 +250,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     }
                 }
             }
+
             throw new TimeoutException($"Timed out attempting to access the endpoint {url} on container {containerName}");
         }
-
     }
 }
