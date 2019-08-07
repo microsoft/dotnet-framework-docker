@@ -37,6 +37,7 @@ docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.
 * [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
 
 .NET Core:
+
 * [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
 * [dotnet/core-nightly](https://hub.docker.com/_/microsoft-dotnet-core-nightly/): .NET Core (Preview)
 * [dotnet/core/samples](https://hub.docker.com/_/microsoft-dotnet-core-samples/): .NET Core Samples
