@@ -199,14 +199,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             appBuildArgs.Add($"BASE_WCF_IMAGE={baseWCFImage}");
 
             VerifyImages(
-                ImageDescriptor imageDescriptor,
-                IEnumerable<string> buildArgs,
-                string appDescriptor,
-                string runCommand,
-                    appDescriptor: "wcf",
-                    runCommand: "",
-                    testUrl: "/Service1.svc"
-                    );
+                imageDescriptor: imageDescriptor,
+                buildArgs: appBuildArgs,
+                appDescriptor: "wcf",
+                runCommand: "",
+                testUrl: "/Service1.svc"
+                );
 
         }
 
