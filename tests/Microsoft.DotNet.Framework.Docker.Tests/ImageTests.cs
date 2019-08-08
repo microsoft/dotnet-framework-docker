@@ -204,7 +204,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Ensure image exists locally
             if (IsLocalRun)
             {
-                Assert.True(_dockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
+                Assert.True(_dockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
             }
             else
             {
