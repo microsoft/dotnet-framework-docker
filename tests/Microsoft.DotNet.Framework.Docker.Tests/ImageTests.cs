@@ -100,7 +100,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             return GetVerifyImagesData(AspnetTestData);
         }
-      
+     
         public static IEnumerable<object[]> GetVerifyWcfImagesData()
         {
             return GetVerifyImagesData(WcfTestData);
@@ -119,6 +119,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     || Regex.IsMatch(imageDescriptor.RuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
                 .Select(imageDescriptor => new object[] { imageDescriptor });
         }
+
         private static string GetFilterRegexPattern(string filter)
         {
             return $"^{Regex.Escape(filter).Replace(@"\*", ".*").Replace(@"\?", ".")}$";
@@ -178,7 +179,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyAspnetImages(ImageDescriptor imageDescriptor)
         {
-            List<string> appBuildArgs = new List<string> {  };
+            List<string> appBuildArgs = new List<string> { };
 
             string baseAspnetImage = GetImage("aspnet", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
             appBuildArgs.Add($"BASE_ASPNET_IMAGE={baseAspnetImage}");
@@ -194,7 +195,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyWcfImages(ImageDescriptor imageDescriptor)
         {
-            List<string> appBuildArgs = new List<string> {  };
+            List<string> appBuildArgs = new List<string> { };
 
             string baseWCFImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
             appBuildArgs.Add($"BASE_WCF_IMAGE={baseWCFImage}");
