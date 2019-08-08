@@ -28,47 +28,47 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
-            {
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
-                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
-            };
+        {
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
+            new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
+        };
 
         private static ImageDescriptor[] AspnetTestData = new ImageDescriptor[]
-            {
-                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1903 },
-                new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
-                new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
-                new ImageDescriptor { RuntimeVersion = "4.8",  OsVariant = WSC_1903 },
-            };
+        {
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1903 },
+            new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8",  OsVariant = WSC_1903 },
+        };
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
-          {
+        {
             new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
@@ -79,7 +79,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1903 },
-          };
+        };
 
         private DockerHelper _dockerHelper;
         private ITestOutputHelper _outputHelper;
@@ -144,9 +144,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyAspnetImages(imageDescriptor, "");
+            VerifyAspnetImages(imageDescriptor);
         }
-
 
         [Theory]
         [Trait("Category", "WCF")]
@@ -175,7 +174,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 testUrl: ""
                 );
         }
-        private void VerifyAspnetImages(ImageDescriptor imageDescriptor, string runCommand)
+
+        private void VerifyAspnetImages(ImageDescriptor imageDescriptor)
         {
             List<string> appBuildArgs = new List<string> {  };
 
@@ -205,7 +205,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 runCommand: "",
                 testUrl: "/Service1.svc"
                 );
-
         }
 
         private void VerifyImages(
@@ -295,6 +294,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     }
                 }
             }
+
             throw new TimeoutException($"Timed out attempting to access the endpoint {url} on container {containerName}");
         }
     }
