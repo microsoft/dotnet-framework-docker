@@ -1,5 +1,4 @@
 {
-  "readmePath": "README.aspnet.md",
   "registry": "mcr.microsoft.com",
   "variables": {
     "AspnetReleaseDateStamp": "20190709"

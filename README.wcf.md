@@ -68,8 +68,8 @@ Tag | Dockerfile
 ---------| ---------------
 4.8-20190709-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.8/wcf/windowsservercore-ltsc2016/Dockerfile)
 4.7.2-20190709-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/wcf/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20190709-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.1/rwcf/windowsservercore-ltsc2016/Dockerfile)
-4.7-20190709-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7wcf/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20190709-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.1/wcf/windowsservercore-ltsc2016/Dockerfile)
+4.7-20190709-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7/wcf/windowsservercore-ltsc2016/Dockerfile)
 4.6.2-20190709-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.6.2/wcf/windowsservercore-ltsc2016/Dockerfile)
 
 You can retriev a list of all available tags for dotnet/framework/runtime at https://mcr.microsoft.com/v2/dotnet/framework/wcf/tags/list.
