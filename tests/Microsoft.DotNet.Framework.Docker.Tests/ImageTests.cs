@@ -266,7 +266,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
         }
-  
+
         private void VerifyHttpResponseFromContainer(string containerName, string urlPath)
         {
             var retries = 30;
