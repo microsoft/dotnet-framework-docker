@@ -27,7 +27,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
-        private ITestOutputHelper _outputHelper;
 
         private static ImageDescriptor[] TestData = new ImageDescriptor[]
             {
@@ -70,12 +69,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new ImageDescriptor { RuntimeVersion = "4.8",  OsVariant = WSC_1903 },
             };
 
-        private DockerHelper DockerHelper { get; set; }
+        private DockerHelper _dockerHelper;
+        private ITestOutputHelper _outputHelper;
 
         public ImageTests(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
-            DockerHelper = new DockerHelper(outputHelper);
+            _dockerHelper = new DockerHelper(outputHelper);
         }
 
         public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
@@ -145,7 +145,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: appDescriptor,
-                runCommand: runCommand
+                runCommand: runCommand,
+                testUrl: ""
                 );
         }
         private void VerifyAspnetImages(ImageDescriptor imageDescriptor, string runCommand)
@@ -168,7 +169,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             IEnumerable<string> buildArgs,
             string appDescriptor,
             string runCommand,
-            string testUrl = null)
+            string testUrl)
         {
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
@@ -178,13 +179,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             try
             {
-                DockerHelper.Build(
+                _dockerHelper.Build(
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
                     buildContextPath: workDir,
                     buildArgs: buildArgs);
 
-                DockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                _dockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
                 if (!string.IsNullOrEmpty(testUrl))
                 {
                     VerifyHttpResponseFromContainer(appId, testUrl);
@@ -192,11 +193,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
             finally
             {
-                if (!string.IsNullOrEmpty(testUrl) && DockerHelper.IsContainerRunning(appId))
-                {
-                    DockerHelper.Stop(appId);
-                }
-                DockerHelper.DeleteImage(appId);
+                _dockerHelper.DeleteContainer(appId, !string.IsNullOrEmpty(testUrl));
+                _dockerHelper.DeleteImage(appId);
             }
         }
 
@@ -207,11 +205,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Ensure image exists locally
             if (IsLocalRun)
             {
-                Assert.True(DockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
+                Assert.True(_dockerHelper.ContainerExists(image), $"`{image}` could not be found on disk.");
             }
             else
             {
-                DockerHelper.Pull(image);
+                _dockerHelper.Pull(image);
             }
 
             return image;
@@ -228,7 +226,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             var retries = 30;
 
             // Can't use localhost when running inside containers or Windows.
-            var url = $"http://{DockerHelper.GetContainerAddress(containerName)}" + urlPath;
+            var url = $"http://{_dockerHelper.GetContainerAddress(containerName)}" + urlPath;
 
             using (HttpClient client = new HttpClient())
             {
