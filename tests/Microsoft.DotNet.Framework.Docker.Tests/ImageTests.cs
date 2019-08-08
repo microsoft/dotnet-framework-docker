@@ -61,12 +61,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
             new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1903 },
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
             new ImageDescriptor { RuntimeVersion = "4.8",  OsVariant = WSC_1903 },
         };
+
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
         {
             new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
