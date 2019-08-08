@@ -5,6 +5,9 @@ steps:
     } else {
       $optionalTestArgs="-IsLocalRun"
     }
+    if ($env:REPOTESTARGS) {
+      $optionalTestArgs += " $env:REPOTESTARGS"
+    }
     echo "##vso[task.setvariable variable=optionalTestArgs]$optionalTestArgs"
   displayName: Set Test Variables
 - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
