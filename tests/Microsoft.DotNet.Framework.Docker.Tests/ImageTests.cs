@@ -126,7 +126,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "Runtime")]
+        [Trait("Category", "runtime-sdk")]
         [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -134,7 +134,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "Runtime")]
+        [Trait("Category", "runtime-sdk")]
         [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
@@ -262,7 +262,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private static string GetManifestRegistry()
         {
-            string manifestJson = File.ReadAllText("manifest.json");
+            string manifestJson = File.ReadAllText("manifest.runtime-sdk.json");
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
         }
