@@ -44,7 +44,7 @@ try {
                 $OptionalTestArgs += " -ArchitectureFilter $ArchitectureFilter"
             }
 
-            Exec "./tests/run-tests.ps1 -VersionFilter $VersionFilter -OSFilter $OSFilter -IsLocalRun $OptionalTestArgs"
+            Exec "./tests/run-tests.ps1 -VersionFilter $VersionFilter -OSFilter $OSFilter $OptionalTestArgs"
         } else {
           Write-Warning "Test script file './tests/run-tests.ps1' not found."
         }
