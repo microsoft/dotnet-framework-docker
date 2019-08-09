@@ -5,9 +5,9 @@ pr:
 variables:
 - template: variables/common.yml
 - name: manifest
-  value: manifest.json
+  value: manifest.runtime-sdk.json
 - name: repoTestArgs
-  value: "-TestCategory Runtime"
+  value: "-TestCategory runtime-sdk"
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:
