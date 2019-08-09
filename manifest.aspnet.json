@@ -1,0 +1,185 @@
+{
+  "registry": "mcr.microsoft.com",
+  "variables": {
+    "AspnetReleaseDateStamp": "20190709"
+  },
+  "repos": [
+    {
+      "id": "aspnet",
+      "name": "dotnet/framework/aspnet",
+      "readmePath": "README.aspnet.md",
+      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/aspnet-tags.yml",
+      "images": [
+        {
+          "sharedTags": {
+            "4.8": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.8/aspnet/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/aspnet/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/aspnet/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/aspnet/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-windowsservercore-1903": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.2/aspnet/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.2-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "4.7.2/aspnet/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.7.2-$(AspnetReleaseDateStamp)-windowsservercore-1803": {},
+                "4.7.2-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "4.7.2/aspnet/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.7.2-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-windowsservercore-ltsc2019": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.1": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.1/aspnet/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.1-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-windowsservercore-ltsc2016": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7/aspnet/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-windowsservercore-ltsc2016": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.6.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.6.2/aspnet/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.6.2-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.6.2-windowsservercore-ltsc2016": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "3.5": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "3.5/aspnet/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/aspnet/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/aspnet/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/aspnet/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
+                "3.5-windowsservercore-1903": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -49,6 +49,25 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
         };
 
+        private static ImageDescriptor[] AspnetTestData = new ImageDescriptor[]
+        {
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = WSC_1903 },
+            new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", OsVariant = WSC_1903 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8",  OsVariant = WSC_1903 },
+        };
+
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
         {
             new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
@@ -77,6 +96,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return GetVerifyImagesData(TestData);
         }
 
+        public static IEnumerable<object[]> GetVerifyAspnetImagesData()
+        {
+            return GetVerifyImagesData(AspnetTestData);
+        }
+     
         public static IEnumerable<object[]> GetVerifyWcfImagesData()
         {
             return GetVerifyImagesData(WcfTestData);
@@ -118,6 +142,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "ASPNET")]
+        [MemberData(nameof(GetVerifyAspnetImagesData))]
+        public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
+        {
+            VerifyAspnetImages(imageDescriptor);
+        }
+
+        [Theory]
         [Trait("Category", "WCF")]
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
@@ -129,7 +161,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
 
-            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}"};
+            List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
             if (includeRuntime)
             {
                 string baseRuntimeImage = GetImage("runtime", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
@@ -143,12 +175,27 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 runCommand: runCommand,
                 testUrl: ""
                 );
+        }
 
+        private void VerifyAspnetImages(ImageDescriptor imageDescriptor)
+        {
+            List<string> appBuildArgs = new List<string> { };
+
+            string baseAspnetImage = GetImage("aspnet", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
+            appBuildArgs.Add($"BASE_ASPNET_IMAGE={baseAspnetImage}");
+
+            VerifyImages(
+                imageDescriptor: imageDescriptor,
+                buildArgs: appBuildArgs,
+                appDescriptor: "aspnet",
+                runCommand: "",
+                testUrl: "/hello-world.aspx"
+                );
         }
 
         private void VerifyWcfImages(ImageDescriptor imageDescriptor)
         {
-            List<string> appBuildArgs = new List<string> {  };
+            List<string> appBuildArgs = new List<string> { };
 
             string baseWCFImage = GetImage("wcf", imageDescriptor.RuntimeVersion, imageDescriptor.OsVariant);
             appBuildArgs.Add($"BASE_WCF_IMAGE={baseWCFImage}");
@@ -160,7 +207,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 runCommand: "",
                 testUrl: "/Service1.svc"
                 );
-
         }
 
         private void VerifyImages(

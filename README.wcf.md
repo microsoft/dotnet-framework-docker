@@ -6,6 +6,8 @@
 ## About This Image
 The Windows Communication Foundation (WCF) is a framework for building service-oriented applications. Using WCF, you can send data as asynchronous messages from one service endpoint to another. A service endpoint can be part of a continuously available service hosted by IIS, or it can be a service hosted in an application.
 
+Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
+
 # How to Use the Image
 
 The [WCF Docker samples](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/wcfapp) show various ways to use WCF and Docker together.
