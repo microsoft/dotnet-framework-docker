@@ -1,0 +1,426 @@
+{
+  "readmePath": "README.md",
+  "registry": "mcr.microsoft.com",
+  "variables": {
+    "RuntimeReleaseDateStamp": "20190709",
+    "SdkReleaseDateStamp": "20190724"
+  },
+  "repos": [
+    {
+      "id": "runtime",
+      "name": "dotnet/framework/runtime",
+      "readmePath": "README.runtime.md",
+      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/runtime-tags.yml",
+      "images": [
+        {
+          "sharedTags": {
+            "4.8": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.8/runtime/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/runtime/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/runtime/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "dockerfile": "4.8/runtime/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-windowsservercore-1903": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.2/runtime/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            },
+            {
+              "dockerfile": "4.7.2/runtime/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
+                "4.7.2-windowsservercore-1803": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-1803",
+                    "$(Repo:sdk):4.8-windowsservercore-1803"
+                  ]
+                }
+              ]
+            },
+            {
+              "dockerfile": "4.7.2/runtime/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-windowsservercore-ltsc2019": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2019",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2019"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.1": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7.1/runtime/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.1-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.7/runtime/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.7.1-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.7.1-windowsservercore-ltsc2016",
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.6.2": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "4.6.2/runtime/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.6.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.6.2-windowsservercore-ltsc2016": {}
+              },
+              "customBuildLegGrouping": [
+                {
+                  "name": "pr-build",
+                  "dependencies": [
+                    "$(Repo:runtime):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.7.2-windowsservercore-ltsc2016",
+                    "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
+                    "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "3.5": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-windowsservercore-1803": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
+                "3.5-windowsservercore-1903": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sdk",
+      "name": "dotnet/framework/sdk",
+      "readmePath": "README.sdk.md",
+      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/sdk-tags.yml",
+      "images": [
+        {
+          "sharedTags": {
+            "4.8": {},
+            "latest": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/sdk/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-windowsservercore-1803": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/sdk/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/sdk/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/sdk/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-windowsservercore-1903": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.2": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.7.2/sdk/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.2-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.7.2/sdk/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "4.7.2-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
+                "4.7.2-windowsservercore-1803": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.7.2/sdk/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "4.7.2-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-windowsservercore-ltsc2019": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "4.7.1": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.7.1/sdk/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "4.7.1-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-windowsservercore-ltsc2016": {}
+              }
+            }
+          ]
+        },
+        {
+          "sharedTags": {
+            "3.5": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/sdk/windowsservercore-ltsc2016",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2016",
+              "tags": {
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-windowsservercore-ltsc2016": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/sdk/windowsservercore-1803",
+              "os": "windows",
+              "osVersion": "windowsservercore-1803",
+              "tags": {
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
+                "3.5-windowsservercore-1803": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/sdk/windowsservercore-ltsc2019",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2019",
+              "tags": {
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-windowsservercore-ltsc2019": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/sdk/windowsservercore-1903",
+              "os": "windows",
+              "osVersion": "windowsservercore-1903",
+              "tags": {
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "3.5-windowsservercore-1903": {}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

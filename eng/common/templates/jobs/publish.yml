@@ -1,0 +1,74 @@
+parameters:
+  pool: {}
+jobs:
+- job: Publish
+  pool: ${{ parameters.pool }}
+  variables:
+    imageBuilder.commonCmdArgs: >
+      --manifest $(manifest)
+      --registry-override $(acr.server)
+      $(imageBuilder.queueArgs)
+    # publicSourceBranch is not necessarily the working branch, it is the branch referenced in the readme Dockerfile source links
+    ${{ if contains(variables['Build.SourceBranchName'], 'nightly') }}:
+      publicSourceBranch: nightly
+    ${{ if not(contains(variables['Build.SourceBranchName'], 'nightly')) }}:
+      publicSourceBranch: master
+  steps:
+  - template: ../steps/init-docker-linux.yml
+  - script: >
+      $(runImageBuilderCmd) copyAcrImages
+      $(stagingRepoPrefix)
+      $(acr.servicePrincipalName)
+      $(app-dotnetdockerbuild-client-secret)
+      $(acr.servicePrincipalTenant)
+      $(acr.subscription)
+      $(acr.resourceGroup)
+      --os-type '*'
+      --architecture '*'
+      --repo-prefix $(publishRepoPrefix)
+      $(imageBuilder.pathArgs)
+      $(imageBuilder.commonCmdArgs)
+    displayName: Copy Images
+  - script: >
+      $(runImageBuilderCmd) publishManifest
+      --repo-prefix $(publishRepoPrefix)
+      --username $(acr.userName)
+      --password $(BotAccount-dotnet-docker-acr-bot-password)
+      --os-type '*'
+      --architecture '*'
+      $(imageBuilder.pathArgs)
+      $(imageBuilder.commonCmdArgs)
+    displayName: Publish Manifest
+  - script: >
+      $(runImageBuilderCmd) publishMcrDocs
+      $(dotnetBot-userName)
+      $(dotnetBot-email)
+      $(dotnet-bot-user-repo-adminrepohook-pat)
+      $(publicGitRepoUri)/blob/$(publicSourceBranch)
+      $(imageBuilder.commonCmdArgs)
+    displayName: Publish Readme
+  - task: DownloadPipelineArtifact@1
+    inputs:
+      buildType: specific
+      project: $(System.TeamProject)
+      pipline: $(System.DefinitionId)
+      buildVersionToDownload: specific
+      buildId: $(sourceBuildId)
+      targetPath: $(Build.ArtifactStagingDirectory)
+    displayName: Download Pipline Artifacts
+    condition: and(succeeded(), eq(variables['publishRepoPrefix'], 'public/'))
+  - script: >
+      $(runImageBuilderCmd) publishImageInfo
+      $(dotnetBot-userName)
+      $(dotnetBot-email)
+      $(dotnet-bot-user-repo-adminrepohook-pat)
+      $(imageBuilderArtifactsPath)
+      --git-owner dotnet
+      --git-repo versions
+      --git-branch master
+      --git-path build-info/docker/image-info.json
+    displayName: Publish Image Info
+    condition: and(succeeded(), eq(variables['publishRepoPrefix'], 'public/'))
+  - task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0
+    displayName: Component Detection
+  - template: ../steps/cleanup-docker-linux.yml

@@ -36,7 +36,7 @@ You can also [download the repository as a zip](https://github.com/microsoft/dot
 WCF service is supported on .NET Framework, which can run in Windows Server Core based containers. For simplicity, we disabled security in these samples.
 
 ### Build a Container with IIS-hosted WCF Service
-Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](/Dockerfile.web) is added to the project. We use a [WCF image](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/) as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use the WCF image with tag `4.7.2` for .NET Framework 4.7.2 in this example, but you can change it to use other tags (eg. `4.7`) for WCF images with different versions of .NET Framework. The complete list of supported WCF tags can be found on [Docker Hub](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/).
+Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](/Dockerfile.web) is added to the project. We use a [WCF image](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/) as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use the WCF image with tag `4.8` for .NET Framework 4.8 in this example, but you can change it to use other tags (eg. `4.7.2`) for WCF images with different versions of .NET Framework. The complete list of supported WCF tags can be found on [Docker Hub](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/).
 
 Run commands below to build the container image with name `iishostedwcfservice` and start an instance of it named `myservice1`. Docker parameter `-d` will run the container in background (detached mode).
 ```
@@ -95,9 +95,9 @@ docker-compose -f docker-compose-selfhosted.yml up
 
 ## Build the sample locally
 
-You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2017`.
+You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2019`.
 
-You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) with the Visual Studio Installer.
+You must have the [.NET Framework 4.8 targeting pack](https://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) with the Visual Studio Installer.
 
 ```console
 cd samples
@@ -106,7 +106,7 @@ msbuild wcfapp.sln /p:Configuration=Release
 ```
 
 Note: The /p:Configuration=Release argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/en-us/library/ms164311.aspx) for more information on commandline parameters.
-You can also build, test and debug the application with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build).
+You can also build, test and debug the application with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
 
 ## .NET Resources
 

@@ -11,28 +11,27 @@ RUN powershell -Command `
             -Uri "https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2016.zip" `
             -OutFile microsoft-windows-netfx3.zip; `
         Expand-Archive microsoft-windows-netfx3.zip; `
-        Remove-Item -Force microsoft-windows-netfx3.zip; `
-        Add-WindowsPackage -Online -PackagePath .\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab; `
-        Remove-Item -Force -Recurse microsoft-windows-netfx3; `
-        Remove-Item -Force -Recurse ${Env:TEMP}\*
+    && del microsoft-windows-netfx3.zip `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab `
+    && rmdir /S /Q microsoft-windows-netfx3 `
+    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Apply latest patch
 RUN powershell -Command `
-        $ErrorActionPreference = 'Stop'; `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/04/windows10.0-kb4493470-x64_2d9533301a1e6b5fb0c1c200df8a060bcc97b7d3.msu" `
+            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2019/07/windows10.0-kb4507460-x64_6d645b0420de6481c8cbad52885f70f7369cb662.msu" `
             -OutFile patch.msu; `
-        New-Item -Type Directory patch; `
-        Start-Process expand -ArgumentList 'patch.msu', 'patch', '-F:*' -NoNewWindow -Wait; `
-        Remove-Item -Force patch.msu; `
-        Add-WindowsPackage -Online -PackagePath C:\patch\Windows10.0-KB4493470-x64.cab; `
-        Remove-Item -Force -Recurse \patch
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4507460-x64.cab `
+    && rmdir /S /Q patch
 
 # ngen .NET Fx
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
-RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update & `
-    \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update & `
-    \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update & `
-    \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update
+RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
+    && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update `
+    && \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update
