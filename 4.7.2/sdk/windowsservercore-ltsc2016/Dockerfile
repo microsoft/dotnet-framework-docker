@@ -39,6 +39,7 @@ RUN `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
         --add Microsoft.Net.Component.4.7.2.SDK ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
+        --add Microsoft.VisualStudio.Component.WebDeploy ^ `
         --quiet --norestart --nocache --wait `
     && del vs_BuildTools.exe `
     `
