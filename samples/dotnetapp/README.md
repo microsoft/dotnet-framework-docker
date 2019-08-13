@@ -60,9 +60,9 @@ You can push the image to a container registry so that you can pull and run it o
 
 ## Build and run the sample locally with the .NET Core SDK
 
-You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
+You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
 
-You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) and the the Visual Studio Installer.
+You must have the [.NET Framework 4.8 targeting pack](http://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
 
 ```console
 cd samples
@@ -86,16 +86,16 @@ Note: The `-c release` argument builds the application in release mode (the defa
 
 ## Build and run the sample locally with MSBuild
 
-You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2017`.
+You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2019`.
 
-You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) and the the Visual Studio Installer.
+You must have the [.NET Framework 4.8 targeting pack](https://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
 
 ```console
 cd samples
 cd dotnetapp
 msbuild /t:restore
 msbuild /p:Configuration=Release
-dotnetapp\bin\Release\net471\dotnetapp.exe
+dotnetapp\bin\Release\net48\dotnetapp.exe
 ```
 
 Note: The `/p:Configuration=Release` argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/en-us/library/ms164311.aspx) for more information on commandline parameters.

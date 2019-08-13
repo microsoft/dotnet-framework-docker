@@ -9,6 +9,7 @@ param(
     [string]$OSFilter,
     [string]$Registry,
     [string]$RepoPrefix,
+    [string]$TestCategory,
     [switch]$IsLocalRun
 )
 
@@ -40,6 +41,9 @@ $env:REPO_PREFIX = $RepoPrefix
 if ($IsLocalRun) {
     $env:LOCAL_RUN = 1
 }
+else {
+    $env:LOCAL_RUN = $null
+}
 
-& dotnet test -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
+& dotnet test --filter Category=$TestCategory -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
 if ($LASTEXITCODE -ne 0) { throw "Tests Failed" }

@@ -32,6 +32,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Execute($"build -t {tag} {buildArgsOption} -f {dockerfile} {buildContextPath}");
         }
 
+        public bool ContainerExists(string name) => ResourceExists("container", $"-f \"name={name}\"");
+
+        public void DeleteContainer(string container, bool captureLogs = false)
+        {
+            if (ContainerExists(container))
+            {
+                if (captureLogs)
+                {
+                    Execute($"logs {container}");
+                }
+
+                Execute($"container rm -f {container}");
+            }
+        }
+
         public void DeleteImage(string tag)
         {
             if (ImageExists(tag))
@@ -40,7 +55,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        private void Execute(string args)
+        private string Execute(string args, bool ignoreErrors = false)
         {
             OutputHelper.WriteLine($"Executing : docker {args}");
             ProcessStartInfo startInfo = new ProcessStartInfo("docker", args);
@@ -51,35 +66,44 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Action<object, DataReceivedEventArgs> errorDataReceived = (sender, e) => stdError.AppendLine(e.Data);
             process.ErrorDataReceived += new DataReceivedEventHandler(errorDataReceived);
 
-            OutputHelper.WriteLine(process.StandardOutput.ReadToEnd());
+            string result = process.StandardOutput.ReadToEnd();
+            OutputHelper.WriteLine(result);
             process.BeginErrorReadLine();
             process.WaitForExit();
 
-            if (process.ExitCode != 0)
+            if (process.ExitCode != 0 && !ignoreErrors)
             {
                 string msg = $"Failed to execute {startInfo.FileName} {startInfo.Arguments}{Environment.NewLine}{stdError}";
                 throw new InvalidOperationException(msg);
             }
+
+            return result;
         }
 
-        public static bool ImageExists(string tag)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo("docker", $"image ls -q {tag}");
-            startInfo.RedirectStandardOutput = true;
-            Process process = Process.Start(startInfo);
-            string stdOutput = process.StandardOutput.ReadToEnd().Trim();
-            process.WaitForExit();
-            return process.ExitCode == 0 && stdOutput != "";
-        }
+        public bool ImageExists(string tag) => ResourceExists("image", tag);
 
-        public void Run(string image, string containerName, string command)
+        public void Run(string image, string containerName, string command, bool detach = false)
         {
-            Execute($"run --rm --name {containerName} {image} {command}");
+            string options = detach ? "run --rm -d --name" : "run --rm --name";
+            Execute($"{options} {containerName} {image} {command}");
         }
 
         public void Pull(string image)
         {
             Execute($"pull {image}");
+        }
+
+        private bool ResourceExists(string type, string filterArg)
+        {
+            string output = Execute($"{type} ls -a -q {filterArg}", true);
+            return output != "";
+        }
+
+        public string GetContainerAddress(string container)
+        {
+            string address = Execute("inspect -f \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\" " + container);
+            //remove the last character of the address
+            return address.Remove(address.Length - 1);
         }
     }
 }

@@ -103,9 +103,9 @@ We recommend that you do not use `--rm` in production. It cleans up container re
 
 ## Build the sample locally
 
-You can build this [.NET Framework 4.7.2](https://www.microsoft.com/net/download/dotnet-framework-runtime/net472) application locally with MSBuild and [NuGet](https://www.nuget.org/downloads) using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2017`.
+You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with MSBuild and [NuGet](https://www.nuget.org/downloads) using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2019`.
 
-You must have the [.NET Framework 4.7.2 targeting pack](https://go.microsoft.com/fwlink/?LinkId=863261) installed. It is easiest to install with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build) with the Visual Studio Installer.
+You must have the [.NET Framework 4.8 targeting pack](http://go.microsoft.com/fwlink/?LinkId=2085167) installed.
 
 ```console
 cd samples
@@ -114,7 +114,7 @@ nuget restore
 msbuild
 ```
 
-You can test and debug the application with [Visual Studio 2017](https://www.microsoft.com/net/download/Windows/build).
+You can test and debug the application with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
 
 ## .NET Core Resources
 

@@ -1,0 +1,22 @@
+parameters:
+  matrixType: null
+  name: null
+  customBuildLegGrouping: ""
+
+jobs:
+- job: ${{ parameters.name }}
+  pool: # linuxAmd64Pool
+    name: Hosted Ubuntu 1604
+  steps:
+  - template: ../steps/init-docker-linux.yml
+  - script: >
+      $(runImageBuilderCmd) generateBuildMatrix
+      --manifest $(manifest)
+      --type ${{ parameters.matrixType }}
+      --os-type '*'
+      --architecture '*'
+      --customBuildLegGrouping "${{ parameters.customBuildLegGrouping }}"
+      $(imageBuilder.pathArgs)
+    displayName: Generate ${{ parameters.matrixType }} Matrix
+    name: matrix
+  - template: ../steps/cleanup-docker-linux.yml
