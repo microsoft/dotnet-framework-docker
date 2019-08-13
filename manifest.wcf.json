@@ -1,7 +1,8 @@
 {
   "registry": "mcr.microsoft.com",
   "variables": {
-    "WcfReleaseDateStamp": "20190709"
+    "WcfReleaseDateStamp": "20190709",
+    "WcfReleaseDateStamp-48": "20190813"
   },
   "repos": [
     {
@@ -21,7 +22,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-$(WcfReleaseDateStamp-48)-windowsservercore-1803": {},
                 "4.8-windowsservercore-1803": {}
               }
             },
@@ -30,7 +31,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-$(WcfReleaseDateStamp-48)-windowsservercore-ltsc2016": {},
                 "4.8-windowsservercore-ltsc2016": {}
               }
             },
@@ -39,7 +40,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-$(WcfReleaseDateStamp-48)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
               }
             },
@@ -48,7 +49,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(WcfReleaseDateStamp-48)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             }
