@@ -2,8 +2,10 @@
   "readmePath": "README.md",
   "registry": "mcr.microsoft.com",
   "variables": {
-    "RuntimeReleaseDateStamp": "20190813",
-    "SdkReleaseDateStamp": "20190813"
+    "RuntimeReleaseDateStamp": "20190709",
+    "SdkReleaseDateStamp": "20190724",
+    "RuntimeReleaseDateStamp-48": "20190813",
+    "SdkReleaseDateStamp-48": "20190813"
   },
   "repos": [
     {
@@ -23,7 +25,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-$(RuntimeReleaseDateStamp-48)-windowsservercore-1803": {},
                 "4.8-windowsservercore-1803": {}
               }
             },
@@ -32,7 +34,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-$(RuntimeReleaseDateStamp-48)-windowsservercore-ltsc2016": {},
                 "4.8-windowsservercore-ltsc2016": {}
               }
             },
@@ -41,7 +43,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-$(RuntimeReleaseDateStamp-48)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
               }
             },
@@ -50,7 +52,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(RuntimeReleaseDateStamp-48)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             }
@@ -261,7 +263,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1803",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1803": {},
+                "4.8-$(SdkReleaseDateStamp-48)-windowsservercore-1803": {},
                 "4.8-windowsservercore-1803": {}
               }
             },
@@ -273,7 +275,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-$(SdkReleaseDateStamp-48)-windowsservercore-ltsc2016": {},
                 "4.8-windowsservercore-ltsc2016": {}
               }
             },
@@ -285,7 +287,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-$(SdkReleaseDateStamp-48)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
               }
             },
@@ -297,7 +299,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(SdkReleaseDateStamp-48)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             }
