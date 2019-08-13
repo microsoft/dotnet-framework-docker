@@ -1,7 +1,7 @@
 {
   "registry": "mcr.microsoft.com",
   "variables": {
-    "WcfReleaseDateStamp": "20190709"
+    "WcfReleaseDateStamp": "20190813"
   },
   "repos": [
     {

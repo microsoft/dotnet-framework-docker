@@ -1,7 +1,7 @@
 {
   "registry": "mcr.microsoft.com",
   "variables": {
-    "AspnetReleaseDateStamp": "20190709"
+    "AspnetReleaseDateStamp": "20190813"
   },
   "repos": [
     {
