@@ -5,6 +5,16 @@ parameters:
   cleanupDocker: true
 
 steps:
+- script: echo "##vso[task.setvariable variable=artifactsPath]/artifacts"
+  displayName: Define Artifacts Path Variable
+
+- ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+  - script: echo '##vso[task.setvariable variable=imageBuilderImageInfoArg]--image-info-output-path $(artifactsPath)/$(legName)-image-info.json'
+    displayName: Set Image Info Arg for Image Builder
+- ${{ if eq(variables['System.TeamProject'], 'public') }}:
+  - script: echo '##vso[task.setvariable variable=imageBuilderImageInfoArg]'
+    displayName: Set Image Info Arg for Image Builder
+
   ################################################################################
   # Cleanup Docker Resources
   ################################################################################
@@ -19,12 +29,12 @@ steps:
   ################################################################################
 - ${{ if eq(parameters.setupRemoteDockerServer, 'true') }}:
   - script: >
-      echo "##vso[task.setvariable variable=dockerArmRunArgs]
+      echo "##vso[task.setvariable variable=dockerArmRunOptions]
       -v $(DOCKER_CERT_PATH):/docker-certs
       -e DOCKER_CERT_PATH=/docker-certs
       -e DOCKER_TLS_VERIFY=1
       -e DOCKER_HOST=tcp://$(DOCKER_HOST_IP):2376"
-    displayName: Define dockerArmRunArgs Variable
+    displayName: Define dockerArmRunOptions Variable
 
   ################################################################################
   # Setup Image Builder (Optional)
@@ -38,15 +48,14 @@ steps:
       --build-arg IMAGE=$(imageNames.imageBuilder.linux)
       -f $(engCommonPath)/Dockerfile.WithRepo .
     displayName: Build Image for Image Builder
-  - script: echo "##vso[task.setvariable variable=imageBuilderArtifactsPath]/artifacts"
-    displayName: Define Image Builder Artifacts Path Variable
   - script: >
       echo "##vso[task.setvariable variable=runImageBuilderCmd]
       docker run --rm
       -v /var/run/docker.sock:/var/run/docker.sock
-      -v $(Build.ArtifactStagingDirectory):$(imageBuilderArtifactsPath)
+      -v $(Build.ArtifactStagingDirectory):$(artifactsPath)
       -w /repo
-      $(dockerArmRunArgs)
+      $(dockerArmRunOptions)
+      $(imageBuilderDockerRunExtraOptions)
       $(imageNames.imageBuilder.withrepo)"
     displayName: Define runImageBuilderCmd Variable
   - ${{ if eq(parameters.setupRemoteDockerServer, 'true') }}:
