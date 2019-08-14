@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -82,6 +83,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { RuntimeVersion = "4.8", OsVariant = WSC_1903 },
         };
 
+        private static Lazy<JArray> ImageInfoData;
+
         private DockerHelper _dockerHelper;
         private ITestOutputHelper _outputHelper;
 
@@ -89,6 +92,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             _outputHelper = outputHelper;
             _dockerHelper = new DockerHelper(outputHelper);
+        }
+
+        static ImageTests()
+        {
+            ImageInfoData = new Lazy<JArray>(() =>
+            {
+                string imageInfoPath = Environment.GetEnvironmentVariable("IMAGE_INFO_PATH");
+                if (!String.IsNullOrEmpty(imageInfoPath))
+                {
+                    string imageInfoContents = File.ReadAllText(imageInfoPath);
+                    return JsonConvert.DeserializeObject<JArray>(imageInfoContents);
+                }
+
+                return null;
+            });
         }
 
         public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
@@ -245,7 +263,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private string GetImage(string imageType, string version, string osVariant)
         {
-            string image = $"{Registry}/{RepoPrefix}dotnet/framework/{imageType}:{version}-{osVariant}";
+            string repo = $"dotnet/framework/{imageType}";
+            string tag = $"{version}-{osVariant}";
+            string registry = GetRegistryName(repo, tag);
+            string image = $"{registry}{repo}:{tag}";
 
             // Ensure image exists locally
             if (IsLocalRun)
@@ -258,6 +279,33 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
 
             return image;
+        }
+
+        private static string GetRegistryName(string repo, string tag)
+        {
+            bool imageExistsInStaging = true;
+
+            // In the case of running this in a local development environment, there would likely be no image info file
+            // provided. In that case, the assumption is that the images exist in the staging location.
+
+            if (ImageTests.ImageInfoData.Value != null)
+            {
+                JObject repoInfo = (JObject)ImageTests.ImageInfoData.Value
+                    .FirstOrDefault(imageInfoRepo => imageInfoRepo["repo"].ToString() == repo);
+
+                if (repoInfo["images"] != null)
+                {
+                    imageExistsInStaging = repoInfo["images"]
+                        .Cast<JProperty>()
+                        .Any(imageInfo => imageInfo.Value["simpleTags"].Any(imageTag => imageTag.ToString() == tag));
+                }
+                else
+                {
+                    imageExistsInStaging = false;
+                }
+            }
+
+            return imageExistsInStaging ? $"{Registry}/{RepoPrefix}" : "mcr.microsoft.com/";
         }
 
         private static string GetManifestRegistry()

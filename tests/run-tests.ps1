@@ -10,7 +10,8 @@ param(
     [string]$Registry,
     [string]$RepoPrefix,
     [string]$TestCategory,
-    [switch]$IsLocalRun
+    [switch]$IsLocalRun,
+    [string]$ImageInfoPath
 )
 
 Set-StrictMode -Version Latest
@@ -37,6 +38,7 @@ $env:IMAGE_OS_FILTER = $OSFilter
 $env:IMAGE_VERSION_FILTER = $VersionFilter
 $env:REGISTRY = $Registry
 $env:REPO_PREFIX = $RepoPrefix
+$env:IMAGE_INFO_PATH = $ImageInfoPath
 
 if ($IsLocalRun) {
     $env:LOCAL_RUN = 1
