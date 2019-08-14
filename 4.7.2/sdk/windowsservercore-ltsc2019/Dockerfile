@@ -24,6 +24,7 @@ RUN `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
         --add Microsoft.Net.Component.4.7.2.SDK ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
+        --add Microsoft.VisualStudio.Component.WebDeploy ^ `
         --quiet --norestart --nocache --wait `
     && del vs_BuildTools.exe `
     `
@@ -37,7 +38,7 @@ RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbina
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
-ENV ROSLYN_COMPILER_LOCATION "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 RUN `
