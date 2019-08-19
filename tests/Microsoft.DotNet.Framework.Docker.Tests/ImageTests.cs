@@ -306,14 +306,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 }
             }
 
-            if (isUsingCustomRegistry)
-            {
-                Debug.Assert(!String.IsNullOrEmpty(Registry), "Registry is not set.");
-                Debug.Assert(!String.IsNullOrEmpty(RepoPrefix), "RepoPrefix is not set.");
-                return $"{Registry}/{RepoPrefix}";
-            }
-            
-            return "mcr.microsoft.com/";
+            return isUsingCustomRegistry ? $"{Registry}/{RepoPrefix}" : $"{GetManifestRegistry()}/";
         }
 
         private static string GetManifestRegistry()
