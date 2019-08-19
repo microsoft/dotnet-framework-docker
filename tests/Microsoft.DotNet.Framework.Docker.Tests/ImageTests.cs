@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -265,7 +266,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string repo = $"dotnet/framework/{imageType}";
             string tag = $"{version}-{osVariant}";
-            string registry = GetRegistryName(repo, tag);
+            string registry = GetRegistryNameWithRepoPrefix(repo, tag);
             string image = $"{registry}{repo}:{tag}";
 
             // Ensure image exists locally
@@ -281,12 +282,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return image;
         }
 
-        private static string GetRegistryName(string repo, string tag)
+        private static string GetRegistryNameWithRepoPrefix(string repo, string tag)
         {
-            bool imageExistsInStaging = true;
+            bool isUsingCustomRegistry = true;
 
             // In the case of running this in a local development environment, there would likely be no image info file
-            // provided. In that case, the assumption is that the images exist in the staging location.
+            // provided. In that case, the assumption is that the images exist in the custom configured location.
 
             if (ImageTests.ImageInfoData.Value != null)
             {
@@ -295,17 +296,24 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
                 if (repoInfo["images"] != null)
                 {
-                    imageExistsInStaging = repoInfo["images"]
+                    isUsingCustomRegistry = repoInfo["images"]
                         .Cast<JProperty>()
                         .Any(imageInfo => imageInfo.Value["simpleTags"].Any(imageTag => imageTag.ToString() == tag));
                 }
                 else
                 {
-                    imageExistsInStaging = false;
+                    isUsingCustomRegistry = false;
                 }
             }
 
-            return imageExistsInStaging ? $"{Registry}/{RepoPrefix}" : "mcr.microsoft.com/";
+            if (isUsingCustomRegistry)
+            {
+                Debug.Assert(!String.IsNullOrEmpty(Registry), "Registry is not set.");
+                Debug.Assert(!String.IsNullOrEmpty(RepoPrefix), "RepoPrefix is not set.");
+                return $"{Registry}/{RepoPrefix}";
+            }
+            
+            return "mcr.microsoft.com/";
         }
 
         private static string GetManifestRegistry()
