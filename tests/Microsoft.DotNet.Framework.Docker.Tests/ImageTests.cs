@@ -72,6 +72,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
         {
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = "" }, // Placeholder to avoid empty MemberData for 3.5 (see https://github.com/xunit/xunit/issues/1113)
             new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
@@ -145,6 +146,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "all")]
         [Trait("Category", "runtime-sdk")]
         [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
@@ -153,6 +155,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "all")]
         [Trait("Category", "runtime-sdk")]
         [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
@@ -161,6 +164,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "all")]
         [Trait("Category", "ASPNET")]
         [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
@@ -168,12 +172,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyAspnetImages(imageDescriptor);
         }
 
-        [Theory]
+        [SkippableTheory("3.5")]
+        [Trait("Category", "all")]
         [Trait("Category", "WCF")]
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyWcfImages(imageDescriptor);
+            //VerifyWcfImages(imageDescriptor);
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -311,7 +316,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private static string GetManifestRegistry()
         {
-            string manifestJson = File.ReadAllText("manifest.runtime-sdk.json");
+            string manifestJson = File.ReadAllText("manifest.json");
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
         }
@@ -347,6 +352,18 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
 
             throw new TimeoutException($"Timed out attempting to access the endpoint {url} on container {containerName}");
+        }
+
+        private class SkippableTheoryAttribute : TheoryAttribute
+        {
+            public SkippableTheoryAttribute(string skipOnRuntimeVersion)
+            {
+                string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
+                if (Regex.IsMatch(skipOnRuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                {
+                    Skip = $"{skipOnRuntimeVersion} is unsupported";
+                }
+            }
         }
     }
 }

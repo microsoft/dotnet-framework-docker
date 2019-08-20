@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.7.2-windowsservercore-1803
+ARG REPO=mcr.microsoft.com/dotnet/framework/aspnet
+FROM $REPO:4.7.2-windowsservercore-1803
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 

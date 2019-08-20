@@ -9,7 +9,7 @@ param(
     [string]$OSFilter,
     [string]$Registry,
     [string]$RepoPrefix,
-    [string]$TestCategory,
+    [string]$TestCategory = "all",
     [switch]$IsLocalRun,
     [string]$ImageInfoPath
 )
