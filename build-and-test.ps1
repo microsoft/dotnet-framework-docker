@@ -1,26 +1,30 @@
 #!/usr/bin/env pwsh
 [cmdletbinding()]
 param(
-    [ValidateSet('default', 'samples')]
-    [string]$ManifestType = 'default',
+    [ValidateSet('*', 'runtime-sdk', 'aspnet', 'wcf')]
+    [string]$ImageTypeFilter = '*',
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
     [string]$OptionalImageBuilderArgs,
     [switch]$SkipTesting = $false
 )
 
-if ($ManifestType -eq 'default') {
-    $manifest = 'manifest.json'
+if ($ImageTypeFilter -eq "*") {
+    $PathFilters = $null
 }
-elseif ($ManifestType -eq 'samples') {
-    $manifest = 'manifest.samples.json'
+elseif ($ImageTypeFilter -eq "runtime-sdk") {
+    $PathFilters = "--path '$VersionFilter/runtime/$OSFilter' --path '$VersionFilter/sdk/$OSFilter'"
+}
+else {
+    $PathFilters = "--path '$VersionFilter/$ImageTypeFilter/$OSFilter'"
 }
 
-$OptionalImageBuilderArgs += " --manifest $manifest"
+$OptionalImageBuilderArgs += " --manifest manifest.json"
 
 & ./eng/common/build-and-test.ps1 `
     -VersionFilter $VersionFilter `
     -OSFilter $OSFilter `
+    -PathFilters $PathFilters `
     -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
     -SkipTesting:$SkipTesting `
     -ExcludeArchitecture

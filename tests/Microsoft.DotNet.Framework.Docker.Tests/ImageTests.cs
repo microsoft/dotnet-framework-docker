@@ -72,7 +72,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
         {
-            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = "" }, // Placeholder to avoid empty MemberData for 3.5 (see https://github.com/xunit/xunit/issues/1113)
+            // 3.5 is a placeholder to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
+            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = "" },
             new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
@@ -178,7 +179,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            //VerifyWcfImages(imageDescriptor);
+            VerifyWcfImages(imageDescriptor);
         }
 
         private void VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
