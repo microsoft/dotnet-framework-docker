@@ -15,6 +15,12 @@ param(
     [string]$ImageInfoPath
 )
 
+function Log {
+    param ([string] $Message)
+
+    Write-Output $Message
+}
+
 function Exec {
     param ([string] $Cmd)
 
