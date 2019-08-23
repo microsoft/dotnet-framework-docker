@@ -72,8 +72,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
         {
-            // 3.5 is a placeholder to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
-            new ImageDescriptor { RuntimeVersion = "3.5", OsVariant = "" },
             new ImageDescriptor { RuntimeVersion = "4.6.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
@@ -165,15 +163,16 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "ASPNET")]
+        [Trait("Category", "aspnet")]
         [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
             VerifyAspnetImages(imageDescriptor);
         }
 
+        // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
         [SkippableTheory("3.5")]
-        [Trait("Category", "WCF")]
+        [Trait("Category", "wcf")]
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -357,10 +356,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             public SkippableTheoryAttribute(string skipOnRuntimeVersion)
             {
-                string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
-                if (Regex.IsMatch(skipOnRuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                if (VersionFilter != "*")
                 {
-                    Skip = $"{skipOnRuntimeVersion} is unsupported";
+                    string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
+                    if (Regex.IsMatch(skipOnRuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                    {
+                        Skip = $"{skipOnRuntimeVersion} is unsupported";
+                    }
                 }
             }
         }

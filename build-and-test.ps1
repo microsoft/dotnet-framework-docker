@@ -1,15 +1,15 @@
 #!/usr/bin/env pwsh
 [cmdletbinding()]
 param(
-    [ValidateSet('*', 'runtime', 'sdk', 'aspnet', 'wcf')]
-    [array]$RepoFilter = @('*'),
+    [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf')]
+    [string[]]$RepoFilter = @(),
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
     [string]$OptionalImageBuilderArgs,
     [switch]$SkipTesting = $false
 )
 
-if ($RepoFilter.Count -eq 1 -and $RepoFilter[0] -eq '*') {
+if ($RepoFilter.Count -eq 0) {
     $PathFilters = $null
     $optionalTestArgs = ""
 }
