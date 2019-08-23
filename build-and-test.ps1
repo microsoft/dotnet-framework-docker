@@ -1,22 +1,27 @@
 #!/usr/bin/env pwsh
 [cmdletbinding()]
 param(
-    [ValidateSet('*', 'runtime-sdk', 'aspnet', 'wcf')]
-    [string]$ImageTypeFilter = '*',
+    [ValidateSet('*', 'runtime', 'sdk', 'aspnet', 'wcf')]
+    [array]$RepoFilter = @('*'),
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
     [string]$OptionalImageBuilderArgs,
     [switch]$SkipTesting = $false
 )
 
-if ($ImageTypeFilter -eq "*") {
+if ($RepoFilter.Count -eq 1 -and $RepoFilter[0] -eq '*') {
     $PathFilters = $null
-}
-elseif ($ImageTypeFilter -eq "runtime-sdk") {
-    $PathFilters = "--path '$VersionFilter/runtime/$OSFilter' --path '$VersionFilter/sdk/$OSFilter'"
+    $optionalTestArgs = ""
 }
 else {
-    $PathFilters = "--path '$VersionFilter/$ImageTypeFilter/$OSFilter'"
+    $PathFilters = ""
+    $RepoFilter | foreach {
+        $PathFilters += " --path '$VersionFilter/$_/$OSFilter'"
+    }
+    # Convert the array to a comma-delimited string of the repos with each repo value in quotes
+    # (e.g. "runtime", "sdk")
+    $repoList = ($RepoFilter | foreach { "`"$_`"" }) -join ", "
+    $optionalTestArgs = "-TestCategories @($repoList)"
 }
 
 $OptionalImageBuilderArgs += " --manifest manifest.json"
@@ -26,5 +31,6 @@ $OptionalImageBuilderArgs += " --manifest manifest.json"
     -OSFilter $OSFilter `
     -PathFilters $PathFilters `
     -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
+    -OptionalTestArgs $optionalTestArgs `
     -SkipTesting:$SkipTesting `
     -ExcludeArchitecture

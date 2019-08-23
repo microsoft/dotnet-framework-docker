@@ -147,8 +147,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "all")]
-        [Trait("Category", "runtime-sdk")]
+        [Trait("Category", "runtime")]
+        [Trait("Category", "sdk")]
         [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -156,8 +156,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "all")]
-        [Trait("Category", "runtime-sdk")]
+        [Trait("Category", "runtime")]
+        [Trait("Category", "sdk")]
         [MemberData(nameof(GetVerifyRuntimeImagesData))]
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
@@ -165,7 +165,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "all")]
         [Trait("Category", "ASPNET")]
         [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
@@ -174,7 +173,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("3.5")]
-        [Trait("Category", "all")]
         [Trait("Category", "WCF")]
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)

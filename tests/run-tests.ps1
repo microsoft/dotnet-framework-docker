@@ -9,7 +9,7 @@ param(
     [string]$OSFilter,
     [string]$Registry,
     [string]$RepoPrefix,
-    [string]$TestCategory = "all",
+    [array]$TestCategories,
     [switch]$IsLocalRun,
     [string]$ImageInfoPath
 )
@@ -47,5 +47,30 @@ else {
     $env:LOCAL_RUN = $null
 }
 
-& dotnet test --filter Category=$TestCategory -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
+# Powershell treats each variable passed to the command line call as an individual argument.  But we're constructing the $testFilter variable
+# which actually consists of multiple command line arguments.  This causes the parsing to not interpret the command correctly.  To solve this,
+# we need to construct the parameters as an array rather than use variables in a direct call to the command line execution.
+$testArgs = @()
+$testFilter = ""
+if ($TestCategories) {
+    # Construct an expression that filters the test to each of the selected TestCategories (using an OR operator between each category)
+    # See https://docs.microsoft.com/en-us/dotnet/core/testing/selective-unit-tests
+    $TestCategories | foreach {
+        if ($testFilter) {
+            $testFilter += "|"
+        }
+
+        $testFilter += "Category=$_"
+    }
+
+    $testArgs += "--filter"
+    $testArgs += "`"$testFilter`""
+}
+
+$testArgs += "-c"
+$testArgs += "Release"
+$testArgs += "--logger:trx"
+$testArgs += "$PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj"
+
+& dotnet test $testArgs
 if ($LASTEXITCODE -ne 0) { throw "Tests Failed" }
