@@ -3,7 +3,7 @@
   "registry": "mcr.microsoft.com",
   "variables": {
     "RuntimeReleaseDateStamp": "20190910",
-    "SdkReleaseDateStamp": "20190910",
+    "SdkReleaseDateStamp": "20190923",
     "AspnetReleaseDateStamp": "20190910",
     "WcfReleaseDateStamp": "20190910"
   },
