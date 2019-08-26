@@ -5,12 +5,14 @@ pr:
 variables:
 - template: variables/common.yml
 - name: manifest
-  value: manifest.wcf.json
-- name: repoTestArgs 
-  value: "-TestCategory WCF"
+  value: manifest.json
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:
+    ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+      windowsAmdBuildJobTimeout: 300
+      windowsAmdTestJobTimeout: 120
     ${{ if eq(variables['System.TeamProject'], 'public') }}:
       buildMatrixType: platformVersionedOs
-      windowsAmdBuildJobTimeout: 120
+      customBuildLegGrouping: pr-build
+      windowsAmdBuildJobTimeout: 420

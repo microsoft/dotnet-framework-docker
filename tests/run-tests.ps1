@@ -9,10 +9,27 @@ param(
     [string]$OSFilter,
     [string]$Registry,
     [string]$RepoPrefix,
-    [string]$TestCategory,
+    [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf')]
+    [string[]]$TestCategories = @(),
     [switch]$IsLocalRun,
     [string]$ImageInfoPath
 )
+
+function Log {
+    param ([string] $Message)
+
+    Write-Output $Message
+}
+
+function Exec {
+    param ([string] $Cmd)
+
+    Log "Executing: '$Cmd'"
+    Invoke-Expression $Cmd
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed: '$Cmd'"
+    }
+}
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -47,5 +64,20 @@ else {
     $env:LOCAL_RUN = $null
 }
 
-& dotnet test --filter Category=$TestCategory -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj
-if ($LASTEXITCODE -ne 0) { throw "Tests Failed" }
+$testFilter = ""
+if ($TestCategories) {
+    # Construct an expression that filters the test to each of the
+    # selected TestCategories (using an OR operator between each category).
+    # See https://docs.microsoft.com/en-us/dotnet/core/testing/selective-unit-tests
+    $TestCategories | foreach {
+        if ($testFilter) {
+            $testFilter += "|"
+        }
+
+        $testFilter += "Category=$_"
+    }
+
+    $testFilter = "--filter `"$testFilter`""
+}
+
+Exec "dotnet test $testFilter -c Release --logger:trx $PSScriptRoot/Microsoft.DotNet.Framework.Docker.Tests/Microsoft.DotNet.Framework.Docker.Tests.csproj"

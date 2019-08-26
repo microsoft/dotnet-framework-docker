@@ -1,6 +1,7 @@
 # escape=`
 
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-1803
+ARG REPO=mcr.microsoft.com/dotnet/framework/aspnet
+FROM $REPO:4.8-windowsservercore-1803
 
 # Install Windows components required for WCF service hosted on IIS
 RUN Add-WindowsFeature NET-WCF-TCP-Activation45; `

@@ -1,6 +1,7 @@
 # escape=`
 
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2016
+ARG REPO=mcr.microsoft.com/dotnet/framework/aspnet
+FROM $REPO:4.8-windowsservercore-ltsc2016
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 

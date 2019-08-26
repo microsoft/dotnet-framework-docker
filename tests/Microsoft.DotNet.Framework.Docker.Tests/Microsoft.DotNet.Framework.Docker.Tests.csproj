@@ -19,7 +19,7 @@
     <Content Include="projects\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="../../manifest.runtime-sdk.json">
+    <Content Include="../../manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
