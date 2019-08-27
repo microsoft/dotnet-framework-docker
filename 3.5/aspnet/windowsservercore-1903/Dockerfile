@@ -1,6 +1,7 @@
 # escape=`
 
-FROM mcr.microsoft.com/dotnet/framework/runtime:3.5-windowsservercore-1903
+ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
+FROM $REPO:3.5-windowsservercore-1903
 
 RUN powershell -Command Add-WindowsFeature Web-Server & `
     powershell -Command Add-WindowsFeature Web-Asp-Net & `
