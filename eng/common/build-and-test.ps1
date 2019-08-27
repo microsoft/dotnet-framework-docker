@@ -4,7 +4,6 @@ param(
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
     [string]$ArchitectureFilter = "amd64",
-    [string]$PathFilters,
     [string]$OptionalImageBuilderArgs,
     [string]$OptionalTestArgs,
     [switch]$SkipTesting = $false,
@@ -32,16 +31,12 @@ function Exec {
 
 pushd $PSScriptRoot/../..
 try {
-    if (-not $PathFilters) {
-        $PathFilters = "$VersionFilter/*/$OSFilter"
-        if (-not $ExcludeArchitecture) {
-            $PathFilters += "/$ArchitectureFilter"
-        }
-
-        $PathFilters = "--path '$PathFilters'"
+    $pathFilter = "$VersionFilter/*/$OSFilter"
+    if (-not $ExcludeArchitecture) {
+        $pathFilter += "/$ArchitectureFilter"
     }
 
-    ./eng/common/Invoke-ImageBuilder.ps1 "build $PathFilters $OptionalImageBuilderArgs"
+    ./eng/common/Invoke-ImageBuilder.ps1 "build --path '$pathFilter' $OptionalImageBuilderArgs"
 
     if (-not $SkipTesting) {
         if (Test-Path ./tests/run-tests.ps1) {
