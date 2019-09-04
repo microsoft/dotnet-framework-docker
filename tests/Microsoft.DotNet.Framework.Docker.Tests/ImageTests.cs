@@ -249,10 +249,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 _dockerHelper.Build(
                     tag: appId,
                     dockerfile: Path.Combine(workDir, "Dockerfile"),
-                    buildContextPath: workDir,
-                    buildArgs: buildArgs);
+                    contextDir: workDir,
+                    buildArgs: buildArgs.ToArray());
 
-                _dockerHelper.Run(image: appId, containerName: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                _dockerHelper.Run(image: appId, name: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
                 if (!string.IsNullOrEmpty(testUrl))
                 {
                     VerifyHttpResponseFromContainer(appId, testUrl);
@@ -275,7 +275,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Ensure image exists locally
             if (IsLocalRun)
             {
-                Assert.True(_dockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
+                Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
             }
             else
             {

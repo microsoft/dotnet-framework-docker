@@ -1,16 +1,21 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
+
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class DockerHelper
     {
+        public static string DockerOS => GetDockerOS();
+        public static string ContainerWorkDir => IsLinuxContainerModeEnabled ? "/sandbox" : "c:\\sandbox";
+        public static bool IsLinuxContainerModeEnabled => string.Equals(DockerOS, "linux", StringComparison.OrdinalIgnoreCase);
+
         private ITestOutputHelper OutputHelper { get; set; }
 
         public DockerHelper(ITestOutputHelper outputHelper)
@@ -18,9 +23,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             OutputHelper = outputHelper;
         }
 
-        public void Build(string tag, string dockerfile, string buildContextPath, IEnumerable<string> buildArgs)
+        public void Build(
+            string tag,
+            string dockerfile = null,
+            string target = null,
+            string contextDir = ".",
+            params string[] buildArgs)
         {
-            string buildArgsOption = null;
+            string buildArgsOption = string.Empty;
             if (buildArgs != null)
             {
                 foreach (string arg in buildArgs)
@@ -29,10 +39,15 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 }
             }
 
-            Execute($"build -t {tag} {buildArgsOption} -f {dockerfile} {buildContextPath}");
+            string targetArg = target == null ? string.Empty : $" --target {target}";
+            string dockerfileArg = dockerfile == null ? string.Empty : $" -f {dockerfile}";
+
+            ExecuteWithLogging($"build -t {tag}{targetArg}{buildArgsOption}{dockerfileArg} {contextDir}");
         }
 
-        public bool ContainerExists(string name) => ResourceExists("container", $"-f \"name={name}\"");
+        public static bool ContainerExists(string name) => ResourceExists("container", $"-f \"name={name}\"");
+
+        public void Copy(string src, string dest) => ExecuteWithLogging($"cp {src} {dest}");
 
         public void DeleteContainer(string container, bool captureLogs = false)
         {
@@ -40,10 +55,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 if (captureLogs)
                 {
-                    Execute($"logs {container}");
+                    ExecuteWithLogging($"logs {container}", ignoreErrors: true);
                 }
 
-                Execute($"container rm -f {container}");
+                ExecuteWithLogging($"container rm -f {container}");
             }
         }
 
@@ -51,59 +66,163 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             if (ImageExists(tag))
             {
-                Execute($"image rm -f {tag}");
+                ExecuteWithLogging($"image rm -f {tag}");
             }
         }
 
-        private string Execute(string args, bool ignoreErrors = false)
+        private static string Execute(
+            string args, bool ignoreErrors = false, bool autoRetry = false, ITestOutputHelper outputHelper = null)
         {
-            OutputHelper.WriteLine($"Executing : docker {args}");
-            ProcessStartInfo startInfo = new ProcessStartInfo("docker", args);
-            startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardError = true;
-            Process process = Process.Start(startInfo);
-            StringBuilder stdError = new StringBuilder();
-            Action<object, DataReceivedEventArgs> errorDataReceived = (sender, e) => stdError.AppendLine(e.Data);
-            process.ErrorDataReceived += new DataReceivedEventHandler(errorDataReceived);
+            (Process Process, string StdOut, string StdErr) result;
+            if (autoRetry)
+            {
+                result = ExecuteWithRetry(args, outputHelper, ExecuteProcess);
+            }
+            else
+            {
+                result = ExecuteProcess(args, outputHelper);
+            }
 
-            string result = process.StandardOutput.ReadToEnd();
-            OutputHelper.WriteLine(result);
+            if (!ignoreErrors && result.Process.ExitCode != 0)
+            {
+                ProcessStartInfo startInfo = result.Process.StartInfo;
+                string msg = $"Failed to execute {startInfo.FileName} {startInfo.Arguments}" +
+                    $"{Environment.NewLine}Exit code: {result.Process.ExitCode}" +
+                    $"{Environment.NewLine}Standard Error: {result.StdErr}";
+                throw new InvalidOperationException(msg);
+            }
+
+            return result.StdOut;
+        }
+
+        private static (Process Process, string StdOut, string StdErr) ExecuteProcess(
+            string args, ITestOutputHelper outputHelper)
+        {
+            Process process = new Process
+            {
+                EnableRaisingEvents = true,
+                StartInfo =
+                {
+                    FileName = "docker",
+                    Arguments = args,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                }
+            };
+
+            StringBuilder stdOutput = new StringBuilder();
+            process.OutputDataReceived += new DataReceivedEventHandler((sender, e) => stdOutput.AppendLine(e.Data));
+
+            StringBuilder stdError = new StringBuilder();
+            process.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => stdError.AppendLine(e.Data));
+
+            process.Start();
+            process.BeginOutputReadLine();
             process.BeginErrorReadLine();
             process.WaitForExit();
 
-            if (process.ExitCode != 0 && !ignoreErrors)
+            string output = stdOutput.ToString().Trim();
+            if (outputHelper != null && !string.IsNullOrWhiteSpace(output))
             {
-                string msg = $"Failed to execute {startInfo.FileName} {startInfo.Arguments}{Environment.NewLine}{stdError}";
-                throw new InvalidOperationException(msg);
+                outputHelper.WriteLine(output);
+            }
+
+            string error = stdError.ToString().Trim();
+            if (outputHelper != null && !string.IsNullOrWhiteSpace(error))
+            {
+                outputHelper.WriteLine(error);
+            }
+
+            return (process, output, error);
+        }
+
+        private string ExecuteWithLogging(string args, bool ignoreErrors = false, bool autoRetry = false)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            OutputHelper.WriteLine($"Executing: docker {args}");
+            string result = Execute(args, outputHelper: OutputHelper, ignoreErrors: ignoreErrors, autoRetry: autoRetry);
+
+            stopwatch.Stop();
+            OutputHelper.WriteLine($"Execution Elapsed Time: {stopwatch.Elapsed}");
+
+            return result;
+        }
+
+        private static (Process Process, string StdOut, string StdErr) ExecuteWithRetry(
+            string args,
+            ITestOutputHelper outputHelper,
+            Func<string, ITestOutputHelper, (Process Process, string StdOut, string StdErr)> executor)
+        {
+            const int maxRetries = 5;
+            const int waitFactor = 5;
+
+            int retryCount = 0;
+
+            (Process Process, string StdOut, string StdErr) result = executor(args, outputHelper);
+            while (result.Process.ExitCode != 0)
+            {
+                retryCount++;
+                if (retryCount >= maxRetries)
+                {
+                    break;
+                }
+
+                int waitTime = Convert.ToInt32(Math.Pow(waitFactor, retryCount - 1));
+                if (outputHelper != null)
+                {
+                    outputHelper.WriteLine($"Retry {retryCount}/{maxRetries}, retrying in {waitTime} seconds...");
+                }
+
+                Thread.Sleep(waitTime * 1000);
+                result = executor(args, outputHelper);
             }
 
             return result;
         }
 
-        public bool ImageExists(string tag) => ResourceExists("image", tag);
+        private static string GetDockerOS() => Execute("version -f \"{{ .Server.Os }}\"");
 
-        public void Run(string image, string containerName, string command, bool detach = false)
+        public string GetContainerAddress(string container) =>
+            ExecuteWithLogging("inspect -f \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\" " + container);
+
+        public string GetContainerHostPort(string container, int containerPort = 80) =>
+            ExecuteWithLogging(
+                $"inspect -f \"{{{{(index (index .NetworkSettings.Ports \\\"{containerPort}/tcp\\\") 0).HostPort}}}}\" {container}");
+
+        public string GetContainerWorkPath(string relativePath)
         {
-            string options = detach ? "run --rm -d --name" : "run --rm --name";
-            Execute($"{options} {containerName} {image} {command}");
+            string separator = IsLinuxContainerModeEnabled ? "/" : "\\";
+            return $"{ContainerWorkDir}{separator}{relativePath}";
         }
 
-        public void Pull(string image)
-        {
-            Execute($"pull {image}");
-        }
+        public static bool ImageExists(string tag) => ResourceExists("image", tag);
 
-        private bool ResourceExists(string type, string filterArg)
+        public void Pull(string image) => ExecuteWithLogging($"pull {image}", autoRetry: true);
+
+        private static bool ResourceExists(string type, string filterArg)
         {
             string output = Execute($"{type} ls -a -q {filterArg}", true);
             return output != "";
         }
 
-        public string GetContainerAddress(string container)
+        public string Run(
+            string image,
+            string name,
+            string command = null,
+            string workdir = null,
+            string optionalRunArgs = null,
+            bool detach = false,
+            bool runAsContainerAdministrator = false,
+            bool skipAutoCleanup = false)
         {
-            string address = Execute("inspect -f \"{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}\" " + container);
-            //remove the last character of the address
-            return address.Remove(address.Length - 1);
+            string cleanupArg = skipAutoCleanup ? string.Empty : " --rm";
+            string detachArg = detach ? " -d -t" : string.Empty;
+            string userArg = runAsContainerAdministrator ? " -u ContainerAdministrator" : string.Empty;
+            string workdirArg = workdir == null ? string.Empty : $" -w {workdir}";
+            return ExecuteWithLogging(
+                $"run --name {name}{cleanupArg}{workdirArg}{userArg}{detachArg} {optionalRunArgs} {image} {command}");
         }
     }
 }
