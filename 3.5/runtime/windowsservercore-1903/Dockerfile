@@ -11,11 +11,11 @@ RUN curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.win
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Apply latest patch
-RUN curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/07/windows10.0-kb4506991-x64_a0962ce8ceeb7faf10c6c95696eca09b36563f76.msu `
+RUN curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/09/windows10.0-kb4514359-x86_620f0dfcc5171ffb477b43c9fc904d13c7d4e52a.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4506991-x64.cab `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4514359-x64.cab `
     && rmdir /S /Q patch
 
 # ngen .NET 3.5 Fx
