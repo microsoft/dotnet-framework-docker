@@ -321,7 +321,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyHttpResponseFromContainer(string containerName, string urlPath)
         {
-            var retries = 30;
+            var retries = 60;
 
             // Can't use localhost when running inside containers or Windows.
             var url = $"http://{_dockerHelper.GetContainerAddress(containerName)}" + urlPath;
@@ -331,7 +331,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 while (retries > 0)
                 {
                     retries--;
-                    Thread.Sleep(TimeSpan.FromSeconds(2));
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
                     try
                     {
                         using (HttpResponseMessage result = client.GetAsync(url).Result)
