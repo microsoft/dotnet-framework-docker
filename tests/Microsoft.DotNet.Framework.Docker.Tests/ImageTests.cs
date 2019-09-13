@@ -29,22 +29,34 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         private static string VersionFilter => Environment.GetEnvironmentVariable("IMAGE_VERSION_FILTER");
-        private static ImageDescriptor[] TestData = new ImageDescriptor[]
+        private static ImageDescriptor[] RuntimeTestData = new ImageDescriptor[]
         {
             new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
             new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
             new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
-            new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.6.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
-            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
-            new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
             new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
-            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1903 },
+        };
+
+        private static ImageDescriptor[] SdkTestData = new ImageDescriptor[]
+        {
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_LTSC2019 },
+            new ImageDescriptor { RuntimeVersion = "3.5", BuildVersion = "3.5", OsVariant = WSC_1903 },
+            new ImageDescriptor { RuntimeVersion = "4.7.1", BuildVersion = "4.7.1", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2016 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_1803 },
+            new ImageDescriptor { RuntimeVersion = "4.7.2", BuildVersion = "4.7.2", OsVariant = WSC_LTSC2019 },
             new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_1803 },
             new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2016 },
             new ImageDescriptor { RuntimeVersion = "4.8", BuildVersion = "4.8", OsVariant = WSC_LTSC2019 },
@@ -112,7 +124,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
         {
-            return GetVerifyImagesData(TestData);
+            return GetVerifyImagesData(RuntimeTestData);
+        }
+
+        public static IEnumerable<object[]> GetVerifySdkImagesData()
+        {
+            return GetVerifyImagesData(SdkTestData);
         }
 
         public static IEnumerable<object[]> GetVerifyAspnetImagesData()
@@ -160,6 +177,43 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
+        }
+
+        /// <summary>
+        /// Verifies the SDK images contain the expected targeting packs.
+        /// </summary>
+        [SkippableTheory("4.6.2", "4.7")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetVerifySdkImagesData))]
+        public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
+        {
+            Version[] allFrameworkVersions = new Version[]
+            {
+                new Version("4.0"),
+                new Version("4.5"),
+                new Version("4.5.1"),
+                new Version("4.5.2"),
+                new Version("4.6"),
+                new Version("4.6.1"),
+                new Version("4.6.2"),
+                new Version("4.7"),
+                new Version("4.7.1"),
+                new Version("4.7.2"),
+                new Version("4.8")
+            };
+
+            string baseBuildImage = GetImage("sdk", imageDescriptor.BuildVersion, imageDescriptor.OsVariant);
+            string appId = $"targetingpacks-{DateTime.Now.ToFileTime()}";
+            string command = @"cmd /c dir /B ""C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework""";
+            string output = _dockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
+            IEnumerable<Version> actualVersions = output.Split(Environment.NewLine)
+                .Select(name => new Version(name.Substring(1))); // Trim the first character (v4.0 => 4.0)
+
+            Version buildVersion = new Version(imageDescriptor.BuildVersion);
+            IEnumerable<Version> expectedVersions = allFrameworkVersions.Where(version => version <= buildVersion);
+
+            Assert.Equal(expectedVersions, actualVersions);
         }
 
         [Theory]
@@ -354,14 +408,18 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private class SkippableTheoryAttribute : TheoryAttribute
         {
-            public SkippableTheoryAttribute(string skipOnRuntimeVersion)
+            public SkippableTheoryAttribute(params string[] skipOnRuntimeVersions)
             {
                 if (VersionFilter != "*")
                 {
                     string versionFilterPattern = VersionFilter != null ? GetFilterRegexPattern(VersionFilter) : null;
-                    if (Regex.IsMatch(skipOnRuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                    foreach (string skipOnRuntimeVersion in skipOnRuntimeVersions)
                     {
-                        Skip = $"{skipOnRuntimeVersion} is unsupported";
+                        if (Regex.IsMatch(skipOnRuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                        {
+                            Skip = $"{skipOnRuntimeVersion} is unsupported";
+                            break;
+                        }
                     }
                 }
             }
