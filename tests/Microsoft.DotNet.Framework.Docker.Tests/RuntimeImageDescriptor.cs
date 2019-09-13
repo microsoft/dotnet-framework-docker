@@ -4,9 +4,8 @@
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    public class ImageDescriptor
+    public class RuntimeImageDescriptor : ImageDescriptor
     {
-        public string Version { get; set; }
-        public string OsVariant { get; set; }
+        public string SdkVersion { get; set; }
     }
 }
