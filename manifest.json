@@ -3,7 +3,8 @@
   "registry": "mcr.microsoft.com",
   "variables": {
     "RuntimeReleaseDateStamp": "20190910",
-    "SdkReleaseDateStamp": "20190910",
+    "16.2-SdkReleaseDateStamp": "20190910",
+    "SdkReleaseDateStamp": "20190923",
     "AspnetReleaseDateStamp": "20190910",
     "WcfReleaseDateStamp": "20190910"
   },
@@ -321,7 +322,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(16.2-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             }
