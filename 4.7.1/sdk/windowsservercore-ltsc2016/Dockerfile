@@ -30,7 +30,7 @@ RUN `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/af181144-6075-4ca1-8543-9dbdeffb1b79/9d09c436e510d44ae798146b36153624/vs_buildtools.exe `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/f7e4b23c-a833-4926-a096-881a57b4cff2/46215d4e73cd15e9ff7f00cada35ff95cfb41c388cc537bdf7816b0b10d7f95d/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     && setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1 `
