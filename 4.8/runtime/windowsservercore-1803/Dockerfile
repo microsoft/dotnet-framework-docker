@@ -9,11 +9,11 @@ RUN curl -fSLo dotnet-framework-installer.exe https://download.visualstudio.micr
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # Apply latest patch
-RUN curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/09/windows10.0-kb4514357-x64_2c821ae454ee44636d3e3d7ffaed96b41a415153.msu `
+RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2019/09/windows10.0-kb4515842-x64_ef9cc729b6b45824ff614184bc1d4f90c0bcdaee.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4514357-x64.cab `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4515842-x64.cab `
     && rmdir /S /Q patch
 
 # ngen .NET Fx
