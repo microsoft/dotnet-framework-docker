@@ -39,6 +39,7 @@ RUN `
             -Uri "https://download.visualstudio.microsoft.com/download/pr/1d102ee6-9263-4353-8676-6430f0cc5998/1e779e07d0265e229adf69a6b67ebeecd24afe3179c1b15864f3fb81533aa89f/vs_TestAgent.exe" `
             -OutFile vs_TestAgent.exe `
     && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
+    && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
     # Install VS Build Tools
@@ -57,6 +58,7 @@ RUN `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `
         --quiet --norestart --nocache --wait `
+    && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
     `
     # Cleanup
