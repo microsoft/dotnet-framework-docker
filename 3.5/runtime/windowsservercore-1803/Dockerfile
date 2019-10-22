@@ -18,7 +18,7 @@ RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/s
     && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\Windows10.0-kb4520008-x64.cab `
     && rmdir /S /Q patch
 
-# ngen .NET 3.5 Fx
+# ngen .NET Fx
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
 RUN \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
     && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update `
