@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    public class SdkImageTests
+    public class SdkOnlyImageTests
     {
         private static ImageDescriptor[] SdkTestData = new ImageDescriptor[]
         {
@@ -30,14 +30,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private readonly ImageTestHelper imageTestHelper;
 
-        public SdkImageTests(ITestOutputHelper outputHelper)
+        public SdkOnlyImageTests(ITestOutputHelper outputHelper)
         {
             imageTestHelper = new ImageTestHelper(outputHelper);
         }
 
         public static IEnumerable<object[]> GetVerifySdkImagesData()
         {
-            return ImageTestHelper.GetVerifyImagesData(SdkTestData);
+            return ImageTestHelper.ApplyImageDataFilters(SdkTestData);
         }
 
         /// <summary>

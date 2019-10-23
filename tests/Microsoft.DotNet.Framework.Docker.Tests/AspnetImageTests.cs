@@ -41,28 +41,23 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyAspnetImagesData))]
         public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyAspnetImages(imageDescriptor);
-        }
-
-        public static IEnumerable<object[]> GetVerifyAspnetImagesData()
-        {
-            return ImageTestHelper.GetVerifyImagesData(AspnetTestData);
-        }
-
-        private void VerifyAspnetImages(ImageDescriptor imageDescriptor)
-        {
             List<string> appBuildArgs = new List<string> { };
 
             string baseAspnetImage = imageTestHelper.GetImage("aspnet", imageDescriptor.Version, imageDescriptor.OsVariant);
             appBuildArgs.Add($"BASE_ASPNET_IMAGE={baseAspnetImage}");
 
-            imageTestHelper.VerifyImages(
+            imageTestHelper.BuildAndTestImage(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: "aspnet",
                 runCommand: "",
                 testUrl: "/hello-world.aspx"
                 );
+        }
+
+        public static IEnumerable<object[]> GetVerifyAspnetImagesData()
+        {
+            return ImageTestHelper.ApplyImageDataFilters(AspnetTestData);
         }
     }
 }

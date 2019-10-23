@@ -44,7 +44,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             });
         }
 
-        public static IEnumerable<object[]> GetVerifyImagesData(IEnumerable<ImageDescriptor> imageDescriptors)
+        public static IEnumerable<object[]> ApplyImageDataFilters(IEnumerable<ImageDescriptor> imageDescriptors)
         {
             string versionFilterPattern =
                 Config.VersionFilter != null ? Config.GetFilterRegexPattern(Config.VersionFilter) : null;
@@ -60,7 +60,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 .Select(imageDescriptor => new object[] { imageDescriptor });
         }
 
-        public void VerifyImages(
+        public void BuildAndTestImage(
             ImageDescriptor imageDescriptor,
             IEnumerable<string> buildArgs,
             string appDescriptor, 

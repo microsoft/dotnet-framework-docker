@@ -37,28 +37,23 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetVerifyWcfImagesData))]
         public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
         {
-            VerifyWcfImages(imageDescriptor);
-        }
-
-        public static IEnumerable<object[]> GetVerifyWcfImagesData()
-        {
-            return ImageTestHelper.GetVerifyImagesData(WcfTestData);
-        }
-
-        private void VerifyWcfImages(ImageDescriptor imageDescriptor)
-        {
             List<string> appBuildArgs = new List<string> { };
 
             string baseWCFImage = imageTestHelper.GetImage("wcf", imageDescriptor.Version, imageDescriptor.OsVariant);
             appBuildArgs.Add($"BASE_WCF_IMAGE={baseWCFImage}");
 
-            imageTestHelper.VerifyImages(
+            imageTestHelper.BuildAndTestImage(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: "wcf",
                 runCommand: "",
                 testUrl: "/Service1.svc"
                 );
+        }
+
+        public static IEnumerable<object[]> GetVerifyWcfImagesData()
+        {
+            return ImageTestHelper.ApplyImageDataFilters(WcfTestData);
         }
     }
 }

@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    public class RuntimeImageTests
+    public class RuntimeSdkImageTests
     {
         private static RuntimeImageDescriptor[] RuntimeTestData = new RuntimeImageDescriptor[]
         {
@@ -30,7 +30,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private readonly ImageTestHelper imageTestHelper;
 
-        public RuntimeImageTests(ITestOutputHelper outputHelper)
+        public RuntimeSdkImageTests(ITestOutputHelper outputHelper)
         {
             imageTestHelper = new ImageTestHelper(outputHelper);
         }
@@ -55,7 +55,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
         {
-            return ImageTestHelper.GetVerifyImagesData(RuntimeTestData);
+            return ImageTestHelper.ApplyImageDataFilters(RuntimeTestData);
         }
 
         private void VerifyFxImages(RuntimeImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
@@ -69,7 +69,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
-            imageTestHelper.VerifyImages(
+            imageTestHelper.BuildAndTestImage(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: appDescriptor,
