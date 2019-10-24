@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class AspnetImageTests
     {
-        private static ImageDescriptor[] AspnetTestData = new ImageDescriptor[]
+        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1803 },
@@ -38,8 +38,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         [Theory]
         [Trait("Category", "aspnet")]
-        [MemberData(nameof(GetVerifyAspnetImagesData))]
-        public void VerifyAspnetImagesWithApps(ImageDescriptor imageDescriptor)
+        [MemberData(nameof(GetImageData))]
+        public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
             List<string> appBuildArgs = new List<string> { };
 
@@ -55,9 +55,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 );
         }
 
-        public static IEnumerable<object[]> GetVerifyAspnetImagesData()
+        public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(AspnetTestData);
+            return ImageTestHelper.ApplyImageDataFilters(ImageData);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class WcfImageTests
     {
-        private static ImageDescriptor[] WcfTestData = new ImageDescriptor[]
+        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
@@ -34,8 +34,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
         [SkippableTheory("3.5")]
         [Trait("Category", "wcf")]
-        [MemberData(nameof(GetVerifyWcfImagesData))]
-        public void VerifyWcfImagesWithApps(ImageDescriptor imageDescriptor)
+        [MemberData(nameof(GetImageData))]
+        public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
             List<string> appBuildArgs = new List<string> { };
 
@@ -51,9 +51,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 );
         }
 
-        public static IEnumerable<object[]> GetVerifyWcfImagesData()
+        public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(WcfTestData);
+            return ImageTestHelper.ApplyImageDataFilters(ImageData);
         }
     }
 }

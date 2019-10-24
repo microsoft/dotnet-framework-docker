@@ -12,7 +12,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class SdkOnlyImageTests
     {
-        private static ImageDescriptor[] SdkTestData = new ImageDescriptor[]
+        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1803 },
@@ -35,9 +35,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             imageTestHelper = new ImageTestHelper(outputHelper);
         }
 
-        public static IEnumerable<object[]> GetVerifySdkImagesData()
+        public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(SdkTestData);
+            return ImageTestHelper.ApplyImageDataFilters(ImageData);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         /// </summary>
         [SkippableTheory("4.6.2", "4.7")]
         [Trait("Category", "sdk")]
-        [MemberData(nameof(GetVerifySdkImagesData))]
+        [MemberData(nameof(GetImageData))]
         public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
         {
             Version[] allFrameworkVersions = new Version[]

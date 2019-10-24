@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class RuntimeSdkImageTests
     {
-        private static RuntimeImageDescriptor[] RuntimeTestData = new RuntimeImageDescriptor[]
+        private static RuntimeImageDescriptor[] ImageData = new RuntimeImageDescriptor[]
         {
             new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_1803 },
@@ -38,7 +38,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [Theory]
         [Trait("Category", "runtime")]
         [Trait("Category", "sdk")]
-        [MemberData(nameof(GetVerifyRuntimeImagesData))]
+        [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithApps(RuntimeImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "dotnetapp", "", true);
@@ -47,15 +47,15 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [Theory]
         [Trait("Category", "runtime")]
         [Trait("Category", "sdk")]
-        [MemberData(nameof(GetVerifyRuntimeImagesData))]
+        [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithWebApps(RuntimeImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
-        public static IEnumerable<object[]> GetVerifyRuntimeImagesData()
+        public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(RuntimeTestData);
+            return ImageTestHelper.ApplyImageDataFilters(ImageData);
         }
 
         private void VerifyFxImages(RuntimeImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
