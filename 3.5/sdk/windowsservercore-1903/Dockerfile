@@ -4,7 +4,7 @@ ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:3.5-windowsservercore-1903
 
 # Install NuGet CLI
-ENV NUGET_VERSION 4.4.1
+ENV NUGET_VERSION 4.4.3
 RUN mkdir "%ProgramFiles%\NuGet" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
 
