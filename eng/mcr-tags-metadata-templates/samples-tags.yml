@@ -1,4 +1,8 @@
 $(McrTagsYmlRepo:samples)
+$(McrTagsYmlTagGroup:dotnetapp-windowsservercore-1909)
+$(McrTagsYmlTagGroup:aspnetapp-windowsservercore-1909)
+$(McrTagsYmlTagGroup:wcfservice-windowsservercore-1909)
+$(McrTagsYmlTagGroup:wcfclient-windowsservercore-1909)
 $(McrTagsYmlTagGroup:dotnetapp-windowsservercore-1903)
 $(McrTagsYmlTagGroup:aspnetapp-windowsservercore-1903)
 $(McrTagsYmlTagGroup:wcfservice-windowsservercore-1903)
