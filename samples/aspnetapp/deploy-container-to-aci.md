@@ -63,7 +63,7 @@ You can deploy Windows images with the following command, which includes `--os-t
 az container create --name aspnetapp --image richlander.azurecr.io/aspnetapp --resource-group richlander-containers --ip-address public --os-type Windows
 ```
 
-> Note: Azure Container Instances currently supports Windows Server 2016 images based on Long-Term Servicing Channel (LTSC) versions. Windows Semi-Annual Channel (SAC) releases like 1803 and 1903 are unsupported.
+> Note: Azure Container Instances do not support all versions of Windows images.  See [What Windows base OS images are supported](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-faq#what-windows-base-os-images-are-supported) for details.
 
 ## Running the Image
 

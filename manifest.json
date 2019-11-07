@@ -55,6 +55,15 @@
                 "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
+            },
+            {
+              "dockerfile": "4.8/runtime/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-windowsservercore-1909": {}
+              }
             }
           ]
         },
@@ -198,6 +207,15 @@
                 "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
                 "3.5-windowsservercore-1903": {}
               }
+            },
+            {
+              "dockerfile": "3.5/runtime/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-windowsservercore-1909": {}
+              }
             }
           ]
         }
@@ -261,6 +279,18 @@
               "tags": {
                 "4.8-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/sdk/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-windowsservercore-1909": {}
               }
             }
           ]
@@ -379,6 +409,18 @@
                 "3.5-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
                 "3.5-windowsservercore-1903": {}
               }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/sdk/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-windowsservercore-1909": {}
+              }
             }
           ]
         }
@@ -442,6 +484,18 @@
               "tags": {
                 "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "4.8/aspnet/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-windowsservercore-1909": {}
               }
             }
           ]
@@ -598,6 +652,18 @@
                 "3.5-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
                 "3.5-windowsservercore-1903": {}
               }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "3.5/aspnet/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-windowsservercore-1909": {}
+              }
             }
           ]
         }
@@ -661,6 +727,18 @@
               "tags": {
                 "4.8-$(WcfReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:aspnet)"
+              },
+              "dockerfile": "4.8/wcf/windowsservercore-1909",
+              "os": "windows",
+              "osVersion": "windowsservercore-1909",
+              "tags": {
+                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-windowsservercore-1909": {}
               }
             }
           ]
