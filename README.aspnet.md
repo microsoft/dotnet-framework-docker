@@ -65,24 +65,24 @@ Tag | Dockerfile
 Tag | Dockerfile
 ---------| ---------------
 4.8-20191008-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.8/aspnet/windowsservercore-ltsc2019/Dockerfile)
-4.7.2-20191008-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/aspnet/windowsservercore-ltsc2019/Dockerfile)
+4.7.2-20191112-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/aspnet/windowsservercore-ltsc2019/Dockerfile)
 3.5-20191008-windowsservercore-ltsc2019, 3.5-windowsservercore-ltsc2019, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/3.5/aspnet/windowsservercore-ltsc2019/Dockerfile)
 
 ## Windows Server, version 1803 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
 4.8-20191008-windowsservercore-1803, 4.8-windowsservercore-1803, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.8/aspnet/windowsservercore-1803/Dockerfile)
-4.7.2-20191008-windowsservercore-1803, 4.7.2-windowsservercore-1803, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/aspnet/windowsservercore-1803/Dockerfile)
+4.7.2-20191112-windowsservercore-1803, 4.7.2-windowsservercore-1803, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/aspnet/windowsservercore-1803/Dockerfile)
 3.5-20191008-windowsservercore-1803, 3.5-windowsservercore-1803, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/3.5/aspnet/windowsservercore-1803/Dockerfile)
 
 ## Windows Server 2016 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
 4.8-20191008-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.8/aspnet/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20191008-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/aspnet/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20191008-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.1/aspnet/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20191112-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.2/aspnet/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20191112-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7.1/aspnet/windowsservercore-ltsc2016/Dockerfile)
 4.7-20191008-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.7/aspnet/windowsservercore-ltsc2016/Dockerfile)
-4.6.2-20191008-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.6.2/aspnet/windowsservercore-ltsc2016/Dockerfile)
+4.6.2-20191112-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.6.2/aspnet/windowsservercore-ltsc2016/Dockerfile)
 3.5-20191008-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/3.5/aspnet/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/aspnet at https://mcr.microsoft.com/v2/dotnet/framework/aspnet/tags/list.
