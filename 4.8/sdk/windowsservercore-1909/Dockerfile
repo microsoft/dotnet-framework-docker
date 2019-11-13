@@ -45,13 +45,14 @@ ENV DOTNET_USE_POLLING_FILE_WATCHER true `
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 RUN `
-    # Workaround for issue with 32 bit assemblies from .NET Framework 4.8 SDK being 64 bit ngen'ed
+    # Workaround for issues with 64-bit ngen 
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=Neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=msil" `
     `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     `
-    # Workaround VS installer/ngen issues
+    # Workaround for issues with 32-bit ngen
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\VSWebLauncher.exe" `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn\csc.exe.config" `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn\csc.rsp" `
@@ -66,6 +67,7 @@ RUN `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn\VBCSCompiler.exe.config" `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn\Microsoft.DiaSymReader.Native.amd64.dll" `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn\Microsoft.DiaSymReader.Native.x86.dll" `
+    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=Neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=msil" `
     `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
 
