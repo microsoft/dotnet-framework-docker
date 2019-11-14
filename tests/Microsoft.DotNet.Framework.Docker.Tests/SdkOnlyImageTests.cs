@@ -15,11 +15,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1803 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1909 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1803 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1903 },
