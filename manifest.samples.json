@@ -24,14 +24,6 @@
             {
               "dockerfile": "samples/dotnetapp",
               "os": "windows",
-              "osVersion": "windowsservercore-1803",
-              "tags": {
-                "dotnetapp-windowsservercore-1803": {}
-              }
-            },
-            {
-              "dockerfile": "samples/dotnetapp",
-              "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
                 "dotnetapp-windowsservercore-ltsc2019": {}
@@ -66,14 +58,6 @@
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "aspnetapp-windowsservercore-ltsc2016": {}
-              }
-            },
-            {
-              "dockerfile": "samples/aspnetapp",
-              "os": "windows",
-              "osVersion": "windowsservercore-1803",
-              "tags": {
-                "aspnetapp-windowsservercore-1803": {}
               }
             },
             {
@@ -118,14 +102,6 @@
             {
               "dockerfile": "samples/wcfapp/Dockerfile.web",
               "os": "windows",
-              "osVersion": "windowsservercore-1803",
-              "tags": {
-                "wcfservice-windowsservercore-1803": {}
-              }
-            },
-            {
-              "dockerfile": "samples/wcfapp/Dockerfile.web",
-              "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
                 "wcfservice-windowsservercore-ltsc2019": {}
@@ -160,14 +136,6 @@
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
                 "wcfclient-windowsservercore-ltsc2016": {}
-              }
-            },
-            {
-              "dockerfile": "samples/wcfapp/Dockerfile.client",
-              "os": "windows",
-              "osVersion": "windowsservercore-1803",
-              "tags": {
-                "wcfclient-windowsservercore-1803": {}
               }
             },
             {
