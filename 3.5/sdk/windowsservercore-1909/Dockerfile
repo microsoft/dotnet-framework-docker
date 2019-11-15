@@ -40,8 +40,8 @@ RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbina
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
-ENV DOTNET_USE_POLLING_FILE_WATCHER true `
-    ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true `
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 RUN `
