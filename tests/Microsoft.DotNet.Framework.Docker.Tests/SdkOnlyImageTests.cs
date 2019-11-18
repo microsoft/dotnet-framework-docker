@@ -39,6 +39,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         /// <summary>
         /// Verifies the SDK images contain the expected targeting packs.
         /// </summary>
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
         [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
@@ -75,6 +76,28 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
 
             Assert.Equal(expectedVersions, actualVersions);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
+        {
+            List<EnvironmentVariableInfo> variables = new List<EnvironmentVariableInfo>();
+
+            variables.AddRange(RuntimeOnlyImageTests.GetRuntimeEnvironmentVariableInfos(imageDescriptor));
+
+            variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION",
+                @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"));
+
+            if (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
+                imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019 &&
+                imageDescriptor.OsVariant != OsVersion.WSC_1903)
+            {
+                variables.Add(new EnvironmentVariableInfo("DOTNET_USE_POLLING_FILE_WATCHER", "true"));
+            }
+
+            EnvironmentVariableInfo.Validate(variables, "sdk", imageDescriptor, imageTestHelper);
         }
     }
 }
