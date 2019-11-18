@@ -40,6 +40,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
+        [Trait("Category", "runtime")]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {

@@ -79,6 +79,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
