@@ -128,13 +128,13 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                         {
                             Path = val.Dockerfile.Path,
                             VersionGroupName = UrlVersionGroupName,
-                            Regex = new Regex(@$"# Apply latest patch(.|\n)+-Uri ""(?<{UrlVersionGroupName}>http:\/\/\S+)""")
+                            Regex = new Regex(@$"# Apply latest patch(.|\n)+(?<{UrlVersionGroupName}>http:\/\/[^\s""]+)")
                         },
                         new CustomFileRegexUpdater(ParseCabFileName(val.LcuConfigInfo!.Value.Config.DownloadUrl), val.LcuConfigInfo!.Value.BuildInfoName)
                         {
                             Path = val.Dockerfile.Path,
                             VersionGroupName = CabFileVersionGroupName,
-                            Regex = new Regex(@$"# Apply latest patch(.|\n)+&& dism.+C:\\patch\\(?<{CabFileVersionGroupName}>\S+)")
+                            Regex = new Regex(@$"# Apply latest patch(.|\n)+dism.+C:\\patch\\(?<{CabFileVersionGroupName}>\S+)", RegexOptions.IgnoreCase)
                         }
                     }
                 );
@@ -157,19 +157,19 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                         {
                             VersionGroupName = TestAgentGroupName,
                             Path = dockerfile.Path,
-                            Regex = new Regex(@$"curl.+vs_TestAgent\.exe (?<{TestAgentGroupName}>https:\/\/\S+)"),
+                            Regex = new Regex(@$"(?<{TestAgentGroupName}>https:\/\/\S+vs_TestAgent\.exe)"),
                         },
                         new CustomFileRegexUpdater(vsConfig.BuildToolsUrl, dockerfile.BuildInfoName)
                         {
                             VersionGroupName = BuildToolsGroupName,
                             Path = dockerfile.Path,
-                            Regex = new Regex(@$"curl.+vs_BuildTools\.exe (?<{BuildToolsGroupName}>https:\/\/\S+)"),
+                            Regex = new Regex(@$"(?<{BuildToolsGroupName}>https:\/\/\S+vs_BuildTools\.exe)"),
                         },
                         new CustomFileRegexUpdater(vsConfig.WebTargetsUrl, dockerfile.BuildInfoName)
                         {
                             VersionGroupName = WebTargetsGroupName,
                             Path = dockerfile.Path,
-                            Regex = new Regex(@$"curl.+MSBuild.Microsoft.VisualStudio.Web.targets.zip (?<{WebTargetsGroupName}>https:\/\/\S+)"),
+                            Regex = new Regex(@$"# Install web targets(.|\n)+?(?<{WebTargetsGroupName}>https:\/\/\S+)"),
                         }
                     });
         }
@@ -212,7 +212,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                     {
                         Path = file.Path,
                         VersionGroupName = NuGetVersionGroupName,
-                        Regex = new Regex($"(?<{NuGetVersionGroupName}>{nuGetVersion.Filter.Replace(".", @"\.").Replace("*", $@"\d*")})")
+                        Regex = new Regex($"ENV NUGET_VERSION (?<{NuGetVersionGroupName}>{nuGetVersion.Filter.Replace(".", @"\.").Replace("*", $@"\d*")})")
                     }
                 ));
         }
