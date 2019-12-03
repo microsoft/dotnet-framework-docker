@@ -21,28 +21,38 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
     public class DependencyUpdater
     {
         private readonly Options options;
+        private static readonly Lazy<IEnumerable<DockerfileInfo>> dockerfiles;
 
-        public const string RuntimeBuildInfoName = "runtime";
-        public const string SdkBuildInfoName = "sdk";
-        public const string AspnetBuildInfoName = "aspnet";
-        public const string WcfBuildInfoName = "wcf";
+        public const string RuntimeImageVariant = "runtime";
+        public const string SdkImageVariant = "sdk";
+        public const string AspnetImageVariant = "aspnet";
+        public const string WcfImageVariant = "wcf";
 
         public DependencyUpdater(Options options)
         {
             this.options = options;
         }
 
+        static DependencyUpdater()
+        {
+            dockerfiles = new Lazy<IEnumerable<DockerfileInfo>>(() =>
+                new DirectoryInfo(Program.RepoRoot).GetDirectories("4.*")
+                .Append(new DirectoryInfo(Path.Combine(Program.RepoRoot, "3.5")))
+                .SelectMany(dir => dir.GetFiles("Dockerfile", SearchOption.AllDirectories))
+                .Select(file => new DockerfileInfo(file.FullName)));
+        }
+
         public async Task ExecuteAsync()
         {
             IEnumerable<IDependencyInfo> dependencyInfos = new IDependencyInfo[]
             {
-                CreateBuildInfo(RuntimeBuildInfoName,
+                CreateBuildInfo(RuntimeImageVariant,
                     this.options.DateStampRuntime?? this.options.DateStampAll ?? String.Empty),
-                CreateBuildInfo(SdkBuildInfoName,
+                CreateBuildInfo(SdkImageVariant,
                     this.options.DateStampSdk ?? this.options.DateStampAll ?? String.Empty),
-                CreateBuildInfo(AspnetBuildInfoName,
+                CreateBuildInfo(AspnetImageVariant,
                     this.options.DateStampAspnet ?? this.options.DateStampAll ?? String.Empty),
-                CreateBuildInfo(WcfBuildInfoName,
+                CreateBuildInfo(WcfImageVariant,
                     this.options.DateStampWcf ?? this.options.DateStampAll ?? String.Empty),
             };
 
@@ -69,7 +79,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                 BranchNamingStrategy = new SingleBranchNamingStrategy($"UpdateDependencies-{this.options.GitHubUpstreamBranch}")
             };
 
-            string commitMessage = $"[{this.options.GitHubUpstreamBranch}] Update dependencies from dotnet/core-sdk";
+            string commitMessage = $"[{this.options.GitHubUpstreamBranch}] Update image dependencies";
 
             await prCreator.CreateOrUpdateAsync(
                 commitMessage,
@@ -98,39 +108,40 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             List<IDependencyUpdater> updaters = new List<IDependencyUpdater>();
 
             updaters.AddRange(CreateManifestUpdaters());
-            updaters.AddRange(CreateLcuUpdaters(buildInfos));
+            updaters.AddRange(CreateLcuUpdaters());
             updaters.AddRange(CreateVsUpdaters());
-            updaters.AddRange(CreateNuGetClientVersionUpdaters());
+            updaters.AddRange(CreateNuGetUpdaters());
             updaters.Add(new ReadmeUpdater());
 
             return DependencyUpdateUtils.Update(updaters, buildInfos);
         }
 
-        private IEnumerable<IDependencyUpdater> CreateLcuUpdaters(IEnumerable<IDependencyInfo> buildInfos)
+        private IEnumerable<IDependencyUpdater> CreateLcuUpdaters()
         {
-            LcuConfig[] lcuConfigs = JsonConvert.DeserializeObject<LcuConfig[]>(
-                File.ReadAllText(this.options.LcuConfigPath));
+            LcuInfo[] lcuConfigs = JsonConvert.DeserializeObject<LcuInfo[]>(
+                File.ReadAllText(this.options.LcuInfoPath));
 
             const string UrlVersionGroupName = "Url";
             const string CabFileVersionGroupName = "CabFile";
 
-            return GetDockerfiles()
-                .Select(file => new
+            return dockerfiles.Value
+                .Where(dockerfile => dockerfile.ImageVariant == RuntimeImageVariant)
+                .Select(dockerfile => new
                 {
-                    Dockerfile = file,
-                    LcuConfigInfo = GetLcuConfigInfo(file, lcuConfigs)
+                    Dockerfile = dockerfile,
+                    LcuConfigInfo = GetLcuConfigInfo(dockerfile, lcuConfigs)
                 })
-                .Where(val => val.LcuConfigInfo.HasValue)
+                .Where(val => val.LcuConfigInfo != null)
                 .SelectMany(val =>
                     new IDependencyUpdater[]
                     {
-                        new CustomFileRegexUpdater(val.LcuConfigInfo!.Value.Config.DownloadUrl, val.LcuConfigInfo!.Value.BuildInfoName)
+                        new CustomFileRegexUpdater(val.LcuConfigInfo!.DownloadUrl, RuntimeImageVariant)
                         {
                             Path = val.Dockerfile.Path,
                             VersionGroupName = UrlVersionGroupName,
                             Regex = new Regex(@$"# Apply latest patch(.|\n)+(?<{UrlVersionGroupName}>http:\/\/[^\s""]+)")
                         },
-                        new CustomFileRegexUpdater(ParseCabFileName(val.LcuConfigInfo!.Value.Config.DownloadUrl), val.LcuConfigInfo!.Value.BuildInfoName)
+                        new CustomFileRegexUpdater(ParseCabFileName(val.LcuConfigInfo!.DownloadUrl), RuntimeImageVariant)
                         {
                             Path = val.Dockerfile.Path,
                             VersionGroupName = CabFileVersionGroupName,
@@ -142,30 +153,31 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         private IEnumerable<IDependencyUpdater> CreateVsUpdaters()
         {
-            VsConfig vsConfig = JsonConvert.DeserializeObject<VsConfig>(
-                File.ReadAllText(this.options.VsConfigPath));
+            VsInfo vsConfig = JsonConvert.DeserializeObject<VsInfo>(
+                File.ReadAllText(this.options.VsInfoPath));
 
             const string TestAgentGroupName = "TestAgent";
             const string BuildToolsGroupName = "BuildTools";
             const string WebTargetsGroupName = "WebTargets";
 
-            return GetDockerfiles()
+            return dockerfiles.Value
+                .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
                 .SelectMany(dockerfile =>
                     new IDependencyUpdater[]
                     {
-                        new CustomFileRegexUpdater(vsConfig.TestAgentUrl, dockerfile.BuildInfoName)
+                        new CustomFileRegexUpdater(vsConfig.TestAgentUrl, dockerfile.ImageVariant)
                         {
                             VersionGroupName = TestAgentGroupName,
                             Path = dockerfile.Path,
                             Regex = new Regex(@$"(?<{TestAgentGroupName}>https:\/\/\S+vs_TestAgent\.exe)"),
                         },
-                        new CustomFileRegexUpdater(vsConfig.BuildToolsUrl, dockerfile.BuildInfoName)
+                        new CustomFileRegexUpdater(vsConfig.BuildToolsUrl, dockerfile.ImageVariant)
                         {
                             VersionGroupName = BuildToolsGroupName,
                             Path = dockerfile.Path,
                             Regex = new Regex(@$"(?<{BuildToolsGroupName}>https:\/\/\S+vs_BuildTools\.exe)"),
                         },
-                        new CustomFileRegexUpdater(vsConfig.WebTargetsUrl, dockerfile.BuildInfoName)
+                        new CustomFileRegexUpdater(vsConfig.WebTargetsUrl, dockerfile.ImageVariant)
                         {
                             VersionGroupName = WebTargetsGroupName,
                             Path = dockerfile.Path,
@@ -180,52 +192,49 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             return msuFilename.Substring(0, msuFilename.IndexOf("_")) + ".cab";
         }
 
-        private static (LcuConfig Config, string BuildInfoName)? GetLcuConfigInfo(DockerfileInfo dockerfile, LcuConfig[] lcuConfigs)
+        private static LcuInfo? GetLcuConfigInfo(DockerfileInfo dockerfile, LcuInfo[] lcuConfigs)
         {
-            if (dockerfile.BuildInfoName != RuntimeBuildInfoName)
-            {
-                return null;
-            }
-
-            LcuConfig? lcuConfig = lcuConfigs
+            return lcuConfigs
                 .FirstOrDefault(config => config.OsVersion == dockerfile.OsVersion &&
                     config.RuntimeVersions.Any(runtime => runtime == dockerfile.FrameworkVersion));
-
-            if (lcuConfig != null)
-            {
-                return (lcuConfig, dockerfile.BuildInfoName);
-            }
-
-            return null;
         }
 
-        private IEnumerable<IDependencyUpdater> CreateNuGetClientVersionUpdaters()
+        private IEnumerable<IDependencyUpdater> CreateNuGetUpdaters()
         {
-            NuGetVersion[] nuGetVersions = JsonConvert.DeserializeObject<NuGetVersion[]>(
-                File.ReadAllText(this.options.NuGetClientVersionsPath));
+            NuGetInfo[] nuGetVersions = JsonConvert.DeserializeObject<NuGetInfo[]>(
+                File.ReadAllText(this.options.NuGetInfoPath));
+
+            // Verify a given OS version is not specified more than once
+            HashSet<string> osVersions = new HashSet<string>();
+            foreach (string osVersion in nuGetVersions.SelectMany(ver => ver.OsVersions))
+            {
+                if (osVersions.Contains(osVersion))
+                {
+                    throw new InvalidOperationException($"OS version '{osVersion}' should only be specified once in '{this.options.NuGetInfoPath}'.");
+                }
+
+                osVersions.Add(osVersion);
+            }
             
             const string NuGetVersionGroupName = "version";
 
-            return GetDockerfiles()
-                .SelectMany(file => nuGetVersions.Select(nuGetVersion => 
-                    new CustomFileRegexUpdater(nuGetVersion.Version, file.BuildInfoName)
+            return dockerfiles.Value
+                .Select(file =>
+                {
+                    // Find the NuGetInfo that matches the OS version of this Dockerfile
+                    NuGetInfo nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(file.OsVersion));
+                    if (nuGetInfo is null)
+                    {
+                        throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{file.OsVersion}'.");
+                    }
+
+                    return new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, file.ImageVariant)
                     {
                         Path = file.Path,
                         VersionGroupName = NuGetVersionGroupName,
-                        Regex = new Regex($"ENV NUGET_VERSION (?<{NuGetVersionGroupName}>{nuGetVersion.Filter.Replace(".", @"\.").Replace("*", $@"\d*")})")
-                    }
-                ));
-        }
-
-        private static IEnumerable<DockerfileInfo> GetDockerfiles()
-        {
-            IEnumerable<DirectoryInfo> frameworkVersionDirs =
-                new DirectoryInfo(Program.RepoRoot).GetDirectories("4.*")
-                .Concat(new DirectoryInfo[] { new DirectoryInfo(Path.Combine(Program.RepoRoot, "3.5")) });
-
-            return frameworkVersionDirs
-                .SelectMany(dir => dir.GetFiles("Dockerfile", SearchOption.AllDirectories))
-                .Select(file => new DockerfileInfo(file.FullName));
+                        Regex = new Regex(@$"ENV NUGET_VERSION (?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
+                    };
+                });
         }
 
         private IEnumerable<IDependencyUpdater> CreateManifestUpdaters()
@@ -237,31 +246,31 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
             if (this.options.DateStampAll != null)
             {
-                yield return CreateManifestUpdater(RuntimePrefix, RuntimeBuildInfoName);
-                yield return CreateManifestUpdater(SdkPrefix, SdkBuildInfoName);
-                yield return CreateManifestUpdater(AspnetPrefix, AspnetBuildInfoName);
-                yield return CreateManifestUpdater(WcfPrefix, WcfBuildInfoName);
+                yield return CreateManifestUpdater(RuntimePrefix, RuntimeImageVariant);
+                yield return CreateManifestUpdater(SdkPrefix, SdkImageVariant);
+                yield return CreateManifestUpdater(AspnetPrefix, AspnetImageVariant);
+                yield return CreateManifestUpdater(WcfPrefix, WcfImageVariant);
             }
             else
             {
                 if (this.options.DateStampRuntime != null)
                 {
-                    yield return CreateManifestUpdater(RuntimePrefix, RuntimeBuildInfoName);
+                    yield return CreateManifestUpdater(RuntimePrefix, RuntimeImageVariant);
                 }
 
                 if (this.options.DateStampSdk != null)
                 {
-                    yield return CreateManifestUpdater(SdkPrefix, SdkBuildInfoName);
+                    yield return CreateManifestUpdater(SdkPrefix, SdkImageVariant);
                 }
 
                 if (this.options.DateStampAspnet != null)
                 {
-                    yield return CreateManifestUpdater(AspnetPrefix, AspnetBuildInfoName);
+                    yield return CreateManifestUpdater(AspnetPrefix, AspnetImageVariant);
                 }
 
                 if (this.options.DateStampWcf != null)
                 {
-                    yield return CreateManifestUpdater(WcfPrefix, WcfBuildInfoName);
+                    yield return CreateManifestUpdater(WcfPrefix, WcfImageVariant);
                 }
             }
         }
@@ -290,14 +299,14 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                     .Split("/");
 
                 this.FrameworkVersion = pathParts[0];
-                this.BuildInfoName = pathParts[1];
+                this.ImageVariant = pathParts[1];
                 this.OsVersion = pathParts[2];
             }
 
             public string Path { get; }
             public string FrameworkVersion { get; }
             public string OsVersion { get; }
-            public string BuildInfoName { get; }
+            public string ImageVariant { get; }
         }
     }
 }

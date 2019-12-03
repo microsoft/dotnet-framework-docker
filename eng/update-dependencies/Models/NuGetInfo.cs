@@ -7,12 +7,12 @@ using Newtonsoft.Json;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies.Models
 {
-    public class NuGetVersion
+    public class NuGetInfo
     {
         [JsonProperty(Required = Required.Always)]
-        public string Filter { get; set; } = String.Empty;
+        public string[] OsVersions { get; set; } = Array.Empty<string>();
 
         [JsonProperty(Required = Required.Always)]
-        public string Version { get; set; } = String.Empty;
+        public string NuGetClientVersion { get; set; } = String.Empty;
     }
 }

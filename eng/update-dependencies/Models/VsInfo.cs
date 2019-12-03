@@ -7,15 +7,15 @@ using Newtonsoft.Json;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies.Models
 {
-    public class LcuConfig
+    public class VsInfo
     {
         [JsonProperty(Required = Required.Always)]
-        public string OsVersion { get; set; } = String.Empty;
+        public string TestAgentUrl { get; set; } = String.Empty;
 
         [JsonProperty(Required = Required.Always)]
-        public string[] RuntimeVersions { get; set; } = Array.Empty<string>();
+        public string BuildToolsUrl { get; set; } = String.Empty;
 
         [JsonProperty(Required = Required.Always)]
-        public string DownloadUrl { get; set; } = String.Empty;
+        public string WebTargetsUrl { get; set; } = String.Empty;
     }
 }

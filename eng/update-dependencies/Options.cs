@@ -31,11 +31,11 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         public string? GitHubUser { get; private set; }
 
-        public string NuGetClientVersionsPath { get; private set; } = "eng/nuget-client-versions.json";
+        public string NuGetInfoPath { get; private set; } = "eng/nuget-info.json";
 
-        public string LcuConfigPath { get; private set; } = "eng/lcu-config.json";
+        public string LcuInfoPath { get; private set; } = "eng/lcu-info.json";
 
-        public string VsConfigPath { get; private set; } = "eng/vs-config.json";
+        public string VsInfoPath { get; private set; } = "eng/vs-info.json";
 
         public bool UpdateOnly => GitHubEmail == null || GitHubPassword == null || GitHubUser == null;
 
@@ -100,26 +100,26 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                     "GitHub user used to make PR (if not specified, a PR will not be created)");
                 GitHubUser = gitHubUser;
 
-                string nugetClientVersionsPath = NuGetClientVersionsPath;
+                string nugetInfoPath = NuGetInfoPath;
                 syntax.DefineOption(
-                    "nuget-client-versions",
-                    ref nugetClientVersionsPath,
-                    "Path to the NuGet client versions JSON file");
-                NuGetClientVersionsPath = nugetClientVersionsPath;
+                    "nuget-info",
+                    ref nugetInfoPath,
+                    "Path to the NuGet info JSON file");
+                NuGetInfoPath = nugetInfoPath;
 
-                string lcuConfigPath = LcuConfigPath;
+                string lcuInfoPath = LcuInfoPath;
                 syntax.DefineOption(
-                    "lcu-config",
-                    ref lcuConfigPath,
-                    "Path to the LCU config JSON file");
-                LcuConfigPath = lcuConfigPath;
+                    "lcu-info",
+                    ref lcuInfoPath,
+                    "Path to the LCU info JSON file");
+                LcuInfoPath = lcuInfoPath;
 
-                string vsConfigPath = VsConfigPath;
+                string vsInfoPath = VsInfoPath;
                 syntax.DefineOption(
-                    "vs-config",
-                    ref vsConfigPath,
-                    "Path to the VS config JSON file");
-                VsConfigPath = vsConfigPath;
+                    "vs-info",
+                    ref vsInfoPath,
+                    "Path to the VS info JSON file");
+                VsInfoPath = vsInfoPath;
             });
         }
     }
