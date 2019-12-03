@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    public class SdkOnlyImageTests
+    public class SdkOnlyImageTests : ImageTests
     {
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
         {
@@ -24,12 +24,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
         };
 
-        private readonly ImageTestHelper imageTestHelper;
-
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
+            : base(outputHelper)
         {
-            imageTestHelper = new ImageTestHelper(outputHelper);
         }
+
+        protected override string ImageType => "sdk";
 
         public static IEnumerable<object[]> GetImageData()
         {
@@ -59,10 +59,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new Version("4.8")
             };
 
-            string baseBuildImage = imageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"targetingpacks-{DateTime.Now.ToFileTime()}";
             string command = @"cmd /c dir /B ""C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework""";
-            string output = imageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
             IEnumerable<Version> actualVersions = output.Split(Environment.NewLine)
                 .Select(name => new Version(name.Substring(1))); // Trim the first character (v4.0 => 4.0)
@@ -97,7 +97,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 variables.Add(new EnvironmentVariableInfo("DOTNET_USE_POLLING_FILE_WATCHER", "true"));
             }
 
-            EnvironmentVariableInfo.Validate(variables, "sdk", imageDescriptor, imageTestHelper);
+            VerifyCommonEnvironmentVariables(variables, imageDescriptor);
         }
     }
 }
