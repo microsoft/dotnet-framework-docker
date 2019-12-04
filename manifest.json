@@ -3,15 +3,13 @@
   "registry": "mcr.microsoft.com",
   "variables": {
     "RuntimeReleaseDateStamp": "20191008",
-    "SdkReleaseDateStamp": "20191008",
+    "SdkReleaseDateStamp": "20191203",
     "AspnetReleaseDateStamp": "20191008",
     "WcfReleaseDateStamp": "20191008",
     "11B-RuntimeReleaseDateStamp": "20191112",
-    "11B-SdkReleaseDateStamp": "20191112",
     "11B-AspnetReleaseDateStamp": "20191112",
     "11B-WcfReleaseDateStamp": "20191112",
     "EnvVarFix-RuntimeReleaseDateStamp": "20191118",
-    "EnvVarFix-SdkReleaseDateStamp": "20191118",
     "EnvVarFix-AspnetReleaseDateStamp": "20191118",
     "EnvVarFix-WcfReleaseDateStamp": "20191118"
   },
@@ -285,7 +283,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(EnvVarFix-SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             }
@@ -340,7 +338,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "3.5-$(EnvVarFix-SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "3.5-windowsservercore-1909": {}
               }
             }
