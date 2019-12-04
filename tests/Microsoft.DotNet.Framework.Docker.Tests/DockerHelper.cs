@@ -213,6 +213,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string command = null,
             string workdir = null,
             string optionalRunArgs = null,
+            string entrypointOverride = null,
             bool detach = false,
             bool runAsContainerAdministrator = false,
             bool skipAutoCleanup = false)
@@ -221,8 +222,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string detachArg = detach ? " -d -t" : string.Empty;
             string userArg = runAsContainerAdministrator ? " -u ContainerAdministrator" : string.Empty;
             string workdirArg = workdir == null ? string.Empty : $" -w {workdir}";
+            string entrypointArg = entrypointOverride == null ? string.Empty : $" --entrypoint {entrypointOverride}";
             return ExecuteWithLogging(
-                $"run --name {name}{cleanupArg}{workdirArg}{userArg}{detachArg} {optionalRunArgs} {image} {command}");
+                $"run --name {name}{cleanupArg}{workdirArg}{userArg}{detachArg}{entrypointArg} {optionalRunArgs} {image} {command}");
         }
     }
 }

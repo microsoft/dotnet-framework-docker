@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    public class WcfImageTests
+    public class WcfImageTests : ImageTests
     {
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
         {
@@ -23,12 +23,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
         };
 
-        private readonly ImageTestHelper imageTestHelper;
-
         public WcfImageTests(ITestOutputHelper outputHelper)
+            : base(outputHelper)
         {
-            imageTestHelper = new ImageTestHelper(outputHelper);
         }
+
+        protected override string ImageType => "wcf";
 
         // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
         [SkippableTheory("3.5")]
@@ -38,16 +38,30 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             List<string> appBuildArgs = new List<string> { };
 
-            string baseWCFImage = imageTestHelper.GetImage("wcf", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string baseWCFImage = ImageTestHelper.GetImage("wcf", imageDescriptor.Version, imageDescriptor.OsVariant);
             appBuildArgs.Add($"BASE_WCF_IMAGE={baseWCFImage}");
 
-            imageTestHelper.BuildAndTestImage(
+            ImageTestHelper.BuildAndTestImage(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: "wcf",
                 runCommand: "",
                 testUrl: "/Service1.svc"
                 );
+        }
+
+        // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
+        [SkippableTheory("3.5")]
+        [Trait("Category", "wcf")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
+        {
+            // Remove this "if" condition once this bug is fixed: https://github.com/microsoft/dotnet-framework-docker/issues/406
+            if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 &&
+                (imageDescriptor.Version == "4.7.1" || imageDescriptor.Version == "4.7.2"))
+            {
+                VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
+            }
         }
 
         public static IEnumerable<object[]> GetImageData()
