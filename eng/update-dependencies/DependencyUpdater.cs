@@ -39,7 +39,8 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                 new DirectoryInfo(Program.RepoRoot).GetDirectories("4.*")
                 .Append(new DirectoryInfo(Path.Combine(Program.RepoRoot, "3.5")))
                 .SelectMany(dir => dir.GetFiles("Dockerfile", SearchOption.AllDirectories))
-                .Select(file => new DockerfileInfo(file.FullName)));
+                .Select(file => new DockerfileInfo(file.FullName))
+                .ToArray());
         }
 
         public async Task ExecuteAsync()
@@ -204,33 +205,22 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             NuGetInfo[] nuGetVersions = JsonConvert.DeserializeObject<NuGetInfo[]>(
                 File.ReadAllText(this.options.NuGetInfoPath));
 
-            // Verify a given OS version is not specified more than once
-            HashSet<string> osVersions = new HashSet<string>();
-            foreach (string osVersion in nuGetVersions.SelectMany(ver => ver.OsVersions))
-            {
-                if (osVersions.Contains(osVersion))
-                {
-                    throw new InvalidOperationException($"OS version '{osVersion}' should only be specified once in '{this.options.NuGetInfoPath}'.");
-                }
-
-                osVersions.Add(osVersion);
-            }
-            
             const string NuGetVersionGroupName = "version";
 
             return dockerfiles.Value
-                .Select(file =>
+                .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
+                .Select(dockerfile =>
                 {
                     // Find the NuGetInfo that matches the OS version of this Dockerfile
-                    NuGetInfo nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(file.OsVersion));
+                    NuGetInfo nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(dockerfile.OsVersion));
                     if (nuGetInfo is null)
                     {
-                        throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{file.OsVersion}'.");
+                        throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{dockerfile.OsVersion}'.");
                     }
 
-                    return new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, file.ImageVariant)
+                    return new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, dockerfile.ImageVariant)
                     {
-                        Path = file.Path,
+                        Path = dockerfile.Path,
                         VersionGroupName = NuGetVersionGroupName,
                         Regex = new Regex(@$"ENV NUGET_VERSION (?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
                     };
