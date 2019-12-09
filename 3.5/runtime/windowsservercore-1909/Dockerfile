@@ -15,6 +15,14 @@ RUN curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.win
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
+# Apply latest patch
+RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2019/12/windows10.0-kb4533002-x64-ndp48_80e9bfc8ffeb6fb63cf57a272c68387326883621.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4533002-x64-ndp48.cab `
+    && rmdir /S /Q patch
+
 # ngen .NET 3.5 Fx
 RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
