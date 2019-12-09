@@ -21,3 +21,6 @@
 
 # ImageBuilder directory
 .Microsoft.DotNet.ImageBuilder
+
+# Visual Studio debug profile
+**/launchSettings.json

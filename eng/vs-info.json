@@ -1,0 +1,5 @@
+{
+    "testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/c7d8bceb-64c4-426d-85a2-89bc21b21245/43d1b07a15fa7c77ed6f5e0011d1966c2d6e2610e6a293dfa25dde277abbba94/vs_TestAgent.exe",
+    "buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/c7d8bceb-64c4-426d-85a2-89bc21b21245/1f07eb88f128370a60ab6d592b1e0f3deb76036a168c7e3021d0fbaf4316a5a0/vs_BuildTools.exe",
+    "webTargetsUrl": "https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2019.12.zip"
+}
