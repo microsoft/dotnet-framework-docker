@@ -19,7 +19,13 @@
     {
         "osVersion": "windowsservercore-ltsc2019",
         "runtimeVersions": [
-            "3.5",
+            "3.5"
+        ],
+        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/12/windows10.0-kb4533013-x64_73ac5058be2b97668dc89517717371ad71a18a92.msu"
+    },
+    {
+        "osVersion": "windowsservercore-ltsc2019",
+        "runtimeVersions": [
             "4.8"
         ],
         "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2019/12/windows10.0-kb4533001-x64-ndp48_9bf7b653c8a3ccac16c5a3e9a72b021dae763789.msu"
