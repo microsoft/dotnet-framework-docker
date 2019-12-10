@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
@@ -42,7 +43,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string targetArg = target == null ? string.Empty : $" --target {target}";
             string dockerfileArg = dockerfile == null ? string.Empty : $" -f {dockerfile}";
 
-            ExecuteWithLogging($"build -t {tag}{targetArg}{buildArgsOption}{dockerfileArg} {contextDir}");
+            var stdOut = ExecuteWithLogging($"build -t {tag}{targetArg}{buildArgsOption}{dockerfileArg} {contextDir}");
+            Assert.DoesNotContain(stdOut, "StatusPending");
         }
 
         public static bool ContainerExists(string name) => ResourceExists("container", $"-f \"name={name}\"");
