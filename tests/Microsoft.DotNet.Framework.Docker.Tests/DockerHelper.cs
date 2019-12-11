@@ -6,7 +6,6 @@ using System;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
