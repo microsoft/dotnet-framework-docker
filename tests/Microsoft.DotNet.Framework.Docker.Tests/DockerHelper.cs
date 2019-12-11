@@ -43,8 +43,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string targetArg = target == null ? string.Empty : $" --target {target}";
             string dockerfileArg = dockerfile == null ? string.Empty : $" -f {dockerfile}";
 
-            var stdOut = ExecuteWithLogging($"build -t {tag}{targetArg}{buildArgsOption}{dockerfileArg} {contextDir}");
-            Assert.DoesNotContain(stdOut, "StatusPending");
+            ExecuteWithLogging($"build -t {tag}{targetArg}{buildArgsOption}{dockerfileArg} {contextDir}");
         }
 
         public static bool ContainerExists(string name) => ResourceExists("container", $"-f \"name={name}\"");
