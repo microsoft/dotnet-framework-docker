@@ -44,7 +44,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
-            VerifyCommonEnvironmentVariables(GetRuntimeEnvironmentVariableInfos(imageDescriptor), imageDescriptor);
+            VerifyCommonEnvironmentVariables(GetEnvironmentVariables(imageDescriptor), imageDescriptor);
         }
 
         [Theory]
@@ -55,7 +55,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
         }
 
-        public static IEnumerable<EnvironmentVariableInfo> GetRuntimeEnvironmentVariableInfos(ImageDescriptor imageDescriptor)
+        public static IEnumerable<EnvironmentVariableInfo> GetEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
             yield return new EnvironmentVariableInfo("COMPLUS_NGenProtectedProcess_FeatureEnabled", "0");
 

@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     {
         public SkippableTheoryAttribute(params string[] skipOnRuntimeVersions)
         {
-            if (Config.VersionFilter != "*")
+            if (!string.IsNullOrEmpty(Config.VersionFilter) && Config.VersionFilter != "*")
             {
                 string versionFilterPattern =
                     Config.VersionFilter != null ? Config.GetFilterRegexPattern(Config.VersionFilter) : null;

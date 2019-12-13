@@ -30,29 +30,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected void VerifyCommonEnvironmentVariables(IEnumerable<EnvironmentVariableInfo> variables, ImageDescriptor imageDescriptor)
         {
             const char delimiter = '|';
-            IEnumerable<string> echoParts;
-            string invokeCommand;
-            char delimiterEscape;
-
-            if (DockerHelper.IsLinuxContainerModeEnabled)
-            {
-                echoParts = variables.Select(envVar => $"${envVar.Name}");
-                invokeCommand = $"/bin/sh -c";
-                delimiterEscape = '\\';
-            }
-            else
-            {
-                echoParts = variables.Select(envVar => $"%{envVar.Name}%");
-                invokeCommand = $"CMD /S /C";
-                delimiterEscape = '^';
-            }
-
             string appId = $"envvar-{DateTime.Now.ToFileTime()}";
+            IEnumerable<string> echoParts= variables.Select(envVar => $"%{envVar.Name}%");
 
             string combinedValues = ImageTestHelper.DockerHelper.Run(
                 image: ImageTestHelper.GetImage(ImageType, imageDescriptor.Version, imageDescriptor.OsVariant),
                 name: appId,
-                command: $"{invokeCommand} \"echo {String.Join($"{delimiterEscape}{delimiter}", echoParts)}\"");
+                entrypointOverride: "cmd",
+                command: $"CMD /S /C \"echo {String.Join($"^{delimiter}", echoParts)}\"");
 
             string[] values = combinedValues.Split(delimiter);
             Assert.Equal(variables.Count(), values.Count());

@@ -30,6 +30,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         protected override string ImageType => "wcf";
 
+        [SkippableTheory("3.5")]
+        [Trait("Category", "wcf")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
+        {
+            VerifyCommonEnvironmentVariables(AspnetImageTests.GetEnvironmentVariables(imageDescriptor), imageDescriptor);
+        }
+
         // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
         [SkippableTheory("3.5")]
         [Trait("Category", "wcf")]
