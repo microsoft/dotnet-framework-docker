@@ -85,7 +85,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             List<EnvironmentVariableInfo> variables = new List<EnvironmentVariableInfo>();
 
-            variables.AddRange(RuntimeOnlyImageTests.GetRuntimeEnvironmentVariableInfos(imageDescriptor));
+            variables.AddRange(RuntimeOnlyImageTests.GetEnvironmentVariables(imageDescriptor));
 
             variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION",
                 @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"));
