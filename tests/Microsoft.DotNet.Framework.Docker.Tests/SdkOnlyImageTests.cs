@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -98,6 +100,25 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
 
             VerifyCommonEnvironmentVariables(variables, imageDescriptor);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyVsWhereOperability(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string appId = $"vswhere-{DateTime.Now.ToFileTime()}";
+            const string vsWhereUrl = "https://github.com/Microsoft/vswhere/releases/download/2.8.4/vswhere.exe";
+            string downloadVsWhereCmd = $"Invoke-WebRequest -UseBasicParsing {vsWhereUrl} -OutFile vswhere.exe";
+            const string executeVsWhereCmd = @".\vswhere.exe -products * -latest -format json";
+            string command = $@"powershell {downloadVsWhereCmd}; {executeVsWhereCmd}";
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
+            JArray json = (JArray)JsonConvert.DeserializeObject(output);
+
+            Assert.Single(json);
+            Assert.Equal(@"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools", json[0]["installationPath"]);
         }
     }
 }
