@@ -99,5 +99,57 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             VerifyCommonEnvironmentVariables(variables, imageDescriptor);
         }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyNuGetCli(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string appId = $"nuget-{DateTime.Now.ToFileTime()}";
+            string command = "nuget help";
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+            Assert.StartsWith("NuGet Version:", output);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyDotNetCli(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string appId = $"dotnetcli-{DateTime.Now.ToFileTime()}";
+            string command = "dotnet --version";
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
+            // Just verify the output is parseable to a Version object (it will throw if it's not)
+            Version.Parse(output);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyVsTest(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string appId = $"vstest-{DateTime.Now.ToFileTime()}";
+            string command = "vstest.console.exe /?";
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
+            Assert.StartsWith("Microsoft (R) Test Execution Command Line Tool", output);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyGacUtil(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string appId = $"gacutil-{DateTime.Now.ToFileTime()}";
+            string command = "gacutil";
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
+            Assert.StartsWith("Microsoft (R) .NET Global Assembly Cache Utility", output);
+        }
     }
 }
