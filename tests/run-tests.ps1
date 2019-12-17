@@ -43,11 +43,11 @@ if (!(Test-Path "$dotnetInstallDir")) {
 $dotnetInstallScript = "dotnet-install.ps1";
 $dotnetInstallScriptPath = "$dotnetInstallDir/$DotnetInstallScript"
 if (!(Test-Path $dotnetInstallScriptPath)) {
-    $dotnetInstallScriptUrl = "https://raw.githubusercontent.com/dotnet/cli/release/2.1/scripts/obtain/$dotnetInstallScript"
+    $dotnetInstallScriptUrl = "https://dot.net/v1/$dotnetInstallScript"
     Invoke-WebRequest $dotnetInstallScriptUrl -OutFile $dotnetInstallScriptPath
 }
 
-& $dotnetInstallScriptPath -Channel "2.1" -Version "latest" -Architecture x64 -InstallDir $dotnetInstallDir
+& $dotnetInstallScriptPath -Channel "3.1" -Version "latest" -Architecture x64 -InstallDir $dotnetInstallDir
 if ($LASTEXITCODE -ne 0) { throw "Failed to install the .NET Core SDK" }
 
 # Run Tests
