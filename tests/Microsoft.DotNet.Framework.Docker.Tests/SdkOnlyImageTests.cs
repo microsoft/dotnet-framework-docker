@@ -109,6 +109,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string appId = $"nuget-{DateTime.Now.ToFileTime()}";
             string command = "nuget help";
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
             Assert.StartsWith("NuGet Version:", output);
         }
 
