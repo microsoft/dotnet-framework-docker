@@ -102,13 +102,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string image = $"{registry}{repo}:{tag}";
 
             // Ensure image exists locally
-            if (Config.IsLocalRun)
+            if (Config.PullImages)
             {
-                Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
+                DockerHelper.Pull(image);
             }
             else
             {
-                DockerHelper.Pull(image);
+                Assert.True(DockerHelper.ImageExists(image), $"`{image}` could not be found on disk.");
             }
 
             return image;

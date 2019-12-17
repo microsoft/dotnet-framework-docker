@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public static class Config
     {
-        public static bool IsLocalRun = Environment.GetEnvironmentVariable("LOCAL_RUN") != null;
+        public static bool PullImages { get; } = Environment.GetEnvironmentVariable("PULL_IMAGES") != null;
         public static string OSFilter => Environment.GetEnvironmentVariable("IMAGE_OS_FILTER");
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
