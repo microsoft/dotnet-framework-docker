@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Microsoft.DotNet.Framework.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -119,6 +121,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             Assert.Single(json);
             Assert.Equal(@"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools", json[0]["installationPath"]);
+
+            Version actualVsVersion = Version.Parse(json[0]["catalog"]["productDisplayVersion"].ToString());
+
+            VsInfo vsInfo = Config.GetVsInfo();
+            Version expectedVsVersion = Version.Parse(vsInfo.VsVersion);
+
+            Assert.Equal(expectedVsVersion.Major, actualVsVersion.Major);
+            Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);
         }
     }
 }

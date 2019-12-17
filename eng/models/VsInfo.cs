@@ -5,10 +5,13 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Microsoft.DotNet.Framework.UpdateDependencies.Models
+namespace Microsoft.DotNet.Framework.Models
 {
     public class VsInfo
     {
+        [JsonProperty(Required = Required.Always)]
+        public string VsVersion { get; set; } = String.Empty;
+
         [JsonProperty(Required = Required.Always)]
         public string TestAgentUrl { get; set; } = String.Empty;
 
