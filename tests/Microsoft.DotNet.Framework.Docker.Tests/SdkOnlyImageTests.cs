@@ -111,10 +111,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"vswhere-{DateTime.Now.ToFileTime()}";
+            const string securityProtocolCmd = "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12";
             const string vsWhereUrl = "https://github.com/Microsoft/vswhere/releases/download/2.8.4/vswhere.exe";
             string downloadVsWhereCmd = $"Invoke-WebRequest -UseBasicParsing {vsWhereUrl} -OutFile vswhere.exe";
             const string executeVsWhereCmd = @".\vswhere.exe -products * -latest -format json";
-            string command = $@"powershell {downloadVsWhereCmd}; {executeVsWhereCmd}";
+            string command = $@"powershell {securityProtocolCmd}; {downloadVsWhereCmd}; {executeVsWhereCmd}";
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
             JArray json = (JArray)JsonConvert.DeserializeObject(output);
