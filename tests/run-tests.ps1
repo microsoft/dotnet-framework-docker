@@ -11,7 +11,7 @@ param(
     [string]$RepoPrefix,
     [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf')]
     [string[]]$TestCategories = @(),
-    [switch]$IsLocalRun,
+    [switch]$PullImages,
     [string]$ImageInfoPath
 )
 
@@ -57,11 +57,11 @@ $env:REGISTRY = $Registry
 $env:REPO_PREFIX = $RepoPrefix
 $env:IMAGE_INFO_PATH = $ImageInfoPath
 
-if ($IsLocalRun) {
-    $env:LOCAL_RUN = 1
+if ($PullImages) {
+    $env:PULL_IMAGES = 1
 }
 else {
-    $env:LOCAL_RUN = $null
+    $env:PULL_IMAGES = $null
 }
 
 $testFilter = ""
