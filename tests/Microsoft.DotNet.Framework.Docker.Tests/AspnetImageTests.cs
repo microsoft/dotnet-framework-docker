@@ -23,8 +23,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8",  OsVariant = OsVersion.WSC_1903 },
-            new ImageDescriptor { Version = "4.8",  OsVariant = OsVersion.WSC_1909 },
+            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1903 },
+            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
         };
 
         public AspnetImageTests(ITestOutputHelper outputHelper)
@@ -33,6 +33,27 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         protected override string ImageType => "aspnet";
+
+        [Theory]
+        [Trait("Category", "aspnet")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
+        {
+            VerifyCommonEnvironmentVariables(GetEnvironmentVariables(imageDescriptor), imageDescriptor);
+        }
+
+        public static IEnumerable<EnvironmentVariableInfo> GetEnvironmentVariables(ImageDescriptor imageDescriptor)
+        {
+            List<EnvironmentVariableInfo> variables = new List<EnvironmentVariableInfo>();
+            variables.AddRange(RuntimeOnlyImageTests.GetEnvironmentVariables(imageDescriptor));
+
+            if (imageDescriptor.Version != "3.5")
+            {
+                variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION", "c:\\\\RoslynCompilers\\\\tools"));
+            }
+
+            return variables;
+        }
 
         [Theory]
         [Trait("Category", "aspnet")]
