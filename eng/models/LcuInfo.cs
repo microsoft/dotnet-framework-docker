@@ -5,14 +5,17 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Microsoft.DotNet.Framework.UpdateDependencies.Models
+namespace Microsoft.DotNet.Framework.Models
 {
-    public class NuGetInfo
+    public class LcuInfo
     {
         [JsonProperty(Required = Required.Always)]
-        public string[] OsVersions { get; set; } = Array.Empty<string>();
+        public string OsVersion { get; set; } = String.Empty;
 
         [JsonProperty(Required = Required.Always)]
-        public string NuGetClientVersion { get; set; } = String.Empty;
+        public string[] RuntimeVersions { get; set; } = Array.Empty<string>();
+
+        [JsonProperty(Required = Required.Always)]
+        public string DownloadUrl { get; set; } = String.Empty;
     }
 }

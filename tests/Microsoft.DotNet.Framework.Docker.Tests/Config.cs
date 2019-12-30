@@ -5,6 +5,8 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using Microsoft.DotNet.Framework.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
@@ -22,6 +24,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string manifestJson = File.ReadAllText("manifest.json");
             JObject manifest = JObject.Parse(manifestJson);
             return (string)manifest["registry"];
+        }
+
+        public static VsInfo GetVsInfo()
+        {
+            string vsInfoJson = File.ReadAllText("vs-info.json");
+            return JsonConvert.DeserializeObject<VsInfo>(vsInfoJson);
         }
 
         public static string GetFilterRegexPattern(string filter)
