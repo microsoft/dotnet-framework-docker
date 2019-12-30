@@ -60,7 +60,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 .Select(imageDescriptor => new object[] { imageDescriptor });
         }
 
-        public void BuildAndTestImage(
+        public string BuildAndTestImage(
             ImageDescriptor imageDescriptor,
             IEnumerable<string> buildArgs,
             string appDescriptor, 
@@ -73,6 +73,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 "projects",
                 $"{appDescriptor}-{imageDescriptor.Version}");
 
+            string output;
+
             try
             {
                 DockerHelper.Build(
@@ -81,7 +83,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     contextDir: workDir,
                     buildArgs: buildArgs.ToArray());
 
-                DockerHelper.Run(image: appId, name: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                output = DockerHelper.Run(image: appId, name: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
                 if (!string.IsNullOrEmpty(testUrl))
                 {
                     VerifyHttpResponseFromContainer(appId, testUrl);
@@ -92,6 +94,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 DockerHelper.DeleteContainer(appId, !string.IsNullOrEmpty(testUrl));
                 DockerHelper.DeleteImage(appId);
             }
+
+            return output;
         }
 
         public string GetImage(string imageType, string version, string osVariant)

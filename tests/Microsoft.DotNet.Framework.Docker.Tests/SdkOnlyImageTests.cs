@@ -152,5 +152,47 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             Assert.StartsWith("Microsoft (R) .NET Global Assembly Cache Utility", output);
         }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyWebDeploy(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            string appId = $"webdeploy-{DateTime.Now.ToFileTime()}";
+            
+            // Calling msdeploy's help command results in a -1 exit code. To prevent that from bubbling up and causing the
+            // docker run call to fail, the call is batched with an echo command that will always run even if msdeploy
+            // returns a non-zero exit code. This batch needs to be wrapped in space-separated quotes to work properly.
+            string command = @"cmd /S /C "" ""C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"" -help & echo > nul """;
+            string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+
+            Assert.StartsWith("Microsoft (R) Web Deployment Command Line Tool (MSDeploy.exe)", output);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [Trait("Category", "sdk")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyClickOncePublishing(ImageDescriptor imageDescriptor)
+        {
+            string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
+            const string PublishDir = "publish";
+            List<string> buildArgs = new List<string>
+            {
+                $"BASE_BUILD_IMAGE={baseBuildImage}",
+                $"PUBLISH_DIR={PublishDir}/"
+            };
+
+            string command = $"cmd /s /c dir /b {PublishDir}";
+            string output = ImageTestHelper.BuildAndTestImage(imageDescriptor, buildArgs, "clickonce", command, null);
+
+            string[] outputLines = output.Split(Environment.NewLine);
+
+            Assert.Equal(4, outputLines.Length);
+            Assert.Equal("Application Files", outputLines[0]);
+            Assert.Equal($"clickonce-{imageDescriptor.Version}.application", outputLines[1]);
+            Assert.Equal($"clickonce-{imageDescriptor.Version}.exe", outputLines[2]);
+            Assert.Equal($"setup.exe", outputLines[3]);
+        }
     }
 }
