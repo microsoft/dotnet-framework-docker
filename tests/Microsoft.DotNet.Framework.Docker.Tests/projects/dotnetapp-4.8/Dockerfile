@@ -4,8 +4,6 @@ ARG BASE_RUNTIME_IMAGE
 
 FROM $BASE_BUILD_IMAGE as builder
 
-RUN Write-Host "Verified PowerShell is active"
-
 WORKDIR /app
 COPY . ./
 RUN dotnet restore

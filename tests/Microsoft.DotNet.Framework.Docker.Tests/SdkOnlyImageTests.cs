@@ -10,6 +10,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
+    [Trait("Category", "sdk")]
     public class SdkOnlyImageTests : ImageTests
     {
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
@@ -40,7 +41,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         /// Verifies the SDK images contain the expected targeting packs.
         /// </summary>
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
         {
@@ -79,7 +79,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
@@ -101,7 +100,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyNuGetCli(ImageDescriptor imageDescriptor)
         {
@@ -114,7 +112,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyDotNetCli(ImageDescriptor imageDescriptor)
         {
@@ -128,7 +125,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyVsTest(ImageDescriptor imageDescriptor)
         {
@@ -141,7 +137,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyGacUtil(ImageDescriptor imageDescriptor)
         {
@@ -154,7 +149,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyWebDeploy(ImageDescriptor imageDescriptor)
         {
@@ -171,7 +165,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyClickOncePublishing(ImageDescriptor imageDescriptor)
         {
@@ -193,6 +186,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.Equal($"clickonce-{imageDescriptor.Version}.application", outputLines[1]);
             Assert.Equal($"clickonce-{imageDescriptor.Version}.exe", outputLines[2]);
             Assert.Equal($"setup.exe", outputLines[3]);
+        }
+
+        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyShell(ImageDescriptor imageDescriptor)
+        {
+            VerifyCommonShell(imageDescriptor, isPowerShellExpected: true);
         }
     }
 }

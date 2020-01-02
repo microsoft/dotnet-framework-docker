@@ -191,6 +191,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             ExecuteWithLogging(
                 $"inspect -f \"{{{{(index (index .NetworkSettings.Ports \\\"{containerPort}/tcp\\\") 0).HostPort}}}}\" {container}");
 
+        public string GetImageShell(string imageTag) =>
+            ExecuteWithLogging(
+                "inspect -f \"{{ .Config.Shell }}\" " + imageTag);
+
         public string GetContainerWorkPath(string relativePath)
         {
             string separator = IsLinuxContainerModeEnabled ? "/" : "\\";

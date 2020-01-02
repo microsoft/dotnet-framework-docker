@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
+    [Trait("Category", "runtime")]
     public class RuntimeOnlyImageTests : ImageTests
     {
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
@@ -40,7 +41,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "runtime")]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
@@ -48,11 +48,17 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "runtime")]
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
             VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
+        }
+
+        [Theory]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyShell(ImageDescriptor imageDescriptor)
+        {
+            VerifyCommonShell(imageDescriptor, isPowerShellExpected: false);
         }
 
         public static IEnumerable<EnvironmentVariableInfo> GetEnvironmentVariables(ImageDescriptor imageDescriptor)

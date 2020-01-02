@@ -69,6 +69,18 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
+        protected void VerifyCommonShell(ImageDescriptor imageDescriptor, bool isPowerShellExpected)
+        {
+            string imageTag = ImageTestHelper.GetImage(ImageType, imageDescriptor.Version, imageDescriptor.OsVariant);
+            string shell = ImageTestHelper.DockerHelper.GetImageShell(imageTag);
+
+            string expectedShell = isPowerShellExpected ?
+                "[powershell -Command $ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';]" :
+                "[]";
+
+            Assert.Equal(expectedShell, shell);
+        }
+
         private void VerifyNgenQueueIsUpToDate(ImageDescriptor imageDescriptor, string imageType, string ngenCommand)
         {
             string appId = $"ngen-{DateTime.Now.ToFileTime()}";

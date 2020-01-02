@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
+    [Trait("Category", "aspnet")]
     public class AspnetImageTests : ImageTests
     {
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
@@ -35,7 +36,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected override string ImageType => "aspnet";
 
         [Theory]
-        [Trait("Category", "aspnet")]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
@@ -56,7 +56,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "aspnet")]
         [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -75,7 +74,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "aspnet")]
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
@@ -85,6 +83,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
             }
+        }
+
+        [Theory]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyShell(ImageDescriptor imageDescriptor)
+        {
+            VerifyCommonShell(imageDescriptor, isPowerShellExpected: true);
         }
 
         public static IEnumerable<object[]> GetImageData()
