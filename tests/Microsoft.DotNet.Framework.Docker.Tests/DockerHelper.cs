@@ -193,7 +193,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public string GetImageShell(string imageTag) =>
             ExecuteWithLogging(
-                "inspect -f \"{{ .Config.Shell }}\" " + imageTag);
+                $"inspect -f \"{{{{ .Config.Shell }}}}\" {imageTag}");
 
         public string GetContainerWorkPath(string relativePath)
         {
