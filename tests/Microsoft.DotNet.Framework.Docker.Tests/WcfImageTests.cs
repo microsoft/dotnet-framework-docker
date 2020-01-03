@@ -8,6 +8,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
+    [Trait("Category", "wcf")]
     public class WcfImageTests : ImageTests
     {
         private static ImageDescriptor[] ImageData = new ImageDescriptor[]
@@ -31,7 +32,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected override string ImageType => "wcf";
 
         [SkippableTheory("3.5")]
-        [Trait("Category", "wcf")]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
@@ -40,7 +40,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
         [SkippableTheory("3.5")]
-        [Trait("Category", "wcf")]
         [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
@@ -60,7 +59,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
         [SkippableTheory("3.5")]
-        [Trait("Category", "wcf")]
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
@@ -70,6 +68,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             {
                 VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
             }
+        }
+
+        [SkippableTheory("3.5")]
+        [MemberData(nameof(GetImageData))]
+        public void VerifyShell(ImageDescriptor imageDescriptor)
+        {
+            VerifyCommonShell(imageDescriptor, ShellValue_PowerShell);
         }
 
         public static IEnumerable<object[]> GetImageData()

@@ -8,6 +8,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
+    [Trait("Category", "runtime")]
+    [Trait("Category", "sdk")]
     public class RuntimeSdkImageTests
     {
         private static RuntimeImageDescriptor[] ImageData = new RuntimeImageDescriptor[]
@@ -35,8 +37,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "runtime")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithApps(RuntimeImageDescriptor imageDescriptor)
         {
@@ -44,8 +44,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Theory]
-        [Trait("Category", "runtime")]
-        [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithWebApps(RuntimeImageDescriptor imageDescriptor)
         {
