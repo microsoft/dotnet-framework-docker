@@ -89,7 +89,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
-            VerifyCommonShell(imageDescriptor, isPowerShellExpected: true);
+            // 3.5 differs from the rest: https://github.com/microsoft/dotnet-framework-docker/issues/483
+            string expectedShellValue = imageDescriptor.Version == "3.5" ? ShellValue_Default : ShellValue_PowerShell;
+            VerifyCommonShell(imageDescriptor, expectedShellValue);
         }
 
         public static IEnumerable<object[]> GetImageData()

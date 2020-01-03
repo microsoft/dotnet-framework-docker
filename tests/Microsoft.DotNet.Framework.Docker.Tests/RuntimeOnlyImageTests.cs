@@ -58,7 +58,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
-            VerifyCommonShell(imageDescriptor, isPowerShellExpected: false);
+            VerifyCommonShell(imageDescriptor, ShellValue_Default);
         }
 
         public static IEnumerable<EnvironmentVariableInfo> GetEnvironmentVariables(ImageDescriptor imageDescriptor)

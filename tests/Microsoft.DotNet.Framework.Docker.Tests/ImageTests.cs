@@ -12,6 +12,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public abstract class ImageTests
     {
+        protected const string ShellValue_PowerShell = "[powershell -Command $ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';]";
+        protected const string ShellValue_Default = "[]";
+
         protected ImageTests(ITestOutputHelper outputHelper)
         {
             ImageTestHelper = new ImageTestHelper(outputHelper);
@@ -69,16 +72,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        protected void VerifyCommonShell(ImageDescriptor imageDescriptor, bool isPowerShellExpected)
+        protected void VerifyCommonShell(ImageDescriptor imageDescriptor, string expectedShellValue)
         {
             string imageTag = ImageTestHelper.GetImage(ImageType, imageDescriptor.Version, imageDescriptor.OsVariant);
             string shell = ImageTestHelper.DockerHelper.GetImageShell(imageTag);
 
-            string expectedShell = isPowerShellExpected ?
-                "[powershell -Command $ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';]" :
-                "[]";
-
-            Assert.Equal(expectedShell, shell);
+            Assert.Equal(expectedShellValue, shell);
         }
 
         private void VerifyNgenQueueIsUpToDate(ImageDescriptor imageDescriptor, string imageType, string ngenCommand)
