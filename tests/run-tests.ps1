@@ -44,6 +44,7 @@ $dotnetInstallScript = "dotnet-install.ps1";
 $dotnetInstallScriptPath = "$dotnetInstallDir/$DotnetInstallScript"
 if (!(Test-Path $dotnetInstallScriptPath)) {
     $dotnetInstallScriptUrl = "https://dot.net/v1/$dotnetInstallScript"
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
     Invoke-WebRequest $dotnetInstallScriptUrl -OutFile $dotnetInstallScriptPath
 }
 
