@@ -27,7 +27,7 @@ else {
 
 if ($RepoFilter.Count -eq 0) {
     $PathFilters = $null
-    $testCategories = @("runtime", "sdk", "aspnet", "wcf")
+    $testCategories = @()
 }
 else {
     $PathFilters = ""
@@ -36,8 +36,6 @@ else {
     }
     $testCategories = $RepoFilter
 }
-
-$OptionalImageBuilderArgs += " --manifest manifest.json"
 
 if ($build) {
     & ./eng/common/build-and-test.ps1 `
