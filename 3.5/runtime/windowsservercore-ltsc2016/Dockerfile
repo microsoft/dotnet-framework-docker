@@ -21,12 +21,12 @@ RUN powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "http://download.windowsupdate.com/d/msdownload/update/software/secu/2019/12/windows10.0-kb4530689-x64_a7cbdbcf320f1c56dace2424dedd4d468cd46d3d.msu" `
+            -Uri "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/01/windows10.0-kb4534271-x64_a009e866038836e277b167c85c58bbf1e0cc5dc8.msu" `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4530689-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4534271-x64.cab `
     && rmdir /S /Q patch
 
 # ngen .NET Fx
