@@ -49,7 +49,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             if (imageDescriptor.Version != "3.5")
             {
-                variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION", "c:\\\\RoslynCompilers\\\\tools"));
+                variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION", "c:\\RoslynCompilers\\tools"));
             }
 
             return variables;
