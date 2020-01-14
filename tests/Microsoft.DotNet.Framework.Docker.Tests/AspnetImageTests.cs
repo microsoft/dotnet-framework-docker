@@ -77,12 +77,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
-            // Remove this "if" condition once this bug is fixed: https://github.com/microsoft/dotnet-framework-docker/issues/406
-            if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 &&
-                (imageDescriptor.Version == "4.7.1" || imageDescriptor.Version == "4.7.2"))
-            {
                 VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
-            }
         }
 
         [Theory]
