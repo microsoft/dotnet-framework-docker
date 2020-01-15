@@ -1,36 +1,54 @@
 #!/usr/bin/env pwsh
-[cmdletbinding()]
+[cmdletbinding(
+    DefaultParameterSetName = "BuildAndTest"
+)]
 param(
-    [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf')]
+    [ValidateSet("runtime", "sdk", "aspnet", "wcf")]
     [string[]]$RepoFilter = @(),
     [string]$VersionFilter = "*",
     [string]$OSFilter = "*",
-    [string]$OptionalImageBuilderArgs,
-    [switch]$SkipTesting = $false
+    [Parameter(ParameterSetName = "Build")]
+    [switch]$BuildOnly,
+    [Parameter(ParameterSetName = "Test")]
+    [switch]$TestOnly,
+    [Parameter(ParameterSetName = "Build")]
+    [Parameter(ParameterSetName = "BuildAndTest")]
+    [string]$OptionalImageBuilderArgs
 )
+
+if ($PSCmdlet.ParameterSetName -eq "BuildAndTest") {
+    $build = $true
+    $test = $true
+}
+else {
+    $build = $BuildOnly
+    $test = $TestOnly
+}
 
 if ($RepoFilter.Count -eq 0) {
     $PathFilters = $null
-    $optionalTestArgs = ""
+    $testCategories = @()
 }
 else {
     $PathFilters = ""
     $RepoFilter | foreach {
         $PathFilters += " --path '$VersionFilter/$_/$OSFilter'"
     }
-    # Convert the array to a comma-delimited string of the repos with each repo value in quotes
-    # (e.g. "runtime", "sdk")
-    $repoList = ($RepoFilter | foreach { "`"$_`"" }) -join ", "
-    $optionalTestArgs = "-TestCategories @($repoList)"
+    $testCategories = $RepoFilter
 }
 
-$OptionalImageBuilderArgs += " --manifest manifest.json"
-
-& ./eng/common/build-and-test.ps1 `
-    -VersionFilter $VersionFilter `
-    -OSFilter $OSFilter `
-    -PathFilters $PathFilters `
-    -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
-    -OptionalTestArgs $optionalTestArgs `
-    -SkipTesting:$SkipTesting `
-    -ExcludeArchitecture
+if ($build) {
+    & ./eng/common/build-and-test.ps1 `
+        -VersionFilter $VersionFilter `
+        -OSFilter $OSFilter `
+        -PathFilters $PathFilters `
+        -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
+        -SkipTesting `
+        -ExcludeArchitecture
+}
+if ($test) {
+    & ./tests/run-tests.ps1 `
+        -VersionFilter $VersionFilter `
+        -OSFilter $OSFilter `
+        -TestCategories $testCategories
+}
