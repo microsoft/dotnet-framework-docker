@@ -10,10 +10,11 @@
 ASP.NET is a high productivity framework for building Web Applications using Web Forms, MVC, Web API and SignalR.
 
 This image contains:
-- Windows Server Core as the base OS
-- IIS 10 as Web Server
-- .NET Framework (multiple versions available)
-- .NET Extensibility for IIS
+
+* Windows Server Core as the base OS
+* IIS 10 as Web Server
+* .NET Framework (multiple versions available)
+* .NET Extensibility for IIS
 
 Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
@@ -82,7 +83,12 @@ You can retrieve a list of all available tags for dotnet/framework/aspnet at htt
 
 # Support
 
-See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/17455/lifecycle-faq-net-framework)
+See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
+
+# Image Update Policy
+
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
 # Feedback
 
@@ -95,7 +101,6 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 # License
 
-View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image. 
+View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
 
 Windows Container images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
-
