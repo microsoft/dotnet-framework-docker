@@ -16,15 +16,20 @@ The [WCF Docker samples](https://github.com/Microsoft/dotnet-framework-docker/tr
 You can quickly run a container with a pre-built [sample WCF Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the WCF Docker sample.
 
 Type the following [Docker](https://www.docker.com/products/docker) command to start a WCF service container:
+
 ```console
 docker run --name wcfservicesample --rm -it mcr.microsoft.com/dotnet/framework/samples:wcfservice
 ```
+
 Find the IP address of the container instance.
+
 ```console
 docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" wcfservicesample
 172.26.236.119
 ```
+
 Type the following Docker command to start a WCF client container, set environment variable HOST to the IP address of the wcfservicesample container:
+
 ```console
 docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.com/dotnet/framework/samples:wcfclient
 ```
@@ -77,6 +82,11 @@ You can retrieve a list of all available tags for dotnet/framework/wcf at https:
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/17455/lifecycle-faq-net-framework)
 
+# Image Update Policy
+
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
+
 # Feedback
 
 * [File a WCF Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
@@ -88,8 +98,6 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 # License
 
-View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image. 
+View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
 
 Windows Container images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
-
-

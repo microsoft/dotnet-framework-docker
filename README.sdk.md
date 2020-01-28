@@ -76,7 +76,12 @@ You can retrieve a list of all available tags for dotnet/framework/sdk at https:
 
 # Support
 
-See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/17455/lifecycle-faq-net-framework)
+See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
+
+# Image Update Policy
+
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
 # Feedback
 
