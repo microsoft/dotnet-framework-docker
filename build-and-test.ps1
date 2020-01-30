@@ -38,12 +38,11 @@ else {
 }
 
 if ($build) {
-    & ./eng/common/build-and-test.ps1 `
+    & ./eng/common/build.ps1 `
         -VersionFilter $VersionFilter `
         -OSFilter $OSFilter `
         -PathFilters $PathFilters `
         -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
-        -SkipTesting `
         -ExcludeArchitecture
 }
 if ($test) {
