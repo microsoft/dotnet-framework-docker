@@ -6,6 +6,7 @@ pr:
     - dev
   paths:
     exclude:
+    - .github/*
     - README*
     - samples/*
 
