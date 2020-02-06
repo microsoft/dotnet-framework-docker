@@ -6,7 +6,9 @@ To provide a consistent FQDNs, on **March 3, 2020** the data endpoint will be ch
  
 
 For more info, see [MCR Client Firewall Rules](https://aka.ms/mcr/firewallrules).
--------------------------------------------------------------------------------------# Featured Repos
+-------------------------------------------------------------------------------------
+
+# Featured Repos
 
 * [dotnet/framework/sdk](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/): .NET Framework SDK
 * [dotnet/framework/aspnet](https://hub.docker.com/_/microsoft-dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
