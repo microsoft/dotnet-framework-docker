@@ -1,4 +1,12 @@
-# Featured Tags
+## Important: Client Firewall Rules Update to Microsoft Container Registry (MCR)
+ 
+
+To provide a consistent FQDNs, on **March 3, 2020** the data endpoint will be changing from *.cdn.mscr.io to *.data.mcr.microsoft.com. 
+
+ 
+
+For more info, see [MCR Client Firewall Rules](https://aka.ms/mcr/firewallrules).
+-------------------------------------------------------------------------------------# Featured Tags
 
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8`
@@ -104,3 +112,4 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
 
 Windows Container images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
+
