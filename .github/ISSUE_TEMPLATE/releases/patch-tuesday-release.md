@@ -9,13 +9,13 @@
 1. - [ ] Gather list of KB numbers for the .NET Framework updates from the .NET Release team.
 1. - [ ] Look up the download URL for each of the KB numbers in [Microsoft Update Catalog](https://www.catalog.update.microsoft.com/) and input them into the [lcu-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/lcu-info.json) file.
 1. - [ ] Run the `update-dependencies` tool to update all the necessary files:
-      - [ ] `dotnet run --project .\eng\update-dependencies\update-dependencies.csproj --datestamp-all <YYYYMMDD>`
+      - [ ] `dotnet run --project .\eng\update-dependencies --datestamp-all <YYYYMMDD>`
 1. - [ ] Inspect generated changes for correctness
 1. - [ ] Commit generated changes
 1. - [ ] Create PR
 1. - [ ] Get PR signoff
 1. - [ ] Merge PR
-1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/dotnet-dotnet-framework-docker) (internal MSFT link)
+1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/Microsoft-dotnet-framework-docker) (internal MSFT link)
 1. - [ ] Wait for the following Windows images to have been updated as part of the Windows Patch Tuesday release process (this begins at 10 AM PST on Patch Tuesday):
       - [ ] `mcr.microsoft.com/windows/servercore:1903`
       - [ ] `mcr.microsoft.com/windows/servercore:1909`
