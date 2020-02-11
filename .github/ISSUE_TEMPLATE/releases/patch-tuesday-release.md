@@ -17,7 +17,6 @@
 1. - [ ] Merge PR
 1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/dotnet-dotnet-framework-docker) (internal MSFT link)
 1. - [ ] Wait for the following Windows images to have been updated as part of the Windows Patch Tuesday release process (this begins at 10 AM PST on Patch Tuesday):
-      - [ ] `mcr.microsoft.com/windows/servercore:1809`
       - [ ] `mcr.microsoft.com/windows/servercore:1903`
       - [ ] `mcr.microsoft.com/windows/servercore:1909`
       - [ ] `mcr.microsoft.com/windows/servercore:ltsc2016`
