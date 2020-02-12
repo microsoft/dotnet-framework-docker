@@ -11,15 +11,14 @@
       - [ ] Add a new entry to the [lcu-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/lcu-info.json) file to associate a URL for the new Windows version and `3.5` runtime version.
       - [ ] Update the `3.5/runtime` Dockerfile for the new Windows version so that the patch is applied (this can be copied from another `3.5/runtime` Dockerfile in a section labeled `Apply latest patch`)
 1. - [ ] Run the `update-dependencies` tool to update all the necessary files:
-      - [ ] `dotnet run --project .\eng\update-dependencies\update-dependencies.csproj --datestamp-all <YYYYMMDD>`
+      - [ ] `dotnet run --project .\eng\update-dependencies --datestamp-all <YYYYMMDD>`
 1. - [ ] Inspect generated changes for correctness
 1. - [ ] Commit generated changes
 1. - [ ] Create PR
 1. - [ ] Get PR signoff
 1. - [ ] Merge PR
-1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/dotnet-dotnet-framework-docker) (internal MSFT link)
+1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/Microsoft-dotnet-framework-docker) (internal MSFT link)
 1. - [ ] Wait for the following Windows images to have been updated as part of the Windows Patch Tuesday release process (this begins at 10 AM PST on Patch Tuesday):
-      - [ ] `mcr.microsoft.com/windows/servercore:1809`
       - [ ] `mcr.microsoft.com/windows/servercore:1903`
       - [ ] `mcr.microsoft.com/windows/servercore:1909`
       - [ ] `mcr.microsoft.com/windows/servercore:ltsc2016`
