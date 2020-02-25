@@ -18,11 +18,9 @@
 1. - [ ] Get PR signoff
 1. - [ ] Merge PR
 1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/Microsoft-dotnet-framework-docker) (internal MSFT link)
-1. - [ ] Wait for the following Windows images to have been updated as part of the Windows Patch Tuesday release process (this begins at 10 AM PST on Patch Tuesday):
-      - [ ] `mcr.microsoft.com/windows/servercore:1903`
-      - [ ] `mcr.microsoft.com/windows/servercore:1909`
-      - [ ] `mcr.microsoft.com/windows/servercore:ltsc2016`
-      - [ ] `mcr.microsoft.com/windows/servercore:ltsc2019`
+1. - [ ] Run the [`Get-BaseImageStatus.ps1`](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/common/Get-BaseImageStatus.ps1) script and wait until the Windows images have been updated as part of the Windows Patch Tuesday release process. This script will display when the dependent Windows images were last updated. Wait until all the images show that they have been recently updated. "Recently updated" amounts to be having been updated within the past week or so; images from a month ago should be considered to be the old version.
+
+          ./eng/common/Get-BaseImageStatus.ps1 -Continuous
 1. - [ ] Queue build of [dotnet-framework-docker pipeline](https://dev.azure.com/dnceng/internal/_build?definitionId=372) (internal MSFT link)
 1. - [ ] Confirm images have been ingested by MCR
 1. - [ ] Confirm READMEs have been updated in Docker Hub for [microsoft-dotnet-framework](https://hub.docker.com/_/microsoft-dotnet-framework)
