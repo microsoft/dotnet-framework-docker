@@ -42,8 +42,7 @@ if ($build) {
         -VersionFilter $VersionFilter `
         -OSFilter $OSFilter `
         -PathFilters $PathFilters `
-        -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
-        -ExcludeArchitecture
+        -OptionalImageBuilderArgs $OptionalImageBuilderArgs
 }
 if ($test) {
     & ./tests/run-tests.ps1 `
