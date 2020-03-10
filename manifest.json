@@ -5,7 +5,11 @@
     "RuntimeReleaseDateStamp": "20200211",
     "SdkReleaseDateStamp": "20200211",
     "AspnetReleaseDateStamp": "20200211",
-    "WcfReleaseDateStamp": "20200211"
+    "WcfReleaseDateStamp": "20200211",
+    "3B-RuntimeReleaseDateStamp": "20200310",
+    "3B-SdkReleaseDateStamp": "20200310",
+    "3B-AspnetReleaseDateStamp": "20200310",
+    "3B-WcfReleaseDateStamp": "20200310"
   },
   "repos": [
     {
@@ -43,7 +47,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(3B-RuntimeReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             },
@@ -52,7 +56,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(3B-RuntimeReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             }
@@ -86,7 +90,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-$(3B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.7.2-windowsservercore-ltsc2019": {}
               },
               "customBuildLegGrouping": [
@@ -265,7 +269,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(3B-SdkReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             },
@@ -277,7 +281,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(3B-SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             }
@@ -384,7 +388,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(3B-AspnetReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             },
@@ -396,7 +400,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(3B-AspnetReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             }
@@ -427,7 +431,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.7.2-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-$(3B-AspnetReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.7.2-windowsservercore-ltsc2019": {}
               }
             }
@@ -591,7 +595,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(3B-WcfReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             },
@@ -603,7 +607,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(3B-WcfReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             }
@@ -634,7 +638,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.7.2-$(3B-WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.7.2-windowsservercore-ltsc2019": {}
               }
             }
