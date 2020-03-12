@@ -5,8 +5,8 @@
 
 [cmdletbinding()]
 param(
-    [string]$VersionFilter,
-    [string]$OSFilter,
+    [string]$Version,
+    [string]$OS,
     [string]$Registry,
     [string]$RepoPrefix,
     [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf')]
@@ -52,8 +52,8 @@ if (!(Test-Path $dotnetInstallScriptPath)) {
 if ($LASTEXITCODE -ne 0) { throw "Failed to install the .NET Core SDK" }
 
 # Run Tests
-$env:IMAGE_OS_FILTER = $OSFilter
-$env:IMAGE_VERSION_FILTER = $VersionFilter
+$env:IMAGE_OS = $OS
+$env:IMAGE_VERSION = $Version
 $env:REGISTRY = $Registry
 $env:REPO_PREFIX = $RepoPrefix
 $env:IMAGE_INFO_PATH = $ImageInfoPath
