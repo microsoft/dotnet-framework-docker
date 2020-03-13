@@ -11,13 +11,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     {
         public SkippableTheoryAttribute(params string[] skipOnRuntimeVersions)
         {
-            if (!string.IsNullOrEmpty(Config.VersionFilter) && Config.VersionFilter != "*")
+            if (!string.IsNullOrEmpty(Config.Version) && Config.Version != "*")
             {
-                string versionFilterPattern =
-                    Config.VersionFilter != null ? Config.GetFilterRegexPattern(Config.VersionFilter) : null;
+                string versionPattern =
+                    Config.Version != null ? Config.GetFilterRegexPattern(Config.Version) : null;
                 foreach (string skipOnRuntimeVersion in skipOnRuntimeVersions)
                 {
-                    if (Regex.IsMatch(skipOnRuntimeVersion, versionFilterPattern, RegexOptions.IgnoreCase))
+                    if (Regex.IsMatch(skipOnRuntimeVersion, versionPattern, RegexOptions.IgnoreCase))
                     {
                         Skip = $"{skipOnRuntimeVersion} is unsupported";
                         break;

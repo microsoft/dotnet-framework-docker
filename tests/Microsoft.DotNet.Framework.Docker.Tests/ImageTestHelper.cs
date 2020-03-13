@@ -46,17 +46,17 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> ApplyImageDataFilters(IEnumerable<ImageDescriptor> imageDescriptors)
         {
-            string versionFilterPattern =
-                Config.VersionFilter != null ? Config.GetFilterRegexPattern(Config.VersionFilter) : null;
-            string osFilterPattern =
-                Config.OSFilter != null ? Config.GetFilterRegexPattern(Config.OSFilter) : null;
+            string versionPattern =
+                Config.Version != null ? Config.GetFilterRegexPattern(Config.Version) : null;
+            string osPattern =
+                Config.OS != null ? Config.GetFilterRegexPattern(Config.OS) : null;
 
             // Filter out test data that does not match the active os and version filters.
             return imageDescriptors
-                .Where(imageDescriptor => Config.OSFilter == null
-                    || Regex.IsMatch(imageDescriptor.OsVariant, osFilterPattern, RegexOptions.IgnoreCase))
-                .Where(imageDescriptor => Config.VersionFilter == null
-                    || Regex.IsMatch(imageDescriptor.Version, versionFilterPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor => Config.OS == null
+                    || Regex.IsMatch(imageDescriptor.OsVariant, osPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor => Config.Version == null
+                    || Regex.IsMatch(imageDescriptor.Version, versionPattern, RegexOptions.IgnoreCase))
                 .Select(imageDescriptor => new object[] { imageDescriptor });
         }
 
