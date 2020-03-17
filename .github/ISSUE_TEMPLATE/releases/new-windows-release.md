@@ -13,7 +13,7 @@ Windows version: &lt;version&gt;
 1. - [ ] Update the test data for each of the [test classes](https://github.com/microsoft/dotnet-framework-docker/tree/master/tests/Microsoft.DotNet.Framework.Docker.Tests) to include the new Windows version
 1. - [ ] Look up the recommended latest [NuGet CLI version](https://www.nuget.org/downloads) and update the [nuget-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/nuget-info.json) file to associate that NuGet version with the new version of Windows
 1. - [ ] Run the `update-dependencies` tool to update all the necessary files:
-      - [ ] `dotnet run --project .\eng\update-dependencies\update-dependencies.csproj`
+      - [ ] `dotnet run --project .\eng\update-dependencies`
 1. - [ ] Inspect generated changes for correctness
 1. - [ ] Test the images
       1. - [ ] Create a local VM of the new Windows version
