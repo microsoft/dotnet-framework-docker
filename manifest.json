@@ -13,7 +13,8 @@
     "3B-2016-RuntimeReleaseDateStamp": "20200312",
     "3B-2016-SdkReleaseDateStamp": "20200316",
     "3B-2016-AspnetReleaseDateStamp": "20200312",
-    "3B-2016-WcfReleaseDateStamp": "20200312"
+    "3B-2016-WcfReleaseDateStamp": "20200312",
+    "NuGetUpdate-SdkReleaseDateStamp": "20200318"
   },
   "repos": [
     {
@@ -249,7 +250,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.8-windowsservercore-ltsc2016": {}
               }
             },
@@ -261,7 +262,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
               }
             },
@@ -273,7 +274,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "4.8-$(3B-SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "4.8-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-1903": {},
                 "4.8-windowsservercore-1903": {}
               }
             },
@@ -304,7 +305,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(3B-2016-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -316,7 +317,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "3.5-windowsservercore-ltsc2019": {}
               }
             },
@@ -328,7 +329,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1903",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
+                "3.5-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-1903": {},
                 "3.5-windowsservercore-1903": {}
               }
             },

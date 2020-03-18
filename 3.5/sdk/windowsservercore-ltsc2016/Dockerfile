@@ -20,7 +20,7 @@ RUN \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION 4.4.3
+ENV NUGET_VERSION 4.9.4
 RUN mkdir "%ProgramFiles%\NuGet" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `

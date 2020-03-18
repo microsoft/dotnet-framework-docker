@@ -5,6 +5,6 @@ FROM $BASE_BUILD_IMAGE
 WORKDIR /app
 COPY . ./
 
-RUN nuget restore SimpleWebApplication.csproj -SolutionDirectory .
+RUN nuget restore SimpleWebApplication.sln -SolutionDirectory .
 
 RUN msbuild SimpleWebApplication.csproj /p:Configuration=Release
