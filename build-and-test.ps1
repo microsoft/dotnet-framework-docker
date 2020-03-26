@@ -4,9 +4,9 @@
 )]
 param(
     [ValidateSet("runtime", "sdk", "aspnet", "wcf")]
-    [string[]]$RepoFilter = @(),
-    [string]$VersionFilter = "*",
-    [string]$OSFilter = "*",
+    [string[]]$Repos = @(),
+    [string]$Version = "*",
+    [string]$OS = "*",
     [Parameter(ParameterSetName = "Build")]
     [switch]$BuildOnly,
     [Parameter(ParameterSetName = "Test")]
@@ -25,29 +25,28 @@ else {
     $test = $TestOnly
 }
 
-if ($RepoFilter.Count -eq 0) {
-    $PathFilters = $null
+if ($Repos.Count -eq 0) {
+    $Path = $null
     $testCategories = @()
 }
 else {
-    $PathFilters = ""
-    $RepoFilter | foreach {
-        $PathFilters += " --path '$VersionFilter/$_/$OSFilter'"
+    $Path = ""
+    $Repos | foreach {
+        $Path += " --path '$Version/$_/$OS'"
     }
-    $testCategories = $RepoFilter
+    $testCategories = $Repos
 }
 
 if ($build) {
     & ./eng/common/build.ps1 `
-        -VersionFilter $VersionFilter `
-        -OSFilter $OSFilter `
-        -PathFilters $PathFilters `
-        -OptionalImageBuilderArgs $OptionalImageBuilderArgs `
-        -ExcludeArchitecture
+        -Version $Version `
+        -OS $OS `
+        -Path $Path `
+        -OptionalImageBuilderArgs $OptionalImageBuilderArgs
 }
 if ($test) {
     & ./tests/run-tests.ps1 `
-        -VersionFilter $VersionFilter `
-        -OSFilter $OSFilter `
+        -Version $Version `
+        -OS $OS `
         -TestCategories $testCategories
 }
