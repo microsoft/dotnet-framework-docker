@@ -24,6 +24,7 @@
       "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/runtime-tags.yml",
       "images": [
         {
+          "productVersion": "4.8",
           "sharedTags": {
             "4.8": {},
             "latest": {}
@@ -68,6 +69,7 @@
           ]
         },
         {
+          "productVersion": "4.7.2",
           "sharedTags": {
             "4.7.2": {}
           },
@@ -111,6 +113,7 @@
           ]
         },
         {
+          "productVersion": "4.7.1",
           "sharedTags": {
             "4.7.1": {}
           },
@@ -136,6 +139,7 @@
           ]
         },
         {
+          "productVersion": "4.7",
           "sharedTags": {
             "4.7": {}
           },
@@ -161,6 +165,7 @@
           ]
         },
         {
+          "productVersion": "4.6.2",
           "sharedTags": {
             "4.6.2": {}
           },
@@ -186,6 +191,7 @@
           ]
         },
         {
+          "productVersion": "3.5",
           "sharedTags": {
             "3.5": {}
           },
@@ -237,6 +243,7 @@
       "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/sdk-tags.yml",
       "images": [
         {
+          "productVersion": "4.8",
           "sharedTags": {
             "4.8": {},
             "latest": {}
@@ -293,6 +300,7 @@
           ]
         },
         {
+          "productVersion": "3.5",
           "sharedTags": {
             "3.5": {}
           },
@@ -356,6 +364,7 @@
       "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/aspnet-tags.yml",
       "images": [
         {
+          "productVersion": "4.8",
           "sharedTags": {
             "4.8": {},
             "latest": {}
@@ -412,6 +421,7 @@
           ]
         },
         {
+          "productVersion": "4.7.2",
           "sharedTags": {
             "4.7.2": {}
           },
@@ -443,6 +453,7 @@
           ]
         },
         {
+          "productVersion": "4.7.1",
           "sharedTags": {
             "4.7.1": {}
           },
@@ -462,6 +473,7 @@
           ]
         },
         {
+          "productVersion": "4.7",
           "sharedTags": {
             "4.7": {}
           },
@@ -481,6 +493,7 @@
           ]
         },
         {
+          "productVersion": "4.6.2",
           "sharedTags": {
             "4.6.2": {}
           },
@@ -500,6 +513,7 @@
           ]
         },
         {
+          "productVersion": "3.5",
           "sharedTags": {
             "3.5": {}
           },
@@ -563,6 +577,7 @@
       "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/wcf-tags.yml",
       "images": [
         {
+          "productVersion": "4.8",
           "sharedTags": {
             "4.8": {},
             "latest": {}
@@ -619,6 +634,7 @@
           ]
         },
         {
+          "productVersion": "4.7.2",
           "sharedTags": {
             "4.7.2": {}
           },
@@ -650,6 +666,7 @@
           ]
         },
         {
+          "productVersion": "4.7.1",
           "sharedTags": {
             "4.7.1": {}
           },
@@ -669,6 +686,7 @@
           ]
         },
         {
+          "productVersion": "4.7",
           "sharedTags": {
             "4.7": {}
           },
@@ -688,6 +706,7 @@
           ]
         },
         {
+          "productVersion": "4.6.2",
           "sharedTags": {
             "4.6.2": {}
           },
