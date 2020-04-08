@@ -2,3 +2,5 @@ variables:
 - template: ../../common/templates/variables/common.yml
 - name: publicGitRepoUri
   value: https://github.com/microsoft/dotnet-framework-docker
+- name: productVersionComponents
+  value: 3
