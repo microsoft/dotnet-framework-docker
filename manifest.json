@@ -10,10 +10,10 @@
     "3B-SdkReleaseDateStamp": "20200316",
     "3B-AspnetReleaseDateStamp": "20200310",
     "3B-WcfReleaseDateStamp": "20200310",
-    "3B-2016-RuntimeReleaseDateStamp": "20200312",
-    "3B-2016-SdkReleaseDateStamp": "20200316",
-    "3B-2016-AspnetReleaseDateStamp": "20200312",
-    "3B-2016-WcfReleaseDateStamp": "20200312",
+    "4B-RuntimeReleaseDateStamp": "20200414",
+    "4B-SdkReleaseDateStamp": "20200414",
+    "4B-AspnetReleaseDateStamp": "20200414",
+    "4B-WcfReleaseDateStamp": "20200414",
     "NuGetUpdate-SdkReleaseDateStamp": "20200318"
   },
   "repos": [
@@ -79,7 +79,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.2-$(3B-2016-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-$(4B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               },
               "customBuildLegGrouping": [
@@ -123,7 +123,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(3B-2016-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(4B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               },
               "customBuildLegGrouping": [
@@ -149,7 +149,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7-$(3B-2016-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-$(4B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               },
               "customBuildLegGrouping": [
@@ -201,7 +201,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(3B-2016-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(4B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -313,7 +313,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(NuGetUpdate-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(4B-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -434,7 +434,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.2-$(3B-2016-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-$(4B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               }
             },
@@ -466,7 +466,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(3B-2016-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(4B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             }
@@ -486,7 +486,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7-$(3B-2016-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-$(4B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               }
             }
@@ -526,7 +526,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(3B-2016-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(4B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -647,7 +647,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.2-$(3B-2016-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-$(4B-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               }
             },
@@ -679,7 +679,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(3B-2016-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(4B-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             }
@@ -699,7 +699,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7-$(3B-2016-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-$(4B-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               }
             }
