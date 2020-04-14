@@ -7,7 +7,7 @@
             "4.7.1",
             "4.7.2"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/03/windows10.0-kb4540670-x64_580c199c6d7492e2c2586e4f7557a54a7ac95a08.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/04/windows10.0-kb4550929-x64_1d6541833fc96407f5c59911aaf1fcd2bf2036aa.msu"
     },
     {
         "osVersion": "windowsservercore-ltsc2016",
