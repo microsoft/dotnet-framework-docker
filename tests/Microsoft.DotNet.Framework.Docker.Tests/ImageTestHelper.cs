@@ -18,7 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class ImageTestHelper
     {
-        private static Lazy<JArray> ImageInfoData;
+        private readonly static Lazy<JObject> ImageInfoData;
 
         public DockerHelper DockerHelper { get; }
         private ITestOutputHelper _outputHelper;
@@ -31,13 +31,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         static ImageTestHelper()
         {
-            ImageInfoData = new Lazy<JArray>(() =>
+            ImageInfoData = new Lazy<JObject>(() =>
             {
                 string imageInfoPath = Environment.GetEnvironmentVariable("IMAGE_INFO_PATH");
                 if (!String.IsNullOrEmpty(imageInfoPath))
                 {
                     string imageInfoContents = File.ReadAllText(imageInfoPath);
-                    return JsonConvert.DeserializeObject<JArray>(imageInfoContents);
+                    return JsonConvert.DeserializeObject<JObject>(imageInfoContents);
                 }
 
                 return null;
@@ -128,13 +128,15 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             if (ImageTestHelper.ImageInfoData.Value != null)
             {
                 JObject repoInfo = (JObject)ImageTestHelper.ImageInfoData.Value
+                    .Value<JArray>("repos")
                     .FirstOrDefault(imageInfoRepo => imageInfoRepo["repo"].ToString() == repo);
 
                 if (repoInfo["images"] != null)
                 {
-                    isUsingCustomRegistry = repoInfo["images"]
-                        .Cast<JProperty>()
-                        .Any(imageInfo => imageInfo.Value["simpleTags"].Any(imageTag => imageTag.ToString() == tag));
+                    isUsingCustomRegistry = repoInfo.Value<JArray>("images")
+                        .SelectMany(imageInfo => imageInfo.Value<JArray>("platforms"))
+                        .Cast<JObject>()
+                        .Any(platformInfo => platformInfo.Value<JArray>("simpleTags").Any(imageTag => imageTag.ToString() == tag));
                 }
                 else
                 {
