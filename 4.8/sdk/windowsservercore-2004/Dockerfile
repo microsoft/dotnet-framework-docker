@@ -54,9 +54,7 @@ RUN `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     `
     # Workaround for issues with 32-bit ngen
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\VSWebLauncher.exe" `
-    `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\VSWebLauncher.exe"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
