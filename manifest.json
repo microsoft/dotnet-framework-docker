@@ -202,7 +202,8 @@
         {
           "productVersion": "3.5",
           "sharedTags": {
-            "3.5": {}
+            "3.5": {},
+            "4.8-3.5": {}
           },
           "platforms": [
             {
@@ -247,7 +248,9 @@
               "osVersion": "windowsservercore-2004",
               "tags": {
                 "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
-                "3.5-windowsservercore-2004": {}
+                "4.8-3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
+                "3.5-windowsservercore-2004": {},
+                "4.8-3.5-windowsservercore-2004": {}
               }
             }
           ]
@@ -332,7 +335,8 @@
         {
           "productVersion": "3.5",
           "sharedTags": {
-            "3.5": {}
+            "3.5": {},
+            "4.8-3.5": {}
           },
           "platforms": [
             {
@@ -392,7 +396,9 @@
               "osVersion": "windowsservercore-2004",
               "tags": {
                 "3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
-                "3.5-windowsservercore-2004": {}
+                "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "3.5-windowsservercore-2004": {},
+                "4.8-3.5-windowsservercore-2004": {}
               }
             }
           ]
@@ -569,7 +575,8 @@
         {
           "productVersion": "3.5",
           "sharedTags": {
-            "3.5": {}
+            "3.5": {},
+            "4.8-3.5": {}
           },
           "platforms": [
             {
@@ -629,7 +636,9 @@
               "osVersion": "windowsservercore-2004",
               "tags": {
                 "3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
-                "3.5-windowsservercore-2004": {}
+                "4.8-3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
+                "3.5-windowsservercore-2004": {},
+                "4.8-3.5-windowsservercore-2004": {}
               }
             }
           ]
