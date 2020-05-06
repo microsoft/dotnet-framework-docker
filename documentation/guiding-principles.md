@@ -11,7 +11,7 @@ These are the guiding principles for the content, tagging and production of the 
 1. Breaking changes are not allowed within a release.  This includes changes such as adding/removing components, adding/removing ENVs, and major/minor version changes to included components.
 
 1. There should be parity within the supported image matrix.  Examples include:
-    1. If support for a new version of Windows is added for a particular .NET Core version, then support will be added across all `runtime`, `aspnet`, `wcf`, and `sdk` image variants.
+    1. If support for a new version of Windows is added for a particular .NET Framework version, then support will be added across all `runtime`, `aspnet`, `wcf`, and `sdk` image variants.
     1. If a new component is added, it should be available across all supported OS versions.
 
 1. Windows Server Core is the only Windows SKU supported by the official .NET Framework images.  Windows Server Core is the best Windows SKU to run .NET Framework apps from a performance perspective.  Windows Server Core doesn't have support for every scenario.  For these cases, it is expected that consumers will need to manage their own custom .NET Framework images based on the [Windows](https://hub.docker.com/_/microsoft-windows) base image.
