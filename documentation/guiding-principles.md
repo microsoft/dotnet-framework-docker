@@ -24,7 +24,7 @@ The .NET Core image tags strive to align with the tagging practices utilized by 
 
 1. Images will be included as part of the .NET release process.  The Docker images will be released at the same time as the core product.
 
-1. Images will be rebuilt within hours of base image changes. For example, suppose a particular version of Windows is patched.  The .NET Core images based on this version of Windows will be rebuilt with this new base image within hours of its release.
+1. Images will be rebuilt within hours of base image changes. For example, suppose a particular version of Windows is patched.  The .NET Framework images based on this version of Windows will be rebuilt with this new base image within hours of its release.
 
 1. Images will never be deleted from the [official Docker repositories](https://hub.docker.com/_/microsoft-dotnet-framework/).
 
