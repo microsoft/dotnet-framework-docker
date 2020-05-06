@@ -8,6 +8,8 @@ jobs:
   pool: # linuxAmd64Pool
     name: Hosted Ubuntu 1604
   steps:
+  - script: >
+      echo $(Build.Repository.Name)
   - template: ../steps/init-docker-linux.yml
   - script: >
       $(runImageBuilderCmd) generateBuildMatrix
