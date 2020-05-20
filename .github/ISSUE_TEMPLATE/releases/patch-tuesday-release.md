@@ -2,6 +2,7 @@
 
 ## Tasks
 
+1. - [ ] Ensure all build agent scale sets have the appropriate number of machines allocated for a build
 1. - [ ] Merge any pending PRs or commits from `dev` branch:
       - [ ] &lt;placeholder link&gt;
 1. - [ ] Look up the latest [NuGet CLI versions](https://www.nuget.org/downloads) and update the [nuget-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/nuget-info.json) file with the latest patch of each major/minor version listed in the file.
@@ -28,3 +29,4 @@
 1. - [ ] Confirm sample images have been ingested by MCR
 1. - [ ] Confirm `Last Modified` field has been updated in Docker Hub for [microsoft-dotnet-framework-samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/)
 1. - [ ] Reply to .NET Release team with a status update email
+1. - [ ] Deallocate any extra scale set build agent machines if necessary
