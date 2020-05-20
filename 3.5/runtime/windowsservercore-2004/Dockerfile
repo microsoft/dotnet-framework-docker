@@ -7,10 +7,11 @@ ENV DOTNET_RUNNING_IN_CONTAINER=true `
     # Ngen workaround: https://github.com/microsoft/dotnet-framework-docker/issues/231
     COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
-COPY . .
-
 # Install .NET Fx 3.5
-RUN DISM /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+RUN curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-2004.zip `
+    && tar -zxf microsoft-windows-netfx3.zip `
+    && del /F /Q microsoft-windows-netfx3.zip `
+    && DISM /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     && C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe update `
