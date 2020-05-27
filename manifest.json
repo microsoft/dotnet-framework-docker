@@ -5,7 +5,11 @@
     "RuntimeReleaseDateStamp": "20200512",
     "SdkReleaseDateStamp": "20200519",
     "AspnetReleaseDateStamp": "20200512",
-    "WcfReleaseDateStamp": "20200512"
+    "WcfReleaseDateStamp": "20200512",
+    "2004-RuntimeReleaseDateStamp": "20200527",
+    "2004-SdkReleaseDateStamp": "20200527",
+    "2004-AspnetReleaseDateStamp": "20200527",
+    "2004-WcfReleaseDateStamp": "20200527"
   },
   "repos": [
     {
@@ -62,7 +66,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-$(2004-RuntimeReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
               }
             }
@@ -238,8 +242,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
+                "3.5-$(2004-RuntimeReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(2004-RuntimeReleaseDateStamp)-windowsservercore-2004": {},
                 "3.5-windowsservercore-2004": {},
                 "4.8-3.5-windowsservercore-2004": {}
               }
@@ -317,7 +321,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-$(2004-SdkReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
               }
             }
@@ -386,8 +390,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "3.5-$(2004-SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(2004-SdkReleaseDateStamp)-windowsservercore-2004": {},
                 "3.5-windowsservercore-2004": {},
                 "4.8-3.5-windowsservercore-2004": {}
               }
@@ -465,7 +469,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-$(2004-AspnetReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
               }
             }
@@ -626,8 +630,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
+                "3.5-$(2004-AspnetReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(2004-AspnetReleaseDateStamp)-windowsservercore-2004": {},
                 "3.5-windowsservercore-2004": {},
                 "4.8-3.5-windowsservercore-2004": {}
               }
@@ -705,7 +709,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-$(2004-WcfReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
               }
             }

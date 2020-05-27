@@ -52,8 +52,8 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 ## Windows Server, version 2004 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20200512-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.8/runtime/windowsservercore-2004/Dockerfile)
-3.5-20200512-windowsservercore-2004, 4.8-3.5-20200512-windowsservercore-2004, 3.5-windowsservercore-2004, 4.8-3.5-windowsservercore-2004, 3.5, 4.8-3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/3.5/runtime/windowsservercore-2004/Dockerfile)
+4.8-20200527-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/4.8/runtime/windowsservercore-2004/Dockerfile)
+3.5-20200527-windowsservercore-2004, 4.8-3.5-20200527-windowsservercore-2004, 3.5-windowsservercore-2004, 4.8-3.5-windowsservercore-2004, 3.5, 4.8-3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/3.5/runtime/windowsservercore-2004/Dockerfile)
 
 ## Windows Server, version 1909 amd64 Tags
 Tag | Dockerfile
