@@ -31,8 +31,8 @@ jobs:
       $(runImageBuilderCmd) build
       --manifest $(manifest)
       $(imageBuilderPaths)
+      $(osVersions)
       --os-type $(osType)
-      --os-version "$(osVersion)"
       --architecture $(architecture)
       --retry
       --source-repo $(publicGitRepoUri)
