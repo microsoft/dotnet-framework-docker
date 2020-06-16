@@ -1,20 +1,10 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-windowsservercore-ltsc2019
-
-# Install .NET 4.8 Fx
-RUN curl -fSLo dotnet-framework-installer.exe https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe `
-    && .\dotnet-framework-installer.exe /q `
-    && del .\dotnet-framework-installer.exe `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
-
-# ngen .NET Fx
-RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+FROM $REPO:4.8-windowsservercore-2004
 
 # Install NuGet CLI
-ENV NUGET_VERSION 4.9.4
+ENV NUGET_VERSION 5.5.1
 RUN mkdir "%ProgramFiles%\NuGet" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
 
@@ -40,7 +30,7 @@ RUN `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
     `
-    #Cleanup
+    # Cleanup
     && rmdir /S /Q "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer" `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
@@ -50,20 +40,21 @@ RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbina
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
-ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true `
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn" `
+    # Ngen workaround: https://github.com/microsoft/dotnet-framework-docker/issues/231
+    COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 RUN `
-    # Workaround for issue with 32 bit assemblies from .NET Framework 4.8 SDK being 64 bit ngen'ed
+    # Workaround for issues with 64-bit ngen 
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     `
-    # Workaround VS installer/ngen issues
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\VSWebLauncher.exe" `
-    `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+    # Workaround for issues with 32-bit ngen
+    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\VSWebLauncher.exe"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `

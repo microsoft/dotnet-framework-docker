@@ -1,4 +1,6 @@
 $(McrTagsYmlRepo:sdk)
+$(McrTagsYmlTagGroup:4.8-windowsservercore-2004)
+$(McrTagsYmlTagGroup:3.5-windowsservercore-2004)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-1909)
 $(McrTagsYmlTagGroup:3.5-windowsservercore-1909)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-1903)
