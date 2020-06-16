@@ -36,10 +36,11 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
         static DependencyUpdater()
         {
             dockerfiles = new Lazy<IEnumerable<DockerfileInfo>>(() =>
-                new DirectoryInfo(Program.RepoRoot).GetDirectories("4.*")
-                .Append(new DirectoryInfo(Path.Combine(Program.RepoRoot, "3.5")))
-                .SelectMany(dir => dir.GetFiles("Dockerfile", SearchOption.AllDirectories))
-                .Select(file => new DockerfileInfo(file.FullName))
+                Directory.GetFiles(
+                    Path.Combine(Program.RepoRoot, "src"),
+                    "Dockerfile",
+                    SearchOption.AllDirectories)
+                .Select(file => new DockerfileInfo(file))
                 .ToArray());
         }
 
@@ -283,14 +284,14 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             public DockerfileInfo(string path)
             {
                 this.Path = path;
-                
+
                 string[] pathParts = path.Substring(Program.RepoRoot.Length + 1)
                     .Replace(@"\", "/")
                     .Split("/");
 
-                this.FrameworkVersion = pathParts[0];
+                this.FrameworkVersion = pathParts[2];
                 this.ImageVariant = pathParts[1];
-                this.OsVersion = pathParts[2];
+                this.OsVersion = pathParts[3];
             }
 
             public string Path { get; }
