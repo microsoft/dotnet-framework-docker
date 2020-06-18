@@ -9,10 +9,12 @@ RUN Add-WindowsFeature Web-Server; `
     Add-WindowsFeature NET-Framework-45-ASPNET; `
     Add-WindowsFeature Web-Asp-Net45; `
     Remove-Item -Recurse C:\inetpub\wwwroot\*; `
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
     Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe
 
 # Install Roslyn compilers and ngen binaries
-RUN Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg -OutFile c:\microsoft.net.compilers.2.9.0.zip; `
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+    Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg -OutFile c:\microsoft.net.compilers.2.9.0.zip; `
     Expand-Archive -Path c:\microsoft.net.compilers.2.9.0.zip -DestinationPath c:\RoslynCompilers; `
     Remove-Item c:\microsoft.net.compilers.2.9.0.zip -Force; `
     &C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe update; `

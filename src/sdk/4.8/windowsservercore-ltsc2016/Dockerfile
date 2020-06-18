@@ -8,6 +8,7 @@ ENV NUGET_VERSION 4.9.4
 RUN mkdir "%ProgramFiles%\NuGet" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
@@ -18,6 +19,7 @@ RUN `
     # Install VS Test Agent
     powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://download.visualstudio.microsoft.com/download/pr/0fed0c12-ccd3-4767-b151-a616aaf99d86/87427eb26c5d1597bf3a6c87e295827d0a042e0edeb04c2668c474aca9a3d3e6/vs_TestAgent.exe `
@@ -29,6 +31,7 @@ RUN `
     # Install VS Build Tools
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://download.visualstudio.microsoft.com/download/pr/0fed0c12-ccd3-4767-b151-a616aaf99d86/360c496b69ec34805b9bd5afb5eaeb08b726be48f730c3bb557bf41ead9700d4/vs_BuildTools.exe `
@@ -54,6 +57,7 @@ RUN `
 RUN powershell -Command `
         $ErrorActionPreference = 'Stop'; `
         $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2020.05.zip `
@@ -88,6 +92,7 @@ RUN powershell setx /M PATH $(${Env:PATH} `
 RUN powershell " `
     $ErrorActionPreference = 'Stop'; `
     $ProgressPreference = 'SilentlyContinue'; `
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
     @('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8') `
     | %{ `
         Invoke-WebRequest `
