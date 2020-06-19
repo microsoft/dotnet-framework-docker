@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2016
 # Install .NET 4.7
 RUN powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri "https://download.microsoft.com/download/D/D/3/DD35CC25-6E9C-484B-A746-C5BE0C923290/NDP47-KB3186497-x86-x64-AllOS-ENU.exe" `
@@ -16,6 +17,7 @@ RUN powershell -Command `
 # Apply latest patch
 RUN powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4561616-x64_0026760a6c77d1a8113855bd853f3c2ea22ada84.msu" `
