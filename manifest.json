@@ -202,7 +202,9 @@
           "productVersion": "3.5",
           "sharedTags": {
             "3.5": {},
-            "4.8-3.5": {}
+            "4.8-3.5": {
+              "isUndocumented": true
+            }
           },
           "platforms": [
             {
@@ -335,7 +337,9 @@
           "productVersion": "3.5",
           "sharedTags": {
             "3.5": {},
-            "4.8-3.5": {}
+            "4.8-3.5": {
+              "isUndocumented": true
+            }
           },
           "platforms": [
             {
@@ -575,7 +579,9 @@
           "productVersion": "3.5",
           "sharedTags": {
             "3.5": {},
-            "4.8-3.5": {}
+            "4.8-3.5": {
+              "isUndocumented": true
+            }
           },
           "platforms": [
             {
