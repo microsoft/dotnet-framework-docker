@@ -7,14 +7,14 @@
             "4.7.1",
             "4.7.2"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4561616-x64_0026760a6c77d1a8113855bd853f3c2ea22ada84.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/07/windows10.0-kb4565511-x64_5d2481cbc9319147ad3c8f42e07a0ee182909be9.msu"
     },
     {
         "osVersion": "windowsservercore-ltsc2016",
         "runtimeVersions": [
             "4.8"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/05/windows10.0-kb4552926-x64-ndp48_3aeb81a5f71e515f6eda4508e575d13d0a58305b.msu"
+        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/06/windows10.0-kb4565628-x64-ndp48_2b568c83ef9452555a34eca2b154adeca0e250a7.msu"
     },
     {
         "osVersion": "windowsservercore-ltsc2019",
@@ -22,14 +22,14 @@
             "3.5",
             "4.7.2"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/05/windows10.0-kb4552924-x64_dd0744e29f54be0c3891bb6339480a845e947050.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4565625-x64_327b50b4c8fee3c26ccbd9bd4fbbd1b03c99c0e4.msu"
     },
     {
         "osVersion": "windowsservercore-ltsc2019",
         "runtimeVersions": [
             "4.8"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/05/windows10.0-kb4552930-x64-ndp48_3fb9f9a7b72e49707c8c49b4febc171411eca05f.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4565632-x64-ndp48_dbab0773d0b336c20b095d9144120d487992066c.msu"
     },
     {
         "osVersion": "windowsservercore-1903",
@@ -37,7 +37,7 @@
             "3.5",
             "4.8"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/05/windows10.0-kb4552931-x64_2db4f6d9a62833406875986aae69351f82f3ca2b.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4565633-x64-ndp48_89a1da5ef1fe7a716623d3e2af3a996be27d6fd7.msu"
     },
     {
         "osVersion": "windowsservercore-1909",
@@ -45,6 +45,14 @@
             "3.5",
             "4.8"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/05/windows10.0-kb4552931-x64_2db4f6d9a62833406875986aae69351f82f3ca2b.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4565633-x64-ndp48_89a1da5ef1fe7a716623d3e2af3a996be27d6fd7.msu"
+    },
+    {
+        "osVersion": "windowsservercore-2004",
+        "runtimeVersions": [
+            "3.5",
+            "4.8"
+        ],
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4565627-x64-ndp48_a765b5e7b36d04b80565d097620218def98f1f9d.msu"
     }
 ]
