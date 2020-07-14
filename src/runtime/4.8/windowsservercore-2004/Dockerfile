@@ -2,6 +2,14 @@
 
 FROM mcr.microsoft.com/windows/servercore:2004
 
+# Apply latest patch
+RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/06/windows10.0-kb4565627-x64-ndp48_a765b5e7b36d04b80565d097620218def98f1f9d.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4565627-x64-ndp48.cab `
+    && rmdir /S /Q patch
+
 ENV `
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true `
