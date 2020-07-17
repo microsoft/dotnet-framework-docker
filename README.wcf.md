@@ -1,10 +1,3 @@
-## Important: Client Firewall Rules Update to Microsoft Container Registry (MCR)
-
-To provide a consistent FQDNs, the data endpoint will be changing from *.cdn.mscr.io to *.data.mcr.microsoft.com
-
-For more info, see [MCR Client Firewall Rules](https://aka.ms/mcr/firewallrules).
----------------------------------------------------------------------------------
-
 # Featured Tags
 
 * `4.8`
@@ -109,6 +102,7 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
 # License
+- Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
 
 View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
 
