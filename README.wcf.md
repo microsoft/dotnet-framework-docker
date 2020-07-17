@@ -104,7 +104,6 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 # License
 - Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
 
-
 View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
 
 Windows Container images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
