@@ -6,13 +6,14 @@
 [cmdletbinding()]
 param(
     [string]$Version,
+    [string]$Architecture,
     [string]$OS,
     [string]$Registry,
     [string]$RepoPrefix,
-    [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf')]
-    [string[]]$TestCategories = @(),
     [switch]$PullImages,
-    [string]$ImageInfoPath
+    [string]$ImageInfoPath,
+    [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf', 'pre-build')]
+    [string[]]$TestCategories = @("runtime", "runtime-deps", "aspnet", "sdk")
 )
 
 function Log {
@@ -33,6 +34,11 @@ function Exec {
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+if ($TestCategories.Count -eq 1 -and $TestCategories.Contains("pre-build")) {
+    Write-Output "There are no pre-build tests"
+    Exit 0
+}
 
 # Install the .NET Core SDK
 $dotnetInstallDir = "$PSScriptRoot/../.dotnet"
