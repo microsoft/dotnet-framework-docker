@@ -82,9 +82,10 @@
                 "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               },
-              "customBuildLegGrouping": [
+              "customBuildLegGroups": [
                 {
                   "name": "pr-build",
+                  "type": "Supplemental",
                   "dependencies": [
                     "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
@@ -100,9 +101,10 @@
                 "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.7.2-windowsservercore-ltsc2019": {}
               },
-              "customBuildLegGrouping": [
+              "customBuildLegGroups": [
                 {
                   "name": "pr-build",
+                  "type": "Supplemental",
                   "dependencies": [
                     "$(Repo:runtime):4.8-windowsservercore-ltsc2019",
                     "$(Repo:sdk):4.8-windowsservercore-ltsc2019"
@@ -126,9 +128,10 @@
                 "4.7.1-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               },
-              "customBuildLegGrouping": [
+              "customBuildLegGroups": [
                 {
                   "name": "pr-build",
+                  "type": "Supplemental",
                   "dependencies": [
                     "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
@@ -152,9 +155,10 @@
                 "4.7-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               },
-              "customBuildLegGrouping": [
+              "customBuildLegGroups": [
                 {
                   "name": "pr-build",
+                  "type": "Supplemental",
                   "dependencies": [
                     "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
@@ -178,9 +182,10 @@
                 "4.6.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.6.2-windowsservercore-ltsc2016": {}
               },
-              "customBuildLegGrouping": [
+              "customBuildLegGroups": [
                 {
                   "name": "pr-build",
+                  "type": "Supplemental",
                   "dependencies": [
                     "$(Repo:runtime):4.8-windowsservercore-ltsc2016",
                     "$(Repo:sdk):4.8-windowsservercore-ltsc2016"
