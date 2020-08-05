@@ -22,7 +22,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/0fed0c12-ccd3-4767-b151-a616aaf99d86/87427eb26c5d1597bf3a6c87e295827d0a042e0edeb04c2668c474aca9a3d3e6/vs_TestAgent.exe `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/584a5fcf-dd07-4c36-add9-620e858c9a35/cd90750df4950dc9a6130937f4aaf7367f42944dea5fde2c78dbcb4bd8a7fa73/vs_TestAgent.exe `
             -OutFile vs_TestAgent.exe `
     && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
@@ -34,7 +34,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/0fed0c12-ccd3-4767-b151-a616aaf99d86/360c496b69ec34805b9bd5afb5eaeb08b726be48f730c3bb557bf41ead9700d4/vs_BuildTools.exe `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/584a5fcf-dd07-4c36-add9-620e858c9a35/536a649978a0c34a78ca99a0c7b14a7b52e96b5a563d86efe6fdf9559b2886fb/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     && setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1 `

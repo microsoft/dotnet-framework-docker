@@ -3,7 +3,7 @@
   "registry": "mcr.microsoft.com",
   "variables": {
     "RuntimeReleaseDateStamp": "20200714",
-    "SdkReleaseDateStamp": "20200714",
+    "SdkReleaseDateStamp": "20200805",
     "AspnetReleaseDateStamp": "20200714",
     "WcfReleaseDateStamp": "20200714"
   },
@@ -195,7 +195,7 @@
           "sharedTags": {
             "3.5": {},
             "4.8-3.5": {
-              "isUndocumented": true
+              "docType": "Undocumented"
             }
           },
           "platforms": [
@@ -330,7 +330,7 @@
           "sharedTags": {
             "3.5": {},
             "4.8-3.5": {
-              "isUndocumented": true
+              "docType": "Undocumented"
             }
           },
           "platforms": [
@@ -572,7 +572,7 @@
           "sharedTags": {
             "3.5": {},
             "4.8-3.5": {
-              "isUndocumented": true
+              "docType": "Undocumented"
             }
           },
           "platforms": [
