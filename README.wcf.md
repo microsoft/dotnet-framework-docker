@@ -102,7 +102,8 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
 # License
-- Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
+
+* Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
 
 View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
 
