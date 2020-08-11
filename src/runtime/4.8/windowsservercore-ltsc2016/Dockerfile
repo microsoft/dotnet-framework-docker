@@ -20,12 +20,12 @@ RUN powershell -Command `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/06/windows10.0-kb4565628-x64-ndp48_2b568c83ef9452555a34eca2b154adeca0e250a7.msu" `
+            -Uri "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/07/windows10.0-kb4569746-x64-ndp48_d0493cbcc6681dc3b4f6418d879ed011f226ba25.msu" `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4565628-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4569746-x64-ndp48.cab `
     && rmdir /S /Q patch
 
 # ngen .NET Fx
