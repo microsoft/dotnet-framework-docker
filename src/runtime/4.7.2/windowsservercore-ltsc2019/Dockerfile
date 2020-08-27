@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 
 # Apply latest patch
 RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/07/windows10.0-kb4569776-x64_fb879f26b463abeea05426b15bbaba635b4ab79d.msu `

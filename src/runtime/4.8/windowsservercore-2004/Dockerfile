@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:2004
+FROM mcr.microsoft.com/windows/servercore:2004-amd64
 
 # Apply latest patch
 RUN curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/07/windows10.0-kb4569745-x64-ndp48_7f8a54816ac281286046a4b00a79fe1b7ed12fd5.msu `
