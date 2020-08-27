@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:2004
+FROM mcr.microsoft.com/windows/servercore:2004-amd64
 
 # Enable detection of running in a container
 ENV DOTNET_RUNNING_IN_CONTAINER=true `

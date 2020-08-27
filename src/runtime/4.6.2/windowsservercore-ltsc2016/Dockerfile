@@ -1,6 +1,6 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2016
+FROM mcr.microsoft.com/windows/servercore:ltsc2016-amd64
 
 # ngen .NET Fx
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
