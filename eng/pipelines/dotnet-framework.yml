@@ -1,26 +1,13 @@
 trigger: none
-pr:
-  branches:
-    include:
-    - master
-    - dev
-  paths:
-    exclude:
-    - .github/*
-    - README*
-    - samples/*
+pr: none
 
 variables:
 - template: variables/common.yml
 - name: manifest
   value: manifest.json
+
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
   parameters:
-    ${{ if eq(variables['System.TeamProject'], 'internal') }}:
-      windowsAmdBuildJobTimeout: 240
-      windowsAmdTestJobTimeout: 90
-    ${{ if eq(variables['System.TeamProject'], 'public') }}:
-      buildMatrixType: platformVersionedOs
-      buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
-      windowsAmdBuildJobTimeout: 330
+    windowsAmdBuildJobTimeout: 240
+    windowsAmdTestJobTimeout: 90
