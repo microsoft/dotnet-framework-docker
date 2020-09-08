@@ -2,10 +2,10 @@
   "readmePath": "README.md",
   "registry": "mcr.microsoft.com",
   "variables": {
-    "RuntimeReleaseDateStamp": "20200811",
-    "SdkReleaseDateStamp": "20200811",
-    "AspnetReleaseDateStamp": "20200811",
-    "WcfReleaseDateStamp": "20200811"
+    "RuntimeReleaseDateStamp": "20200908",
+    "SdkReleaseDateStamp": "20200908",
+    "AspnetReleaseDateStamp": "20200908",
+    "WcfReleaseDateStamp": "20200908"
   },
   "repos": [
     {

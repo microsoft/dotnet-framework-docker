@@ -3,11 +3,11 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 
 # Apply latest patch
-RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2020/07/windows10.0-kb4569776-x64_fb879f26b463abeea05426b15bbaba635b4ab79d.msu `
+RUN curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/08/windows10.0-kb4570720-x64_330e9452537bec8a07458bfc5476fdf62bba6264.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4569776-x64.cab `
+    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4570720-x64.cab `
     && rmdir /S /Q patch
 
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
