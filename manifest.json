@@ -1,5 +1,6 @@
 {
-  "readmePath": "README.md",
+  "readme": "README.md",
+  "readmeTemplate": "eng/readme-templates/README.md",
   "registry": "mcr.microsoft.com",
   "variables": {
     "RuntimeReleaseDateStamp": "20200908",
@@ -11,8 +12,9 @@
     {
       "id": "runtime",
       "name": "dotnet/framework/runtime",
-      "readmePath": "README.runtime.md",
-      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/runtime-tags.yml",
+      "readme": "README.runtime.md",
+      "readmeTemplate": "eng/readme-templates/README.md",
+      "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/runtime-tags.yml",
       "images": [
         {
           "productVersion": "4.8",
@@ -258,8 +260,9 @@
     {
       "id": "sdk",
       "name": "dotnet/framework/sdk",
-      "readmePath": "README.sdk.md",
-      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/sdk-tags.yml",
+      "readme": "README.sdk.md",
+      "readmeTemplate": "eng/readme-templates/README.md",
+      "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/sdk-tags.yml",
       "images": [
         {
           "productVersion": "4.8",
@@ -408,8 +411,9 @@
     {
       "id": "aspnet",
       "name": "dotnet/framework/aspnet",
-      "readmePath": "README.aspnet.md",
-      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/aspnet-tags.yml",
+      "readme": "README.aspnet.md",
+      "readmeTemplate": "eng/readme-templates/README.md",
+      "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/aspnet-tags.yml",
       "images": [
         {
           "productVersion": "4.8",
@@ -650,8 +654,9 @@
     {
       "id": "wcf",
       "name": "dotnet/framework/wcf",
-      "readmePath": "README.wcf.md",
-      "mcrTagsMetadataTemplatePath": "eng/mcr-tags-metadata-templates/wcf-tags.yml",
+      "readme": "README.wcf.md",
+      "readmeTemplate": "eng/readme-templates/README.md",
+      "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/wcf-tags.yml",
       "images": [
         {
           "productVersion": "4.8",

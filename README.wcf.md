@@ -3,14 +3,15 @@
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8`
 
-## About This Image
+# About This Image
+
 The Windows Communication Foundation (WCF) is a framework for building service-oriented applications. Using WCF, you can send data as asynchronous messages from one service endpoint to another. A service endpoint can be part of a continuously available service hosted by IIS, or it can be a service hosted in an application.
 
 Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
 # How to Use the Image
 
-The [WCF Docker samples](https://github.com/Microsoft/dotnet-framework-docker/tree/master/samples/wcfapp) show various ways to use WCF and Docker together.
+The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/README.md) show various ways to use .NET Framework and Docker together.
 
 ## Container sample: Run a WCF application
 You can quickly run a container with a pre-built [sample WCF Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the WCF Docker sample.
@@ -38,14 +39,14 @@ docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.
 
 .NET Framework:
 
-* [dotnet/framework/runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/): .NET Framework Runtime
-* [dotnet/framework/aspnet](https://hub.docker.com/_/microsoft-dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
 * [dotnet/framework/sdk](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/): .NET Framework SDK
+* [dotnet/framework/aspnet](https://hub.docker.com/_/microsoft-dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
+* [dotnet/framework/runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/): .NET Framework Runtime
 * [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
 
 .NET Core:
 
-* [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/) for .NET Core images.
+* [dotnet/core](https://hub.docker.com/_/microsoft-dotnet-core/): .NET Core
 * [dotnet/core-nightly](https://hub.docker.com/_/microsoft-dotnet-core-nightly/): .NET Core (Preview)
 * [dotnet/core/samples](https://hub.docker.com/_/microsoft-dotnet-core-samples/): .NET Core Samples
 
@@ -85,7 +86,7 @@ You can retrieve a list of all available tags for dotnet/framework/wcf at https:
 
 # Support
 
-See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/17455/lifecycle-faq-net-framework)
+See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 
 # Image Update Policy
 
@@ -105,6 +106,4 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/
 
 * Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
 
-View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
-
-Windows Container images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
+The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).

@@ -119,7 +119,7 @@ You can retrieve a list of all available tags for dotnet/framework/samples at ht
 
 # Support
 
-See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/17455/lifecycle-faq-net-framework)
+See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 
 # Image Update Policy
 

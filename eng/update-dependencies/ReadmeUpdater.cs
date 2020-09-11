@@ -29,7 +29,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             Trace.TraceInformation($"InvokeGetTagsDocumentationScript");
 
             // Support both execution within Windows 10, Nano Server and Linux environments.
-            string scriptPath = Path.Combine(Program.RepoRoot, "eng", "Get-TagsDocumentation.ps1");
+            string scriptPath = Path.Combine(Program.RepoRoot, "eng", "readme-templates", "Get-GeneratedReadmes.ps1");
             try
             {
                 Process process = Process.Start("pwsh", scriptPath);
