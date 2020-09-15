@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     [Trait("Category", "wcf")]
     public class WcfImageTests : ImageTests
     {
-        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
+        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
@@ -63,7 +63,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
-                VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
+            VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
         }
 
         [SkippableTheory("3.5")]
@@ -75,7 +75,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(ImageData);
+            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
     }
 }

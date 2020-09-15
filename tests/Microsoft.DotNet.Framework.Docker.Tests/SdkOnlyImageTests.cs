@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.DotNet.Framework.Models;
 using Newtonsoft.Json;
@@ -17,7 +16,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     [Trait("Category", "sdk")]
     public class SdkOnlyImageTests : ImageTests
     {
-        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
+        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
@@ -40,7 +39,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(ImageData);
+            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
 
         /// <summary>
@@ -188,7 +187,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"webdeploy-{DateTime.Now.ToFileTime()}";
-            
+
             // Calling msdeploy's help command results in a -1 exit code. To prevent that from bubbling up and causing the
             // docker run call to fail, the call is batched with an echo command that will always run even if msdeploy
             // returns a non-zero exit code. This batch needs to be wrapped in space-separated quotes to work properly.
