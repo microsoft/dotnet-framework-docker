@@ -18,7 +18,7 @@ This image contains:
 
 Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
-# How to use these Images
+# How to Use the Image
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/README.md) show various ways to use .NET Framework and Docker together.
 
@@ -109,6 +109,4 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 * Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
 
-View [license information](https://www.microsoft.com/net/dotnet_library_license.htm) for the software contained in this image.
-
-Windows Container images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
+The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).

@@ -42,7 +42,6 @@ docker run -it --rm -p 8000:80 --name aspnet_sample mcr.microsoft.com/dotnet/fra
 
 After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
 
-
 # Related Repos
 
 * [dotnet/core](https://hub.docker.com/_/microsoft-dotnet-core/): .NET Core
@@ -51,7 +50,7 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 # Support
 
-See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/en-us/help/17455/lifecycle-faq-net-framework)
+See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 
 # Image Update Policy
 
