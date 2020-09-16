@@ -34,13 +34,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             const char delimiter = '|';
             string appId = $"envvar-{DateTime.Now.ToFileTime()}";
-            IEnumerable<string> echoParts= variables.Select(envVar => $"%{envVar.Name}%");
+            IEnumerable<string> echoParts = variables.Select(envVar => $"%{envVar.Name}%");
 
             string combinedValues = ImageTestHelper.DockerHelper.Run(
                 image: ImageTestHelper.GetImage(ImageType, imageDescriptor.Version, imageDescriptor.OsVariant),
                 name: appId,
                 entrypointOverride: "cmd",
-                command: $"CMD /S /C \"echo {String.Join($"^{delimiter}", echoParts)}\"");
+                command: $"CMD /S /C \"echo {string.Join($"^{delimiter}", echoParts)}\"");
 
             string[] values = combinedValues.Split(delimiter);
             Assert.Equal(variables.Count(), values.Count());

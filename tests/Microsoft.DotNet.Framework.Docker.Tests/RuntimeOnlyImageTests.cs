@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     [Trait("Category", "runtime")]
     public class RuntimeOnlyImageTests : ImageTests
     {
-        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
+        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
@@ -39,7 +39,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(ImageData);
+            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
 
         [Theory]

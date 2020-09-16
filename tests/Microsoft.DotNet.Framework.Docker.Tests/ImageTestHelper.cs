@@ -18,10 +18,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class ImageTestHelper
     {
-        private readonly static Lazy<JObject> ImageInfoData;
+        private static readonly Lazy<JObject> s_imageInfoData;
 
         public DockerHelper DockerHelper { get; }
-        private ITestOutputHelper _outputHelper;
+        private readonly ITestOutputHelper _outputHelper;
 
         public ImageTestHelper(ITestOutputHelper outputHelper)
         {
@@ -31,10 +31,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         static ImageTestHelper()
         {
-            ImageInfoData = new Lazy<JObject>(() =>
+            s_imageInfoData = new Lazy<JObject>(() =>
             {
                 string imageInfoPath = Environment.GetEnvironmentVariable("IMAGE_INFO_PATH");
-                if (!String.IsNullOrEmpty(imageInfoPath))
+                if (!string.IsNullOrEmpty(imageInfoPath))
                 {
                     string imageInfoContents = File.ReadAllText(imageInfoPath);
                     return JsonConvert.DeserializeObject<JObject>(imageInfoContents);
@@ -63,8 +63,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public string BuildAndTestImage(
             ImageDescriptor imageDescriptor,
             IEnumerable<string> buildArgs,
-            string appDescriptor, 
-            string runCommand, 
+            string appDescriptor,
+            string runCommand,
             string testUrl)
         {
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
@@ -125,9 +125,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // In the case of running this in a local development environment, there would likely be no image info file
             // provided. In that case, the assumption is that the images exist in the custom configured location.
 
-            if (ImageTestHelper.ImageInfoData.Value != null)
+            if (ImageTestHelper.s_imageInfoData.Value != null)
             {
-                JObject repoInfo = (JObject)ImageTestHelper.ImageInfoData.Value
+                JObject repoInfo = (JObject)ImageTestHelper.s_imageInfoData.Value
                     .Value<JArray>("repos")
                     .FirstOrDefault(imageInfoRepo => imageInfoRepo["repo"].ToString() == repo);
 
@@ -149,10 +149,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         private void VerifyHttpResponseFromContainer(string containerName, string urlPath)
         {
-            var retries = 30;
+            int retries = 30;
 
             // Can't use localhost when running inside containers or Windows.
-            var url = $"http://{DockerHelper.GetContainerAddress(containerName)}" + urlPath;
+            string url = $"http://{DockerHelper.GetContainerAddress(containerName)}" + urlPath;
 
             using (HttpClient client = new HttpClient())
             {
@@ -172,7 +172,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     }
                     catch (Exception ex)
                     {
-                        _outputHelper.WriteLine($"Request to {url} failed - retrying: {ex.ToString()}");
+                        _outputHelper.WriteLine($"Request to {url} failed - retrying: {ex}");
                     }
                 }
             }

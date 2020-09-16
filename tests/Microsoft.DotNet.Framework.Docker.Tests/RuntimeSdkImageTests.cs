@@ -12,7 +12,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     [Trait("Category", "sdk")]
     public class RuntimeSdkImageTests
     {
-        private static RuntimeImageDescriptor[] ImageData = new RuntimeImageDescriptor[]
+        private static readonly RuntimeImageDescriptor[] s_imageData = new RuntimeImageDescriptor[]
         {
             new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
@@ -31,11 +31,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_2004 },
         };
 
-        private readonly ImageTestHelper imageTestHelper;
+        private readonly ImageTestHelper _imageTestHelper;
 
         public RuntimeSdkImageTests(ITestOutputHelper outputHelper)
         {
-            imageTestHelper = new ImageTestHelper(outputHelper);
+            _imageTestHelper = new ImageTestHelper(outputHelper);
         }
 
         [Theory]
@@ -54,21 +54,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(ImageData);
+            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
 
         private void VerifyFxImages(RuntimeImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
         {
-            string baseBuildImage = imageTestHelper.GetImage("sdk", imageDescriptor.SdkVersion, imageDescriptor.OsVariant);
+            string baseBuildImage = _imageTestHelper.GetImage("sdk", imageDescriptor.SdkVersion, imageDescriptor.OsVariant);
 
             List<string> appBuildArgs = new List<string> { $"BASE_BUILD_IMAGE={baseBuildImage}" };
             if (includeRuntime)
             {
-                string baseRuntimeImage = imageTestHelper.GetImage("runtime", imageDescriptor.Version, imageDescriptor.OsVariant);
+                string baseRuntimeImage = _imageTestHelper.GetImage("runtime", imageDescriptor.Version, imageDescriptor.OsVariant);
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
-            imageTestHelper.BuildAndTestImage(
+            _imageTestHelper.BuildAndTestImage(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: appDescriptor,

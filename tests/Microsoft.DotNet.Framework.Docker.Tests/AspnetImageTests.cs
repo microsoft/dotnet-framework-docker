@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     [Trait("Category", "aspnet")]
     public class AspnetImageTests : ImageTests
     {
-        private static ImageDescriptor[] ImageData = new ImageDescriptor[]
+        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
@@ -79,7 +79,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
-                VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
+            VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
         }
 
         [Theory]
@@ -93,7 +93,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(ImageData);
+            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
     }
 }

@@ -2,11 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
-
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class EnvironmentVariableInfo
@@ -17,14 +12,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public EnvironmentVariableInfo(string name, string expectedValue)
         {
-            this.Name = name;
-            this.ExpectedValue = expectedValue;
+            Name = name;
+            ExpectedValue = expectedValue;
         }
 
         public EnvironmentVariableInfo(string name, bool allowAnyValue)
         {
-            this.Name = name;
-            this.AllowAnyValue = allowAnyValue;
+            Name = name;
+            AllowAnyValue = allowAnyValue;
         }
     }
 }
