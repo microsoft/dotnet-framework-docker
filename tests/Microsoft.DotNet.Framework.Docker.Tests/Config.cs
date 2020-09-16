@@ -17,6 +17,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string OS => Environment.GetEnvironmentVariable("IMAGE_OS");
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
+        public static string SourceRepoRoot { get; } = Environment.GetEnvironmentVariable("SOURCE_REPO_ROOT") ?? string.Empty;
         public static string Version => Environment.GetEnvironmentVariable("IMAGE_VERSION");
 
         public static string GetManifestRegistry()
