@@ -21,7 +21,7 @@
 :* `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/{{SHORT_REPO}}:4.8`
 {{if SHORT_REPO != "wcf"
-:* `3.5`
+:* `3.5` (also supports 3.0 and 2.0 apps)
   * `docker pull mcr.microsoft.com/dotnet/framework/{{SHORT_REPO}}:3.5`
 }}}}}}
 # About {{if IS_PRODUCT_FAMILY:.NET Framework^else:This Image}}

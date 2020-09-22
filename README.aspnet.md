@@ -2,7 +2,7 @@
 
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8`
-* `3.5`
+* `3.5` (also supports 3.0 and 2.0 apps)
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:3.5`
 
 # About This Image
