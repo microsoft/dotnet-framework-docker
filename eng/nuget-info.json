@@ -18,5 +18,11 @@
     "osVersions": [
       "windowsservercore-2004"
     ]
+  },
+  {
+    "nugetClientVersion": "5.7.0",
+    "osVersions": [
+      "windowsservercore-2009"
+    ]
   }
 ]

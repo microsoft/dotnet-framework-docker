@@ -50,6 +50,12 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 # Full Tag Listing
 
+## Windows Server, version 2009 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+4.8-20200908-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/aspnet/4.8/windowsservercore-2009/Dockerfile)
+3.5-20200908-windowsservercore-2009, 4.8-3.5-20200908-windowsservercore-2009, 3.5-windowsservercore-2009, 4.8-3.5-windowsservercore-2009, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/aspnet/3.5/windowsservercore-2009/Dockerfile)
+
 ## Windows Server, version 2004 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
