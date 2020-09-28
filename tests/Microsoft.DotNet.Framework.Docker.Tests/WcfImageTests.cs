@@ -71,7 +71,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
-            VerifyCommonShell(imageDescriptor, ShellValue_PowerShell);
+            string expectedShellValue;
+            if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_1903 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_1909 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_2004)
+            {
+                expectedShellValue = ShellValue_PowerShell;
+            }
+            else
+            {
+                expectedShellValue = ShellValue_Default;
+            }
+
+            VerifyCommonShell(imageDescriptor, expectedShellValue);
         }
 
         public static IEnumerable<object[]> GetImageData()

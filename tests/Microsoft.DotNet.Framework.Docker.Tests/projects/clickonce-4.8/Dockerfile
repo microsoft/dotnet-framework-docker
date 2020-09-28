@@ -6,4 +6,4 @@ ARG PUBLISH_DIR
 
 WORKDIR /app
 COPY . ./
-RUN msbuild.exe clickonce-4.8.csproj /t:Publish /p:Configuration=Release /p:PublishDir="${Env:PUBLISH_DIR}"
+RUN msbuild.exe clickonce-4.8.csproj /t:Publish /p:Configuration=Release /p:PublishDir="$PUBLISH_DIR"
