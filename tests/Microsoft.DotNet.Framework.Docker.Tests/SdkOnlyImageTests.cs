@@ -204,14 +204,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public void VerifyClickOncePublishing(ImageDescriptor imageDescriptor)
         {
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
-            const string PublishDir = "publish";
             List<string> buildArgs = new List<string>
             {
                 $"BASE_BUILD_IMAGE={baseBuildImage}",
-                $"PUBLISH_DIR={PublishDir}/"
             };
 
-            string command = $"cmd /s /c dir /b {PublishDir}";
+            string command = $"cmd /s /c dir /b publish";
             string output = ImageTestHelper.BuildAndTestImage(imageDescriptor, buildArgs, "clickonce", command, null);
 
             string[] outputLines = output.Split(Environment.NewLine);
