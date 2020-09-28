@@ -13,5 +13,5 @@ RUN powershell -Command `
         Add-WindowsFeature Web-WebSockets
 
 # Enable net.tcp protocol for default web site on IIS
-RUN windows\system32\inetsrv\appcmd.exe set app 'Default Web Site/' /enabledProtocols:"http,net.tcp"
+RUN windows\system32\inetsrv\appcmd.exe set app "Default Web Site/" /enabledProtocols:"http,net.tcp"
 EXPOSE 808
