@@ -13,7 +13,7 @@ param(
     [switch]$PullImages,
     [string]$ImageInfoPath,
     [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf', 'pre-build')]
-    [string[]]$TestCategories = @("runtime", "runtime-deps", "aspnet", "sdk")
+    [string[]]$TestCategories = @("runtime", "sdk", "aspnet", "wcf")
 )
 
 function Log {
