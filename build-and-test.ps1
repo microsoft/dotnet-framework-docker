@@ -27,7 +27,6 @@ else {
 
 if ($Repos.Count -eq 0) {
     $Path = $null
-    $testCategories = @()
 }
 else {
     $Path = ""
@@ -45,8 +44,15 @@ if ($build) {
         -OptionalImageBuilderArgs $OptionalImageBuilderArgs
 }
 if ($test) {
-    & ./tests/run-tests.ps1 `
-        -Version $Version `
-        -OS $OS `
-        -TestCategories $testCategories
+
+    $testArgs = @{
+        Version = $Version;
+        OS = $OS;
+    }
+
+    if ($testCategories) {
+        $testArgs.Add("TestCategories", $testCategories)
+    }
+
+    & ./tests/run-tests.ps1 @testArgs
 }
