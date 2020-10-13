@@ -31,7 +31,8 @@ RUN `
     && del vs_BuildTools.exe `
     `
     #Cleanup
-    && rmdir /S /Q "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer" `
+    && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
+    && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
