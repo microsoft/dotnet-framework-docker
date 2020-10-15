@@ -51,8 +51,8 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 ## Windows Server, version 2009 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20200908-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/4.8/windowsservercore-2009/Dockerfile)
-3.5-20200908-windowsservercore-2009, 4.8-3.5-20200908-windowsservercore-2009, 3.5-windowsservercore-2009, 4.8-3.5-windowsservercore-2009, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/3.5/windowsservercore-2009/Dockerfile)
+4.8-20201013-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/4.8/windowsservercore-2009/Dockerfile)
+3.5-20201013-windowsservercore-2009, 3.5-windowsservercore-2009, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/3.5/windowsservercore-2009/Dockerfile)
 
 ## Windows Server, version 2004 amd64 Tags
 Tag | Dockerfile

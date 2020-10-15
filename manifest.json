@@ -268,9 +268,7 @@
               "osVersion": "windowsservercore-2009",
               "tags": {
                 "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2009": {},
-                "4.8-3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2009": {},
-                "3.5-windowsservercore-2009": {},
-                "4.8-3.5-windowsservercore-2009": {}
+                "3.5-windowsservercore-2009": {}
               }
             }
           ]
@@ -445,9 +443,7 @@
               "osVersion": "windowsservercore-2009",
               "tags": {
                 "3.5-$(SdkReleaseDateStamp)-windowsservercore-2009": {},
-                "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2009": {},
-                "3.5-windowsservercore-2009": {},
-                "4.8-3.5-windowsservercore-2009": {}
+                "3.5-windowsservercore-2009": {}
               }
             }
           ]
@@ -714,9 +710,7 @@
               "osVersion": "windowsservercore-2009",
               "tags": {
                 "3.5-$(AspnetReleaseDateStamp)-windowsservercore-2009": {},
-                "4.8-3.5-$(AspnetReleaseDateStamp)-windowsservercore-2009": {},
-                "3.5-windowsservercore-2009": {},
-                "4.8-3.5-windowsservercore-2009": {}
+                "3.5-windowsservercore-2009": {}
               }
             }
           ]

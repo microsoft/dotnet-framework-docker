@@ -55,7 +55,7 @@ docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.
 ## Windows Server, version 2009 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20200908-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-2009/Dockerfile)
+4.8-20201013-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-2009/Dockerfile)
 
 ## Windows Server, version 2004 amd64 Tags
 Tag | Dockerfile
