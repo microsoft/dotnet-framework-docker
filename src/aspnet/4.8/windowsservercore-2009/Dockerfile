@@ -6,7 +6,7 @@ FROM $REPO:4.8-windowsservercore-2009
 RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /FeatureName:NetFx4Extended-ASPNET45 /FeatureName:IIS-ASPNET45 `
     && dism /Online /Quiet /Disable-Feature /FeatureName:IIS-WebServerManagementTools `
     && del /q "C:\inetpub\wwwroot\*" `
-    && FOR /D %p IN ("C:\inetpub\wwwroot\*.*") DO rmdir "%p" /s /q `
+    && FOR /D %p IN ("C:\inetpub\wwwroot\*") DO rmdir "%p" /s /q `
     && curl -fSLo ServiceMonitor.exe https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe `
     && C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe update `
     && C:\Windows\Microsoft.NET\Framework\v4.0.30319\ngen.exe update
