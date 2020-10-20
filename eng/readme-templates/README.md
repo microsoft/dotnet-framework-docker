@@ -68,18 +68,7 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # Feedback
 
-{{if SHORT_REPO = "aspnet"
-:* [File an ASP.NET Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
-* [Report an ASP.NET problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
-^elif SHORT_REPO = "wcf"
-:* [File a WCF Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
-* [Report a WCF problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
-^else
-:* [File a .NET Framework Docker issue](https://github.com/microsoft/dotnet-framework-docker/issues)
-* [Report a .NET Framework problem](https://developercommunity.visualstudio.com/spaces/61/index.html)
-}}* [File a Visual Studio Docker Tools issue](https://github.com/microsoft/dockertools/issues)
-* [File a Microsoft Container Registry (MCR) issue](https://github.com/microsoft/containerregistry/issues)
-* [Ask on Stack Overflow](https://stackoverflow.com/questions/tagged/.net)
+* [File an issue](https://github.com/microsoft/dotnet-framework-docker/issues/new/choose)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
 # License
