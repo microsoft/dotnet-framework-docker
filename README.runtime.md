@@ -42,6 +42,12 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 
 # Full Tag Listing
 
+## Windows Server, version 2009 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+4.8-20201020-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/runtime/4.8/windowsservercore-2009/Dockerfile)
+3.5-20201020-windowsservercore-2009, 3.5-windowsservercore-2009, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/runtime/3.5/windowsservercore-2009/Dockerfile)
+
 ## Windows Server, version 2004 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------

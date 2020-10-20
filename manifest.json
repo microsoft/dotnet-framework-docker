@@ -6,7 +6,11 @@
     "RuntimeReleaseDateStamp": "20201013",
     "SdkReleaseDateStamp": "20201013",
     "AspnetReleaseDateStamp": "20201013",
-    "WcfReleaseDateStamp": "20201013"
+    "WcfReleaseDateStamp": "20201013",
+    "2009-RuntimeReleaseDateStamp": "20201020",
+    "2009-SdkReleaseDateStamp": "20201020",
+    "2009-AspnetReleaseDateStamp": "20201020",
+    "2009-WcfReleaseDateStamp": "20201020"
   },
   "repos": [
     {
@@ -66,6 +70,15 @@
               "tags": {
                 "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
+              }
+            },
+            {
+              "dockerfile": "src/runtime/4.8/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "4.8-$(2009-RuntimeReleaseDateStamp)-windowsservercore-2009": {},
+                "4.8-windowsservercore-2009": {}
               }
             }
           ]
@@ -252,6 +265,15 @@
                 "3.5-windowsservercore-2004": {},
                 "4.8-3.5-windowsservercore-2004": {}
               }
+            },
+            {
+              "dockerfile": "src/runtime/3.5/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "3.5-$(2009-RuntimeReleaseDateStamp)-windowsservercore-2009": {},
+                "3.5-windowsservercore-2009": {}
+              }
             }
           ]
         }
@@ -330,6 +352,18 @@
                 "4.8-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
               }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/sdk/4.8/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "4.8-$(2009-SdkReleaseDateStamp)-windowsservercore-2009": {},
+                "4.8-windowsservercore-2009": {}
+              }
             }
           ]
         },
@@ -402,6 +436,18 @@
                 "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
                 "3.5-windowsservercore-2004": {},
                 "4.8-3.5-windowsservercore-2004": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/sdk/3.5/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "3.5-$(2009-SdkReleaseDateStamp)-windowsservercore-2009": {},
+                "3.5-windowsservercore-2009": {}
               }
             }
           ]
@@ -480,6 +526,18 @@
               "tags": {
                 "4.8-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/aspnet/4.8/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "4.8-$(2009-AspnetReleaseDateStamp)-windowsservercore-2009": {},
+                "4.8-windowsservercore-2009": {}
               }
             }
           ]
@@ -646,6 +704,18 @@
                 "3.5-windowsservercore-2004": {},
                 "4.8-3.5-windowsservercore-2004": {}
               }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/aspnet/3.5/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "3.5-$(2009-AspnetReleaseDateStamp)-windowsservercore-2009": {},
+                "3.5-windowsservercore-2009": {}
+              }
             }
           ]
         }
@@ -723,6 +793,18 @@
               "tags": {
                 "4.8-$(WcfReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:aspnet)"
+              },
+              "dockerfile": "src/wcf/4.8/windowsservercore-2009",
+              "os": "windows",
+              "osVersion": "windowsservercore-2009",
+              "tags": {
+                "4.8-$(2009-WcfReleaseDateStamp)-windowsservercore-2009": {},
+                "4.8-windowsservercore-2009": {}
               }
             }
           ]

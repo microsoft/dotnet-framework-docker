@@ -23,11 +23,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2004 },
+            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2009 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
+            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2009 },
         };
 
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
@@ -198,14 +200,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public void VerifyClickOncePublishing(ImageDescriptor imageDescriptor)
         {
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
-            const string PublishDir = "publish";
             List<string> buildArgs = new List<string>
             {
                 $"BASE_BUILD_IMAGE={baseBuildImage}",
-                $"PUBLISH_DIR={PublishDir}/"
             };
 
-            string command = $"cmd /s /c dir /b {PublishDir}";
+            string command = $"cmd /s /c dir /b publish";
             string output = ImageTestHelper.BuildAndTestImage(imageDescriptor, buildArgs, "clickonce", command, null);
 
             string[] outputLines = output.Split(Environment.NewLine);
@@ -221,7 +221,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
-            VerifyCommonShell(imageDescriptor, ShellValue_PowerShell);
+            string expectedShellValue;
+            if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_1903 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_1909 ||
+                imageDescriptor.OsVariant == OsVersion.WSC_2004)
+            {
+                expectedShellValue = ShellValue_PowerShell;
+            }
+            else
+            {
+                expectedShellValue = ShellValue_Default;
+            }
+
+            VerifyCommonShell(imageDescriptor, expectedShellValue);
         }
     }
 }
