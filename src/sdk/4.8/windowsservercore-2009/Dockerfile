@@ -42,13 +42,11 @@ RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbina
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
 ENV DOTNET_USE_POLLING_FILE_WATCHER=true `
-    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn" `
-    # Ngen workaround: https://github.com/microsoft/dotnet-framework-docker/issues/231
-    COMPLUS_NGenProtectedProcess_FeatureEnabled=0
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 RUN `
-    # Workaround for issues with 64-bit ngen 
+    # Workaround for issues with 64-bit ngen
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `

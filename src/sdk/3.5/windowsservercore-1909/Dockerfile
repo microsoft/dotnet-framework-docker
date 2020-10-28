@@ -30,7 +30,7 @@ RUN `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
     `
-    #Cleanup
+    # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
     && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
@@ -46,7 +46,7 @@ ENV DOTNET_USE_POLLING_FILE_WATCHER=true `
 
 # ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
 RUN `
-    # Workaround for issues with 64-bit ngen 
+    # Workaround for issues with 64-bit ngen
     \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `
