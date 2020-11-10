@@ -11,13 +11,13 @@ RUN mkdir "%ProgramFiles%\NuGet" `
 # Install VS components
 RUN `
     # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/584a5fcf-dd07-4c36-add9-620e858c9a35/cd90750df4950dc9a6130937f4aaf7367f42944dea5fde2c78dbcb4bd8a7fa73/vs_TestAgent.exe `
+    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/8fd51571a9aff13c4381037ccb7559a3bb3e6527cbacf4816068e711dfe824f4/vs_TestAgent.exe `
     && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
     # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/584a5fcf-dd07-4c36-add9-620e858c9a35/536a649978a0c34a78ca99a0c7b14a7b52e96b5a563d86efe6fdf9559b2886fb/vs_BuildTools.exe `
+    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/bc60b587587d10eacc50fe99a6f3d57a81749cb55c904225892d1d165f01a913/vs_BuildTools.exe `
     # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
     && setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1 `
     && start /w vs_BuildTools.exe ^ `
@@ -37,7 +37,7 @@ RUN `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
 # Install web targets
-RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2020.05.zip `
+RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2020.11.zip `
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
