@@ -91,13 +91,13 @@ C:\git\dotnet-framework-docker\samples\aspnetmvcapp>docker inspect -f "{{ .Netwo
 More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
 
 Docs and More Information:
 
 * [.NET Docs](https://docs.microsoft.com/dotnet/)
 * [ASP.NET Docs](https://docs.microsoft.com/aspnet/)
-* [dotnet/core](https://github.com/dotnet/core) for starting with .NET Core on GitHub.
+* [dotnet](https://github.com/dotnet) for starting with .NET on GitHub.
 * [dotnet/announcements](https://github.com/dotnet/announcements/issues) for .NET announcements.
 
 ## Related Docker Hub Repos
@@ -110,9 +110,8 @@ Docs and More Information:
 * [dotnet/framework/wcf](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/): Windows Communication Foundation (WCF)
 * [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
 
-.NET Core:
+.NET:
 
-* [dotnet/core](https://hub.docker.com/_/microsoft-dotnet-core/): .NET Core
-* [dotnet/core/samples](https://hub.docker.com/_/microsoft-dotnet-core-samples/): .NET Core Samples
-* [dotnet/core-nightly](https://hub.docker.com/_/microsoft-dotnet-core-nightly/): .NET Core (Preview)
-
+* [dotnet](https://hub.docker.com/_/microsoft-dotnet/): .NET
+* [dotnet/samples](https://hub.docker.com/_/microsoft-dotnet-samples/): .NET Samples
+* [dotnet-nightly](https://hub.docker.com/_/microsoft-dotnet-nightly/): .NET (Preview)

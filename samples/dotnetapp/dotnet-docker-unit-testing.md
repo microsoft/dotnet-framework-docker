@@ -81,4 +81,4 @@ You should find a `.trx` file in the TestResults folder. You can open this file 
 ## More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
