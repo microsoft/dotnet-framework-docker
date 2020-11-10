@@ -89,4 +89,4 @@ az group exists --name richlander-containers
 ## More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)

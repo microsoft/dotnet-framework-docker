@@ -1,6 +1,6 @@
 # .NET Framework Docker Sample
 
-This [sample](Dockerfile) demonstrates how to use .NET Core and Docker together. It builds multiple projects and executes unit tests in a container. The sample can also be used without Docker.
+This [sample](Dockerfile) demonstrates how to use .NET Framework and Docker together. It builds multiple projects and executes unit tests in a container. The sample can also be used without Docker.
 
 The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/). It builds and [tests](dotnet-docker-unit-testing.md) the application and then copies the final build result into a Docker image based on the smaller [.NET Framework Runtime Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
@@ -58,9 +58,9 @@ You can push the image to a container registry so that you can pull and run it o
 * [Push Docker Images to Azure Container Registry](push-image-to-acr.md)
 * [Push Docker Images to DockerHub](push-image-to-dockerhub.md)
 
-## Build and run the sample locally with the .NET Core SDK
+## Build and run the sample locally with the .NET SDK
 
-You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with the [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
+You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with the [.NET SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
 
 You must have the [.NET Framework 4.8 targeting pack](http://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
 
@@ -105,13 +105,13 @@ Note: The `/p:Configuration=Release` argument builds the application in release 
 More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Core Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
 
 Docs and More Information:
 
 * [.NET Docs](https://docs.microsoft.com/dotnet/)
 * [ASP.NET Docs](https://docs.microsoft.com/aspnet/)
-* [dotnet/core](https://github.com/dotnet/core) for starting with .NET Core on GitHub.
+* [dotnet/core](https://github.com/dotnet/core) for starting with .NET on GitHub.
 * [dotnet/announcements](https://github.com/dotnet/announcements/issues) for .NET announcements.
 
 ## Related Docker Hub Repos
@@ -124,9 +124,8 @@ Docs and More Information:
 * [dotnet/framework/wcf](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/): Windows Communication Foundation (WCF)
 * [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
 
-.NET Core:
+.NET:
 
-* [dotnet/core](https://hub.docker.com/_/microsoft-dotnet-core/): .NET Core
-* [dotnet/core/samples](https://hub.docker.com/_/microsoft-dotnet-core-samples/): .NET Core Samples
-* [dotnet/core-nightly](https://hub.docker.com/_/microsoft-dotnet-core-nightly/): .NET Core (Preview)
-
+* [dotnet](https://hub.docker.com/_/microsoft-dotnet/): .NET
+* [dotnet/samples](https://hub.docker.com/_/microsoft-dotnet-samples/): .NET Samples
+* [dotnet-nightly](https://hub.docker.com/_/microsoft-dotnet-nightly/): .NET (Preview)
