@@ -60,7 +60,7 @@ Tag | Dockerfile
 Tag | Dockerfile
 ---------| ---------------
 4.8-20201013-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/aspnet/4.8/windowsservercore-2004/Dockerfile)
-3.5-20201013-windowsservercore-2004, 4.8-3.5-20201013-windowsservercore-2004, 3.5-windowsservercore-2004, 4.8-3.5-windowsservercore-2004, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/aspnet/3.5/windowsservercore-2004/Dockerfile)
+3.5-20201013-windowsservercore-2004, 3.5-windowsservercore-2004, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/aspnet/3.5/windowsservercore-2004/Dockerfile)
 
 ## Windows Server, version 1909 amd64 Tags
 Tag | Dockerfile

@@ -261,9 +261,13 @@
               "osVersion": "windowsservercore-2004",
               "tags": {
                 "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(RuntimeReleaseDateStamp)-windowsservercore-2004": {
+                  "docType": "Undocumented"
+                },
                 "3.5-windowsservercore-2004": {},
-                "4.8-3.5-windowsservercore-2004": {}
+                "4.8-3.5-windowsservercore-2004": {
+                  "docType": "Undocumented"
+                }
               }
             },
             {
@@ -433,9 +437,13 @@
               "osVersion": "windowsservercore-2004",
               "tags": {
                 "3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {
+                  "docType": "Undocumented"
+                },
                 "3.5-windowsservercore-2004": {},
-                "4.8-3.5-windowsservercore-2004": {}
+                "4.8-3.5-windowsservercore-2004": {
+                  "docType": "Undocumented"
+                }
               }
             },
             {
@@ -700,9 +708,13 @@
               "osVersion": "windowsservercore-2004",
               "tags": {
                 "3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(AspnetReleaseDateStamp)-windowsservercore-2004": {
+                  "docType": "Undocumented"
+                },
                 "3.5-windowsservercore-2004": {},
-                "4.8-3.5-windowsservercore-2004": {}
+                "4.8-3.5-windowsservercore-2004": {
+                  "docType": "Undocumented"
+                }
               }
             },
             {
