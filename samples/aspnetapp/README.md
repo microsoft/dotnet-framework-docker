@@ -127,7 +127,7 @@ Docs and More Information:
 
 * [.NET Docs](https://docs.microsoft.com/dotnet/)
 * [ASP.NET Docs](https://docs.microsoft.com/aspnet/)
-* [dotnet](https://github.com/dotnet) for starting with .NET on GitHub.
+* [dotnet/core](https://github.com/dotnet/core) for starting with .NET on GitHub.
 * [dotnet/announcements](https://github.com/dotnet/announcements/issues) for .NET announcements.
 
 ## Related Docker Hub Repos
