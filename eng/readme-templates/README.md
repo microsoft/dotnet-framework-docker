@@ -21,7 +21,7 @@
 :* `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/{{SHORT_REPO}}:4.8`
 {{if SHORT_REPO != "wcf"
-:* `3.5` (also supports 3.0 and 2.0 apps)
+:* `3.5`
   * `docker pull mcr.microsoft.com/dotnet/framework/{{SHORT_REPO}}:3.5`
 }}}}}}
 # About {{if IS_PRODUCT_FAMILY:.NET Framework^else:This Image}}
@@ -57,7 +57,25 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 {{if !IS_PRODUCT_FAMILY:# Full Tag Listing
 
-}}# Support
+{{if SHORT_REPO != "samples":# Version Compatibility
+
+Version Tag | OS Version | Supported .NET Versions
+- | - | -
+`4.8` | _all supported_ | 4.8{{if SHORT_REPO = "sdk":*}}
+`4.7.2` | _all supported_ | 4.7.2
+`4.7.1` | _all supported_ | 4.7.1
+`4.7` | _all supported_ | 4.7
+`4.6.2` | _all supported_ | 4.6.2{{if SHORT_REPO != "wcf":
+`3.5` | `windowsservercore-2009` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-2004` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-1909` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-1903` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-ltsc2019` | 4.7.2, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-ltsc2016` | 4.6.2, 3.5, 3.0, 2.5}}{{if SHORT_REPO = "sdk":
+
+\* The 4.8 SDK is also capable of building 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects}}
+
+}}}}# Support
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 

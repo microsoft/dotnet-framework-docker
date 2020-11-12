@@ -2,7 +2,7 @@
 
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8`
-* `3.5` (also supports 3.0 and 2.0 apps)
+* `3.5`
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:3.5`
 
 # About This Image
@@ -78,6 +78,22 @@ Tag | Dockerfile
 3.5-20200908-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/runtime/3.5/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/runtime at https://mcr.microsoft.com/v2/dotnet/framework/runtime/tags/list.
+
+# Version Compatibility
+
+Version Tag | OS Version | Supported .NET Versions
+- | - | -
+`4.8` | _all supported_ | 4.8
+`4.7.2` | _all supported_ | 4.7.2
+`4.7.1` | _all supported_ | 4.7.1
+`4.7` | _all supported_ | 4.7
+`4.6.2` | _all supported_ | 4.6.2
+`3.5` | `windowsservercore-2009` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-2004` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-1909` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-1903` | 4.8, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-ltsc2019` | 4.7.2, 3.5, 3.0, 2.5
+`3.5` | `windowsservercore-ltsc2016` | 4.6.2, 3.5, 3.0, 2.5
 
 # Support
 
