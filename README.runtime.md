@@ -82,7 +82,7 @@ You can retrieve a list of all available tags for dotnet/framework/runtime at ht
 # Version Compatibility
 
 Version Tag | OS Version | Supported .NET Versions
-- | - | -
+-- | -- | --
 `4.8` | _all supported_ | 4.8
 `4.7.2` | _all supported_ | 4.7.2
 `4.7.1` | _all supported_ | 4.7.1

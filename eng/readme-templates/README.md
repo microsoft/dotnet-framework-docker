@@ -60,7 +60,7 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 {{if SHORT_REPO != "samples":# Version Compatibility
 
 Version Tag | OS Version | Supported .NET Versions
-- | - | -
+-- | -- | --
 `4.8` | _all supported_ | 4.8{{if SHORT_REPO = "sdk":*}}
 `4.7.2` | _all supported_ | 4.7.2
 `4.7.1` | _all supported_ | 4.7.1
