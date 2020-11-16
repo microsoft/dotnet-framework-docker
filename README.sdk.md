@@ -93,7 +93,7 @@ Version Tag | OS Version | Supported .NET Versions
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 
-\* The 4.8 SDK is also capable of building 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects
+\* The 4.8 SDK is also capable of building 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects.
 
 # Support
 
