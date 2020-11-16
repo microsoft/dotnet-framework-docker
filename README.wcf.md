@@ -89,6 +89,16 @@ Tag | Dockerfile
 
 You can retrieve a list of all available tags for dotnet/framework/wcf at https://mcr.microsoft.com/v2/dotnet/framework/wcf/tags/list.
 
+# Version Compatibility
+
+Version Tag | OS Version | Supported .NET Versions
+-- | -- | --
+4.8 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
+4.7.1 | windowsservercore-ltsc2016 | 4.7.1
+4.7 | windowsservercore-ltsc2016 | 4.7
+4.6.2 | windowsservercore-ltsc2016 | 4.6.2
+
 # Support
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)

@@ -57,7 +57,22 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 {{if !IS_PRODUCT_FAMILY:# Full Tag Listing
 
-}}# Support
+{{if SHORT_REPO != "samples":# Version Compatibility
+
+Version Tag | OS Version | Supported .NET Versions
+-- | -- | --
+4.8 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8{{if SHORT_REPO = "sdk":*}}
+4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
+4.7.1 | windowsservercore-ltsc2016 | 4.7.1
+4.7 | windowsservercore-ltsc2016 | 4.7
+4.6.2 | windowsservercore-ltsc2016 | 4.6.2{{if SHORT_REPO != "wcf":
+3.5 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903 | 4.8, 3.5, 3.0, 2.5
+3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
+3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5}}{{if SHORT_REPO = "sdk":
+
+\* The 4.8 SDK is also capable of building 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects.}}
+
+}}}}# Support
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 
