@@ -91,17 +91,14 @@ You can retrieve a list of all available tags for dotnet/framework/aspnet at htt
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-`4.8` | _all supported_ | 4.8
-`4.7.2` | _all supported_ | 4.7.2
-`4.7.1` | _all supported_ | 4.7.1
-`4.7` | _all supported_ | 4.7
-`4.6.2` | _all supported_ | 4.6.2
-`3.5` | `windowsservercore-2009` | 4.8, 3.5, 3.0, 2.5
-`3.5` | `windowsservercore-2004` | 4.8, 3.5, 3.0, 2.5
-`3.5` | `windowsservercore-1909` | 4.8, 3.5, 3.0, 2.5
-`3.5` | `windowsservercore-1903` | 4.8, 3.5, 3.0, 2.5
-`3.5` | `windowsservercore-ltsc2019` | 4.7.2, 3.5, 3.0, 2.5
-`3.5` | `windowsservercore-ltsc2016` | 4.6.2, 3.5, 3.0, 2.5
+4.8 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
+4.7.1 | windowsservercore-ltsc2016 | 4.7.1
+4.7 | windowsservercore-ltsc2016 | 4.7
+4.6.2 | windowsservercore-ltsc2016 | 4.6.2
+3.5 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903 | 4.8, 3.5, 3.0, 2.5
+3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
+3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 
 # Support
 
