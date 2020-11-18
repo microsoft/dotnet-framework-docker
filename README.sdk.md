@@ -48,11 +48,11 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 # Full Tag Listing
 
-## Windows Server, version 2009 amd64 Tags
+## Windows Server, version 20H2 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20201110-windowsservercore-2009, 4.8-windowsservercore-2009, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/4.8/windowsservercore-2009/Dockerfile)
-3.5-20201110-windowsservercore-2009, 3.5-windowsservercore-2009, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/3.5/windowsservercore-2009/Dockerfile)
+4.8-20201110-windowsservercore-20H2, 4.8-windowsservercore-20H2, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/4.8/windowsservercore-20H2/Dockerfile)
+3.5-20201110-windowsservercore-20H2, 3.5-windowsservercore-20H2, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/sdk/3.5/windowsservercore-20H2/Dockerfile)
 
 ## Windows Server, version 2004 amd64 Tags
 Tag | Dockerfile
@@ -90,12 +90,12 @@ You can retrieve a list of all available tags for dotnet/framework/sdk at https:
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-4.8 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8*
+4.8 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8*
 4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2
-3.5 | windowsservercore-2009, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903 | 4.8, 3.5, 3.0, 2.5
+3.5 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-1909, windowsservercore-1903 | 4.8, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 

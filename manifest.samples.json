@@ -57,9 +57,12 @@
             {
               "dockerfile": "samples/dotnetapp",
               "os": "windows",
-              "osVersion": "windowsservercore-2009",
+              "osVersion": "windowsservercore-20H2",
               "tags": {
-                "dotnetapp-windowsservercore-2009": {}
+                "dotnetapp-windowsservercore-20H2": {},
+                "dotnetapp-windowsservercore-2009": {
+                  "docType": "Undocumented"
+                }
               }
             }
           ]
@@ -112,9 +115,12 @@
             {
               "dockerfile": "samples/aspnetapp",
               "os": "windows",
-              "osVersion": "windowsservercore-2009",
+              "osVersion": "windowsservercore-20H2",
               "tags": {
-                "aspnetapp-windowsservercore-2009": {}
+                "aspnetapp-windowsservercore-20H2": {},
+                "aspnetapp-windowsservercore-2009": {
+                  "docType": "Undocumented"
+                }
               }
             }
           ]
@@ -167,9 +173,12 @@
             {
               "dockerfile": "samples/wcfapp/Dockerfile.web",
               "os": "windows",
-              "osVersion": "windowsservercore-2009",
+              "osVersion": "windowsservercore-20H2",
               "tags": {
-                "wcfservice-windowsservercore-2009": {}
+                "wcfservice-windowsservercore-20H2": {},
+                "wcfservice-windowsservercore-2009": {
+                  "docType": "Undocumented"
+                }
               }
             }
           ]
@@ -222,9 +231,12 @@
             {
               "dockerfile": "samples/wcfapp/Dockerfile.client",
               "os": "windows",
-              "osVersion": "windowsservercore-2009",
+              "osVersion": "windowsservercore-20H2",
               "tags": {
-                "wcfclient-windowsservercore-2009": {}
+                "wcfclient-windowsservercore-20H2": {},
+                "wcfclient-windowsservercore-2009": {
+                  "docType": "Undocumented"
+                }
               }
             }
           ]
