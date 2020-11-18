@@ -11,6 +11,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public const string WSC_1903 = "windowsservercore-1903";
         public const string WSC_1909 = "windowsservercore-1909";
         public const string WSC_2004 = "windowsservercore-2004";
-        public const string WSC_2009 = "windowsservercore-20H2";
+        public const string WSC_20H2 = "windowsservercore-20H2";
     }
 }
