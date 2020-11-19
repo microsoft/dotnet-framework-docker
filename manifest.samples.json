@@ -59,10 +59,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
-                "dotnetapp-windowsservercore-20H2": {},
-                "dotnetapp-windowsservercore-2009": {
-                  "docType": "Undocumented"
-                }
+                "dotnetapp-windowsservercore-20H2": {}
               }
             }
           ]
@@ -117,10 +114,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
-                "aspnetapp-windowsservercore-20H2": {},
-                "aspnetapp-windowsservercore-2009": {
-                  "docType": "Undocumented"
-                }
+                "aspnetapp-windowsservercore-20H2": {}
               }
             }
           ]
@@ -175,10 +169,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
-                "wcfservice-windowsservercore-20H2": {},
-                "wcfservice-windowsservercore-2009": {
-                  "docType": "Undocumented"
-                }
+                "wcfservice-windowsservercore-20H2": {}
               }
             }
           ]
@@ -233,10 +224,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
-                "wcfclient-windowsservercore-20H2": {},
-                "wcfclient-windowsservercore-2009": {
-                  "docType": "Undocumented"
-                }
+                "wcfclient-windowsservercore-20H2": {}
               }
             }
           ]
