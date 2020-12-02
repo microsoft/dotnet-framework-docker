@@ -11,7 +11,7 @@ RUN dotnet restore
 # copy everything else and build app
 COPY . .
 WORKDIR /app/dotnetapp
-RUN dotnet build
+RUN dotnet build --no-restore
 
 
 FROM build AS testrunner
@@ -26,7 +26,7 @@ RUN dotnet test
 
 FROM build AS publish
 WORKDIR /app/dotnetapp
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o out --no-restore
 
 
 FROM mcr.microsoft.com/dotnet/framework/runtime:4.8 AS runtime
