@@ -5,8 +5,8 @@ ARG BASE_RUNTIME_IMAGE
 FROM $BASE_BUILD_IMAGE as builder
 WORKDIR /app
 COPY . ./
-RUN nuget restore dotnetapp-4.8.sln
-RUN dotnet build -c Release
+RUN nuget restore
+RUN dotnet build -c Release --no-restore
 
 
 FROM $BASE_RUNTIME_IMAGE

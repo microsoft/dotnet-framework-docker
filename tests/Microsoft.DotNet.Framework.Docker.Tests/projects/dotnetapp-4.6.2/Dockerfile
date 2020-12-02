@@ -6,7 +6,7 @@ FROM $BASE_BUILD_IMAGE as builder
 WORKDIR /app
 COPY . ./
 RUN dotnet restore
-RUN dotnet build -c Release
+RUN dotnet build -c Release --no-restore
 
 
 FROM $BASE_RUNTIME_IMAGE
