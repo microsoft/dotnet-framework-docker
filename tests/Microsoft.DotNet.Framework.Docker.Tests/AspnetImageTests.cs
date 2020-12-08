@@ -18,7 +18,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2004 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2009 },
+            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_20H2 },
             new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7.1", OsVariant = OsVersion.WSC_LTSC2016 },
@@ -29,7 +29,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2009 },
+            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
         };
 
         public AspnetImageTests(ITestOutputHelper outputHelper)
@@ -89,7 +89,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
             // 3.5 uses cmd: https://github.com/microsoft/dotnet-framework-docker/issues/483
-            // Server Core 2009 and higher also use cmd
+            // Server Core 20H2 and higher also use cmd
             string expectedShellValue;
             if (imageDescriptor.Version != "3.5" &&
                 (

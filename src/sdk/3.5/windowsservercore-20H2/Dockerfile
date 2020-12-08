@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-windowsservercore-2009
+FROM $REPO:3.5-windowsservercore-20H2
 
 # Install NuGet CLI
 ENV NUGET_VERSION 5.7.0
