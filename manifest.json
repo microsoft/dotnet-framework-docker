@@ -46,15 +46,6 @@
               }
             },
             {
-              "dockerfile": "src/runtime/4.8/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
-                "4.8-windowsservercore-1903": {}
-              }
-            },
-            {
               "dockerfile": "src/runtime/4.8/windowsservercore-1909",
               "os": "windows",
               "osVersion": "windowsservercore-1909",
@@ -244,15 +235,6 @@
               }
             },
             {
-              "dockerfile": "src/runtime/3.5/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1903": {},
-                "3.5-windowsservercore-1903": {}
-              }
-            },
-            {
               "dockerfile": "src/runtime/3.5/windowsservercore-1909",
               "os": "windows",
               "osVersion": "windowsservercore-1909",
@@ -337,18 +319,6 @@
               "buildArgs": {
                 "REPO": "$(Repo:runtime)"
               },
-              "dockerfile": "src/sdk/4.8/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
-                "4.8-windowsservercore-1903": {}
-              }
-            },
-            {
-              "buildArgs": {
-                "REPO": "$(Repo:runtime)"
-              },
               "dockerfile": "src/sdk/4.8/windowsservercore-1909",
               "os": "windows",
               "osVersion": "windowsservercore-1909",
@@ -420,18 +390,6 @@
               "tags": {
                 "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "3.5-windowsservercore-ltsc2019": {}
-              }
-            },
-            {
-              "buildArgs": {
-                "REPO": "$(Repo:runtime)"
-              },
-              "dockerfile": "src/sdk/3.5/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1903": {},
-                "3.5-windowsservercore-1903": {}
               }
             },
             {
@@ -522,18 +480,6 @@
               "tags": {
                 "4.8-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
-              }
-            },
-            {
-              "buildArgs": {
-                "REPO": "$(Repo:runtime)"
-              },
-              "dockerfile": "src/aspnet/4.8/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
-                "4.8-windowsservercore-1903": {}
               }
             },
             {
@@ -709,18 +655,6 @@
               "buildArgs": {
                 "REPO": "$(Repo:runtime)"
               },
-              "dockerfile": "src/aspnet/3.5/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-1903": {},
-                "3.5-windowsservercore-1903": {}
-              }
-            },
-            {
-              "buildArgs": {
-                "REPO": "$(Repo:runtime)"
-              },
               "dockerfile": "src/aspnet/3.5/windowsservercore-1909",
               "os": "windows",
               "osVersion": "windowsservercore-1909",
@@ -805,18 +739,6 @@
               "tags": {
                 "4.8-$(WcfReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
-              }
-            },
-            {
-              "buildArgs": {
-                "REPO": "$(Repo:aspnet)"
-              },
-              "dockerfile": "src/wcf/4.8/windowsservercore-1903",
-              "os": "windows",
-              "osVersion": "windowsservercore-1903",
-              "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1903": {},
-                "4.8-windowsservercore-1903": {}
               }
             },
             {

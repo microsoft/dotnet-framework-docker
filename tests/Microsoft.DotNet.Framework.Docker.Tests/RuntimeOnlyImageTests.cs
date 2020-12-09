@@ -15,7 +15,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_20H2 },
@@ -26,7 +25,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
@@ -71,8 +69,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             if ((imageDescriptor.Version == "3.5" || imageDescriptor.Version == "4.8") &&
                 imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
-                imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019 &&
-                imageDescriptor.OsVariant != OsVersion.WSC_1903)
+                imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019)
             {
                 yield return new EnvironmentVariableInfo("DOTNET_RUNNING_IN_CONTAINER", "true");
             }

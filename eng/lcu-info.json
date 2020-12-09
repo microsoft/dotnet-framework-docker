@@ -32,14 +32,6 @@
         "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/10/windows10.0-kb4580979-x64-ndp48_24793c7b24af666026c2e60b7870a1034834c8e3.msu"
     },
     {
-        "osVersion": "windowsservercore-1903",
-        "runtimeVersions": [
-            "3.5",
-            "4.8"
-        ],
-        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/10/windows10.0-kb4580980-x64-ndp48_cc3c6bced8c5238bd7767f5abf419d5a3a1847fa.msu"
-    },
-    {
         "osVersion": "windowsservercore-1909",
         "runtimeVersions": [
             "3.5",

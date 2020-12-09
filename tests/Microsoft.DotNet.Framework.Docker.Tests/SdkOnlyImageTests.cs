@@ -20,13 +20,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_20H2 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1903 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
@@ -97,8 +95,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"));
 
             if (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
-                imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019 &&
-                imageDescriptor.OsVariant != OsVersion.WSC_1903)
+                imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019)
             {
                 variables.Add(new EnvironmentVariableInfo("DOTNET_USE_POLLING_FILE_WATCHER", "true"));
             }
@@ -224,7 +221,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string expectedShellValue;
             if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019 ||
-                imageDescriptor.OsVariant == OsVersion.WSC_1903 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_1909 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_2004)
             {
