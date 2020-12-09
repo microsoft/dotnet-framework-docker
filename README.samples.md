@@ -99,14 +99,6 @@ aspnetapp-windowsservercore-1909, aspnetapp | [Dockerfile](https://github.com/mi
 wcfservice-windowsservercore-1909, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
 wcfclient-windowsservercore-1909, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
 
-## Windows Server Core, version 1903 amd64 Tags
-Tag | Dockerfile
----------| ---------------
-dotnetapp-windowsservercore-1903, dotnetapp, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/dotnetapp/Dockerfile)
-aspnetapp-windowsservercore-1903, aspnetapp | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/Dockerfile)
-wcfservice-windowsservercore-1903, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.web)
-wcfclient-windowsservercore-1903, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/wcfapp/Dockerfile.client)
-
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
