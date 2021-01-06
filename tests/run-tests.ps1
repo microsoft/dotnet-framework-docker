@@ -37,36 +37,9 @@ $ErrorActionPreference = 'Stop'
 
 # Install the .NET Core SDK
 $DotnetInstallDir = "$PSScriptRoot/../.dotnet"
-
-if (!(Test-Path "$DotnetInstallDir")) {
-    mkdir "$DotnetInstallDir" | Out-Null
-}
-
-$IsRunningOnUnix = $PSVersionTable.contains("Platform") -and $PSVersionTable.Platform -eq "Unix"
-if ($IsRunningOnUnix) {
-    $DotnetInstallScript = "dotnet-install.sh"
-}
-else {
-    $DotnetInstallScript = "dotnet-install.ps1"
-}
+& $PSScriptRoot/../eng/common/Install-DotNetSdk.ps1 $dotnetInstallDir
 
 $activeOS = docker version -f "{{ .Server.Os }}"
-
-if (!(Test-Path $DotnetInstallScript)) {
-    $DOTNET_INSTALL_SCRIPT_URL = "https://dot.net/v1/$DotnetInstallScript"
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
-    Invoke-WebRequest $DOTNET_INSTALL_SCRIPT_URL -OutFile $DotnetInstallDir/$DotnetInstallScript
-}
-
-if ($IsRunningOnUnix) {
-    & chmod +x $DotnetInstallDir/$DotnetInstallScript
-    & $DotnetInstallDir/$DotnetInstallScript --channel "3.1" --version "latest" --install-dir $DotnetInstallDir
-}
-else {
-    & $DotnetInstallDir/$DotnetInstallScript -Channel "3.1" -Version "latest" -InstallDir $DotnetInstallDir
-}
-
-if ($LASTEXITCODE -ne 0) { throw "Failed to install the .NET Core SDK" }
 
 # Run Tests
 $env:IMAGE_OS = $OS
