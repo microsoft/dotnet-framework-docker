@@ -39,6 +39,8 @@ $ErrorActionPreference = 'Stop'
 $DotnetInstallDir = "$PSScriptRoot/../.dotnet"
 & $PSScriptRoot/../eng/common/Install-DotNetSdk.ps1 $dotnetInstallDir
 
+$activeOS = docker version -f "{{ .Server.Os }}"
+
 # Run Tests
 $env:IMAGE_OS = $OS
 $env:IMAGE_VERSION = $Version
