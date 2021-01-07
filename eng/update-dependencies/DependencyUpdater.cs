@@ -213,7 +213,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                 .Select(dockerfile =>
                 {
                     // Find the NuGetInfo that matches the OS version of this Dockerfile
-                    NuGetInfo nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(dockerfile.OsVersion));
+                    NuGetInfo? nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(dockerfile.OsVersion));
                     if (nuGetInfo is null)
                     {
                         throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{dockerfile.OsVersion}'.");
