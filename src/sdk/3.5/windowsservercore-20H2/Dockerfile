@@ -31,7 +31,7 @@ RUN `
     && del vs_BuildTools.exe `
     `
     # Trigger dotnet first run experience by running arbitrary cmd
-    && dotnet help `
+    && "%ProgramFiles%\dotnet\dotnet.exe" help `
     `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
