@@ -22,14 +22,18 @@ RUN \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.
 
 # Install NuGet CLI
 ENV NUGET_VERSION 4.9.4
-RUN mkdir "%ProgramFiles%\NuGet" `
+RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
-            -OutFile $Env:ProgramFiles\NuGet\nuget.exe
+            -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
+        Invoke-WebRequest `
+            -UseBasicParsing `
+            -Uri https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe `
+            -OutFile $Env:ProgramFiles\NuGet\latest\nuget.exe
 
 # Install VS components
 RUN `
