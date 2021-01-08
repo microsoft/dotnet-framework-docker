@@ -21,6 +21,15 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         }
 
         [Fact]
+        public void VerifyDockerfileTemplates()
+        {
+            string generateDockerfilesScript = Path.Combine(Config.SourceRepoRoot, "eng", "dockerfile-templates", "Get-GeneratedDockerfiles.ps1");
+            ValidateGeneratedArtifacts(
+                generateDockerfilesScript,
+                $"The Dockerfiles are out of sync with the templates.  Update the Dockerfiles by running `{generateDockerfilesScript}`.");
+        }
+
+        [Fact]
         public void VerifyReadmeTemplates()
         {
             string generateTagsDocumentationScript = Path.Combine(Config.SourceRepoRoot, "eng", "readme-templates", "Get-GeneratedReadmes.ps1");
