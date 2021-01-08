@@ -22,14 +22,18 @@ RUN \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.
 
 # Install NuGet CLI
 ENV NUGET_VERSION 4.9.4
-RUN mkdir "%ProgramFiles%\NuGet" `
+RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
-            -OutFile $Env:ProgramFiles\NuGet\nuget.exe
+            -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
+        Invoke-WebRequest `
+            -UseBasicParsing `
+            -Uri https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe `
+            -OutFile $Env:ProgramFiles\NuGet\latest\nuget.exe
 
 # Install VS components
 RUN `
@@ -52,8 +56,6 @@ RUN `
             -UseBasicParsing `
             -Uri "https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/bc60b587587d10eacc50fe99a6f3d57a81749cb55c904225892d1d165f01a913/vs_BuildTools.exe" `
             -OutFile vs_BuildTools.exe `
-    # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
-    && setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1 `
     && start /w vs_BuildTools.exe ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
@@ -63,6 +65,9 @@ RUN `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
+    `
+    # Trigger dotnet first run experience by running arbitrary cmd
+    && "%ProgramFiles%\dotnet\dotnet.exe" help `
     `
     # Workaround for issues with 64-bit ngen
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `

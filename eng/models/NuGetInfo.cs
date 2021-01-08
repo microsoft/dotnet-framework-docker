@@ -14,5 +14,8 @@ namespace Microsoft.DotNet.Framework.Models
 
         [JsonProperty(Required = Required.Always)]
         public string NuGetClientVersion { get; set; } = String.Empty;
+
+        [JsonProperty(Required = Required.Always)]
+        public string NuGetClientLatestVersion { get; set; } = String.Empty;
     }
 }
