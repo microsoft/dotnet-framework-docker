@@ -11,7 +11,7 @@ RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /Fea
     && C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe update `
     && C:\Windows\Microsoft.NET\Framework\v4.0.30319\ngen.exe update
 
-# Install Roslyn compilers and ngen binaries
+# Install Roslyn compilers
 RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg `
     && mkdir c:\RoslynCompilers `
     && tar -C c:\RoslynCompilers -zxf microsoft.net.compilers.2.9.0.zip `

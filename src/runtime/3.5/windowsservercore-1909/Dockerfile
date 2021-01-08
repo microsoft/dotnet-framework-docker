@@ -24,7 +24,7 @@ RUN `
     && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4580980-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
-    # ngen .NET 3.5 Fx
+    # ngen .NET Fx
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
