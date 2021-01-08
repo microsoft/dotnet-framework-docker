@@ -225,7 +225,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                         {
                             Path = dockerfile.Path,
                             VersionGroupName = NuGetVersionGroupName,
-                            Regex = new Regex(@$"ENV NUGET_VERSION (?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
+                            Regex = new Regex(@$"ENV NUGET_VERSION=(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
                         },
                         new CustomFileRegexUpdater(nuGetInfo.NuGetClientLatestVersion, dockerfile.ImageVariant)
                         {

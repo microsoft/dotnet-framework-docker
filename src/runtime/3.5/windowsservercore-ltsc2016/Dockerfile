@@ -32,7 +32,7 @@ RUN powershell -Command `
     && rmdir /S /Q patch
 
 # ngen .NET Fx
-ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
     && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update `
