@@ -2,8 +2,11 @@
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2016-amd64
 
-# Install .NET 4.7.2
-RUN powershell -Command `
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
+
+RUN `
+    # Install .NET 4.7.2
+    powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
@@ -12,10 +15,10 @@ RUN powershell -Command `
             -OutFile dotnet-framework-installer.exe `
     && start /w .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
-
-# Apply latest patch
-RUN powershell -Command `
+    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+    `
+    # Apply latest patch
+    && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
@@ -26,9 +29,8 @@ RUN powershell -Command `
     && expand patch.msu patch -F:* `
     && del patch.msu `
     && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4593226-x64.cab `
-    && rmdir /S /Q patch
-
-# ngen .NET Fx
-ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
-RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && rmdir /S /Q patch `
+    `
+    # ngen .NET Fx
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
