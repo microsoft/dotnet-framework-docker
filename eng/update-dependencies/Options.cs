@@ -9,10 +9,6 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 {
     public class Options
     {
-        private const string DefaultNuGetInfoPath = "eng/nuget-info.json";
-        private const string DefaultLcuInfoPath = "eng/lcu-info.json";
-        private const string DefaultVsInfoPath = "eng/vs-info.json";
-
         public string? DateStampAll { get; private set; }
 
         public string? DateStampRuntime { get; private set; }
@@ -35,11 +31,11 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         public string? GitHubUser { get; private set; }
 
-        public string NuGetInfoPath { get; private set; } = DefaultNuGetInfoPath;
+        public string NuGetInfoPath { get; private set; }
 
-        public string LcuInfoPath { get; private set; } = DefaultLcuInfoPath;
+        public string LcuInfoPath { get; private set; }
 
-        public string VsInfoPath { get; private set; } = DefaultVsInfoPath;
+        public string VsInfoPath { get; private set; }
 
         public bool UpdateOnly => GitHubEmail == null || GitHubPassword == null || GitHubUser == null;
 
@@ -70,9 +66,9 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                 new Option<string?>("--email", "GitHub email used to make PR (if not specified, a PR will not be created)"),
                 new Option<string?>("--password", "GitHub password used to make PR (if not specified, a PR will not be created)"),
                 new Option<string?>("--user", "GitHub user used to make PR (if not specified, a PR will not be created)"),
-                new Option<string>("--nuget-info", () => DefaultNuGetInfoPath, "Path to the NuGet info JSON file"),
-                new Option<string>("--lcu-info", () => DefaultLcuInfoPath, "Path to the LCU info JSON file"),
-                new Option<string>("--vs-info", () => DefaultVsInfoPath, "Path to the VS info JSON file"),
+                new Option<string>("--nuget-info", () => "eng/nuget-info.json", "Path to the NuGet info JSON file"),
+                new Option<string>("--lcu-info", () => "eng/lcu-info.json", "Path to the LCU info JSON file"),
+                new Option<string>("--vs-info", () => "eng/vs-info.json", "Path to the VS info JSON file"),
             };
     }
 }
