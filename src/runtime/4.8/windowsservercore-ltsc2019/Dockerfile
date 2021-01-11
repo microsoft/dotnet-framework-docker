@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 
-ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Install .NET 4.8

@@ -4,7 +4,7 @@ ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:4.8-windowsservercore-ltsc2019
 
 # Install NuGet CLI
-ENV NUGET_VERSION 4.9.4
+ENV NUGET_VERSION=4.9.4
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
     && curl -fSLo "%ProgramFiles%\NuGet\latest\nuget.exe" https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe
@@ -51,7 +51,7 @@ RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbina
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
-ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+ENV ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `

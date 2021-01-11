@@ -20,7 +20,7 @@ RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/
     && C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe install c:\RoslynCompilers\tools\vbc.exe /ExeConfig:c:\RoslynCompilers\tools\vbc.exe `
     && C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe install c:\RoslynCompilers\tools\VBCSCompiler.exe /ExeConfig:c:\RoslynCompilers\tools\VBCSCompiler.exe
 
-ENV ROSLYN_COMPILER_LOCATION c:\RoslynCompilers\tools
+ENV ROSLYN_COMPILER_LOCATION=c:\RoslynCompilers\tools
 
 EXPOSE 80
 
