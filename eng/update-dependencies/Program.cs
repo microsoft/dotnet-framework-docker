@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.CommandLine;
+using System.CommandLine.Invocation;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,14 +15,24 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
     {
         public static string RepoRoot { get; } = Directory.GetCurrentDirectory();
 
-        public static async Task Main(string[] args)
+        public static Task Main(string[] args)
+        {
+            RootCommand command = new RootCommand();
+            foreach (Symbol symbol in Options.GetCliSymbols())
+            {
+                command.Add(symbol);
+            };
+
+            command.Handler = CommandHandler.Create<Options>(ExecuteAsync);
+
+            return command.InvokeAsync(args);
+        }
+
+        private static async Task ExecuteAsync(Options options)
         {
             try
             {
                 Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-
-                Options options = new Options();
-                options.Parse(args);
 
                 await new DependencyUpdater(options).ExecuteAsync();
             }

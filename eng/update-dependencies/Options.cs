@@ -2,13 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Collections.Generic;
 using System.CommandLine;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies
 {
     public class Options
     {
+        private const string DefaultNuGetInfoPath = "eng/nuget-info.json";
+        private const string DefaultLcuInfoPath = "eng/lcu-info.json";
+        private const string DefaultVsInfoPath = "eng/vs-info.json";
+
         public string? DateStampAll { get; private set; }
 
         public string? DateStampRuntime { get; private set; }
@@ -31,96 +35,44 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         public string? GitHubUser { get; private set; }
 
-        public string NuGetInfoPath { get; private set; } = "eng/nuget-info.json";
+        public string NuGetInfoPath { get; private set; } = DefaultNuGetInfoPath;
 
-        public string LcuInfoPath { get; private set; } = "eng/lcu-info.json";
+        public string LcuInfoPath { get; private set; } = DefaultLcuInfoPath;
 
-        public string VsInfoPath { get; private set; } = "eng/vs-info.json";
+        public string VsInfoPath { get; private set; } = DefaultVsInfoPath;
 
         public bool UpdateOnly => GitHubEmail == null || GitHubPassword == null || GitHubUser == null;
 
-        public void Parse(string[] args)
+        public Options(string? datestampAll, string? datestampRuntime, string? datestampSdk, string? datestampAspnet, string? datestampWcf, string? email,
+            string? password, string? user, string nugetInfo, string lcuInfo, string vsInfo)
         {
-            ArgumentSyntax argSyntax = ArgumentSyntax.Parse(args, syntax =>
-            {
-                const string dateStampAllName = "datestamp-all";
-                string? dateStampAll = null;
-                syntax.DefineOption(
-                    "datestamp-all",
-                    ref dateStampAll,
-                    "Tag date stamp to assign to all image types");
-                DateStampAll = dateStampAll;
-
-                string? dateStampRuntime = null;
-                syntax.DefineOption(
-                    "datestamp-runtime",
-                    ref dateStampRuntime,
-                    $"Tag date stamp to assign to runtime image types (overrides {dateStampAllName})");
-                DateStampRuntime = dateStampRuntime;
-
-                string? dateStampSdk = null;
-                syntax.DefineOption(
-                    "datestamp-sdk",
-                    ref dateStampSdk,
-                    $"Tag date stamp to assign to SDK image types (overrides {dateStampAllName})");
-                DateStampSdk = dateStampSdk;
-
-                string? dateStampAspnet = null;
-                syntax.DefineOption(
-                    "datestamp-aspnet",
-                    ref dateStampAspnet,
-                    $"Tag date stamp to assign to ASP.NET image types (overrides {dateStampAllName})");
-                DateStampAspnet = dateStampAspnet;
-
-                string? dateStampWcf = null;
-                syntax.DefineOption(
-                    "datestamp-wcf",
-                    ref dateStampWcf,
-                    $"Tag date stamp to assign to WCF image types (overrides {dateStampAllName})");
-                DateStampWcf = dateStampWcf;
-
-                string? gitHubEmail = null;
-                syntax.DefineOption(
-                    "email",
-                    ref gitHubEmail,
-                    "GitHub email used to make PR (if not specified, a PR will not be created)");
-                GitHubEmail = gitHubEmail;
-
-                string? gitHubPassword = null;
-                syntax.DefineOption(
-                    "password",
-                    ref gitHubPassword,
-                    "GitHub password used to make PR (if not specified, a PR will not be created)");
-                GitHubPassword = gitHubPassword;
-
-                string? gitHubUser = null;
-                syntax.DefineOption(
-                    "user",
-                    ref gitHubUser,
-                    "GitHub user used to make PR (if not specified, a PR will not be created)");
-                GitHubUser = gitHubUser;
-
-                string nugetInfoPath = NuGetInfoPath;
-                syntax.DefineOption(
-                    "nuget-info",
-                    ref nugetInfoPath,
-                    "Path to the NuGet info JSON file");
-                NuGetInfoPath = nugetInfoPath;
-
-                string lcuInfoPath = LcuInfoPath;
-                syntax.DefineOption(
-                    "lcu-info",
-                    ref lcuInfoPath,
-                    "Path to the LCU info JSON file");
-                LcuInfoPath = lcuInfoPath;
-
-                string vsInfoPath = VsInfoPath;
-                syntax.DefineOption(
-                    "vs-info",
-                    ref vsInfoPath,
-                    "Path to the VS info JSON file");
-                VsInfoPath = vsInfoPath;
-            });
+            DateStampAll = datestampAll;
+            DateStampRuntime = datestampRuntime;
+            DateStampSdk = datestampSdk;
+            DateStampAspnet = datestampAspnet;
+            DateStampWcf = datestampWcf;
+            GitHubEmail = email;
+            GitHubPassword = password;
+            GitHubUser = user;
+            NuGetInfoPath = nugetInfo;
+            LcuInfoPath = lcuInfo;
+            VsInfoPath = vsInfo;
         }
+
+        public static IEnumerable<Symbol> GetCliSymbols() =>
+            new Symbol[]
+            {
+                new Option<string?>("--datestamp-all", "Tag date stamp to assign to all image types"),
+                new Option<string?>("--datestamp-runtime", "Tag date stamp to assign to runtime image types (overrides datestamp-all)"),
+                new Option<string?>("--datestamp-sdk", "Tag date stamp to assign to SDK image types (overrides datestamp-all)"),
+                new Option<string?>("--datestamp-aspnet", "Tag date stamp to assign to ASP.NET image types (overrides datestamp-all)"),
+                new Option<string?>("--datestamp-wcf", "Tag date stamp to assign to WCF image types (overrides datestamp-all)"),
+                new Option<string?>("--email", "GitHub email used to make PR (if not specified, a PR will not be created)"),
+                new Option<string?>("--password", "GitHub password used to make PR (if not specified, a PR will not be created)"),
+                new Option<string?>("--user", "GitHub user used to make PR (if not specified, a PR will not be created)"),
+                new Option<string>("--nuget-info", () => DefaultNuGetInfoPath, "Path to the NuGet info JSON file"),
+                new Option<string>("--lcu-info", () => DefaultLcuInfoPath, "Path to the LCU info JSON file"),
+                new Option<string>("--vs-info", () => DefaultVsInfoPath, "Path to the VS info JSON file"),
+            };
     }
 }
