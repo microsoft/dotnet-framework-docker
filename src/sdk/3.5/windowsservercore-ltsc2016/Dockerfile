@@ -69,6 +69,14 @@ RUN `
     # Trigger dotnet first run experience by running arbitrary cmd
     && "%ProgramFiles%\dotnet\dotnet.exe" help `
     `
+    # Workaround for issues with 64-bit ngen
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    `
+    # ngen assemblies queued by VS installers
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
+    `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
     && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
@@ -88,15 +96,6 @@ RUN powershell -Command `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
 ENV ROSLYN_COMPILER_LOCATION "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
-
-# ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
-RUN `
-    # Workaround for issue with 32 bit assemblies from .NET Framework 4.8 SDK being 64 bit ngen'ed
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
-    `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
