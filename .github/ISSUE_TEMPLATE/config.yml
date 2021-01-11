@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Questions
-    url: https://stackoverflow.com/questions/tagged/.net
-    about: Is your issue perhaps more of a question? Please post questions on Stack Overflow.
+  - name: Discussions
+    url: https://github.com/microsoft/dotnet-framework-docker/discussions
+    about: Is your issue perhaps more of a discussion or question? Please start a new discussion.
   - name: Issue with .NET Framework, ASP.NET or WCF
     url: https://developercommunity.visualstudio.com/spaces/61/index.html
     about: Please report problems relating to the .NET Framework, ASP.NET or WCF on the .NET Developer Community website.
