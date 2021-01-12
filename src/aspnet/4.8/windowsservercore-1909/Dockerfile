@@ -11,7 +11,7 @@ RUN Add-WindowsFeature Web-Server; `
     Remove-Item -Recurse C:\inetpub\wwwroot\*; `
     Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe; `
     &C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe update; `
-    &C:\Windows\Microsoft.NET\Framework\v4.0.30319\ngen.exe update;
+    &C:\Windows\Microsoft.NET\Framework\v4.0.30319\ngen.exe update
 
 # Install Roslyn compilers
 RUN Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg -OutFile c:\microsoft.net.compilers.2.9.0.zip; `
