@@ -210,7 +210,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
             return dockerfiles.Value
                 .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
-                .Select(dockerfile =>
+                .SelectMany(dockerfile =>
                 {
                     // Find the NuGetInfo that matches the OS version of this Dockerfile
                     NuGetInfo? nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(dockerfile.OsVersion));
@@ -219,11 +219,20 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                         throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{dockerfile.OsVersion}'.");
                     }
 
-                    return new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, dockerfile.ImageVariant)
+                    return new IDependencyUpdater[]
                     {
-                        Path = dockerfile.Path,
-                        VersionGroupName = NuGetVersionGroupName,
-                        Regex = new Regex(@$"ENV NUGET_VERSION (?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
+                        new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, dockerfile.ImageVariant)
+                        {
+                            Path = dockerfile.Path,
+                            VersionGroupName = NuGetVersionGroupName,
+                            Regex = new Regex(@$"ENV NUGET_VERSION=(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
+                        },
+                        new CustomFileRegexUpdater(nuGetInfo.NuGetClientLatestVersion, dockerfile.ImageVariant)
+                        {
+                            Path = dockerfile.Path,
+                            VersionGroupName = NuGetVersionGroupName,
+                            Regex = new Regex(@$"https://dist.nuget.org/win-x86-commandline/v(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)/nuget.exe")
+                        }
                     };
                 });
         }
