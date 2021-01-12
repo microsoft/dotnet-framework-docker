@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.DotNet.Framework.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -119,8 +118,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             Version actualVsVersion = Version.Parse(json[0]["catalog"]["productDisplayVersion"].ToString());
 
-            VsInfo vsInfo = Config.GetVsInfo();
-            Version expectedVsVersion = Version.Parse(vsInfo.VsVersion);
+            Version expectedVsVersion = Config.GetManifestVsVersion();
 
             Assert.Equal(expectedVsVersion.Major, actualVsVersion.Major);
             Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);
