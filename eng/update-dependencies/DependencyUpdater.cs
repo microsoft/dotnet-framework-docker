@@ -111,9 +111,8 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
             updaters.AddRange(CreateManifestUpdaters());
             updaters.AddRange(CreateLcuUpdaters());
-            updaters.AddRange(CreateVsUpdaters());
-            updaters.AddRange(CreateNuGetUpdaters());
-            updaters.Add(new ReadmeUpdater());
+            updaters.Add(ScriptRunnerUpdater.GetDockerfileUpdater(Program.RepoRoot));
+            updaters.Add(ScriptRunnerUpdater.GetReadMeUpdater(Program.RepoRoot));
 
             return DependencyUpdateUtils.Update(updaters, buildInfos);
         }
@@ -153,41 +152,6 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                 );
         }
 
-        private IEnumerable<IDependencyUpdater> CreateVsUpdaters()
-        {
-            VsInfo vsConfig = JsonConvert.DeserializeObject<VsInfo>(
-                File.ReadAllText(this.options.VsInfoPath));
-
-            const string TestAgentGroupName = "TestAgent";
-            const string BuildToolsGroupName = "BuildTools";
-            const string WebTargetsGroupName = "WebTargets";
-
-            return dockerfiles.Value
-                .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
-                .SelectMany(dockerfile =>
-                    new IDependencyUpdater[]
-                    {
-                        new CustomFileRegexUpdater(vsConfig.TestAgentUrl, dockerfile.ImageVariant)
-                        {
-                            VersionGroupName = TestAgentGroupName,
-                            Path = dockerfile.Path,
-                            Regex = new Regex(@$"(?<{TestAgentGroupName}>https:\/\/\S+vs_TestAgent\.exe)"),
-                        },
-                        new CustomFileRegexUpdater(vsConfig.BuildToolsUrl, dockerfile.ImageVariant)
-                        {
-                            VersionGroupName = BuildToolsGroupName,
-                            Path = dockerfile.Path,
-                            Regex = new Regex(@$"(?<{BuildToolsGroupName}>https:\/\/\S+vs_BuildTools\.exe)"),
-                        },
-                        new CustomFileRegexUpdater(vsConfig.WebTargetsUrl, dockerfile.ImageVariant)
-                        {
-                            VersionGroupName = WebTargetsGroupName,
-                            Path = dockerfile.Path,
-                            Regex = new Regex(@$"# Install web targets(.|\n)+?(?<{WebTargetsGroupName}>https:\/\/\S+)"),
-                        }
-                    });
-        }
-
         private static string ParseCabFileName(string lcuDownloadUrl)
         {
             string msuFilename = lcuDownloadUrl.Substring(lcuDownloadUrl.LastIndexOf("/") + 1);
@@ -199,42 +163,6 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             return lcuConfigs
                 .FirstOrDefault(config => config.OsVersion == dockerfile.OsVersion &&
                     config.RuntimeVersions.Any(runtime => runtime == dockerfile.FrameworkVersion));
-        }
-
-        private IEnumerable<IDependencyUpdater> CreateNuGetUpdaters()
-        {
-            NuGetInfo[] nuGetVersions = JsonConvert.DeserializeObject<NuGetInfo[]>(
-                File.ReadAllText(this.options.NuGetInfoPath));
-
-            const string NuGetVersionGroupName = "version";
-
-            return dockerfiles.Value
-                .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
-                .SelectMany(dockerfile =>
-                {
-                    // Find the NuGetInfo that matches the OS version of this Dockerfile
-                    NuGetInfo? nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(dockerfile.OsVersion));
-                    if (nuGetInfo is null)
-                    {
-                        throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{dockerfile.OsVersion}'.");
-                    }
-
-                    return new IDependencyUpdater[]
-                    {
-                        new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, dockerfile.ImageVariant)
-                        {
-                            Path = dockerfile.Path,
-                            VersionGroupName = NuGetVersionGroupName,
-                            Regex = new Regex(@$"ENV NUGET_VERSION=(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
-                        },
-                        new CustomFileRegexUpdater(nuGetInfo.NuGetClientLatestVersion, dockerfile.ImageVariant)
-                        {
-                            Path = dockerfile.Path,
-                            VersionGroupName = NuGetVersionGroupName,
-                            Regex = new Regex(@$"https://dist.nuget.org/win-x86-commandline/v(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)/nuget.exe")
-                        }
-                    };
-                });
         }
 
         private IEnumerable<IDependencyUpdater> CreateManifestUpdaters()
