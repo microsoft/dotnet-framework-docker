@@ -6,7 +6,11 @@
     "RuntimeReleaseDateStamp": "20210112",
     "SdkReleaseDateStamp": "20210112",
     "AspnetReleaseDateStamp": "20210112",
-    "WcfReleaseDateStamp": "20210112"
+    "WcfReleaseDateStamp": "20210112",
+    "1909-RuntimeReleaseDateStamp": "20201110",
+    "1909-SdkReleaseDateStamp": "20201110",
+    "1909-AspnetReleaseDateStamp": "20201110",
+    "1909-WcfReleaseDateStamp": "20201110"
   },
   "repos": [
     {
@@ -46,7 +50,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(1909-RuntimeReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             },
@@ -235,7 +239,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-$(1909-RuntimeReleaseDateStamp)-windowsservercore-1909": {},
                 "3.5-windowsservercore-1909": {}
               }
             },
@@ -319,7 +323,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(1909-SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             },
@@ -396,7 +400,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-$(1909-SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "3.5-windowsservercore-1909": {}
               }
             },
@@ -486,7 +490,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(1909-AspnetReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             },
@@ -655,7 +659,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-$(1909-AspnetReleaseDateStamp)-windowsservercore-1909": {},
                 "3.5-windowsservercore-1909": {}
               }
             },
@@ -748,7 +752,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(1909-WcfReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             },

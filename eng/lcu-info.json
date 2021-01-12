@@ -37,7 +37,7 @@
             "3.5",
             "4.8"
         ],
-        "downloadUrl": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2020/11/windows10.0-kb4586878-x64-ndp48_999de1e5d15823c4863dc0a8fffb733447227c73.msu"
+        "downloadUrl": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/10/windows10.0-kb4580980-x64-ndp48_cc3c6bced8c5238bd7767f5abf419d5a3a1847fa.msu"
     },
     {
         "osVersion": "windowsservercore-2004",
