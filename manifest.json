@@ -7,10 +7,10 @@
     "SdkReleaseDateStamp": "20210112",
     "AspnetReleaseDateStamp": "20210112",
     "WcfReleaseDateStamp": "20210112",
-    "1909-RuntimeReleaseDateStamp": "20201110",
-    "1909-SdkReleaseDateStamp": "20201110",
-    "1909-AspnetReleaseDateStamp": "20201110",
-    "1909-WcfReleaseDateStamp": "20201110"
+    "1909-RuntimeReleaseDateStamp": "20210113",
+    "1909-SdkReleaseDateStamp": "20210113",
+    "1909-AspnetReleaseDateStamp": "20210113",
+    "1909-WcfReleaseDateStamp": "20210113"
   },
   "repos": [
     {
