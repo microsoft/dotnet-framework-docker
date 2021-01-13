@@ -1,5 +1,21 @@
 {
     "variables": {
+      "kb|ltsc2016|3.5-4.7.2":"kb4598243",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4598243-x64_a96fed949c557064b0e105745a5524717ad72ab2.msu",
+      "kb|ltsc2019|3.5-4.7.2":"kb4586875",
+      "lcu|ltsc2019|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/11/windows10.0-kb4586875-x64_a14cffeb8033542a5379d4c5a9c0c6fa17c3f939.msu",
+
+      "kb|ltsc2016":"kb4597247",
+      "lcu|ltsc2016":"http://download.windowsupdate.com/d/msdownload/update/software/updt/2020/12/windows10.0-kb4597247-x64-ndp48_c943fabca81cf4383d04efae51e417387f137ee1.msu",
+      "kb|ltsc2019":"kb4586877",
+      "lcu|ltsc2019":"http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/11/windows10.0-kb4586877-x64-ndp48_7ea9b3a0c33531117c9833b26e1e72462defb6c4.msu",
+      "kb|1909":"kb4586878",
+      "lcu|1909":"http://download.windowsupdate.com/d/msdownload/update/software/updt/2020/11/windows10.0-kb4586878-x64-ndp48_999de1e5d15823c4863dc0a8fffb733447227c73.msu",
+      "kb|2004":"kb4586876",
+      "lcu|2004":"http://download.windowsupdate.com/d/msdownload/update/software/updt/2020/11/windows10.0-kb4586876-x64-ndp48_ab1407801539dfe4af2423400875a596fc032739.msu",
+      "kb|20H2":"kb4586876",
+      "lcu|20H2":"http://download.windowsupdate.com/d/msdownload/update/software/updt/2020/11/windows10.0-kb4586876-x64-ndp48_ab1407801539dfe4af2423400875a596fc032739.msu",
+
       "nuget|ltsc2016|version": "4.9.4",
       "nuget|ltsc2019|version": "4.9.4",
       "nuget|1909|version": "5.3.1",

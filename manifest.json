@@ -32,6 +32,7 @@
           "platforms": [
             {
               "dockerfile": "src/runtime/4.8/windowsservercore-ltsc2016",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile.ltsc2016",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -41,6 +42,7 @@
             },
             {
               "dockerfile": "src/runtime/4.8/windowsservercore-ltsc2019",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
@@ -50,6 +52,7 @@
             },
             {
               "dockerfile": "src/runtime/4.8/windowsservercore-1909",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
@@ -59,6 +62,7 @@
             },
             {
               "dockerfile": "src/runtime/4.8/windowsservercore-2004",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
@@ -68,6 +72,7 @@
             },
             {
               "dockerfile": "src/runtime/4.8/windowsservercore-20H2",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
@@ -91,6 +96,7 @@
           "platforms": [
             {
               "dockerfile": "src/runtime/4.7.2/windowsservercore-ltsc2016",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile.ltsc2016",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -110,6 +116,7 @@
             },
             {
               "dockerfile": "src/runtime/4.7.2/windowsservercore-ltsc2019",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
@@ -137,6 +144,7 @@
           "platforms": [
             {
               "dockerfile": "src/runtime/4.7.1/windowsservercore-ltsc2016",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile.ltsc2016",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -164,6 +172,7 @@
           "platforms": [
             {
               "dockerfile": "src/runtime/4.7/windowsservercore-ltsc2016",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile.ltsc2016",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -191,6 +200,7 @@
           "platforms": [
             {
               "dockerfile": "src/runtime/4.6.2/windowsservercore-ltsc2016",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile.ltsc2016",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -221,6 +231,7 @@
           "platforms": [
             {
               "dockerfile": "src/runtime/3.5/windowsservercore-ltsc2016",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile.ltsc2016",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
@@ -230,6 +241,7 @@
             },
             {
               "dockerfile": "src/runtime/3.5/windowsservercore-ltsc2019",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
@@ -239,6 +251,7 @@
             },
             {
               "dockerfile": "src/runtime/3.5/windowsservercore-1909",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
@@ -248,6 +261,7 @@
             },
             {
               "dockerfile": "src/runtime/3.5/windowsservercore-2004",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
@@ -263,6 +277,7 @@
             },
             {
               "dockerfile": "src/runtime/3.5/windowsservercore-20H2",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
