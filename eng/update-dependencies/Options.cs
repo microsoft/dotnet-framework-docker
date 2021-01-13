@@ -31,11 +31,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         public string? GitHubUser { get; private set; }
 
-        public string NuGetInfoPath { get; private set; } = "eng/nuget-info.json";
-
         public string LcuInfoPath { get; private set; } = "eng/lcu-info.json";
-
-        public string VsInfoPath { get; private set; } = "eng/vs-info.json";
 
         public bool UpdateOnly => GitHubEmail == null || GitHubPassword == null || GitHubUser == null;
 
@@ -100,26 +96,12 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                     "GitHub user used to make PR (if not specified, a PR will not be created)");
                 GitHubUser = gitHubUser;
 
-                string nugetInfoPath = NuGetInfoPath;
-                syntax.DefineOption(
-                    "nuget-info",
-                    ref nugetInfoPath,
-                    "Path to the NuGet info JSON file");
-                NuGetInfoPath = nugetInfoPath;
-
                 string lcuInfoPath = LcuInfoPath;
                 syntax.DefineOption(
                     "lcu-info",
                     ref lcuInfoPath,
                     "Path to the LCU info JSON file");
                 LcuInfoPath = lcuInfoPath;
-
-                string vsInfoPath = VsInfoPath;
-                syntax.DefineOption(
-                    "vs-info",
-                    ref vsInfoPath,
-                    "Path to the VS info JSON file");
-                VsInfoPath = vsInfoPath;
             });
         }
     }
