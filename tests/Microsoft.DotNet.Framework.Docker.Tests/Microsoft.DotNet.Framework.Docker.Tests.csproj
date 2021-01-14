@@ -27,8 +27,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\eng\models\Microsoft.DotNet.Framework.Models.csproj" />
-  </ItemGroup>
-
 </Project>

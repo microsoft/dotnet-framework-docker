@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2016-amd64
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-    # Install .NET 4.8
+    # Install .NET Fx 4.8
     powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
@@ -13,7 +13,7 @@ RUN `
             -UseBasicParsing `
             -Uri "https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe" `
             -OutFile dotnet-framework-installer.exe `
-    && .\dotnet-framework-installer.exe /q `
+    && start /w .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `

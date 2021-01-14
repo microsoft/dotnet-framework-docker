@@ -2,9 +2,9 @@
 
 FROM mcr.microsoft.com/windows/servercore:1909-amd64
 
-# Enable detection of running in a container
-ENV DOTNET_RUNNING_IN_CONTAINER=true `
-    # Ngen workaround: https://github.com/microsoft/dotnet-framework-docker/issues/231
+ENV `
+    # Enable detection of running in a container
+    DOTNET_RUNNING_IN_CONTAINER=true `
     COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `

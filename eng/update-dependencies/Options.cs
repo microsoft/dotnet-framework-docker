@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.CommandLine;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies
@@ -30,8 +29,6 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
         public string GitHubUpstreamOwner => "Microsoft";
 
         public string? GitHubUser { get; private set; }
-
-        public string LcuInfoPath { get; private set; } = "eng/lcu-info.json";
 
         public bool UpdateOnly => GitHubEmail == null || GitHubPassword == null || GitHubUser == null;
 
@@ -95,13 +92,6 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                     ref gitHubUser,
                     "GitHub user used to make PR (if not specified, a PR will not be created)");
                 GitHubUser = gitHubUser;
-
-                string lcuInfoPath = LcuInfoPath;
-                syntax.DefineOption(
-                    "lcu-info",
-                    ref lcuInfoPath,
-                    "Path to the LCU info JSON file");
-                LcuInfoPath = lcuInfoPath;
             });
         }
     }

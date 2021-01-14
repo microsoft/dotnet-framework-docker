@@ -9,12 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Framework.Models;
 using Microsoft.DotNet.VersionTools;
 using Microsoft.DotNet.VersionTools.Automation;
 using Microsoft.DotNet.VersionTools.Dependencies;
 using Microsoft.DotNet.VersionTools.Dependencies.BuildOutput;
-using Newtonsoft.Json;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies
 {
@@ -110,59 +108,10 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             List<IDependencyUpdater> updaters = new List<IDependencyUpdater>();
 
             updaters.AddRange(CreateManifestUpdaters());
-            updaters.AddRange(CreateLcuUpdaters());
             updaters.Add(ScriptRunnerUpdater.GetDockerfileUpdater(Program.RepoRoot));
             updaters.Add(ScriptRunnerUpdater.GetReadMeUpdater(Program.RepoRoot));
 
             return DependencyUpdateUtils.Update(updaters, buildInfos);
-        }
-
-        private IEnumerable<IDependencyUpdater> CreateLcuUpdaters()
-        {
-            LcuInfo[] lcuConfigs = JsonConvert.DeserializeObject<LcuInfo[]>(
-                File.ReadAllText(this.options.LcuInfoPath));
-
-            const string UrlVersionGroupName = "Url";
-            const string CabFileVersionGroupName = "CabFile";
-
-            return dockerfiles.Value
-                .Where(dockerfile => dockerfile.ImageVariant == RuntimeImageVariant)
-                .Select(dockerfile => new
-                {
-                    Dockerfile = dockerfile,
-                    LcuConfigInfo = GetLcuConfigInfo(dockerfile, lcuConfigs)
-                })
-                .Where(val => val.LcuConfigInfo != null)
-                .SelectMany(val =>
-                    new IDependencyUpdater[]
-                    {
-                        new CustomFileRegexUpdater(val.LcuConfigInfo!.DownloadUrl, RuntimeImageVariant)
-                        {
-                            Path = val.Dockerfile.Path,
-                            VersionGroupName = UrlVersionGroupName,
-                            Regex = new Regex(@$"# Apply latest patch(.|\n)+(?<{UrlVersionGroupName}>http:\/\/[^\s""]+)")
-                        },
-                        new CustomFileRegexUpdater(ParseCabFileName(val.LcuConfigInfo!.DownloadUrl), RuntimeImageVariant)
-                        {
-                            Path = val.Dockerfile.Path,
-                            VersionGroupName = CabFileVersionGroupName,
-                            Regex = new Regex(@$"# Apply latest patch(.|\n)+dism.+C:\\patch\\(?<{CabFileVersionGroupName}>\S+)", RegexOptions.IgnoreCase)
-                        }
-                    }
-                );
-        }
-
-        private static string ParseCabFileName(string lcuDownloadUrl)
-        {
-            string msuFilename = lcuDownloadUrl.Substring(lcuDownloadUrl.LastIndexOf("/") + 1);
-            return msuFilename.Substring(0, msuFilename.IndexOf("_")) + ".cab";
-        }
-
-        private static LcuInfo? GetLcuConfigInfo(DockerfileInfo dockerfile, LcuInfo[] lcuConfigs)
-        {
-            return lcuConfigs
-                .FirstOrDefault(config => config.OsVersion == dockerfile.OsVersion &&
-                    config.RuntimeVersions.Any(runtime => runtime == dockerfile.FrameworkVersion));
         }
 
         private IEnumerable<IDependencyUpdater> CreateManifestUpdaters()

@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-    # Install .NET 4.8
+    # Install .NET Fx 4.8
     curl -fSLo dotnet-framework-installer.exe https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe `
     && .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `

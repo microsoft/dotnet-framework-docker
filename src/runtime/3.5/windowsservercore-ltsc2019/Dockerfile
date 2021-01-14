@@ -6,7 +6,7 @@ ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Install .NET Fx 3.5
-    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-1809.zip `
+    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2019.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
     && DISM /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `

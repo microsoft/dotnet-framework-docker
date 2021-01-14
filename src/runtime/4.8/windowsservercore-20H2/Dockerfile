@@ -5,7 +5,6 @@ FROM mcr.microsoft.com/windows/servercore:20H2-amd64
 ENV `
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true `
-    # Ngen workaround: https://github.com/microsoft/dotnet-framework-docker/issues/231
     COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
