@@ -7,5 +7,5 @@ FROM $REPO:4.8-windowsservercore-20H2
 RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:WCF-HTTP-Activation45 /FeatureName:WCF-TCP-Activation45 /FeatureName:IIS-WebSockets
 
 # Enable net.tcp protocol for default web site on IIS
-RUN windows\system32\inetsrv\appcmd.exe set app "Default Web Site/" /enabledProtocols:"http,net.tcp"
+RUN %windir%\system32\inetsrv\appcmd set app "Default Web Site/" /enabledProtocols:"http,net.tcp"
 EXPOSE 808

@@ -11,7 +11,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe" `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe `
             -OutFile dotnet-framework-installer.exe `
     && start /w .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
@@ -32,5 +32,5 @@ RUN `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+    && %windir%Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update

@@ -53,12 +53,12 @@ RUN `
     && "%ProgramFiles%\dotnet\dotnet.exe" help `
     `
     # Workaround for issues with 64-bit ngen
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `
     # ngen assemblies queued by VS installers
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update `
     `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `

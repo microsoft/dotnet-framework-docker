@@ -11,8 +11,8 @@ RUN curl -fSLo dotnet-framework-installer.exe https://download.visualstudio.micr
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
 
 # ngen .NET Fx
-RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+RUN %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 }}
 # Install NuGet CLI
 ENV NUGET_VERSION={{VARIABLES[cat("nuget|", OS_VERSION_NUMBER, "|version")]}}
@@ -44,13 +44,13 @@ RUN `
     && "%ProgramFiles%\dotnet\dotnet.exe" help `
     `
     # Workaround for issues with 64-bit ngen
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `
     # ngen assemblies queued by VS installers
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
 {{if OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "1909"
-:    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
+:    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update `
 }}    `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `

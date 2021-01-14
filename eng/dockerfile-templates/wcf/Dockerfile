@@ -13,7 +13,7 @@ FROM $REPO:{{PRODUCT_VERSION}}-{{OS_VERSION}}
 }}
 # Enable net.tcp protocol for default web site on IIS
 {{if OS_VERSION_NUMBER = "ltsc2016" || OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "1909" || OS_VERSION_NUMBER = "2004"
-:RUN windows\system32\inetsrv\appcmd.exe set app 'Default Web Site/' /enabledProtocols:"http,net.tcp"
+:RUN &$Env:windir\system32\inetsrv\appcmd set app 'Default Web Site/' /enabledProtocols:"http,net.tcp"
 ^else
-:RUN windows\system32\inetsrv\appcmd.exe set app "Default Web Site/" /enabledProtocols:"http,net.tcp"
+:RUN %windir%\system32\inetsrv\appcmd set app "Default Web Site/" /enabledProtocols:"http,net.tcp"
 }}EXPOSE 808

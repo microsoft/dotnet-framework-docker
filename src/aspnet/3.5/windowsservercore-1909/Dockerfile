@@ -11,8 +11,8 @@ RUN powershell -Command `
         Remove-Item -Recurse C:\inetpub\wwwroot\*; `
         Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe `
     && %windir%\System32\inetsrv\appcmd set apppool /apppool.name:DefaultAppPool /managedRuntimeVersion:v2.0 `
-    && C:\Windows\Microsoft.NET\Framework64\v2.0.50727\ngen.exe update `
-    && C:\Windows\Microsoft.NET\Framework\v2.0.50727\ngen.exe update
+    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen update `
+    && %windir%\Microsoft.NET\Framework\v2.0.50727\ngen update
 
 EXPOSE 80
 

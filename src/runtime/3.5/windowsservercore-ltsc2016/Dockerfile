@@ -12,7 +12,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2016.zip" `
+            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2016.zip `
             -OutFile microsoft-windows-netfx3.zip; `
         Expand-Archive microsoft-windows-netfx3.zip; `
     && del microsoft-windows-netfx3.zip `
@@ -35,7 +35,7 @@ RUN `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update `
-    && \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update
+    && %windir%Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen update `
+    && %windir%\Microsoft.NET\Framework\v2.0.50727\ngen update
