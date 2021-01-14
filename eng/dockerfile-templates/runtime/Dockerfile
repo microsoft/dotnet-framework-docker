@@ -26,7 +26,7 @@ RUN `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] = undefined)
+}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void
 :    # Apply latest patch
     {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION != "4.8":{{VARIABLES["lcu|ltsc2019|3.5-4.7.2"]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
     && mkdir patch `
