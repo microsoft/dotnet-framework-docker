@@ -26,7 +26,8 @@ RUN `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-}}    # Apply latest patch
+}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] = undefined)
+:    # Apply latest patch
     {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION != "4.8":{{VARIABLES["lcu|ltsc2019|3.5-4.7.2"]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
@@ -34,12 +35,12 @@ RUN `
     && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION != "4.8":{{VARIABLES["kb|ltsc2019|3.5-4.7.2"]}}^else:{{VARIABLES[cat("kb|", OS_VERSION_NUMBER)]}}}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
     && rmdir /S /Q patch `
     `
-{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
+}}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
 :    # ngen .NET Fx
     && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
     && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update `
-    && \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update
-^else
+    && \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update^
+else
 :{{  if OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "1909"
 :    # ngen .NET Fx
     && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
@@ -49,5 +50,4 @@ RUN `
     # To optimize 32-bit assemblies, uncomment the next line
     # && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
 }}    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
-}}
+    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update}}
