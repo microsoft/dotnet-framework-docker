@@ -5,12 +5,11 @@
 1. - [ ] Ensure all build agent scale sets have the appropriate number of machines allocated for a build
 1. - [ ] Merge any pending PRs or commits from `dev` branch:
       - [ ] &lt;placeholder link&gt;
-1. - [ ] Look up the latest [NuGet CLI versions](https://www.nuget.org/downloads) and update the [nuget-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/nuget-info.json) file with the latest patch of each major/minor version listed in the file.
+1. - [ ] Look up the latest [NuGet CLI versions](https://www.nuget.org/downloads) and update the NuGet entries of the [manifest.versions.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/manifest.versions.json) file with the latest patch of each major/minor version listed in the file.
 1. - [ ] Wait for latest cumulative updates (LCUs) to be released (typically at 10 AM PST on Patch Tuesday).
 1. - [ ] Gather list of KB numbers for the .NET Framework updates from the .NET Release team.
-1. - [ ] Look up the download URL for each of the KB numbers in [Microsoft Update Catalog](https://www.catalog.update.microsoft.com/) and input them into the [lcu-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/lcu-info.json) file. If this is the first Patch Tuesday after the release of a new Windows version, you'll need to do the following extra steps for that version:
-      - [ ] Add a new entry to the [lcu-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/lcu-info.json) file to associate a URL for the new Windows version and `3.5` runtime version.
-      - [ ] Update the `3.5/runtime` Dockerfile for the new Windows version so that the patch is applied (this can be copied from another `3.5/runtime` Dockerfile in a section labeled `Apply latest patch`)
+1. - [ ] Look up the download URL for each of the KB numbers in [Microsoft Update Catalog](https://www.catalog.update.microsoft.com/) and input them into the [manifest.versions.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/manifest.versions.json) file. If this is the first Patch Tuesday after the release of a new Windows version, you'll need to do the following for that version:
+      - [ ] Add a new entry to the [manifest.versions.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/manifest.versions.json) file to associate a URL for the new Windows version.
 1. - [ ] Run the `update-dependencies` tool to update all the necessary files:
       - [ ] `dotnet run --project .\eng\update-dependencies --datestamp-all <YYYYMMDD>`
 1. - [ ] Inspect generated changes for correctness

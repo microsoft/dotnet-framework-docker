@@ -22,13 +22,9 @@
     <Content Include="../../manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="../../eng/vs-info.json">
+    <Content Include="../../manifest.versions.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\eng\models\Microsoft.DotNet.Framework.Models.csproj" />
   </ItemGroup>
 
 </Project>

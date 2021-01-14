@@ -2,8 +2,11 @@
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2016-amd64
 
-# Install .NET 4.7
-RUN powershell -Command `
+ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
+
+RUN `
+    # Install .NET Fx 4.7
+    powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
@@ -12,23 +15,22 @@ RUN powershell -Command `
             -OutFile dotnet-framework-installer.exe `
     && start /w .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
-
-# Apply latest patch
-RUN powershell -Command `
+    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+    `
+    # Apply latest patch
+    && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "http://download.windowsupdate.com/d/msdownload/update/software/secu/2020/12/windows10.0-kb4593226-x64_d58938ce2e7c111c8e8f0c0bdc80f0e57defbf4d.msu" `
+            -Uri "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4598243-x64_a96fed949c557064b0e105745a5524717ad72ab2.msu" `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4593226-x64.cab `
-    && rmdir /S /Q patch
-
-# ngen .NET Fx
-ENV COMPLUS_NGenProtectedProcess_FeatureEnabled 0
-RUN \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4598243-x64.cab `
+    && rmdir /S /Q patch `
+    `
+    # ngen .NET Fx
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update

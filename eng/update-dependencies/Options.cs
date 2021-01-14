@@ -31,16 +31,10 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         public string? GitHubUser { get; private set; }
 
-        public string NuGetInfoPath { get; private set; }
-
-        public string LcuInfoPath { get; private set; }
-
-        public string VsInfoPath { get; private set; }
-
         public bool UpdateOnly => GitHubEmail == null || GitHubPassword == null || GitHubUser == null;
 
         public Options(string? datestampAll, string? datestampRuntime, string? datestampSdk, string? datestampAspnet, string? datestampWcf, string? email,
-            string? password, string? user, string nugetInfo, string lcuInfo, string vsInfo)
+            string? password, string? user)
         {
             DateStampAll = datestampAll;
             DateStampRuntime = datestampRuntime;
@@ -50,9 +44,6 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             GitHubEmail = email;
             GitHubPassword = password;
             GitHubUser = user;
-            NuGetInfoPath = nugetInfo;
-            LcuInfoPath = lcuInfo;
-            VsInfoPath = vsInfo;
         }
 
         public static IEnumerable<Symbol> GetCliSymbols() =>
@@ -65,10 +56,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
                 new Option<string?>("--datestamp-wcf", "Tag date stamp to assign to WCF image types (overrides datestamp-all)"),
                 new Option<string?>("--email", "GitHub email used to make PR (if not specified, a PR will not be created)"),
                 new Option<string?>("--password", "GitHub password used to make PR (if not specified, a PR will not be created)"),
-                new Option<string?>("--user", "GitHub user used to make PR (if not specified, a PR will not be created)"),
-                new Option<string>("--nuget-info", () => "eng/nuget-info.json", "Path to the NuGet info JSON file"),
-                new Option<string>("--lcu-info", () => "eng/lcu-info.json", "Path to the LCU info JSON file"),
-                new Option<string>("--vs-info", () => "eng/vs-info.json", "Path to the VS info JSON file"),
+                new Option<string?>("--user", "GitHub user used to make PR (if not specified, a PR will not be created)")
             };
     }
 }

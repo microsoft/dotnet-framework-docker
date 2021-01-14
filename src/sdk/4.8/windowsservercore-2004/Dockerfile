@@ -4,9 +4,10 @@ ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:4.8-windowsservercore-2004
 
 # Install NuGet CLI
-ENV NUGET_VERSION 5.5.1
-RUN mkdir "%ProgramFiles%\NuGet" `
-    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
+ENV NUGET_VERSION=5.5.1
+RUN mkdir "%ProgramFiles%\NuGet\latest" `
+    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
+    && curl -fSLo "%ProgramFiles%\NuGet\latest\nuget.exe" https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe
 
 # Install VS components
 RUN `
@@ -18,8 +19,6 @@ RUN `
     `
     # Install VS Build Tools
     && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/bc60b587587d10eacc50fe99a6f3d57a81749cb55c904225892d1d165f01a913/vs_BuildTools.exe `
-    # Installer won't detect DOTNET_SKIP_FIRST_TIME_EXPERIENCE if ENV is used, must use setx /M
-    && setx /M DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1 `
     && start /w vs_BuildTools.exe ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
@@ -29,6 +28,16 @@ RUN `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
+    `
+    # Trigger dotnet first run experience by running arbitrary cmd
+    && "%ProgramFiles%\dotnet\dotnet.exe" help `
+    `
+    # Workaround for issues with 64-bit ngen
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    `
+    # ngen assemblies queued by VS installers
+    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
@@ -43,14 +52,6 @@ RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbina
 
 ENV DOTNET_USE_POLLING_FILE_WATCHER=true `
     ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
-
-# ngen assemblies queued by VS installers - must be done in cmd shell to avoid access issues
-RUN `
-    # Workaround for issues with 64-bit ngen
-    \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
-    `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
