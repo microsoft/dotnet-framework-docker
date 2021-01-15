@@ -28,7 +28,7 @@ RUN `
             -UseBasicParsing `
             -Uri https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/8fd51571a9aff13c4381037ccb7559a3bb3e6527cbacf4816068e711dfe824f4/vs_TestAgent.exe `
             -OutFile vs_TestAgent.exe `
-    && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
+    && start /w vs_TestAgent --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
@@ -39,7 +39,7 @@ RUN `
             -UseBasicParsing `
             -Uri https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/bc60b587587d10eacc50fe99a6f3d57a81749cb55c904225892d1d165f01a913/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
-    && start /w vs_BuildTools.exe ^ `
+    && start /w vs_BuildTools ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
@@ -50,7 +50,7 @@ RUN `
     && del vs_BuildTools.exe `
     `
     # Trigger dotnet first run experience by running arbitrary cmd
-    && "%ProgramFiles%\dotnet\dotnet.exe" help `
+    && "%ProgramFiles%\dotnet\dotnet" help `
     `
     # Workaround for issues with 64-bit ngen
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
