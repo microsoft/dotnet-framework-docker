@@ -41,7 +41,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "{{if PRODUCT_VERSION = "4.8":{{VARIABLES["lcu|ltsc2016"]}}^else:{{VARIABLES["lcu|ltsc2016|3.5-4.7.2"]}}}}" `
+            -Uri {{if PRODUCT_VERSION = "4.8":{{VARIABLES["lcu|ltsc2016"]}}^else:{{VARIABLES["lcu|ltsc2016|3.5-4.7.2"]}}}} `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
@@ -50,7 +50,7 @@ RUN `
     && rmdir /S /Q patch `
     `
 }}    # ngen .NET Fx
-    {{if PRODUCT_VERSION != "4.6.2":&& }}%windir%Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    {{if PRODUCT_VERSION != "4.6.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update{{
 if PRODUCT_VERSION = "3.5"
 : `
