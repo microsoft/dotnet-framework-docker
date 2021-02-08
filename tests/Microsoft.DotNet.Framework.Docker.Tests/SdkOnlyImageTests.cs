@@ -135,6 +135,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
             Assert.StartsWith("NuGet Version:", output);
+
+            command = "%ProgramFiles%\NuGet\latest\nuget.exe help";
+            string latestOutput = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+            Assert.Equal(output, latestOutput);
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
