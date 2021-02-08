@@ -6,7 +6,8 @@ FROM $REPO:4.8-windowsservercore-20H2
 # Install NuGet CLI
 ENV NUGET_VERSION=5.8.1
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
-    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
+    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
+    && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS components
 RUN `

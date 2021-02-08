@@ -17,7 +17,8 @@ RUN %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
 # Install NuGet CLI
 ENV NUGET_VERSION={{VARIABLES[cat("nuget|version")]}}
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
-    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
+    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
+    && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS components
 RUN `

@@ -29,7 +29,8 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
-            -OutFile $Env:ProgramFiles\NuGet\nuget.exe;
+            -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
+    && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS components
 RUN `
