@@ -136,7 +136,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             Assert.StartsWith("NuGet Version:", output);
 
-            command = "%ProgramFiles%\NuGet\latest\nuget.exe help";
+            command = @"%ProgramFiles%\NuGet\latest\nuget.exe help";
             string latestOutput = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
             Assert.Equal(output, latestOutput);
         }
