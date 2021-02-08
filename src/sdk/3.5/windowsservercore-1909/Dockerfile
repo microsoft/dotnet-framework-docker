@@ -4,10 +4,9 @@ ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:3.5-windowsservercore-1909
 
 # Install NuGet CLI
-ENV NUGET_VERSION=5.3.1
+ENV NUGET_VERSION=5.8.1
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
-    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
-    && curl -fSLo "%ProgramFiles%\NuGet\latest\nuget.exe" https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe
+    && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe
 
 # Install VS components
 RUN `

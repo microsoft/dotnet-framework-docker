@@ -21,7 +21,7 @@ RUN %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION=4.9.4
+ENV NUGET_VERSION=5.8.1
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
@@ -29,11 +29,7 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
         Invoke-WebRequest `
             -UseBasicParsing `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
-            -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe `
-            -OutFile $Env:ProgramFiles\NuGet\latest\nuget.exe
+            -OutFile $Env:ProgramFiles\NuGet\nuget.exe;
 
 # Install VS components
 RUN `
