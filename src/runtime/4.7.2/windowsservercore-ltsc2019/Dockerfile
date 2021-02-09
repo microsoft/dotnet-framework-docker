@@ -6,11 +6,11 @@ ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Apply latest patch
-    curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/11/windows10.0-kb4586875-x64_a14cffeb8033542a5379d4c5a9c0c6fa17c3f939.msu `
+    curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601060-x64_b645458f512391ae20e17e21f01d24183b5076c9.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4586875-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4601060-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
