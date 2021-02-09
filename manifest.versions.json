@@ -16,12 +16,7 @@
       "kb|20H2":"kb4586876",
       "lcu|20H2":"http://download.windowsupdate.com/d/msdownload/update/software/updt/2020/11/windows10.0-kb4586876-x64-ndp48_ab1407801539dfe4af2423400875a596fc032739.msu",
 
-      "nuget|ltsc2016|version": "4.9.4",
-      "nuget|ltsc2019|version": "4.9.4",
-      "nuget|1909|version": "5.3.1",
-      "nuget|2004|version": "5.5.1",
-      "nuget|20H2|version": "5.7.0",
-      "nuget|version": "5.8.0",
+      "nuget|version": "5.8.1",
   
       "vs|version": "16.8",
       "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/8fd51571a9aff13c4381037ccb7559a3bb3e6527cbacf4816068e711dfe824f4/vs_TestAgent.exe",
