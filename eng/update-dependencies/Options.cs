@@ -25,7 +25,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
         public string GitHubProject => "dotnet-framework-docker";
 
-        public string GitHubUpstreamBranch => "master";
+        public string GitHubUpstreamBranch => "main";
 
         public string GitHubUpstreamOwner => "Microsoft";
 

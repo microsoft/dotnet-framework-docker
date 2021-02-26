@@ -16,7 +16,7 @@ The easiest way to get the sample is by cloning the samples repository with [git
 git clone https://github.com/microsoft/dotnet-framework-docker/
 ```
 
-You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/master.zip).
+You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/main.zip).
 
 ## Run unit tests as part of `docker build`
 
@@ -81,4 +81,4 @@ You should find a `.trx` file in the TestResults folder. You can open this file 
 ## More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md)
