@@ -16,7 +16,7 @@ Type the following [Docker](https://www.docker.com/products/docker) command:
 docker run --name aspnet_sample --rm -it -p 8000:80 mcr.microsoft.com/dotnet/framework/samples:aspnetapp
 ```
 
-After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
+After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
 
 ## Getting the sample
 
@@ -26,7 +26,7 @@ The easiest way to get the sample is by cloning the samples repository with [git
 git clone https://github.com/microsoft/dotnet-framework-docker/
 ```
 
-You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/master.zip).
+You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/main.zip).
 
 ## Build and run the sample with Docker
 
@@ -48,7 +48,7 @@ Service 'w3svc' has been stopped
 Service 'w3svc' started
 ```
 
-After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
+After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
 
 Note: The `-p` argument maps port 8000 on your local machine to port 80 in the container (the form of the port mapping is `host:container`). See the [Docker run reference](https://docs.docker.com/engine/reference/commandline/run/) for more information on commandline parameters.
 
@@ -121,7 +121,7 @@ You can test and debug the application with [Visual Studio 2019](https://visuals
 More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md)
 
 Docs and More Information:
 

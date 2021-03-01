@@ -24,7 +24,7 @@ The easiest way to get the sample is by cloning the samples repository with [git
 git clone https://github.com/microsoft/dotnet-framework-docker/
 ```
 
-You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/master.zip).
+You can also [download the repository as a zip](https://github.com/microsoft/dotnet-framework-docker/archive/main.zip).
 
 ## Build and run the sample with Docker
 
@@ -105,7 +105,7 @@ Note: The `/p:Configuration=Release` argument builds the application in release 
 More Samples
 
 * [.NET Framework Docker Samples](../README.md)
-* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/master/samples/README.md)
+* [.NET Docker Samples](https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md)
 
 Docs and More Information:
 
