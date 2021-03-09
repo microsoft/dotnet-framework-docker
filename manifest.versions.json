@@ -2,8 +2,8 @@
     "variables": {
       "kb|ltsc2016|3.5-4.7.2":"kb5000803",
       "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/03/windows10.0-kb5000803-x64_0d1c8a35a2c0a30245f33b66590cb3ece2039865.msu",
-      "kb|ltsc2019|3.5-4.7.2":"kb5000822",
-      "lcu|ltsc2019|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/03/windows10.0-kb5000822-x64_567b66c719842beeaaf49e6332aa6f3477c225a7.msu",
+      "kb|ltsc2019|3.5-4.7.2":"kb4601060",
+      "lcu|ltsc2019|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601060-x64_b645458f512391ae20e17e21f01d24183b5076c9.msu",
 
       "kb|ltsc2016":"kb4601051",
       "lcu|ltsc2016":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601051-x64-ndp48_85c646a43918fc1cc03bc9b1b04228ec3d44d01e.msu",
