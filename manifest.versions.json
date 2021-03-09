@@ -1,7 +1,7 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5-4.7.2":"kb4601318",
-      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/02/windows10.0-kb4601318-x64_0e3c1261a7405cf824f2ab40c2cfc0efff18214b.msu",
+      "kb|ltsc2016|3.5-4.7.2":"kb5000803",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/03/windows10.0-kb5000803-x64_0d1c8a35a2c0a30245f33b66590cb3ece2039865.msu",
       "kb|ltsc2019|3.5-4.7.2":"kb4601060",
       "lcu|ltsc2019|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601060-x64_b645458f512391ae20e17e21f01d24183b5076c9.msu",
 
@@ -18,9 +18,9 @@
 
       "nuget|version": "5.8.1",
   
-      "vs|version": "16.8",
-      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/8fd51571a9aff13c4381037ccb7559a3bb3e6527cbacf4816068e711dfe824f4/vs_TestAgent.exe",
-      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/bc60b587587d10eacc50fe99a6f3d57a81749cb55c904225892d1d165f01a913/vs_BuildTools.exe",
-      "vs|webTargetsUrl": "https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2020.11.zip"
+      "vs|version": "16.9",
+      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/5c555b0d-fffd-45a2-9929-4a5bb59479a4/521a04a4647eefe3e1364cfdcbbc5143f829cfcbd40e325afd330916daa3c075/vs_TestAgent.exe",
+      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/5c555b0d-fffd-45a2-9929-4a5bb59479a4/45fd615bc29fadc5201483dad883e635c0ceecb0bddf0f613edf6093cb431a27/vs_BuildTools.exe",
+      "vs|webTargetsUrl": "https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.03.zip"
     }
   }
