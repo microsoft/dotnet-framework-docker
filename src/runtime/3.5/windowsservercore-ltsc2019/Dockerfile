@@ -14,11 +14,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601060-x64_b645458f512391ae20e17e21f01d24183b5076c9.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/03/windows10.0-kb5000822-x64_567b66c719842beeaaf49e6332aa6f3477c225a7.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4601060-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5000822-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
