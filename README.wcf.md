@@ -110,6 +110,6 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # License
 
-* The [MICROSOFT SOFTWARE SUPPLEMENTAL LICENSE FOR WINDOWS CONTAINER BASE IMAGE](https://hub.docker.com/_/microsoft-windows-servercore/) applies to [].NET Framework container images](https://hub.docker.com/_/microsoft-dotnet-framework/).
-* The [Visual Studio Tools license](https://visualstudio.microsoft.com/license-terms/mlt031519/) applies to the [.NET Framework SDK container images](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/).
+* The [MICROSOFT SOFTWARE SUPPLEMENTAL LICENSE FOR WINDOWS CONTAINER BASE IMAGE](https://hub.docker.com/_/microsoft-windows-servercore/) applies to [.NET Framework container images](https://hub.docker.com/_/microsoft-dotnet-framework/).
+* The [Visual Studio Tools license](https://visualstudio.microsoft.com/license-terms/mlt031519/) applies to all the [.NET Framework SDK container images](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/).
 * [General legal notice for Microsoft container images](https://aka.ms/mcr/osslegalnotice)
