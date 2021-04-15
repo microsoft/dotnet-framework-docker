@@ -112,4 +112,4 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 * Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
 
-The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
+The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/). The [Visual Studio Tools license](https://visualstudio.microsoft.com/license-terms/mlt031519/) also applies to the [SDK images](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/).
