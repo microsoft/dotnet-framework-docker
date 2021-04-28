@@ -3,8 +3,9 @@
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:3.5-windowsservercore-ltsc2016
 
-# Install .NET 4.8 Fx
-RUN powershell -Command `
+RUN `
+    # Install .NET 4.8 Fx
+    powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
@@ -13,10 +14,24 @@ RUN powershell -Command `
             -OutFile dotnet-framework-installer.exe `
     && .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
-
-# ngen .NET Fx
-RUN %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
+    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+    `
+    # Apply latest patch
+    && powershell -Command `
+        $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+        Invoke-WebRequest `
+            -UseBasicParsing `
+            -Uri http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601051-x64-ndp48_85c646a43918fc1cc03bc9b1b04228ec3d44d01e.msu `
+            -OutFile patch.msu; `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4601051-x64-ndp48.cab `
+    && rmdir /S /Q patch `
+    `
+    # ngen .NET Fx
+    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
