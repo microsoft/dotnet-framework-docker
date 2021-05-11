@@ -91,14 +91,6 @@ aspnetapp-windowsservercore-2004, aspnetapp | [Dockerfile](https://github.com/mi
 wcfservice-windowsservercore-2004, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/wcfapp/Dockerfile.web)
 wcfclient-windowsservercore-2004, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/wcfapp/Dockerfile.client)
 
-## Windows Server Core, version 1909 amd64 Tags
-Tag | Dockerfile
----------| ---------------
-dotnetapp-windowsservercore-1909, dotnetapp, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/dotnetapp/Dockerfile)
-aspnetapp-windowsservercore-1909, aspnetapp | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/aspnetapp/Dockerfile)
-wcfservice-windowsservercore-1909, wcfservice | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/wcfapp/Dockerfile.web)
-wcfclient-windowsservercore-1909, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/wcfapp/Dockerfile.client)
-
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
@@ -123,7 +115,7 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # Image Update Policy
 
-* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:20H2, windows/servercore:ltsc2019, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
 # Feedback

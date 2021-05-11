@@ -9,8 +9,6 @@
       "lcu|ltsc2016": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601051-x64-ndp48_85c646a43918fc1cc03bc9b1b04228ec3d44d01e.msu",
       "kb|ltsc2019": "kb4601055",
       "lcu|ltsc2019": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601055-x64-ndp48_433f80c4aa1a9613e8a57357e3f07a2cdccdad1b.msu",
-      "kb|1909": "kb4601056",
-      "lcu|1909": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601056-x64-ndp48_6be9272084f32596e72b1c94441d0c88f12be7b1.msu",
       "kb|2004": "kb4601050",
       "lcu|2004": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601050-x64-ndp48_04c8736f250c06b3787d7d9ec366f011c6f8ca91.msu",
       "kb|20H2": "kb4601050",

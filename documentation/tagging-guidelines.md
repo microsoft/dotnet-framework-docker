@@ -10,7 +10,7 @@ The .NET image tags strive to align with the tagging practices utilized by the [
 
     **Examples**
 
-    * `4.8-20200310-windowsservercore-1909`
+    * `4.8-20210511-windowsservercore-20H2`
     * `4.7.2-20200310-windowsservercore-ltsc2019`
     * `3.5-20200414-windowsservercore-ltsc2016`
 
@@ -18,7 +18,7 @@ The .NET image tags strive to align with the tagging practices utilized by the [
 
     **Examples**
 
-    * `4.8-windowsservercore-1909`
+    * `4.8-windowsservercore-20H2`
     * `4.7.2-windowsservercore-ltsc2019`
     * `3.5-windowsservercore-ltsc2016`
 

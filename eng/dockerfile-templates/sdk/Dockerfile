@@ -58,7 +58,7 @@ RUN `
     `
     # ngen assemblies queued by VS installers
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-{{if OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "1909"
+{{if OS_VERSION_NUMBER = "ltsc2019"
 :    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update `
 }}    `
     # Cleanup
@@ -96,7 +96,7 @@ RUN powershell " `
         Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
         Remove-Item -Force referenceassemblies.zip; `
     }"{{
-if OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "1909" || OS_VERSION_NUMBER = "2004"
+if OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "2004"
 :
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]}}

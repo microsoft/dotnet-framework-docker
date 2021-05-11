@@ -13,7 +13,7 @@ RUN powershell -Command `
 :        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
 }}        Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe `
     && %windir%\System32\inetsrv\appcmd set apppool /apppool.name:DefaultAppPool /managedRuntimeVersion:v2.0 `
-{{if OS_VERSION_NUMBER = "ltsc2016" || OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "1909"
+{{if OS_VERSION_NUMBER = "ltsc2016" || OS_VERSION_NUMBER = "ltsc2019"
 :    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen update `
     && %windir%\Microsoft.NET\Framework\v2.0.50727\ngen update
 ^else
