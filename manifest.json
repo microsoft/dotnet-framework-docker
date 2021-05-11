@@ -3,10 +3,13 @@
   "readmeTemplate": "eng/readme-templates/README.md",
   "registry": "mcr.microsoft.com",
   "variables": {
-    "RuntimeReleaseDateStamp": "20210511",
-    "SdkReleaseDateStamp": "20210511",
-    "AspnetReleaseDateStamp": "20210511",
-    "WcfReleaseDateStamp": "20210511"
+    "RuntimeReleaseDateStamp": "20210209",
+    "AspnetReleaseDateStamp": "20210209",
+    "WcfReleaseDateStamp": "20210209",
+    "5B-RuntimeReleaseDateStamp": "20210511",
+    "5B-AspnetReleaseDateStamp": "20210511",
+    "5B-WcfReleaseDateStamp": "20210511",
+    "5B-SdkReleaseDateStamp": "20210511"
   },
   "includes": [
     "manifest.versions.json"
@@ -96,7 +99,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.2-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-$(5B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               },
               "customBuildLegGroups": [
@@ -144,7 +147,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(5B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               },
               "customBuildLegGroups": [
@@ -172,7 +175,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-$(5B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               },
               "customBuildLegGroups": [
@@ -231,7 +234,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(5B-RuntimeReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -314,7 +317,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.8-$(5B-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.8-windowsservercore-ltsc2016": {}
               }
             },
@@ -327,7 +330,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "4.8-$(5B-SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "4.8-windowsservercore-ltsc2019": {}
               }
             },
@@ -340,7 +343,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "4.8-$(5B-SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "4.8-windowsservercore-1909": {}
               }
             },
@@ -353,7 +356,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-$(5B-SdkReleaseDateStamp)-windowsservercore-2004": {},
                 "4.8-windowsservercore-2004": {}
               }
             },
@@ -366,9 +369,9 @@
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-20H2": {},
+                "4.8-$(5B-SdkReleaseDateStamp)-windowsservercore-20H2": {},
                 "4.8-windowsservercore-20H2": {},
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-2009": {
+                "4.8-$(5B-SdkReleaseDateStamp)-windowsservercore-2009": {
                   "docType": "Undocumented"
                 },
                 "4.8-windowsservercore-2009": {
@@ -396,7 +399,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -409,7 +412,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
+                "3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-ltsc2019": {},
                 "3.5-windowsservercore-ltsc2019": {}
               }
             },
@@ -422,7 +425,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-1909",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-1909": {},
+                "3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-1909": {},
                 "3.5-windowsservercore-1909": {}
               }
             },
@@ -435,8 +438,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-2004",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {},
-                "4.8-3.5-$(SdkReleaseDateStamp)-windowsservercore-2004": {
+                "3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-2004": {},
+                "4.8-3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-2004": {
                   "docType": "Undocumented"
                 },
                 "3.5-windowsservercore-2004": {},
@@ -454,9 +457,9 @@
               "os": "windows",
               "osVersion": "windowsservercore-20H2",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-20H2": {},
+                "3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-20H2": {},
                 "3.5-windowsservercore-20H2": {},
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-2009": {
+                "3.5-$(5B-SdkReleaseDateStamp)-windowsservercore-2009": {
                   "docType": "Undocumented"
                 },
                 "3.5-windowsservercore-2009": {
@@ -570,7 +573,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.2-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-$(5B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               }
             },
@@ -604,7 +607,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(5B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             }
@@ -625,7 +628,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-$(5B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               }
             }
@@ -670,7 +673,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(5B-AspnetReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
@@ -844,7 +847,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.2-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.2-$(5B-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.2-windowsservercore-ltsc2016": {}
               }
             },
@@ -878,7 +881,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7.1-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7.1-$(5B-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7.1-windowsservercore-ltsc2016": {}
               }
             }
@@ -899,7 +902,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.7-$(WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "4.7-$(5B-WcfReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "4.7-windowsservercore-ltsc2016": {}
               }
             }
