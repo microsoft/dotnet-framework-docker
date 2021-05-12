@@ -54,7 +54,7 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # Image Update Policy
 
-* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:20H2, windows/servercore:ltsc2019, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
 # Feedback

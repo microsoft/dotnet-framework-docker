@@ -54,12 +54,6 @@ Tag | Dockerfile
 4.8-20210209-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/4.8/windowsservercore-2004/Dockerfile)
 3.5-20210209-windowsservercore-2004, 3.5-windowsservercore-2004, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-2004/Dockerfile)
 
-## Windows Server Core, version 1909 amd64 Tags
-Tag | Dockerfile
----------| ---------------
-4.8-20210209-windowsservercore-1909, 4.8-windowsservercore-1909, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/4.8/windowsservercore-1909/Dockerfile)
-3.5-20210209-windowsservercore-1909, 3.5-windowsservercore-1909, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-1909/Dockerfile)
-
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
@@ -83,12 +77,12 @@ You can retrieve a list of all available tags for dotnet/framework/runtime at ht
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-4.8 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-1909, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.8 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
 4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2
-3.5 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-1909 | 4.8, 3.5, 3.0, 2.5
+3.5 | windowsservercore-20H2, windowsservercore-2004 | 4.8, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 
@@ -98,7 +92,7 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # Image Update Policy
 
-* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:20H2, windows/servercore:ltsc2019, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
 # Feedback
