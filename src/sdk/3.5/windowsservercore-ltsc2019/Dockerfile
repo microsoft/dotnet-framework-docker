@@ -31,13 +31,13 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
 # Install VS components
 RUN `
     # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/5c555b0d-fffd-45a2-9929-4a5bb59479a4/521a04a4647eefe3e1364cfdcbbc5143f829cfcbd40e325afd330916daa3c075/vs_TestAgent.exe `
+    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/cb1d5164-e767-4886-8955-2df3a7c816a8/bbc9acadb3defd264840100d8021272da8ca578f0f42f9ff5e6afb873a769f6e/vs_TestAgent.exe `
     && start /w vs_TestAgent --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
     # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/5c555b0d-fffd-45a2-9929-4a5bb59479a4/45fd615bc29fadc5201483dad883e635c0ceecb0bddf0f613edf6093cb431a27/vs_BuildTools.exe `
+    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/cb1d5164-e767-4886-8955-2df3a7c816a8/ccac76bbd83f9d0e78a32f8bb22be6d2aca3fb5f10bf870504d8d84f36ab3440/vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
@@ -66,7 +66,7 @@ RUN `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
 # Install web targets
-RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.03.zip `
+RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.05.zip `
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
