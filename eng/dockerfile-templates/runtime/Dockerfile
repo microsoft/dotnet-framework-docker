@@ -26,13 +26,13 @@ RUN `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void
+}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void && !(OS_VERSION_NUMBER = "ltsc2019" && !(PRODUCT_VERSION = "4.8"))
 :    # Apply latest patch
-    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION != "4.8":{{VARIABLES["lcu|ltsc2019|3.5-4.7.2"]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
+    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION != "4.8":{{VARIABLES["kb|ltsc2019|3.5-4.7.2"]}}^else:{{VARIABLES[cat("kb|", OS_VERSION_NUMBER)]}}}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER)]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
