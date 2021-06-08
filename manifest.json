@@ -7,9 +7,10 @@
     "AspnetReleaseDateStamp": "20210209",
     "WcfReleaseDateStamp": "20210209",
     "SdkReleaseDateStamp": "20210525",
-    "5B-RuntimeReleaseDateStamp": "20210511",
-    "5B-AspnetReleaseDateStamp": "20210511",
-    "5B-WcfReleaseDateStamp": "20210511"
+    "5B-RuntimeReleaseDateStamp": "20210608",
+    "5B-AspnetReleaseDateStamp": "20210608",
+    "5B-WcfReleaseDateStamp": "20210608",
+    "6B-SdkReleaseDateStamp": "20210608"
   },
   "includes": [
     "manifest.versions.json"
@@ -366,7 +367,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
+                "3.5-$(6B-SdkReleaseDateStamp)-windowsservercore-ltsc2016": {},
                 "3.5-windowsservercore-ltsc2016": {}
               }
             },
