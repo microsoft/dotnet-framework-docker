@@ -43,11 +43,10 @@ RUN `
 else
 :{{  if OS_VERSION_NUMBER = "ltsc2019"
 :    # ngen .NET Fx
-    {{if PRODUCT_VERSION != "4.7.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
-^    else
+    {{if PRODUCT_VERSION != "4.7.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `^    else
 :    # Ngen top of assembly graph to optimize a set of frequently used assemblies
-    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    {{if !(PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "ltsc2019"):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"{{if !(PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "ltsc2019"): `}}
     # To optimize 32-bit assemblies, uncomment the next line
-    # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
-}}    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update}}
+    # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `}}{{if !(PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "ltsc2019"):
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update}}}}
