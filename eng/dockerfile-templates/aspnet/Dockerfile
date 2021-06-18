@@ -15,10 +15,10 @@ RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole {{if
 {{if PRODUCT_VERSION != "3.5"
 :
 # Install Roslyn compilers
-RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg `
+RUN curl -fSLo microsoft.net.compilers.3.6.0.zip https://api.nuget.org/packages/microsoft.net.compilers.3.6.0.nupkg `
     && mkdir C:\RoslynCompilers `
-    && tar -C C:\RoslynCompilers -zxf microsoft.net.compilers.2.9.0.zip `
-    && del microsoft.net.compilers.2.9.0.zip `
+    && tar -C C:\RoslynCompilers -zxf microsoft.net.compilers.3.6.0.zip `
+    && del microsoft.net.compilers.3.6.0.zip `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers\tools\csc.exe /ExeConfig:C:\RoslynCompilers\tools\csc.exe `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers\tools\vbc.exe /ExeConfig:C:\RoslynCompilers\tools\vbc.exe `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers\tools\VBCSCompiler.exe /ExeConfig:C:\RoslynCompilers\tools\VBCSCompiler.exe
