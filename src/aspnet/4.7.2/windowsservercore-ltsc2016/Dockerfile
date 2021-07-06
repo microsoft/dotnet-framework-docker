@@ -14,7 +14,7 @@ RUN Add-WindowsFeature Web-Server; `
     &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen update; `
     &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen update
 
-# Install Roslyn compilers
+# Install 2.9.0 Roslyn compilers
 RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
     Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg -OutFile C:\microsoft.net.compilers.2.9.0.zip; `
     Expand-Archive -Path C:\microsoft.net.compilers.2.9.0.zip -DestinationPath C:\RoslynCompilers; `

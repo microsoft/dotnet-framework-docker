@@ -11,7 +11,7 @@ RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /Fea
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
-# Install Roslyn compilers
+# Install 2.9.0 Roslyn compilers
 RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg `
     && mkdir C:\RoslynCompilers `
     && tar -C C:\RoslynCompilers -zxf microsoft.net.compilers.2.9.0.zip `
