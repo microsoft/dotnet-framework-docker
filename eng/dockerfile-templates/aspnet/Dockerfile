@@ -23,7 +23,7 @@ RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers\tools\vbc.exe /ExeConfig:C:\RoslynCompilers\tools\vbc.exe `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers\tools\VBCSCompiler.exe /ExeConfig:C:\RoslynCompilers\tools\VBCSCompiler.exe
 
-# Install 3.6.0 Roslyn compilers 
+# Install 3.6.0 Roslyn compilers
 RUN curl -fSLo microsoft.net.compilers.3.6.0.zip https://api.nuget.org/packages/microsoft.net.compilers.3.6.0.nupkg `
     && mkdir C:\RoslynCompilers-3.6.0 `
     && tar -C C:\RoslynCompilers-3.6.0 -zxf microsoft.net.compilers.3.6.0.zip `
