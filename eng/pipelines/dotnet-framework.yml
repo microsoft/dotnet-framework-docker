@@ -5,6 +5,8 @@ variables:
 - template: variables/common.yml
 - name: manifest
   value: manifest.json
+- name: mcrImageIngestionTimeout
+  value: "00:30:00"
 
 stages:
 - template: ../common/templates/stages/build-test-publish-repo.yml
