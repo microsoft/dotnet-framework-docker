@@ -8,7 +8,6 @@ Windows version: &lt;version&gt;
 1. - [ ] Update [manifest.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.json) to include entries for the new images
 1. - [ ] Update [manifest.samples.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.samples.json) to include the new Windows version for each of the samples
 1. - [ ] Update the test data for each of the [test classes](https://github.com/microsoft/dotnet-framework-docker/tree/main/tests/Microsoft.DotNet.Framework.Docker.Tests) to include the new Windows version
-1. - [ ] Look up the recommended latest [NuGet CLI version](https://www.nuget.org/downloads) and update the NuGet entries of the [manifest.versions.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.versions.json) file to associate that NuGet version with the new version of Windows
 1. - [ ] Run the `update-dependencies` tool to generate the new Dockerfiles and update all the necessary files:
       - [ ] `dotnet run --project .\eng\update-dependencies`
 1. - [ ] Inspect generated changes for correctness

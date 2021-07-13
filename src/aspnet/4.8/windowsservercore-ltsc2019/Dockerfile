@@ -13,7 +13,7 @@ RUN Add-WindowsFeature Web-Server; `
     &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen update; `
     &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen update
 
-# Install Roslyn compilers
+# Install 2.9.0 Roslyn compilers
 RUN Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg -OutFile C:\microsoft.net.compilers.2.9.0.zip; `
     Expand-Archive -Path C:\microsoft.net.compilers.2.9.0.zip -DestinationPath C:\RoslynCompilers; `
     Remove-Item C:\microsoft.net.compilers.2.9.0.zip -Force; `
@@ -24,7 +24,18 @@ RUN Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.2.9
     &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen install C:\RoslynCompilers\tools\vbc.exe /ExeConfig:C:\RoslynCompilers\tools\vbc.exe | `
     &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen install C:\RoslynCompilers\tools\VBCSCompiler.exe  /ExeConfig:C:\RoslynCompilers\tools\VBCSCompiler.exe
 
-ENV ROSLYN_COMPILER_LOCATION=C:\RoslynCompilers\tools
+# Install 3.6.0 Roslyn compilers
+RUN Invoke-WebRequest https://api.nuget.org/packages/microsoft.net.compilers.3.6.0.nupkg -OutFile C:\microsoft.net.compilers.3.6.0.zip; `
+    Expand-Archive -Path C:\microsoft.net.compilers.3.6.0.zip -DestinationPath C:\RoslynCompilers-3.6.0; `
+    Remove-Item C:\microsoft.net.compilers.3.6.0.zip -Force; `
+    &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers-3.6.0\tools\csc.exe /ExeConfig:C:\RoslynCompilers-3.6.0\tools\csc.exe | `
+    &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers-3.6.0\tools\vbc.exe /ExeConfig:C:\RoslynCompilers-3.6.0\tools\vbc.exe | `
+    &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers-3.6.0\tools\VBCSCompiler.exe /ExeConfig:C:\RoslynCompilers-3.6.0\tools\VBCSCompiler.exe | `
+    &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen install C:\RoslynCompilers-3.6.0\tools\csc.exe /ExeConfig:C:\RoslynCompilers-3.6.0\tools\csc.exe | `
+    &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen install C:\RoslynCompilers-3.6.0\tools\vbc.exe /ExeConfig:C:\RoslynCompilers-3.6.0\tools\vbc.exe | `
+    &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen install C:\RoslynCompilers-3.6.0\tools\VBCSCompiler.exe  /ExeConfig:C:\RoslynCompilers-3.6.0\tools\VBCSCompiler.exe
+
+ENV ROSLYN_COMPILER_LOCATION=C:\RoslynCompilers-3.6.0\tools
 
 EXPOSE 80
 
