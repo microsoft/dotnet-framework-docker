@@ -28,6 +28,9 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
+# Do not generate certificate
+ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
+
 # Install VS components
 RUN `
     # Install VS Test Agent

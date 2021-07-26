@@ -15,6 +15,9 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
             -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
+# Do not generate certificate
+ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
+
 # Install VS components
 RUN `
     # Install VS Test Agent
