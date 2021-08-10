@@ -51,26 +51,26 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 ## Windows Server Core, version 20H2 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20210713-windowsservercore-20H2, 4.8-windowsservercore-20H2, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-20H2/Dockerfile)
-3.5-20210713-windowsservercore-20H2, 3.5-windowsservercore-20H2, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-20H2/Dockerfile)
+4.8-20210810-windowsservercore-20H2, 4.8-windowsservercore-20H2, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-20H2/Dockerfile)
+3.5-20210810-windowsservercore-20H2, 3.5-windowsservercore-20H2, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-20H2/Dockerfile)
 
 ## Windows Server Core, version 2004 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20210713-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-2004/Dockerfile)
-3.5-20210713-windowsservercore-2004, 3.5-windowsservercore-2004, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-2004/Dockerfile)
+4.8-20210810-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-2004/Dockerfile)
+3.5-20210810-windowsservercore-2004, 3.5-windowsservercore-2004, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-2004/Dockerfile)
 
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20210713-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-ltsc2019/Dockerfile)
-3.5-20210713-windowsservercore-ltsc2019, 3.5-windowsservercore-ltsc2019, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-ltsc2019/Dockerfile)
+4.8-20210810-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-ltsc2019/Dockerfile)
+3.5-20210810-windowsservercore-ltsc2019, 3.5-windowsservercore-ltsc2019, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-ltsc2019/Dockerfile)
 
 ## Windows Server Core 2016 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20210713-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-ltsc2016/Dockerfile)
-3.5-20210713-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-ltsc2016/Dockerfile)
+4.8-20210810-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-ltsc2016/Dockerfile)
+3.5-20210810-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/sdk at https://mcr.microsoft.com/v2/dotnet/framework/sdk/tags/list.
 
