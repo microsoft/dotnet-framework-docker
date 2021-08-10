@@ -43,11 +43,11 @@ $DotnetChannel = "5.0"
 $InstallFailed = $false
 if ($IsRunningOnUnix) {
     & chmod +x $InstallPath/$DotnetInstallScript
-    & $InstallPath/$DotnetInstallScript --channel $DotnetChannel --version "latest" --install-dir $InstallPath
+    & $InstallPath/$DotnetInstallScript --channel $DotnetChannel --version "5.0.302" --install-dir $InstallPath
     $InstallFailed = ($LASTEXITCODE -ne 0)
 }
 else {
-    & $InstallPath/$DotnetInstallScript -Channel $DotnetChannel -Version "latest" -InstallDir $InstallPath
+    & $InstallPath/$DotnetInstallScript -Channel $DotnetChannel -Version "5.0.302" -InstallDir $InstallPath
     $InstallFailed = (-not $?)
 }
 
