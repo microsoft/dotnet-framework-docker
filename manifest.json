@@ -9,7 +9,8 @@
     "SdkReleaseDateStamp": "20210810",
     "5B-RuntimeReleaseDateStamp": "20210608",
     "5B-AspnetReleaseDateStamp": "20210608",
-    "7B-ReleaseDateStamp": "20210713"
+    "7B-ReleaseDateStamp": "20210713",
+    "2022-ReleaseDateStamp": "20210818"
   },
   "includes": [
     "manifest.versions.json"
@@ -81,7 +82,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "4.8-windowsservercore-ltsc2022": {}
               }
             }
@@ -286,7 +287,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "3.5-$(RuntimeReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "3.5-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "3.5-windowsservercore-ltsc2022": {}
               }
             }
@@ -375,7 +376,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8-$(SdkReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "4.8-windowsservercore-ltsc2022": {}
               }
             }
@@ -463,7 +464,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "3.5-$(SdkReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "3.5-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "3.5-windowsservercore-ltsc2022": {}
               }
             }
@@ -552,7 +553,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "4.8-windowsservercore-ltsc2022": {}
               }
             }
@@ -737,7 +738,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "3.5-$(AspnetReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "3.5-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "3.5-windowsservercore-ltsc2022": {}
               }
             }
@@ -826,7 +827,7 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8-$(WcfReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
                 "4.8-windowsservercore-ltsc2022": {}
               }
             }

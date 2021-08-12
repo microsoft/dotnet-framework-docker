@@ -1,4 +1,5 @@
 $(McrTagsYmlRepo:wcf)
+$(McrTagsYmlTagGroup:4.8-windowsservercore-ltsc2022)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-20H2)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-2004)
 $(McrTagsYmlTagGroup:4.8-windowsservercore-ltsc2019)

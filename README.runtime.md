@@ -42,6 +42,12 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 
 # Full Tag Listing
 
+## Windows Server Core 2022 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+4.8-20210818-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/4.8/windowsservercore-ltsc2022/Dockerfile)
+3.5-20210818-windowsservercore-ltsc2022, 3.5-windowsservercore-ltsc2022, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-ltsc2022/Dockerfile)
+
 ## Windows Server Core, version 20H2 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
