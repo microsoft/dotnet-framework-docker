@@ -8,18 +8,14 @@ if OS_VERSION_NUMBER != "ltsc2019"
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true `
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
-{{if PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER = "ltsc2022"
-:
-# TEMP
-COPY *.cab .
-}}
+
 RUN `
 {{if PRODUCT_VERSION = "3.5"
-:    # Install .NET Fx 3.5{{if OS_VERSION_NUMBER != "ltsc2022":
+:    # Install .NET Fx 3.5
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-{{OS_VERSION_NUMBER}}.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
-    && del /F /Q microsoft-windows-netfx3.zip `}}
-    {{if OS_VERSION_NUMBER != "ltsc2022":&& }}dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && del /F /Q microsoft-windows-netfx3.zip `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `

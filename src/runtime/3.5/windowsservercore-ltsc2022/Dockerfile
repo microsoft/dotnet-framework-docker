@@ -7,12 +7,12 @@ ENV `
     DOTNET_RUNNING_IN_CONTAINER=true `
     COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
-# TEMP
-COPY *.cab .
-
 RUN `
     # Install .NET Fx 3.5
-    dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2022.zip `
+    && tar -zxf microsoft-windows-netfx3.zip `
+    && del /F /Q microsoft-windows-netfx3.zip `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
