@@ -47,6 +47,9 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
             -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
+# Do not generate certificate
+ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
+
 # Install VS components
 RUN `
     # Install VS Test Agent
@@ -55,7 +58,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/cb1d5164-e767-4886-8955-2df3a7c816a8/bbc9acadb3defd264840100d8021272da8ca578f0f42f9ff5e6afb873a769f6e/vs_TestAgent.exe `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe `
             -OutFile vs_TestAgent.exe `
     && start /w vs_TestAgent --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
@@ -66,7 +69,7 @@ RUN `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/cb1d5164-e767-4886-8955-2df3a7c816a8/ccac76bbd83f9d0e78a32f8bb22be6d2aca3fb5f10bf870504d8d84f36ab3440/vs_BuildTools.exe `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
@@ -102,7 +105,7 @@ RUN powershell -Command `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.05.zip `
+            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip `
             -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip; `
         Expand-Archive MSBuild.Microsoft.VisualStudio.Web.targets.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0\" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip

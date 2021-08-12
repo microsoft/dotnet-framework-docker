@@ -92,6 +92,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION",
                 @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"));
+            variables.Add(new EnvironmentVariableInfo("DOTNET_GENERATE_ASPNET_CERTIFICATE", "false"));
 
             if (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
                 imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019)
