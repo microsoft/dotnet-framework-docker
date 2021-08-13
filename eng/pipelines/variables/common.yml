@@ -6,3 +6,6 @@ variables:
   value: 3
 - name: testResultsDirectory
   value: tests/Microsoft.DotNet.Framework.Docker.Tests/TestResults/
+- ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+  - group: DotNet-Docker-Common
+  - group: DotNet-Docker-Secrets
