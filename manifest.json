@@ -9,7 +9,8 @@
     "SdkReleaseDateStamp": "20210810",
     "5B-RuntimeReleaseDateStamp": "20210608",
     "5B-AspnetReleaseDateStamp": "20210608",
-    "7B-ReleaseDateStamp": "20210713"
+    "7B-ReleaseDateStamp": "20210713",
+    "2022-ReleaseDateStamp": "20210818"
   },
   "includes": [
     "manifest.versions.json"
@@ -73,6 +74,16 @@
                 "4.8-windowsservercore-2009": {
                   "docType": "Undocumented"
                 }
+              }
+            },
+            {
+              "dockerfile": "src/runtime/4.8/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-windowsservercore-ltsc2022": {}
               }
             }
           ]
@@ -269,6 +280,16 @@
                   "docType": "Undocumented"
                 }
               }
+            },
+            {
+              "dockerfile": "src/runtime/3.5/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "3.5-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "3.5-windowsservercore-ltsc2022": {}
+              }
             }
           ]
         }
@@ -345,6 +366,19 @@
                   "docType": "Undocumented"
                 }
               }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/sdk/4.8/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/sdk/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-windowsservercore-ltsc2022": {}
+              }
             }
           ]
         },
@@ -419,6 +453,19 @@
                 "3.5-windowsservercore-2009": {
                   "docType": "Undocumented"
                 }
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/sdk/3.5/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/sdk/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "3.5-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "3.5-windowsservercore-ltsc2022": {}
               }
             }
           ]
@@ -495,6 +542,19 @@
                 "4.8-windowsservercore-2009": {
                   "docType": "Undocumented"
                 }
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/aspnet/4.8/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/aspnet/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-windowsservercore-ltsc2022": {}
               }
             }
           ]
@@ -668,6 +728,19 @@
                   "docType": "Undocumented"
                 }
               }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/aspnet/3.5/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/aspnet/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "3.5-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "3.5-windowsservercore-ltsc2022": {}
+              }
             }
           ]
         }
@@ -743,6 +816,19 @@
                 "4.8-windowsservercore-2009": {
                   "docType": "Undocumented"
                 }
+              }
+            },
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:aspnet)"
+              },
+              "dockerfile": "src/wcf/4.8/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/wcf/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8-$(2022-ReleaseDateStamp)-windowsservercore-ltsc2022": {},
+                "4.8-windowsservercore-ltsc2022": {}
               }
             }
           ]

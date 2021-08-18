@@ -22,6 +22,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
+            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
         };
 
         public WcfImageTests(ITestOutputHelper outputHelper)
