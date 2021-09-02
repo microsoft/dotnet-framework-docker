@@ -2,6 +2,16 @@
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:{{PRODUCT_VERSION}}-{{OS_VERSION}}
+
+ENV `
+    # Do not generate certificate
+    DOTNET_GENERATE_ASPNET_CERTIFICATE=false `
+    {{if OS_VERSION_NUMBER != "ltsc2019":# Enable correct mode for dotnet watch (only mode supported in a container)
+    DOTNET_USE_POLLING_FILE_WATCHER=true `
+    }}# NuGet version to install
+    NUGET_VERSION={{VARIABLES[cat("nuget|version")]}} `
+    # Install location of Roslyn
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
 :
 RUN `
@@ -24,13 +34,9 @@ RUN `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 }}
 # Install NuGet CLI
-ENV NUGET_VERSION={{VARIABLES[cat("nuget|version")]}}
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
-
-# Do not generate certificate
-ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
 
 # Install VS components
 RUN `
@@ -74,9 +80,6 @@ RUN `
 RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip {{VARIABLES["vs|webTargetsUrl"]}} `
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
-
-ENV {{if OS_VERSION_NUMBER != "ltsc2019":DOTNET_USE_POLLING_FILE_WATCHER=true `
-    }}ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `

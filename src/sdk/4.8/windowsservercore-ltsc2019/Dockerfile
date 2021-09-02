@@ -3,14 +3,18 @@
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:4.8-windowsservercore-ltsc2019
 
+ENV `
+    # Do not generate certificate
+    DOTNET_GENERATE_ASPNET_CERTIFICATE=false `
+    # NuGet version to install
+    NUGET_VERSION=5.10.0 `
+    # Install location of Roslyn
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+
 # Install NuGet CLI
-ENV NUGET_VERSION=5.10.0
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && curl -fSLo "%ProgramFiles%\NuGet\nuget.exe" https://dist.nuget.org/win-x86-commandline/v%NUGET_VERSION%/nuget.exe `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
-
-# Do not generate certificate
-ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
 
 # Install VS components
 RUN `
@@ -53,8 +57,6 @@ RUN `
 RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip `
     && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
-
-ENV ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
