@@ -1,7 +1,7 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5-4.7.2":"kb5005043",
-      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/08/windows10.0-kb5005043-x64_6e39252b88646ca55582da59e6f86a021d8b6ddd.msu",
+      "kb|ltsc2016|3.5-4.7.2":"kb5005573",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/09/windows10.0-kb5005573-x64_68ae94716592a0f0585b0741ab94840d5b9957de.msu",
 
       "kb|ltsc2016": "kb4601051",
       "lcu|ltsc2016": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601051-x64-ndp48_85c646a43918fc1cc03bc9b1b04228ec3d44d01e.msu",
@@ -12,7 +12,7 @@
       "kb|20H2": "kb4601050",
       "lcu|20H2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601050-x64-ndp48_04c8736f250c06b3787d7d9ec366f011c6f8ca91.msu",
 
-      "nuget|version": "5.10.0",
+      "nuget|version": "5.11.0",
   
       "vs|version": "16.11",
       "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe",
