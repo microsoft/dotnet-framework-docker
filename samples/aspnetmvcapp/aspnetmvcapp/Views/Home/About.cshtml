@@ -1,7 +1,34 @@
-﻿@{
+﻿@using System.Runtime.InteropServices
+@{
     ViewBag.Title = "About";
+    string framework = Environment.Version.ToString();
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class="text-center">
+    <h1>Welcome to .NET</h1>
+</div>
+
+<div align="center">
+    <table class="table table-striped table-hover">
+        <tr>
+            <td>.NET version</td>
+            <td>@RuntimeInformation.FrameworkDescription</td>
+        </tr>
+        <tr>
+            <td>Operating system</td>
+            <td>@RuntimeInformation.OSDescription</td>
+        </tr>
+        <tr>
+            <td>Processor architecture</td>
+            <td>@RuntimeInformation.OSArchitecture</td>
+        </tr>
+        <tr>
+            <td>CPU cores</td>
+            <td>@Environment.ProcessorCount</td>
+        </tr>
+        <tr>
+            <td>Containerized</td>
+            <td>@(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") is null ? "false" : "true")</td>
+        </tr>
+    </table>
+</div>

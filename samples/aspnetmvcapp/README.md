@@ -4,7 +4,7 @@ This [sample](Dockerfile) demonstrates how to use ASP.NET MVC and Docker togethe
 
 The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/). It builds the application and then copies the final build result into a Docker image based on the smaller [ASP.NET Runtime Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-aspnet/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
-This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+This sample requires the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
 ## Try a pre-built ASP.NET Docker Image
 

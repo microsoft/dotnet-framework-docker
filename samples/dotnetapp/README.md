@@ -1,10 +1,10 @@
 # .NET Framework Docker Sample
 
-This [sample](Dockerfile) demonstrates how to use .NET Framework and Docker together. It builds multiple projects and executes unit tests in a container. The sample can also be used without Docker.
+This [sample](Dockerfile) demonstrates how to use .NET Framework and Docker together.
 
-The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/). It builds and [tests](dotnet-docker-unit-testing.md) the application and then copies the final build result into a Docker image based on the smaller [.NET Framework Runtime Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
+The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/).
 
-This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+This sample requires the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
 ## Try a pre-built .NET Framework Docker Image
 
@@ -13,7 +13,7 @@ You can quickly run a container with a pre-built [.NET Framework Docker image](h
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
 ```console
-docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
+docker run --rm mcr.microsoft.com/dotnet/framework/samples
 ```
 
 ## Getting the sample
@@ -37,32 +37,11 @@ docker build --pull -t dotnetapp .
 docker run --rm dotnetapp
 ```
 
-The commands above run unit tests as part `docker build`. You can also [run .NET unit tests as part of `docker run`](dotnet-docker-unit-testing.md). The following instructions provide you with the simplest way of doing that.
-
-```console
-docker build --target testrunner -t dotnetapp:test .
-docker run --rm -it dotnetapp:test
-```
-
-You can mount a volume while running the image in order to save the test results to your local disk. The instructions to do that are provided in [Running Unit Tests with Docker](dotnet-docker-unit-testing.md)
-
-Multiple variations of this sample have been provided, as follows. Some of these example Dockerfiles are demonstrated later. Specify an alternate Dockerfile via the `-f` argument.
-
-* [Sample with build and unit testing](Dockerfile)
-* [Sample with basic build](Dockerfile.basic)
-
-## Run Docker Image on Another Device
-
-You can push the image to a container registry so that you can pull and run it on another device. Straightforward instructions are provided for pushing to both Azure Container Registry and DockerHub.
-
-* [Push Docker Images to Azure Container Registry](push-image-to-acr.md)
-* [Push Docker Images to DockerHub](push-image-to-dockerhub.md)
-
 ## Build and run the sample locally with the .NET SDK
 
-You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with the [.NET SDK](https://www.microsoft.com/net/download/core) using the following instructions. The instructions assume that you are in the root of the repository.
+You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with the [.NET SDK](https://dotnet.microsoft.com/download) using the following instructions. The instructions assume that you are in the root of the repository.
 
-You must have the [.NET Framework 4.8 targeting pack](http://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
+You must have the [.NET Framework 4.8 targeting pack](http://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
 
 ```console
 cd samples
@@ -73,7 +52,7 @@ dotnet run
 You can produce an application that is ready to deploy to production using the following command:
 
 ```console
-dotnet publish -c release -o out
+dotnet publish -c Release -o out
 ```
 
 You can run the published application using the following command.
@@ -82,13 +61,13 @@ You can run the published application using the following command.
 out\dotnetapp.exe
 ```
 
-Note: The `-c release` argument builds the application in release mode (the default is debug mode). See the [dotnet publish reference](https://docs.microsoft.com/dotnet/core/tools/dotnet-publish) for more information on commandline parameters.
+Note: The `-c Rrelease` argument builds the application in release mode (the default is debug mode). See the [dotnet publish reference](https://docs.microsoft.com/dotnet/core/tools/dotnet-publish) for more information on commandline parameters.
 
 ## Build and run the sample locally with MSBuild
 
 You can build this [.NET Framework 4.8](https://www.microsoft.com/net/download/dotnet-framework-runtime/net48) application locally with MSBuild using the following instructions. The instructions assume that you are in the root of the repository and using the `Developer Command Prompt for VS 2019`.
 
-You must have the [.NET Framework 4.8 targeting pack](https://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
+You must have the [.NET Framework 4.8 targeting pack](https://go.microsoft.com/fwlink/?LinkId=2085167) installed. It is easiest to install with [Visual Studio](https://visualstudio.microsoft.com/vs/) and the the Visual Studio Installer.
 
 ```console
 cd samples
