@@ -61,7 +61,7 @@ You can run the published application using the following command.
 out\dotnetapp.exe
 ```
 
-Note: The `-c Rrelease` argument builds the application in release mode (the default is debug mode). See the [dotnet publish reference](https://docs.microsoft.com/dotnet/core/tools/dotnet-publish) for more information on commandline parameters.
+Note: The `-c Release` argument builds the application in release mode (the default is debug mode). See the [dotnet publish reference](https://docs.microsoft.com/dotnet/core/tools/dotnet-publish) for more information on commandline parameters.
 
 ## Build and run the sample locally with MSBuild
 
