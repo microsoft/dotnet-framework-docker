@@ -1,11 +1,11 @@
 ﻿@using System.Runtime.InteropServices
 @{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Welcome to .NET Framework";
     string framework = Environment.Version.ToString();
 }
 
 <div class="text-center">
-    <h1>Welcome to .NET</h1>
+    <h1>@ViewBag.Title</h1>
 </div>
 
 <div align="center">
@@ -27,7 +27,7 @@
             <td>@Environment.ProcessorCount</td>
         </tr>
         <tr>
-            <td>Containerized</td>
+            <td>DOTNET_RUNNING_IN_CONTAINER</td>
             <td>@(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") is null ? "false" : "true")</td>
         </tr>
     </table>
