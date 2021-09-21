@@ -5,8 +5,4 @@
     <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\utils\utils.csproj" />
-  </ItemGroup>
-
 </Project>
