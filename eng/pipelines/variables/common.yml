@@ -4,6 +4,8 @@ variables:
   value: https://github.com/microsoft/dotnet-framework-docker
 - name: productVersionComponents
   value: 3
+- name: testScriptPath
+  value: ./tests/run-tests.ps1
 - name: testResultsDirectory
   value: tests/Microsoft.DotNet.Framework.Docker.Tests/TestResults/
 - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
