@@ -1,16 +1,20 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5-4.7.2":"kb5005573",
-      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/09/windows10.0-kb5005573-x64_68ae94716592a0f0585b0741ab94840d5b9957de.msu",
+      "kb|ltsc2016|3.5-4.7.2":"kb5006669",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/10/windows10.0-kb5006669-x64_aa5c931de237226eae4f333915750dbd998a8534.msu",
+      "kb|ltsc2019|3.5-4.7.2": "kb5005543",
+      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005543-x64_3e4279f36b9b94cafb301f105e402b9d8df476bc.msu",
 
-      "kb|ltsc2016": "kb4601051",
-      "lcu|ltsc2016": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601051-x64-ndp48_85c646a43918fc1cc03bc9b1b04228ec3d44d01e.msu",
-      "kb|ltsc2019": "kb4601055",
-      "lcu|ltsc2019": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/01/windows10.0-kb4601055-x64-ndp48_433f80c4aa1a9613e8a57357e3f07a2cdccdad1b.msu",
-      "kb|2004": "kb4601050",
-      "lcu|2004": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601050-x64-ndp48_04c8736f250c06b3787d7d9ec366f011c6f8ca91.msu",
-      "kb|20H2": "kb4601050",
-      "lcu|20H2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4601050-x64-ndp48_04c8736f250c06b3787d7d9ec366f011c6f8ca91.msu",
+      "kb|ltsc2016": "kb5006065",
+      "lcu|ltsc2016": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006065-x64-ndp48_022b43043c63f17a102acfbbd06870b1bc3c45a6.msu",
+      "kb|ltsc2019": "kb5005540",
+      "lcu|ltsc2019": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/08/windows10.0-kb5005540-x64-ndp48_ddca726ba3efa8935b549d9840b190c5efd78d60.msu",
+      "kb|2004": "kb5005539",
+      "lcu|2004": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005539-x64-ndp48_ed8d788827279dcf8689fa6936bc0f2ba375783b.msu",
+      "kb|20H2": "kb5005539",
+      "lcu|20H2": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005539-x64-ndp48_ed8d788827279dcf8689fa6936bc0f2ba375783b.msu",
+      "kb|ltsc2022": "kb5005538",
+      "lcu|ltsc2022": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005538-x64-ndp48_451a4214d51de628ef2c3c8a69c87826b2ab43c8.msu",
 
       "nuget|version": "5.11.0",
   
