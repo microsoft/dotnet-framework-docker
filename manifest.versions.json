@@ -19,8 +19,8 @@
 
       "nuget|version": "5.11.0",
   
-      "vs|version": "16.11",
-      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe",
-      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe"
+      "vs|version": "17.0",
+      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/0b3cf9c7e43023d0601a4d564142eca84d88808251415840b7b1e46d71909371/vs_TestAgent.exe",
+      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/50fdfb4f652e1d3ab4ec79b65bada583af704480a971e9b05c3a52a60036aa7d/vs_BuildTools.exe"
     }
   }
