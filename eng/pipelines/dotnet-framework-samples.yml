@@ -1,14 +1,23 @@
 trigger: none
 pr: none
+
+resources:
+  repositories:
+  - repository: InternalVersionsRepo
+    type: git
+    name: internal/dotnet-versions
+
 variables:
 - template: variables/common.yml
 - name: manifest
   value: manifest.samples.json
 - name: imageInfoVariant
   value: "-samples"
+
 stages:
-- template: ../common/templates/stages/build-test-publish-repo.yml
+- template: ../common/templates/stages/dotnet/build-test-publish-repo.yml
   parameters:
+    internalProjectName: ${{ variables.internalProjectName }}
+    publicProjectName: ${{ variables.publicProjectName }}
     ${{ if eq(variables['System.TeamProject'], 'public') }}:
-      buildMatrixType: platformVersionedOs
       buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
