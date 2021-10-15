@@ -5,6 +5,7 @@
       "kb|ltsc2019|3.5-4.7.2": "kb5005543",
       "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005543-x64_3e4279f36b9b94cafb301f105e402b9d8df476bc.msu",
 
+      "4.8-is-security-release": false,
       "kb|ltsc2016": "kb5006065",
       "lcu|ltsc2016": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006065-x64-ndp48_022b43043c63f17a102acfbbd06870b1bc3c45a6.msu",
       "kb|ltsc2019": "kb5005540",
