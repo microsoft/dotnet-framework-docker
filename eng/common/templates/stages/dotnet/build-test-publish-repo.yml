@@ -10,6 +10,9 @@ parameters:
   customPublishInitSteps: []
   windowsAmdBuildJobTimeout: 60
   windowsAmdTestJobTimeout: 60
+  linuxAmdBuildJobTimeout: 60
+  linuxAmd64Pool:
+    vmImage: $(defaultLinuxAmd64PoolImage)
 
 stages:
 - template: ../build-test-publish-repo.yml
@@ -22,6 +25,7 @@ stages:
     customPublishInitSteps: ${{ parameters.customPublishInitSteps }}
     windowsAmdBuildJobTimeout: ${{ parameters.windowsAmdBuildJobTimeout }}
     windowsAmdTestJobTimeout: ${{ parameters.windowsAmdTestJobTimeout }}
+    linuxAmdBuildJobTimeout: ${{ parameters.linuxAmdBuildJobTimeout }}
 
     internalVersionsRepoRef: InternalVersionsRepo
     publicVersionsRepoRef: PublicVersionsRepo
@@ -33,6 +37,7 @@ stages:
     ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
       buildMatrixType: platformVersionedOs
 
+    linuxAmd64Pool: ${{ parameters.linuxAmd64Pool }}
     linuxArm64Pool:
         ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
           name: DotNetCore-Docker-Public
