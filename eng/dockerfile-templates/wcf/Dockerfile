@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/aspnet
-FROM $REPO:{{PRODUCT_VERSION}}-{{OS_VERSION}}
+FROM $REPO:{{PRODUCT_VERSION}}-{{VARIABLES[cat(PRODUCT_VERSION, "-", OS_VERSION_NUMBER, "-Aspnet-DateStamp")]}}-{{OS_VERSION}}
 
 # Install Windows components required for WCF service hosted on IIS
 {{if OS_VERSION_NUMBER = "ltsc2016" || OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "2004"

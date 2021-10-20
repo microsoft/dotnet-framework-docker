@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:{{PRODUCT_VERSION}}-{{OS_VERSION}}
+FROM $REPO:{{PRODUCT_VERSION}}-{{VARIABLES[cat(PRODUCT_VERSION, "-", OS_VERSION_NUMBER, "-Runtime-DateStamp")]}}-{{OS_VERSION}}
 
 RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole {{if PRODUCT_VERSION = "3.5":/FeatureName:IIS-ASPNET^else:/FeatureName:NetFx4Extended-ASPNET45 /FeatureName:IIS-ASPNET45}} `
     && dism /Online /Quiet /Disable-Feature /FeatureName:IIS-WebServerManagementTools `
