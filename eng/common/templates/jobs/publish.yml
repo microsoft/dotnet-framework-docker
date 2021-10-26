@@ -1,34 +1,40 @@
 parameters:
   pool: {}
+  internalProjectName: null
+  customInitSteps: []
+  customPublishVariables: []
+
 jobs:
 - job: Publish
   pool: ${{ parameters.pool }}
   variables:
-  - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
-    - group: DotNet-AllOrgs-Darc-Pats
   - name: imageBuilder.commonCmdArgs
     value: >
       --manifest '$(manifest)'
       --registry-override '$(acr.server)'
       $(manifestVariables)
       $(imageBuilder.queueArgs)
+  - ${{ parameters.customPublishVariables }}
   steps:
-  - template: ../steps/validate-branch.yml
   - template: ../steps/init-docker-linux.yml
+  - ${{ parameters.customInitSteps }}
+  - template: ../steps/validate-branch.yml
+    parameters:
+      internalProjectName: ${{ parameters.internalProjectName }}
   - template: ../steps/download-build-artifact.yml
     parameters:
       targetPath: $(Build.ArtifactStagingDirectory)
       artifactName: image-info
   - template: ../steps/set-image-info-path-var.yml
-  - script: |
-      # Use dry-run option for certain publish operations if this is not a production build
-      dryRunArg=""
-      if [[ "$PUBLISHREPOPREFIX" != "public/" || "$SYSTEM_TEAMPROJECT" == "public" ]]; then
-        dryRunArg=" --dry-run"
-      fi
-      
-      echo "##vso[task.setvariable variable=dryRunArg]$dryRunArg"
-      echo "##vso[task.setvariable variable=imageQueueTime]$(date --rfc-2822)"
+    parameters:
+      publicSourceBranch: $(publicSourceBranch)
+  - template: ../steps/set-dry-run.yml
+  - script: echo $(sourceBuildId) > $(Build.ArtifactStagingDirectory)/source-build-id.txt
+    displayName: Write Source Build ID to File
+  - publish: $(Build.ArtifactStagingDirectory)/source-build-id.txt
+    artifact: source-build-id
+    displayName: Publish Source Build ID Artifact
+  - script: echo "##vso[task.setvariable variable=imageQueueTime]$(date --rfc-2822)"
     displayName: Set Publish Variables
   - script: >
       $(runImageBuilderCmd) trimUnchangedPlatforms
@@ -37,7 +43,7 @@ jobs:
   - script: >
       $(runImageBuilderCmd) copyAcrImages
       '$(acr.servicePrincipalName)'
-      '$(app-dotnetdockerbuild-client-secret)'
+      '$(acr.servicePrincipalPassword)'
       '$(acr.servicePrincipalTenant)'
       '$(acr.subscription)'
       '$(acr.resourceGroup)'
@@ -54,8 +60,7 @@ jobs:
       $(runImageBuilderCmd) publishManifest
       '$(artifactsPath)/image-info.json'
       --repo-prefix '$(publishRepoPrefix)'
-      --username '$(acr.userName)'
-      --password '$(BotAccount-dotnet-docker-acr-bot-password)'
+      --registry-creds '$(acr.server)=$(acr.userName);$(acr.password)'
       --os-type '*'
       --architecture '*'
       $(dryRunArg)
@@ -78,20 +83,19 @@ jobs:
   - script: >
       $(runImageBuilderCmd) publishImageInfo
       '$(artifactsPath)/image-info.json'
-      '$(dotnetDockerBot.userName)'
-      '$(dotnetDockerBot.email)'
-      '$(BotAccount-dotnet-docker-bot-PAT)'
-      '$(dn-bot-devdiv-dnceng-rw-code-pat)'
-      'dnceng'
-      'internal'
-      --manifest '$(manifest)'
-      --git-owner 'dotnet'
-      --git-repo 'versions'
-      --git-branch 'master'
-      --git-path '$(imageInfoVersionsPath)'
-      --azdo-repo 'dotnet-versions'
-      --azdo-branch 'master'
-      --azdo-path '$(imageInfoVersionsPath)'
+      '$(gitHubVersionsRepoInfo.userName)'
+      '$(gitHubVersionsRepoInfo.email)'
+      '$(gitHubVersionsRepoInfo.accessToken)'
+      '$(azdoVersionsRepoInfo.accessToken)'
+      '$(azdoVersionsRepoInfo.org)'
+      '$(azdoVersionsRepoInfo.project)'
+      --git-owner '$(gitHubVersionsRepoInfo.org)'
+      --git-repo '$(gitHubVersionsRepoInfo.repo)'
+      --git-branch '$(gitHubVersionsRepoInfo.branch)'
+      --git-path '$(gitHubImageInfoVersionsPath)'
+      --azdo-repo '$(azdoVersionsRepoInfo.repo)'
+      --azdo-branch '$(azdoVersionsRepoInfo.branch)'
+      --azdo-path '$(azdoImageInfoVersionsPath)'
       $(dryRunArg)
       $(imageBuilder.commonCmdArgs)
     displayName: Publish Image Info
@@ -100,16 +104,15 @@ jobs:
       '$(artifactsPath)/image-info.json'
       '$(kusto.cluster)'
       '$(kusto.database)'
-      '$(kusto.table)'
+      '$(kusto.imageTable)'
+      '$(kusto.layerTable)'
       '$(kusto.servicePrincipalName)'
-      '$(app-DotnetDockerTelemetryIngestion-client-secret)'
+      '$(kusto.servicePrincipalPassword)'
       '$(kusto.servicePrincipalTenant)'
-      --manifest '$(manifest)'
       --os-type '*'
       --architecture '*'
       $(dryRunArg)
       $(imageBuilder.commonCmdArgs)
     displayName: Ingest Kusto Image Info
-  - task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0
-    displayName: Component Detection
+    condition: and(succeeded(), eq(variables['ingestKustoImageInfo'], 'true'))
   - template: ../steps/cleanup-docker-linux.yml

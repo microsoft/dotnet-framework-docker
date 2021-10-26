@@ -1,13 +1,23 @@
 trigger: none
 pr: none
 
+resources:
+  repositories:
+  - repository: InternalVersionsRepo
+    type: git
+    name: internal/dotnet-versions
+
 variables:
 - template: variables/common.yml
 - name: manifest
   value: manifest.json
+- name: mcrImageIngestionTimeout
+  value: "00:30:00"
 
 stages:
-- template: ../common/templates/stages/build-test-publish-repo.yml
+- template: ../common/templates/stages/dotnet/build-test-publish-repo.yml
   parameters:
+    internalProjectName: ${{ variables.internalProjectName }}
+    publicProjectName: ${{ variables.publicProjectName }}
     windowsAmdBuildJobTimeout: 240
     windowsAmdTestJobTimeout: 90

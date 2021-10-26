@@ -1,50 +1,43 @@
 #!/usr/bin/env pwsh
-[cmdletbinding(
-    DefaultParameterSetName = "BuildAndTest"
-)]
 param(
+    # Docker repositories (image variants) to filter by
     [ValidateSet("runtime", "sdk", "aspnet", "wcf")]
     [string[]]$Repos = @(),
-    [string]$Version = "*",
-    [string]$OS = "*",
-    [Parameter(ParameterSetName = "Build")]
-    [switch]$BuildOnly,
-    [Parameter(ParameterSetName = "Test")]
-    [switch]$TestOnly,
-    [Parameter(ParameterSetName = "Build")]
-    [Parameter(ParameterSetName = "BuildAndTest")]
-    [string]$OptionalImageBuilderArgs
-)
 
-if ($PSCmdlet.ParameterSetName -eq "BuildAndTest") {
-    $build = $true
-    $test = $true
-}
-else {
-    $build = $BuildOnly
-    $test = $TestOnly
-}
+    # Version of .NET Fx to filter by
+    [string]$Version = "*",
+
+    # Name of OS to filter by
+    [string]$OS = "*",
+
+    # Additional args to pass to ImageBuilder
+    [string]$OptionalImageBuilderArgs,
+
+    # Execution mode of the script
+    [ValidateSet("BuildAndTest", "Build", "Test")]
+    [string]$Mode = "BuildAndTest"
+)
 
 if ($Repos.Count -eq 0) {
     $Path = $null
 }
 else {
-    $Path = ""
+    $Path = @()
     $Repos | foreach {
-        $Path += " --path '$Version/$_/$OS'"
+        $Path += "src/$_/$Version/$OS"
     }
     $testCategories = $Repos
 }
 
-if ($build) {
+if ($Mode -eq "BuildAndTest" -or $Mode -eq "Build") {
     & ./eng/common/build.ps1 `
         -Version $Version `
         -OS $OS `
         -Path $Path `
         -OptionalImageBuilderArgs $OptionalImageBuilderArgs
 }
-if ($test) {
 
+if ($Mode -eq "BuildAndTest" -or $Mode -eq "Test") {
     $testArgs = @{
         Version = $Version;
         OS = $OS;

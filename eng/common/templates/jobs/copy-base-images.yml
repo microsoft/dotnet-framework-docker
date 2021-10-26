@@ -1,0 +1,31 @@
+parameters:
+  name: null
+  pool: {}
+  additionalOptions: null
+  publicProjectName: null
+  
+jobs:
+- job: ${{ parameters.name }}
+  pool: ${{ parameters.pool }}
+  steps:
+  - template: ../steps/init-docker-linux.yml
+  - ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
+    - template: ../steps/set-dry-run.yml
+  - script: >
+      $(runImageBuilderCmd)
+      copyBaseImages
+      '$(acr.servicePrincipalName)'
+      '$(acr.servicePrincipalPassword)'
+      '$(acr.servicePrincipalTenant)'
+      '$(acr.subscription)'
+      '$(acr.resourceGroup)'
+      $(mirrorRegistryCreds)
+      --repo-prefix $(mirrorRepoPrefix)
+      --registry-override '$(acr.server)'
+      --os-type 'linux'
+      --architecture '*'
+      $DRYRUNARG
+      ${{ parameters.additionalOptions }}
+    displayName: Copy Base Images
+    continueOnError: true
+  - template: ../steps/cleanup-docker-linux.yml

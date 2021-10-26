@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Microsoft.DotNet.Framework.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -27,10 +26,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return (string)manifest["registry"];
         }
 
-        public static VsInfo GetVsInfo()
+        public static Version GetManifestVsVersion()
         {
-            string vsInfoJson = File.ReadAllText("vs-info.json");
-            return JsonConvert.DeserializeObject<VsInfo>(vsInfoJson);
+            string manifestJson = File.ReadAllText("manifest.versions.json");
+            JObject manifest = JObject.Parse(manifestJson);
+            return System.Version.Parse((string)(manifest["variables"]["vs|version"]));
         }
 
         public static string GetFilterRegexPattern(string filter)

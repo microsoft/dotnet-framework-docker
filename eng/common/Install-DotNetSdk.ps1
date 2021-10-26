@@ -35,17 +35,20 @@ else {
 
 if (!(Test-Path $DotnetInstallScript)) {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
-    Invoke-WebRequest "https://dot.net/v1/$DotnetInstallScript" -OutFile $InstallPath/$DotnetInstallScript
+    & "$PSScriptRoot/Invoke-WithRetry.ps1" "Invoke-WebRequest 'https://dot.net/v1/$DotnetInstallScript' -OutFile $InstallPath/$DotnetInstallScript"
 }
 
 $DotnetChannel = "5.0"
 
+$InstallFailed = $false
 if ($IsRunningOnUnix) {
     & chmod +x $InstallPath/$DotnetInstallScript
     & $InstallPath/$DotnetInstallScript --channel $DotnetChannel --version "latest" --install-dir $InstallPath
+    $InstallFailed = ($LASTEXITCODE -ne 0)
 }
 else {
     & $InstallPath/$DotnetInstallScript -Channel $DotnetChannel -Version "latest" -InstallDir $InstallPath
+    $InstallFailed = (-not $?)
 }
 
-if ($LASTEXITCODE -ne 0) { throw "Failed to install the .NET Core SDK" }
+if ($InstallFailed) { throw "Failed to install the .NET Core SDK" }

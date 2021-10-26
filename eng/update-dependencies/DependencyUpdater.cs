@@ -9,12 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.DotNet.Framework.Models;
 using Microsoft.DotNet.VersionTools;
 using Microsoft.DotNet.VersionTools.Automation;
 using Microsoft.DotNet.VersionTools.Dependencies;
 using Microsoft.DotNet.VersionTools.Dependencies.BuildOutput;
-using Newtonsoft.Json;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies
 {
@@ -110,131 +108,10 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
             List<IDependencyUpdater> updaters = new List<IDependencyUpdater>();
 
             updaters.AddRange(CreateManifestUpdaters());
-            updaters.AddRange(CreateLcuUpdaters());
-            updaters.AddRange(CreateVsUpdaters());
-            updaters.AddRange(CreateNuGetUpdaters());
-            updaters.Add(new ReadmeUpdater());
+            updaters.Add(ScriptRunnerUpdater.GetDockerfileUpdater(Program.RepoRoot));
+            updaters.Add(ScriptRunnerUpdater.GetReadMeUpdater(Program.RepoRoot));
 
             return DependencyUpdateUtils.Update(updaters, buildInfos);
-        }
-
-        private IEnumerable<IDependencyUpdater> CreateLcuUpdaters()
-        {
-            LcuInfo[] lcuConfigs = JsonConvert.DeserializeObject<LcuInfo[]>(
-                File.ReadAllText(this.options.LcuInfoPath));
-
-            const string UrlVersionGroupName = "Url";
-            const string CabFileVersionGroupName = "CabFile";
-
-            return dockerfiles.Value
-                .Where(dockerfile => dockerfile.ImageVariant == RuntimeImageVariant)
-                .Select(dockerfile => new
-                {
-                    Dockerfile = dockerfile,
-                    LcuConfigInfo = GetLcuConfigInfo(dockerfile, lcuConfigs)
-                })
-                .Where(val => val.LcuConfigInfo != null)
-                .SelectMany(val =>
-                    new IDependencyUpdater[]
-                    {
-                        new CustomFileRegexUpdater(val.LcuConfigInfo!.DownloadUrl, RuntimeImageVariant)
-                        {
-                            Path = val.Dockerfile.Path,
-                            VersionGroupName = UrlVersionGroupName,
-                            Regex = new Regex(@$"# Apply latest patch(.|\n)+(?<{UrlVersionGroupName}>http:\/\/[^\s""]+)")
-                        },
-                        new CustomFileRegexUpdater(ParseCabFileName(val.LcuConfigInfo!.DownloadUrl), RuntimeImageVariant)
-                        {
-                            Path = val.Dockerfile.Path,
-                            VersionGroupName = CabFileVersionGroupName,
-                            Regex = new Regex(@$"# Apply latest patch(.|\n)+dism.+C:\\patch\\(?<{CabFileVersionGroupName}>\S+)", RegexOptions.IgnoreCase)
-                        }
-                    }
-                );
-        }
-
-        private IEnumerable<IDependencyUpdater> CreateVsUpdaters()
-        {
-            VsInfo vsConfig = JsonConvert.DeserializeObject<VsInfo>(
-                File.ReadAllText(this.options.VsInfoPath));
-
-            const string TestAgentGroupName = "TestAgent";
-            const string BuildToolsGroupName = "BuildTools";
-            const string WebTargetsGroupName = "WebTargets";
-
-            return dockerfiles.Value
-                .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
-                .SelectMany(dockerfile =>
-                    new IDependencyUpdater[]
-                    {
-                        new CustomFileRegexUpdater(vsConfig.TestAgentUrl, dockerfile.ImageVariant)
-                        {
-                            VersionGroupName = TestAgentGroupName,
-                            Path = dockerfile.Path,
-                            Regex = new Regex(@$"(?<{TestAgentGroupName}>https:\/\/\S+vs_TestAgent\.exe)"),
-                        },
-                        new CustomFileRegexUpdater(vsConfig.BuildToolsUrl, dockerfile.ImageVariant)
-                        {
-                            VersionGroupName = BuildToolsGroupName,
-                            Path = dockerfile.Path,
-                            Regex = new Regex(@$"(?<{BuildToolsGroupName}>https:\/\/\S+vs_BuildTools\.exe)"),
-                        },
-                        new CustomFileRegexUpdater(vsConfig.WebTargetsUrl, dockerfile.ImageVariant)
-                        {
-                            VersionGroupName = WebTargetsGroupName,
-                            Path = dockerfile.Path,
-                            Regex = new Regex(@$"# Install web targets(.|\n)+?(?<{WebTargetsGroupName}>https:\/\/\S+)"),
-                        }
-                    });
-        }
-
-        private static string ParseCabFileName(string lcuDownloadUrl)
-        {
-            string msuFilename = lcuDownloadUrl.Substring(lcuDownloadUrl.LastIndexOf("/") + 1);
-            return msuFilename.Substring(0, msuFilename.IndexOf("_")) + ".cab";
-        }
-
-        private static LcuInfo? GetLcuConfigInfo(DockerfileInfo dockerfile, LcuInfo[] lcuConfigs)
-        {
-            return lcuConfigs
-                .FirstOrDefault(config => config.OsVersion == dockerfile.OsVersion &&
-                    config.RuntimeVersions.Any(runtime => runtime == dockerfile.FrameworkVersion));
-        }
-
-        private IEnumerable<IDependencyUpdater> CreateNuGetUpdaters()
-        {
-            NuGetInfo[] nuGetVersions = JsonConvert.DeserializeObject<NuGetInfo[]>(
-                File.ReadAllText(this.options.NuGetInfoPath));
-
-            const string NuGetVersionGroupName = "version";
-
-            return dockerfiles.Value
-                .Where(dockerfile => dockerfile.ImageVariant == SdkImageVariant)
-                .SelectMany(dockerfile =>
-                {
-                    // Find the NuGetInfo that matches the OS version of this Dockerfile
-                    NuGetInfo? nuGetInfo = nuGetVersions.FirstOrDefault(ver => ver.OsVersions.Contains(dockerfile.OsVersion));
-                    if (nuGetInfo is null)
-                    {
-                        throw new InvalidOperationException($"No NuGet info is specified in '{this.options.NuGetInfoPath}' for OS version '{dockerfile.OsVersion}'.");
-                    }
-
-                    return new IDependencyUpdater[]
-                    {
-                        new CustomFileRegexUpdater(nuGetInfo.NuGetClientVersion, dockerfile.ImageVariant)
-                        {
-                            Path = dockerfile.Path,
-                            VersionGroupName = NuGetVersionGroupName,
-                            Regex = new Regex(@$"ENV NUGET_VERSION=(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)")
-                        },
-                        new CustomFileRegexUpdater(nuGetInfo.NuGetClientLatestVersion, dockerfile.ImageVariant)
-                        {
-                            Path = dockerfile.Path,
-                            VersionGroupName = NuGetVersionGroupName,
-                            Regex = new Regex(@$"https://dist.nuget.org/win-x86-commandline/v(?<{NuGetVersionGroupName}>\d+\.\d+\.\d+)/nuget.exe")
-                        }
-                    };
-                });
         }
 
         private IEnumerable<IDependencyUpdater> CreateManifestUpdaters()

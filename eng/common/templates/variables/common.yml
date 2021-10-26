@@ -15,18 +15,35 @@ variables:
   value: 2
 - name: imageInfoVariant
   value: ""
+- name: ingestKustoImageInfo
+  value: true
 - name: manifestVariables
   value: ""
-- name: defaultLinuxAmd64PoolImage
-  value: ubuntu-latest
 - name: mcrImageIngestionTimeout
   value: "00:20:00"
 - name: mcrDocIngestionTimeout
   value: "00:05:00"
 - name: officialBranches
   # list multiple branches as "'branch1', 'branch2', etc."
-  value: "'master'"
+  value: "'main'"
+- name: mirrorRepoPrefix
+  value: 'mirror/'
+- name: cgBuildGrepArgs
+  value: "''"
 
-- ${{ if eq(variables['System.TeamProject'], 'internal') }}:
-  - group: DotNet-Docker-Common
-  - group: DotNet-Docker-Secrets
+- name: defaultLinuxAmd64PoolImage
+  value: ubuntu-latest
+- name: defaultLinuxArm32PoolImage
+  value: null
+- name: defaultLinuxArm64PoolImage
+  value: null
+- name: defaultWindows2016PoolImage
+  value: vs2017-win2016
+- name: defaultWindows1809PoolImage
+  value: windows-2019
+- name: defaultWindows2004PoolImage
+  value: null
+- name: defaultWindows20H2PoolImage
+  value: null
+- name: defaultWindows2022PoolImage
+  value: windows-2022

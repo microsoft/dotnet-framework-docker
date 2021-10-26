@@ -5,14 +5,10 @@ Windows version: &lt;version&gt;
 ## Prep Tasks
 
 1. - [ ] Ensure a ["New Windows Release" issue](https://github.com/dotnet/docker-tools/blob/.github/ISSUE_TEMPLATE/releases/new-windows-release.md) exists for docker-tools repo
-1. - [ ] Copy the Dockerfiles of the most recent published Windows version for `3.5` and `4.8` Dockerkfiles and place them in a version-specific folder under their respective variants (`runtime`, `sdk`, `aspnet`, `wcf`)
-1. - [ ] Modify the Dockerfiles as appropriate for any specific changes related to the new Windows version
-      - [ ] The `3.5/runtime` Dockerfile will need to have the `Apply latest patch` section removed since there is no patch to apply for a new Windows version
-1. - [ ] Update [manifest.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/manifest.json) to reference the new set of Dockerfiles with the appropriate tags
-1. - [ ] Update [manifest.samples.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/manifest.samples.json) to include the new Windows version for each of the samples
-1. - [ ] Update the test data for each of the [test classes](https://github.com/microsoft/dotnet-framework-docker/tree/master/tests/Microsoft.DotNet.Framework.Docker.Tests) to include the new Windows version
-1. - [ ] Look up the recommended latest [NuGet CLI version](https://www.nuget.org/downloads) and update the [nuget-info.json](https://github.com/microsoft/dotnet-framework-docker/blob/master/eng/nuget-info.json) file to associate that NuGet version with the new version of Windows
-1. - [ ] Run the `update-dependencies` tool to update all the necessary files:
+1. - [ ] Update [manifest.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.json) to include entries for the new images
+1. - [ ] Update [manifest.samples.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.samples.json) to include the new Windows version for each of the samples
+1. - [ ] Update the test data for each of the [test classes](https://github.com/microsoft/dotnet-framework-docker/tree/main/tests/Microsoft.DotNet.Framework.Docker.Tests) to include the new Windows version
+1. - [ ] Run the `update-dependencies` tool to generate the new Dockerfiles and update all the necessary files:
       - [ ] `dotnet run --project .\eng\update-dependencies`
 1. - [ ] Inspect generated changes for correctness
 1. - [ ] Test the images
@@ -22,7 +18,7 @@ Windows version: &lt;version&gt;
 1. - [ ] Revert any modifications that were made to the 3.5/runtime Dockerfile to support local testing due to the lack of the https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows.netfx3-<VERSION>.zip file.
 1. - [ ] Commit generated changes
 1. - [ ] Create PR
-1. - [ ] Get PR signoff. **Don't merge PR to master.**
+1. - [ ] Get PR signoff. **Don't merge PR to main.**
 
 ## Release Day Tasks
 

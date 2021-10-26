@@ -29,7 +29,7 @@ function Invoke-GenerateReadme {
 
     & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
         -ImageBuilderArgs `
-            "generateReadmes --manifest $Manifest --source-branch 'master'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'" `
+            "generateReadmes --manifest $Manifest --source-branch 'main'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'" `
         -OnCommandExecuted $onDockerfilesGenerated `
 }
 

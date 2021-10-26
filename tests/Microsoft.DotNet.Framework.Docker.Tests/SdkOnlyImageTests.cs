@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.DotNet.Framework.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -20,14 +19,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_20H2 },
+            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_1909 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
+            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
         };
 
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
@@ -93,6 +92,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION",
                 @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"));
+            variables.Add(new EnvironmentVariableInfo("DOTNET_GENERATE_ASPNET_CERTIFICATE", "false"));
 
             if (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
                 imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019)
@@ -119,8 +119,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
             Version actualVsVersion = Version.Parse(json[0]["catalog"]["productDisplayVersion"].ToString());
 
-            VsInfo vsInfo = Config.GetVsInfo();
-            Version expectedVsVersion = Version.Parse(vsInfo.VsVersion);
+            Version expectedVsVersion = Config.GetManifestVsVersion();
 
             Assert.Equal(expectedVsVersion.Major, actualVsVersion.Major);
             Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);
@@ -137,6 +136,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
             Assert.StartsWith("NuGet Version:", output);
+
+            command = @"cmd /c ""C:\Program Files\NuGet\latest\nuget.exe"" help";
+            string latestOutput = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
+            Assert.Equal(output, latestOutput);
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
@@ -221,7 +224,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string expectedShellValue;
             if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019 ||
-                imageDescriptor.OsVariant == OsVersion.WSC_1909 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_2004)
             {
                 expectedShellValue = ShellValue_PowerShell;

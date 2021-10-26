@@ -6,22 +6,22 @@ ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Install .NET Fx 3.5
-    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-1809.zip `
+    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2019.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
-    && DISM /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/10/windows10.0-kb4580422-x64_86829f308772f33bab3ada0190346dab8e15d084.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005543-x64_3e4279f36b9b94cafb301f105e402b9d8df476bc.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4580422-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5005543-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
-    && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
-    && \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen update `
-    && \Windows\Microsoft.NET\Framework\v2.0.50727\ngen update
+    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
+    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen update `
+    && %windir%\Microsoft.NET\Framework\v2.0.50727\ngen update

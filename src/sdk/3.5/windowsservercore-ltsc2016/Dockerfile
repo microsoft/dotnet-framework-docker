@@ -3,25 +3,40 @@
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:3.5-windowsservercore-ltsc2016
 
-# Install .NET 4.8 Fx
-RUN powershell -Command `
+RUN `
+    # Install .NET 4.8 Fx
+    powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe" `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe `
             -OutFile dotnet-framework-installer.exe `
     && .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\*
-
-# ngen .NET Fx
-RUN \Windows\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update
+    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+    `
+    # Apply latest patch
+    && powershell -Command `
+        $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+        Invoke-WebRequest `
+            -UseBasicParsing `
+            -Uri http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006065-x64-ndp48_022b43043c63f17a102acfbbd06870b1bc3c45a6.msu `
+            -OutFile patch.msu; `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5006065-x64-ndp48.cab `
+    && rmdir /S /Q patch `
+    `
+    # ngen .NET Fx
+    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION=4.9.4
+ENV NUGET_VERSION=5.11.0
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
@@ -30,10 +45,10 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
             -UseBasicParsing `
             -Uri https://dist.nuget.org/win-x86-commandline/v$Env:NUGET_VERSION/nuget.exe `
             -OutFile $Env:ProgramFiles\NuGet\nuget.exe; `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri https://dist.nuget.org/win-x86-commandline/v5.8.0/nuget.exe `
-            -OutFile $Env:ProgramFiles\NuGet\latest\nuget.exe
+    && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
+
+# Do not generate certificate
+ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=false
 
 # Install VS components
 RUN `
@@ -43,9 +58,9 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/8fd51571a9aff13c4381037ccb7559a3bb3e6527cbacf4816068e711dfe824f4/vs_TestAgent.exe" `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe `
             -OutFile vs_TestAgent.exe `
-    && start /w vs_TestAgent.exe --quiet --norestart --nocache --wait `
+    && start /w vs_TestAgent --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
@@ -54,9 +69,9 @@ RUN `
         $ProgressPreference = 'SilentlyContinue'; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri "https://download.visualstudio.microsoft.com/download/pr/5f914955-f6c7-4add-8e47-2e090bdc02fa/bc60b587587d10eacc50fe99a6f3d57a81749cb55c904225892d1d165f01a913/vs_BuildTools.exe" `
+            -Uri https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
-    && start /w vs_BuildTools.exe ^ `
+    && start /w vs_BuildTools ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
@@ -67,15 +82,15 @@ RUN `
     && del vs_BuildTools.exe `
     `
     # Trigger dotnet first run experience by running arbitrary cmd
-    && "%ProgramFiles%\dotnet\dotnet.exe" help `
+    && "%ProgramFiles%\dotnet\dotnet" help `
     `
     # Workaround for issues with 64-bit ngen
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
     `
     # ngen assemblies queued by VS installers
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen update `
-    && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update `
     `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
@@ -90,7 +105,7 @@ RUN powershell -Command `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2020.11.zip `
+            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip `
             -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip; `
         Expand-Archive MSBuild.Microsoft.VisualStudio.Web.targets.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0\" `
     && del MSBuild.Microsoft.VisualStudio.Web.targets.zip

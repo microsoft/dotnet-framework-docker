@@ -1,0 +1,26 @@
+{
+    "variables": {
+      "kb|ltsc2016|3.5-4.7.2":"kb5006669",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/10/windows10.0-kb5006669-x64_aa5c931de237226eae4f333915750dbd998a8534.msu",
+      "kb|ltsc2019|3.5-4.7.2": "kb5005543",
+      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005543-x64_3e4279f36b9b94cafb301f105e402b9d8df476bc.msu",
+
+      "kb|ltsc2016": "kb5006065",
+      "lcu|ltsc2016": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006065-x64-ndp48_022b43043c63f17a102acfbbd06870b1bc3c45a6.msu",
+      "kb|ltsc2019": "kb5005540",
+      "lcu|ltsc2019": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/08/windows10.0-kb5005540-x64-ndp48_ddca726ba3efa8935b549d9840b190c5efd78d60.msu",
+      "kb|2004": "kb5005539",
+      "lcu|2004": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005539-x64-ndp48_ed8d788827279dcf8689fa6936bc0f2ba375783b.msu",
+      "kb|20H2": "kb5005539",
+      "lcu|20H2": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005539-x64-ndp48_ed8d788827279dcf8689fa6936bc0f2ba375783b.msu",
+      "kb|ltsc2022": "kb5005538",
+      "lcu|ltsc2022": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005538-x64-ndp48_451a4214d51de628ef2c3c8a69c87826b2ab43c8.msu",
+
+      "nuget|version": "5.11.0",
+  
+      "vs|version": "16.11",
+      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe",
+      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe",
+      "vs|webTargetsUrl": "https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip"
+    }
+  }

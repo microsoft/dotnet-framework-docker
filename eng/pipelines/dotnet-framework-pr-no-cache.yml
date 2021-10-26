@@ -2,7 +2,7 @@ trigger: none
 pr:
   branches:
     include:
-    - master
+    - main
   paths:
     include:
     - eng/*
@@ -10,7 +10,7 @@ pr:
 
 resources:
   repositories:
-  - repository: VersionsRepo
+  - repository: PublicVersionsRepo
     type: github
     endpoint: dotnet
     name: dotnet/versions
@@ -21,9 +21,10 @@ variables:
   value: manifest.json
 
 stages:
-- template: ../common/templates/stages/build-test-publish-repo.yml
+- template: ../common/templates/stages/dotnet/build-test-publish-repo.yml
   parameters:
-    buildMatrixType: platformVersionedOs
+    internalProjectName: ${{ variables.internalProjectName }}
+    publicProjectName: ${{ variables.publicProjectName }}
     buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
     windowsAmdBuildJobTimeout: 330
     noCache: true

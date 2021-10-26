@@ -11,7 +11,7 @@ Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Dock
 
 # How to Use the Image
 
-The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/master/samples/README.md) show various ways to use .NET Framework and Docker together.
+The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
 ## Container sample: Run a WCF application
 You can quickly run a container with a pre-built [sample WCF Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the WCF Docker sample.
@@ -52,35 +52,35 @@ docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.
 
 # Full Tag Listing
 
+## Windows Server Core 2022 amd64 Tags
+Tag | Dockerfile
+---------| ---------------
+4.8-20211012-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-ltsc2022/Dockerfile)
+
 ## Windows Server Core, version 20H2 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20201110-windowsservercore-20H2, 4.8-windowsservercore-20H2, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-20H2/Dockerfile)
+4.8-20211012-windowsservercore-20H2, 4.8-windowsservercore-20H2, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-20H2/Dockerfile)
 
 ## Windows Server Core, version 2004 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20201110-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-2004/Dockerfile)
-
-## Windows Server Core, version 1909 amd64 Tags
-Tag | Dockerfile
----------| ---------------
-4.8-20201110-windowsservercore-1909, 4.8-windowsservercore-1909, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-1909/Dockerfile)
+4.8-20211012-windowsservercore-2004, 4.8-windowsservercore-2004, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-2004/Dockerfile)
 
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20201110-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-ltsc2019/Dockerfile)
-4.7.2-20201110-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.7.2/windowsservercore-ltsc2019/Dockerfile)
+4.8-20211012-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-ltsc2019/Dockerfile)
+4.7.2-20211012-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.2/windowsservercore-ltsc2019/Dockerfile)
 
 ## Windows Server Core 2016 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20201110-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.8/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20201208-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20201208-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
-4.7-20201208-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
-4.6.2-20201208-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/master/src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
+4.8-20211012-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20211012-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20211012-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
+4.7-20211012-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
+4.6.2-20211012-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/wcf at https://mcr.microsoft.com/v2/dotnet/framework/wcf/tags/list.
 
@@ -88,7 +88,7 @@ You can retrieve a list of all available tags for dotnet/framework/wcf at https:
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-4.8 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-1909, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.8 | windowsservercore-20H2, windowsservercore-2004, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
 4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
@@ -100,7 +100,7 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # Image Update Policy
 
-* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:1909, windows/servercore:ltsc2019, etc.).
+* We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:20H2, windows/servercore:ltsc2019, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
 # Feedback
@@ -110,6 +110,6 @@ See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/
 
 # License
 
-* Legal Notice: [Container License Information](https://aka.ms/mcr/osslegalnotice)
-
-The .NET Framework images use the same license as the [Windows Server Core base image](https://hub.docker.com/_/microsoft-windows-servercore/).
+* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://hub.docker.com/_/microsoft-dotnet-framework/)
+* [Microsoft Software Supplemental License for Windows Container Base Image](https://hub.docker.com/_/microsoft-windows-servercore/): applies to all [.NET Framework container images](https://hub.docker.com/_/microsoft-dotnet-framework/)
+* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/)

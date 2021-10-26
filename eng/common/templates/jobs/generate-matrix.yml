@@ -1,22 +1,28 @@
 parameters:
   matrixType: null
   name: null
+  pool: {}
   customBuildLegGroupArgs: ""
   isTestStage: false
+  internalProjectName: null
 
 jobs:
 - job: ${{ parameters.name }}
-  pool:
-    vmImage: $(defaultLinuxAmd64PoolImage)
+  pool: ${{ parameters.pool }}
   steps:
-  - template: ../steps/validate-branch.yml
   - template: ../steps/init-docker-linux.yml
+  - template: ../steps/validate-branch.yml
+    parameters:
+      internalProjectName: ${{ parameters.internalProjectName }}
   - ${{ if eq(parameters.isTestStage, true) }}:
     - template: ../steps/download-build-artifact.yml
       parameters:
         targetPath: $(Build.ArtifactStagingDirectory)
         artifactName: image-info
     - script: echo "##vso[task.setvariable variable=additionalGenerateBuildMatrixOptions]--image-info $(artifactsPath)/image-info.json"
+      displayName: Set GenerateBuildMatrix Variables
+  - ${{ if eq(parameters.isTestStage, false) }}:
+    - script: echo "##vso[task.setvariable variable=additionalGenerateBuildMatrixOptions]"
       displayName: Set GenerateBuildMatrix Variables
   - script: >
       $(runImageBuilderCmd) generateBuildMatrix

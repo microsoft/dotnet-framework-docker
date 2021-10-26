@@ -2,31 +2,31 @@
 
 FROM mcr.microsoft.com/windows/servercore:20H2-amd64
 
-# Enable detection of running in a container
-ENV DOTNET_RUNNING_IN_CONTAINER=true `
-    # Ngen workaround: https://github.com/microsoft/dotnet-framework-docker/issues/231
+ENV `
+    # Enable detection of running in a container
+    DOTNET_RUNNING_IN_CONTAINER=true `
     COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Install .NET Fx 3.5
-    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-2009.zip `
+    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-20H2.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
-    && DISM /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
-`
+    `
     # Apply latest patch
-    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2020/10/windows10.0-kb4580419-x64-ndp48_197efbd77177abe76a587359cea77bda5398c594.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005539-x64-ndp48_ed8d788827279dcf8689fa6936bc0f2ba375783b.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && DISM /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb4580419-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5005539-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
-    && \Windows\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
-    # To optimize 32-bit assemblies, uncomment the next line and add an escape character (`) to the end of the previous line
-    # && \Windows\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
-    && C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ngen.exe update `
-    && C:\Windows\Microsoft.NET\Framework\v4.0.30319\ngen.exe update
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    # To optimize 32-bit assemblies, uncomment the next line
+    # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
+    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
