@@ -29,3 +29,5 @@ stages:
     publicProjectName: ${{ variables.publicProjectName }}
     buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
     windowsAmdBuildJobTimeout: 330
+    ${{ if eq(variables['System.TeamProject'], variables.publicProjectName) }}:
+      buildMatrixType: platformVersionedOs
