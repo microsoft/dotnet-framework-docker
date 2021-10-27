@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:{{PRODUCT_VERSION}}-windowsservercore-ltsc2016
+FROM $REPO:{{PRODUCT_VERSION}}-{{VARIABLES[cat(PRODUCT_VERSION, "-", OS_VERSION_NUMBER, "-Runtime-DateStamp")]}}-windowsservercore-ltsc2016
 {{if PRODUCT_VERSION = "3.5"
 :
 RUN `

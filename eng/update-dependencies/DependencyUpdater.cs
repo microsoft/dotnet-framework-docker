@@ -158,7 +158,7 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies
 
             return new FileRegexReleaseUpdater
             {
-                Path = Path.Combine(Program.RepoRoot, "manifest.json"),
+                Path = Path.Combine(Program.RepoRoot, "manifest.datestamps.json"),
                 BuildInfoName = buildInfoName,
                 Regex = new Regex($"\"{dateStampVariablePrefix}ReleaseDateStamp\": \"(?<{TagDateStampGroupName}>\\d{{8}})\""),
                 VersionGroupName = TagDateStampGroupName
