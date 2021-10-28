@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -52,12 +54,67 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
+        [SkippableTheory(
+            "3.5", "4.6.2", "4.7", "4.7.1", "4.7.2",
+            SkipOnOsVersions = new string[]
+            {
+                OsVersion.WSC_LTSC2016,
+                OsVersion.WSC_2004,
+                OsVersion.WSC_20H2
+            })]
+        [MemberData(nameof(GetImageData))]
+        public void ContainerLimits(RuntimeImageDescriptor imageDescriptor)
+        {
+            string appId = $"container-limits-{DateTime.Now.ToFileTime()}";
+            string workDir = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "projects",
+                $"dotnetapp-{imageDescriptor.Version}");
+
+            string baseBuildImage = _imageTestHelper.GetImage("sdk", imageDescriptor.SdkVersion, imageDescriptor.OsVariant);
+            string baseRuntimeImage = _imageTestHelper.GetImage("runtime", imageDescriptor.Version, imageDescriptor.OsVariant);
+            List<string> appBuildArgs = new ()
+            {
+                $"BASE_BUILD_IMAGE={baseBuildImage}",
+                $"BASE_RUNTIME_IMAGE={baseRuntimeImage}"
+            };
+
+            string runCommand = "getProcessorCount";
+
+            try
+            {
+                _imageTestHelper.DockerHelper.Build(
+                    tag: appId,
+                    dockerfile: Path.Combine(workDir, "Dockerfile"),
+                    contextDir: workDir,
+                    buildArgs: appBuildArgs.ToArray());
+
+                // Get the actual number of processors that exist in the container by default
+                int actualProcessorCount = int.Parse(_imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand));
+
+                // Run the container to use half the available processors
+                int expectedProcessorCount = actualProcessorCount / 2;
+                string output = _imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand, optionalRunArgs: "--cpus 0.5");
+                Assert.Equal(expectedProcessorCount.ToString(), output);
+
+                // Run the container with an override to specify the number of processors
+                string overridenProcessorCount = "20";
+                output = _imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand, optionalRunArgs: $"--cpus 0.5 -e COMPLUS_PROCESSOR_COUNT={overridenProcessorCount}");
+                Assert.Equal(overridenProcessorCount, output);
+            }
+            finally
+            {
+                _imageTestHelper.DockerHelper.DeleteContainer(appId);
+                _imageTestHelper.DockerHelper.DeleteImage(appId);
+            }
+        }
+
         public static IEnumerable<object[]> GetImageData()
         {
             return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
 
-        private void VerifyFxImages(RuntimeImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime)
+        private string VerifyFxImages(RuntimeImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime, string optionalRunArgs = null)
         {
             string baseBuildImage = _imageTestHelper.GetImage("sdk", imageDescriptor.SdkVersion, imageDescriptor.OsVariant);
 
@@ -68,12 +125,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 appBuildArgs.Add($"BASE_RUNTIME_IMAGE={baseRuntimeImage}");
             }
 
-            _imageTestHelper.BuildAndTestImage(
+            return _imageTestHelper.BuildAndTestImage(
                 imageDescriptor: imageDescriptor,
                 buildArgs: appBuildArgs,
                 appDescriptor: appDescriptor,
                 runCommand: runCommand,
-                testUrl: ""
+                testUrl: "",
+                optionalRunArgs
                 );
         }
     }

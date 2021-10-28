@@ -8,6 +8,15 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Hello Docker World from .NET 4.8!");
+        bool getProcessorCount = args[0] == "getProcessorCount";
+
+        if (getProcessorCount)
+        {
+            Console.WriteLine(Environment.ProcessorCount);
+        }
+        else
+        {
+            Console.WriteLine("Hello Docker World from .NET 4.8!");
+        }
     }
 }

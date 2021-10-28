@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2022-amd64
 ENV `
     # Enable detection of running in a container
     DOTNET_RUNNING_IN_CONTAINER=true `
+    COMPLUS_RUNNING_IN_CONTAINER=1 `
     COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
@@ -14,6 +15,14 @@ RUN `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
     && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5005538-x64-ndp48.cab `
+    && rmdir /S /Q patch `
+    `
+    # Apply patch to provide support for container limits
+    && curl -fSLo patch.msu https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008395-x64-NDP48.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb9008395-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
