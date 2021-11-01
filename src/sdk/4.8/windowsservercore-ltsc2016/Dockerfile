@@ -40,11 +40,12 @@ RUN `
             -Uri https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
+        --add Microsoft.Component.ClickOnce.MSBuild ^ `
+        --add Microsoft.Net.Component.4.8.SDK ^ `
+        --add Microsoft.VisualStudio.Component.WebDeploy ^ `
+        --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup ^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
-        --add Microsoft.Net.Component.4.8.SDK ^ `
-        --add Microsoft.Component.ClickOnce.MSBuild ^ `
-        --add Microsoft.VisualStudio.Component.WebDeploy ^ `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
@@ -65,18 +66,6 @@ RUN `
     && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
-
-# Install web targets
-RUN powershell -Command `
-        $ErrorActionPreference = 'Stop'; `
-        $ProgressPreference = 'SilentlyContinue'; `
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip `
-            -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip; `
-        Expand-Archive MSBuild.Microsoft.VisualStudio.Web.targets.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0\" `
-    && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
 ENV ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
 

@@ -49,11 +49,12 @@ RUN `
     # Install VS Build Tools
     && curl -fSLo vs_BuildTools.exe {{VARIABLES["vs|buildToolsUrl"]}} `
     && start /w vs_BuildTools @^ `
+        --add Microsoft.Component.ClickOnce.MSBuild @^ `
+        --add Microsoft.Net.Component.4.8.SDK @^ `
+        --add Microsoft.VisualStudio.Component.WebDeploy @^ `
+        --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup @^ `
         --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools @^ `
-        --add Microsoft.Net.Component.4.8.SDK @^ `
-        --add Microsoft.Component.ClickOnce.MSBuild @^ `
-        --add Microsoft.VisualStudio.Component.WebDeploy @^ `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
@@ -75,11 +76,6 @@ RUN `
     && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
-
-# Install web targets
-RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip {{VARIABLES["vs|webTargetsUrl"]}} `
-    && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
-    && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
