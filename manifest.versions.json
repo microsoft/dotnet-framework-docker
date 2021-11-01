@@ -21,7 +21,6 @@
   
       "vs|version": "16.11",
       "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe",
-      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe",
-      "vs|webTargetsUrl": "https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip"
+      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe"
     }
   }
