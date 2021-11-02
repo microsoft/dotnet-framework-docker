@@ -10,18 +10,30 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     public class SkippableTheoryAttribute : TheoryAttribute
     {
+        private readonly Lazy<string> _skip;
         public string[] SkipOnOsVersions { get; set; } = Array.Empty<string>();
+        public string[] SkipOnRuntimeVersions { get; }
 
         public SkippableTheoryAttribute(params string[] skipOnRuntimeVersions)
         {
-            bool skipped = CheckForSkip(Config.Version, skipOnRuntimeVersions);
-            if (!skipped)
-            {
-                CheckForSkip(Config.OS, SkipOnOsVersions);
-            }
+            SkipOnRuntimeVersions = skipOnRuntimeVersions;
+            _skip = new Lazy<string>(() => LoadSkip());
         }
 
-        private bool CheckForSkip(string configuredVersion, string[] skipOnVersions)
+        public override string Skip { get => _skip.Value; set => throw new NotSupportedException(); }
+
+        private string LoadSkip()
+        {
+            string skip = CheckForSkip(Config.Version, SkipOnRuntimeVersions);
+            if (skip is null)
+            {
+                skip = CheckForSkip(Config.OS, SkipOnOsVersions);
+            }
+
+            return skip;
+        }
+
+        private string CheckForSkip(string configuredVersion, string[] skipOnVersions)
         {
             if (!string.IsNullOrEmpty(configuredVersion) && configuredVersion != "*")
             {
@@ -31,13 +43,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 {
                     if (Regex.IsMatch(skipOnVersion, versionPattern, RegexOptions.IgnoreCase))
                     {
-                        Skip = $"{skipOnVersion} is unsupported";
-                        return true;
+                        return $"{skipOnVersion} is unsupported";
                     }
                 }
             }
 
-            return false;
+            return null;
         }
     }
 }

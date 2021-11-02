@@ -8,7 +8,7 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        bool getProcessorCount = args[0] == "getProcessorCount";
+        bool getProcessorCount = args.Length > 0 && args[0] == "getProcessorCount";
 
         if (getProcessorCount)
         {
