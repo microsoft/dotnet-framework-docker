@@ -89,18 +89,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     contextDir: workDir,
                     buildArgs: appBuildArgs.ToArray());
 
-                // Get the actual number of processors that exist in the container by default
-                int actualProcessorCount = int.Parse(_imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand));
-
-                // Run the container to use half the available processors
-                int expectedProcessorCount = actualProcessorCount / 2;
                 string output = _imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand, optionalRunArgs: "--cpus 0.5");
-                Assert.Equal(expectedProcessorCount.ToString(), output);
+                Assert.Equal("1", output);
 
-                // Run the container with an override to specify the number of processors
-                string overridenProcessorCount = "20";
-                output = _imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand, optionalRunArgs: $"--cpus 0.5 -e COMPLUS_PROCESSOR_COUNT={overridenProcessorCount}");
-                Assert.Equal(overridenProcessorCount, output);
+                string processorCount = "20";
+                output = _imageTestHelper.DockerHelper.Run(image: appId, name: appId, command: runCommand, optionalRunArgs: $"--cpus 0.5 -e COMPLUS_PROCESSOR_COUNT={processorCount}");
+                Assert.Equal(processorCount, output);
             }
             finally
             {
