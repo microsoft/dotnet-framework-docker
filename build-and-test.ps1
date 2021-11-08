@@ -19,12 +19,13 @@ param(
 )
 
 if ($Repos.Count -eq 0) {
-    $Path = $null
+    $Paths = $null
 }
 else {
-    $Path = @()
+    $Paths = @()
     $Repos | foreach {
-        $Path += "src/$_/$Version/$OS"
+        
+        $Paths += "src/$_/$Version/$OS"
     }
     $testCategories = $Repos
 }
@@ -33,7 +34,7 @@ if ($Mode -eq "BuildAndTest" -or $Mode -eq "Build") {
     & ./eng/common/build.ps1 `
         -Version $Version `
         -OS $OS `
-        -Path $Path `
+        -Paths $Paths `
         -OptionalImageBuilderArgs $OptionalImageBuilderArgs
 }
 

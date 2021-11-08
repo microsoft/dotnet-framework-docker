@@ -3,10 +3,12 @@
 FROM mcr.microsoft.com/windows/servercore:{{OS_VERSION_NUMBER}}-amd64
 
 ENV {{
-if OS_VERSION_NUMBER != "ltsc2019"
+if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8"
 :`
     # Enable detection of running in a container
-    DOTNET_RUNNING_IN_CONTAINER=true `
+    }}{{ if OS_VERSION_NUMBER != "ltsc2019"
+:DOTNET_RUNNING_IN_CONTAINER=true `
+    }}{{ if PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "2004" && OS_VERSION_NUMBER != "20H2":COMPLUS_RUNNING_IN_CONTAINER=1 `
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
@@ -33,6 +35,15 @@ RUN `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
     && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("kb|", OS_VERSION_NUMBER)]}}}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
+    && rmdir /S /Q patch `
+    `
+}}{{if PRODUCT_VERSION = "4.8" && (OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "ltsc2022")
+:    # Apply patch to provide support for container limits
+    && curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("limits-patch|kb|", OS_VERSION_NUMBER)]}}-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
 }}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"

@@ -17,6 +17,11 @@
       "kb|ltsc2022": "kb5005538",
       "lcu|ltsc2022": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005538-x64-ndp48_451a4214d51de628ef2c3c8a69c87826b2ab43c8.msu",
 
+      "limits-patch|kb|ltsc2022": "kb9008395",
+      "limits-patch|url|ltsc2022": "https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008395-x64-NDP48.msu",
+      "limits-patch|kb|ltsc2019": "kb9008392",
+      "limits-patch|url|ltsc2019": "https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008392-x64-NDP48.msu",
+
       "nuget|version": "5.11.0",
   
       "vs|version": "17.0",

@@ -2,7 +2,10 @@
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 
-ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
+ENV `
+    # Enable detection of running in a container
+    COMPLUS_RUNNING_IN_CONTAINER=1 `
+    COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Install .NET Fx 4.8
@@ -17,6 +20,14 @@ RUN `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
     && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5005540-x64-ndp48.cab `
+    && rmdir /S /Q patch `
+    `
+    # Apply patch to provide support for container limits
+    && curl -fSLo patch.msu https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008392-x64-NDP48.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb9008392-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
