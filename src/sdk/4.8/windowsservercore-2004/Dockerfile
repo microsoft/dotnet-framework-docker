@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.8-windowsservercore-2004
+FROM $REPO:4.8-20211109-windowsservercore-2004
 
 ENV `
     # Do not generate certificate
@@ -11,7 +11,7 @@ ENV `
     # NuGet version to install
     NUGET_VERSION=5.11.0 `
     # Install location of Roslyn
-    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # Install NuGet CLI
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
@@ -21,19 +21,24 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
 # Install VS components
 RUN `
     # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/c7109010de610a88f4140b97d799dafc8ab15f648bc0ab71a66af0cdf626c658/vs_TestAgent.exe `
+    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/0b3cf9c7e43023d0601a4d564142eca84d88808251415840b7b1e46d71909371/vs_TestAgent.exe `
     && start /w vs_TestAgent --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
     # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/b5795c5efd2e27d3dccab0e27661079a2179262bbd3ad15832c4a169fb317eb1/vs_BuildTools.exe `
+    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/50fdfb4f652e1d3ab4ec79b65bada583af704480a971e9b05c3a52a60036aa7d/vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
-        --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
-        --add Microsoft.VisualStudio.Workload.NetCoreBuildTools ^ `
-        --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
+        --add Microsoft.Net.Component.4.8.SDK ^ `
+        --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
+        --add Microsoft.NetCore.Component.Runtime.5.0 ^ `
+        --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
+        --add Microsoft.NetCore.Component.SDK ^ `
+        --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `
+        --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup ^ `
+        --add Microsoft.VisualStudio.Workload.MSBuildTools ^ `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
@@ -54,16 +59,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
-# Install web targets
-RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/MSBuild.Microsoft.VisualStudio.Web.targets.2021.08.zip `
-    && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
-    && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
-
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 

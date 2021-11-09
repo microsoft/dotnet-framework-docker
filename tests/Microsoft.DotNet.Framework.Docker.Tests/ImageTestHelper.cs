@@ -65,7 +65,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             IEnumerable<string> buildArgs,
             string appDescriptor,
             string runCommand,
-            string testUrl)
+            string testUrl,
+            string optionalRunArgs = null)
         {
             string appId = $"{appDescriptor}-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
@@ -83,7 +84,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                     contextDir: workDir,
                     buildArgs: buildArgs.ToArray());
 
-                output = DockerHelper.Run(image: appId, name: appId, command: runCommand, detach: !string.IsNullOrEmpty(testUrl));
+                output = DockerHelper.Run(image: appId, name: appId, command: runCommand, optionalRunArgs: optionalRunArgs, detach: !string.IsNullOrEmpty(testUrl));
                 if (!string.IsNullOrEmpty(testUrl))
                 {
                     VerifyHttpResponseFromContainer(appId, testUrl);

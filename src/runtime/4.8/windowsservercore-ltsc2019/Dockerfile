@@ -2,7 +2,10 @@
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 
-ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
+ENV `
+    # Enable detection of running in a container
+    COMPLUS_RUNNING_IN_CONTAINER=1 `
+    COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
     # Install .NET Fx 4.8
@@ -12,11 +15,19 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/08/windows10.0-kb5005540-x64-ndp48_ddca726ba3efa8935b549d9840b190c5efd78d60.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006366-x64-ndp48_efb89eb8650e3e6502d4e366e310dca651420678.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5005540-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5006366-x64-ndp48.cab `
+    && rmdir /S /Q patch `
+    `
+    # Apply patch to provide support for container limits
+    && curl -fSLo patch.msu https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008392-x64-NDP48.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb9008392-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx

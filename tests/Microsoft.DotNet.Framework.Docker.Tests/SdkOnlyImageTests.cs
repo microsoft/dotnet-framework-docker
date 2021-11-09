@@ -91,7 +91,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             variables.AddRange(RuntimeOnlyImageTests.GetEnvironmentVariables(imageDescriptor));
 
             variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION",
-                @"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"));
+                @"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"));
             variables.Add(new EnvironmentVariableInfo("DOTNET_GENERATE_ASPNET_CERTIFICATE", "false"));
 
             if (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
@@ -115,7 +115,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             JArray json = (JArray)JsonConvert.DeserializeObject(output);
 
             Assert.Single(json);
-            Assert.Equal(@"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools", json[0]["installationPath"]);
+            Assert.Equal(@"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools", json[0]["installationPath"]);
 
             Version actualVsVersion = Version.Parse(json[0]["catalog"]["productDisplayVersion"].ToString());
 

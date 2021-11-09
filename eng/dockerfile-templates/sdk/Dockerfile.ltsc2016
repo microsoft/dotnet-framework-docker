@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:{{PRODUCT_VERSION}}-windowsservercore-ltsc2016
+FROM $REPO:{{PRODUCT_VERSION}}-{{VARIABLES[cat(PRODUCT_VERSION, "-", OS_VERSION_NUMBER, "-Runtime-DateStamp")]}}-windowsservercore-ltsc2016
 {{if PRODUCT_VERSION = "3.5"
 :
 RUN `
@@ -73,11 +73,16 @@ RUN `
             -Uri {{VARIABLES["vs|buildToolsUrl"]}} `
             -OutFile vs_BuildTools.exe `
     && start /w vs_BuildTools @^ `
-        --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
-        --add Microsoft.VisualStudio.Workload.NetCoreBuildTools @^ `
-        --add Microsoft.Net.Component.4.8.SDK @^ `
         --add Microsoft.Component.ClickOnce.MSBuild @^ `
+        --add Microsoft.Net.Component.4.8.SDK @^ `
+        --add Microsoft.NetCore.Component.Runtime.3.1 @^ `
+        --add Microsoft.NetCore.Component.Runtime.5.0 @^ `
+        --add Microsoft.NetCore.Component.Runtime.6.0 @^ `
+        --add Microsoft.NetCore.Component.SDK @^ `
+        --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
         --add Microsoft.VisualStudio.Component.WebDeploy @^ `
+        --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup @^ `
+        --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
@@ -99,25 +104,13 @@ RUN `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
-# Install web targets
-RUN powershell -Command `
-        $ErrorActionPreference = 'Stop'; `
-        $ProgressPreference = 'SilentlyContinue'; `
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri {{VARIABLES["vs|webTargetsUrl"]}} `
-            -OutFile MSBuild.Microsoft.VisualStudio.Web.targets.zip; `
-        Expand-Archive MSBuild.Microsoft.VisualStudio.Web.targets.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0\" `
-    && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
-
-ENV ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+ENV ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 

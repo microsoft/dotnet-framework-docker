@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:{{PRODUCT_VERSION}}-{{OS_VERSION}}
+FROM $REPO:{{PRODUCT_VERSION}}-{{VARIABLES[cat(PRODUCT_VERSION, "-", OS_VERSION_NUMBER, "-Runtime-DateStamp")]}}-{{OS_VERSION}}
 
 ENV `
     # Do not generate certificate
@@ -11,7 +11,7 @@ ENV `
     }}# NuGet version to install
     NUGET_VERSION={{VARIABLES[cat("nuget|version")]}} `
     # Install location of Roslyn
-    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\Roslyn"
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
 :
 RUN `
@@ -49,11 +49,16 @@ RUN `
     # Install VS Build Tools
     && curl -fSLo vs_BuildTools.exe {{VARIABLES["vs|buildToolsUrl"]}} `
     && start /w vs_BuildTools @^ `
-        --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
-        --add Microsoft.VisualStudio.Workload.NetCoreBuildTools @^ `
-        --add Microsoft.Net.Component.4.8.SDK @^ `
         --add Microsoft.Component.ClickOnce.MSBuild @^ `
+        --add Microsoft.Net.Component.4.8.SDK @^ `
+        --add Microsoft.NetCore.Component.Runtime.3.1 @^ `
+        --add Microsoft.NetCore.Component.Runtime.5.0 @^ `
+        --add Microsoft.NetCore.Component.Runtime.6.0 @^ `
+        --add Microsoft.NetCore.Component.SDK @^ `
+        --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
         --add Microsoft.VisualStudio.Component.WebDeploy @^ `
+        --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup @^ `
+        --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
         --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_BuildTools.exe `
@@ -76,16 +81,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
     && rmdir /S /Q "%ProgramData%\Package Cache"
 
-# Install web targets
-RUN curl -fSLo MSBuild.Microsoft.VisualStudio.Web.targets.zip {{VARIABLES["vs|webTargetsUrl"]}} `
-    && tar -zxf MSBuild.Microsoft.VisualStudio.Web.targets.zip -C "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VisualStudio\v16.0" `
-    && del MSBuild.Microsoft.VisualStudio.Web.targets.zip
-
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
