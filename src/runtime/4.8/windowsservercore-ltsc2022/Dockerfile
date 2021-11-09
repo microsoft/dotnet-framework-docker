@@ -10,11 +10,11 @@ ENV `
 
 RUN `
     # Apply latest patch
-    curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/08/windows10.0-kb5005538-x64-ndp48_451a4214d51de628ef2c3c8a69c87826b2ab43c8.msu `
+    curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/09/windows10.0-kb5006364-x64-ndp48_b1f07ef46aa26dc6f55d677d156c038a8f5a1686.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5005538-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5006364-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # Apply patch to provide support for container limits

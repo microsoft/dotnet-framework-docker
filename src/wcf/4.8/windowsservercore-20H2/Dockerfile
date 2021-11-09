@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/aspnet
-FROM $REPO:4.8-20211012-windowsservercore-20H2
+FROM $REPO:4.8-20211109-windowsservercore-20H2
 
 # Install Windows components required for WCF service hosted on IIS
 RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:WCF-HTTP-Activation45 /FeatureName:WCF-TCP-Activation45 /FeatureName:IIS-WebSockets
