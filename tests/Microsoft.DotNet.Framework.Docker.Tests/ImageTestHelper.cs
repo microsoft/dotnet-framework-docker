@@ -21,11 +21,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         private static readonly Lazy<JObject> s_imageInfoData;
 
         public DockerHelper DockerHelper { get; }
-        private readonly ITestOutputHelper _outputHelper;
+        public ITestOutputHelper OutputHelper { get; }
 
         public ImageTestHelper(ITestOutputHelper outputHelper)
         {
-            _outputHelper = outputHelper;
+            OutputHelper = outputHelper;
             DockerHelper = new DockerHelper(outputHelper);
         }
 
@@ -168,12 +168,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                             result.EnsureSuccessStatusCode();
                         }
 
-                        _outputHelper.WriteLine($"Successfully accessed {url}");
+                        OutputHelper.WriteLine($"Successfully accessed {url}");
                         return;
                     }
                     catch (Exception ex)
                     {
-                        _outputHelper.WriteLine($"Request to {url} failed - retrying: {ex}");
+                        OutputHelper.WriteLine($"Request to {url} failed - retrying: {ex}");
                     }
                 }
             }
