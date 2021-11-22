@@ -59,8 +59,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public void ContainerLimits(RuntimeImageDescriptor imageDescriptor)
         {
             // Container limits are only supported on 4.8 for Server 2019 and 2022.
-            if (imageDescriptor.Version != "4.8" &&
-                (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019 ||
+            if (imageDescriptor.Version != "4.8" ||
+                (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019 &&
                 imageDescriptor.OsVariant != OsVersion.WSC_LTSC2022))
             {
                 _imageTestHelper.OutputHelper.WriteLine("Test skipped due to unsupported version.");
