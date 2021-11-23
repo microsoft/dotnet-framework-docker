@@ -54,17 +54,19 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
-        [SkippableTheory(
-            "3.5", "4.6.2", "4.7", "4.7.1", "4.7.2",
-            SkipOnOsVersions = new string[]
-            {
-                OsVersion.WSC_LTSC2016,
-                OsVersion.WSC_2004,
-                OsVersion.WSC_20H2
-            })]
+        [Theory]
         [MemberData(nameof(GetImageData))]
         public void ContainerLimits(RuntimeImageDescriptor imageDescriptor)
         {
+            // Container limits are only supported on 4.8 for Server 2019 and 2022.
+            if (imageDescriptor.Version != "4.8" ||
+                (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019 &&
+                imageDescriptor.OsVariant != OsVersion.WSC_LTSC2022))
+            {
+                _imageTestHelper.OutputHelper.WriteLine("Test skipped due to unsupported version.");
+                return;
+            }
+
             string appId = $"container-limits-{DateTime.Now.ToFileTime()}";
             string workDir = Path.Combine(
                 Directory.GetCurrentDirectory(),
