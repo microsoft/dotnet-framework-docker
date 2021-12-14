@@ -19,12 +19,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_20H2 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_2004 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
         };
@@ -223,8 +221,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string expectedShellValue;
             if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
-                imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019 ||
-                imageDescriptor.OsVariant == OsVersion.WSC_2004)
+                imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019)
             {
                 expectedShellValue = ShellValue_PowerShell;
             }
