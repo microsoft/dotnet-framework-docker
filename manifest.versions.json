@@ -1,9 +1,9 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5-4.7.2":"kb5007192",
-      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/11/windows10.0-kb5007192-x64_1eb621234dd4a597a97769935f46fc868c5800d9.msu",
-      "kb|ltsc2019|3.5-4.7.2": "kb5006368",
-      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006368-x64_a456b267d022e2fb0e96c3d75fb1911ea0d97d5a.msu",
+      "kb|ltsc2016|3.5-4.7.2":"kb5008207",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/12/windows10.0-kb5008207-x64_cf6806ca21959c09136350ee37096950189f1023.msu",
+      "kb|ltsc2019|3.5-4.7.2": "kb5008218",
+      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/12/windows10.0-kb5008218-x64_66e07f2fc23728ca0b8f395df15da52546e45e45.msu",
 
       "4.8-is-security-release": false,
       "kb|ltsc2016": "kb5007152",
@@ -22,7 +22,7 @@
       "limits-patch|kb|ltsc2019": "kb9008392",
       "limits-patch|url|ltsc2019": "https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008392-x64-NDP48.msu",
 
-      "nuget|version": "5.11.0",
+      "nuget|version": "6.0.0",
   
       "vs|version": "17.0",
       "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/0b3cf9c7e43023d0601a4d564142eca84d88808251415840b7b1e46d71909371/vs_TestAgent.exe",
