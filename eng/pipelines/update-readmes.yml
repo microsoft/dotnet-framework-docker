@@ -7,7 +7,8 @@ variables:
   value: manifest.json
 jobs:
 - job: UpdateReadmes
-  pool: $(defaultLinuxAmd64PoolImage)
+  pool:
+    vmImage: $(defaultLinuxAmd64PoolImage)
   steps:
   - template: ../common/templates/steps/init-docker-linux.yml
   - template: ../common/templates/steps/publish-readmes.yml
