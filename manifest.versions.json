@@ -10,8 +10,6 @@
       "lcu|ltsc2016": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/10/windows10.0-kb5007152-x64-ndp48_5631ba2bdcb5a06578ebbd83970739fb87a3ac4f.msu",
       "kb|ltsc2019": "kb5006366",
       "lcu|ltsc2019": "http://download.windowsupdate.com/c/msdownload/update/software/updt/2021/09/windows10.0-kb5006366-x64-ndp48_efb89eb8650e3e6502d4e366e310dca651420678.msu",
-      "kb|2004": "kb5006365",
-      "lcu|2004": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/09/windows10.0-kb5006365-x64-ndp48_a78458584d144b4adc86e78905bef7adaac1a311.msu",
       "kb|20H2": "kb5006365",
       "lcu|20H2": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/09/windows10.0-kb5006365-x64-ndp48_a78458584d144b4adc86e78905bef7adaac1a311.msu",
       "kb|ltsc2022": "kb5006364",

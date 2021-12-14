@@ -102,7 +102,7 @@ RUN powershell " `
         Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
         Remove-Item -Force referenceassemblies.zip; `
     }"{{
-if OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "2004"
+if OS_VERSION_NUMBER = "ltsc2019"
 :
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]}}
