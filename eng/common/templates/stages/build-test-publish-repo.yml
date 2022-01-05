@@ -33,8 +33,6 @@ parameters:
     vmImage: $(defaultWindows2016PoolImage)
   windows1809Pool:
     vmImage: $(defaultWindows1809PoolImage)
-  windows2004Pool:
-    vmImage: $(defaultWindows2004PoolImage)
   windows20H2Pool:
     vmImage: $(defaultWindows20H2PoolImage)
   windows2022Pool:
@@ -98,6 +96,19 @@ stages:
       publicVersionsRepoRef: ${{ parameters.publicVersionsRepoRef }}
   - template: ../jobs/build-images.yml
     parameters:
+      name: Linux_arm32v6
+      pool: ${{ parameters.linuxArm32Pool }}
+      matrix: dependencies.GenerateBuildMatrix.outputs['matrix.LinuxArm32v6']
+      dockerClientOS: linux
+      buildJobTimeout: ${{ parameters.linuxArmBuildJobTimeout }}
+      customInitSteps: ${{ parameters.customBuildInitSteps }}
+      noCache: ${{ parameters.noCache }}
+      internalProjectName: ${{ parameters.internalProjectName }}
+      publicProjectName: ${{ parameters.publicProjectName }}
+      internalVersionsRepoRef: ${{ parameters.internalVersionsRepoRef }}
+      publicVersionsRepoRef: ${{ parameters.publicVersionsRepoRef }}
+  - template: ../jobs/build-images.yml
+    parameters:
       name: Linux_arm32v7
       pool: ${{ parameters.linuxArm32Pool }}
       matrix: dependencies.GenerateBuildMatrix.outputs['matrix.LinuxArm32v7']
@@ -114,19 +125,6 @@ stages:
       name: Windows1809_amd64
       pool: ${{ parameters.windows1809Pool }}
       matrix: dependencies.GenerateBuildMatrix.outputs['matrix.Windows1809Amd64']
-      dockerClientOS: windows
-      buildJobTimeout: ${{ parameters.windowsAmdBuildJobTimeout }}
-      customInitSteps: ${{ parameters.customBuildInitSteps }}
-      noCache: ${{ parameters.noCache }}
-      internalProjectName: ${{ parameters.internalProjectName }}
-      publicProjectName: ${{ parameters.publicProjectName }}
-      internalVersionsRepoRef: ${{ parameters.internalVersionsRepoRef }}
-      publicVersionsRepoRef: ${{ parameters.publicVersionsRepoRef }}
-  - template: ../jobs/build-images.yml
-    parameters:
-      name: Windows2004_amd64
-      pool: ${{ parameters.windows2004Pool }}
-      matrix: dependencies.GenerateBuildMatrix.outputs['matrix.Windows2004Amd64']
       dockerClientOS: windows
       buildJobTimeout: ${{ parameters.windowsAmdBuildJobTimeout }}
       customInitSteps: ${{ parameters.customBuildInitSteps }}
@@ -227,6 +225,13 @@ stages:
         internalProjectName: ${{ parameters.internalProjectName }}
     - template: ../jobs/test-images-linux-client.yml
       parameters:
+        name: Linux_arm32v6
+        pool: ${{ parameters.linuxArm32Pool }}
+        matrix: dependencies.GenerateTestMatrix.outputs['matrix.LinuxArm32v6']
+        testJobTimeout: ${{ parameters.linuxArmTestJobTimeout }}
+        internalProjectName: ${{ parameters.internalProjectName }}
+    - template: ../jobs/test-images-linux-client.yml
+      parameters:
         name: Linux_arm32v7
         pool: ${{ parameters.linuxArm32Pool }}
         matrix: dependencies.GenerateTestMatrix.outputs['matrix.LinuxArm32v7']
@@ -237,13 +242,6 @@ stages:
         name: Windows1809_amd64
         pool: ${{ parameters.windows1809Pool }}
         matrix: dependencies.GenerateTestMatrix.outputs['matrix.Windows1809Amd64']
-        testJobTimeout: ${{ parameters.windowsAmdTestJobTimeout }}
-        internalProjectName: ${{ parameters.internalProjectName }}
-    - template: ../jobs/test-images-windows-client.yml
-      parameters:
-        name: Windows2004_amd64
-        pool: ${{ parameters.windows2004Pool }}
-        matrix: dependencies.GenerateTestMatrix.outputs['matrix.Windows2004Amd64']
         testJobTimeout: ${{ parameters.windowsAmdTestJobTimeout }}
         internalProjectName: ${{ parameters.internalProjectName }}
     - template: ../jobs/test-images-windows-client.yml

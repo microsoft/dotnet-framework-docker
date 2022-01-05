@@ -17,6 +17,8 @@ variables:
   value: ""
 - name: ingestKustoImageInfo
   value: true
+- name: publishNotificationsEnabled
+  value: false
 - name: manifestVariables
   value: ""
 - name: mcrImageIngestionTimeout
@@ -41,8 +43,6 @@ variables:
   value: vs2017-win2016
 - name: defaultWindows1809PoolImage
   value: windows-2019
-- name: defaultWindows2004PoolImage
-  value: null
 - name: defaultWindows20H2PoolImage
   value: null
 - name: defaultWindows2022PoolImage
