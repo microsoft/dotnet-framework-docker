@@ -27,6 +27,7 @@
 # About {{if IS_PRODUCT_FAMILY:.NET Framework^else:This Image}}
 
 {{InsertTemplate(join(filter(["About", SHORT_REPO, "md"], len), "."))}}
+
 Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
 
 # How to Use the Image{{if IS_PRODUCT_FAMILY:s}}
@@ -34,6 +35,7 @@ Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Dock
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
 {{InsertTemplate(join(filter(["Use", SHORT_REPO, "md"], len), "."))}}
+
 # Related Repos
 {{if !IS_PRODUCT_FAMILY:
 .NET Framework:
