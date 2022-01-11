@@ -39,7 +39,7 @@ RUN `
     `
 }}{{if PRODUCT_VERSION = "4.8" && (OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "ltsc2022")
 :    # Apply patch to provide support for container limits
-    && curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
+    {{if OS_VERSION_NUMBER != "ltsc2022":&& }}curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
