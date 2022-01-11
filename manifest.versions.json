@@ -2,13 +2,13 @@
     "variables": {
       "kb|ltsc2016|3.5-4.7.2":"kb5009546",
       "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/01/windows10.0-kb5009546-x64_d3ab97e9f811d7bf19c268e5e6b5e00e92e110ed.msu",
-      "kb|ltsc2019|3.5-4.7.2": "kb5009557",
-      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/01/windows10.0-kb5009557-x64_ddc44e498763e16196d8a19dbf4ae54078d31c46.msu",
+      "kb|ltsc2019|3.5-4.7.2": "kb5008218",
+      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/12/windows10.0-kb5008218-x64_66e07f2fc23728ca0b8f395df15da52546e45e45.msu",
 
       "4.8-is-security-release": true,
       "kb|ltsc2016": "kb5008877",
       "lcu|ltsc2016": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/12/windows10.0-kb5008877-x64-ndp48_df1e4f9dcdb91ebe15d12466be0fd24f966390f7.msu",
-      "kb|ltsc2019": "kb5009718",
+      "kb|ltsc2019": "kb5008878",
       "lcu|ltsc2019": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/12/windows10.0-kb5008878-x64-ndp48_1b3c7e40c5ba4b6325148980b4d939d5ae8d391d.msu",
       "kb|20H2": "kb5008876",
       "lcu|20H2": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2021/12/windows10.0-kb5008876-x64-ndp48_5a565d73e211e26a8bb51bc19a7689ac01eb4cad.msu",
