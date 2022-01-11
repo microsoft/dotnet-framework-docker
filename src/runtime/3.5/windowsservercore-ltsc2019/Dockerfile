@@ -9,7 +9,7 @@ RUN `
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2019.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
-    && powershell Add-WindowsPackage -Online -NoRestart -PackagePath .\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `

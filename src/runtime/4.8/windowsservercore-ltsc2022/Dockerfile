@@ -14,7 +14,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && powershell Add-WindowsPackage -Online -NoRestart -PackagePath C:\patch\windows10.0-kb9008395-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb9008395-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
