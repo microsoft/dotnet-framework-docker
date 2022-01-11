@@ -16,7 +16,7 @@ RUN `
             -OutFile microsoft-windows-netfx3.zip; `
         Expand-Archive microsoft-windows-netfx3.zip; `
     && del microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab `
+    && powershell Add-WindowsPackage -Online -NoRestart -PackagePath C:\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab `
     && rmdir /S /Q microsoft-windows-netfx3 `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
@@ -31,7 +31,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5009546-x64.cab `
+    && powershell Add-WindowsPackage -Online -NoRestart -PackagePath C:\patch\windows10.0-kb5009546-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx

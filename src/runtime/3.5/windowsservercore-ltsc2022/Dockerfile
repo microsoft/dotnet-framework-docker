@@ -12,7 +12,7 @@ RUN `
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2022.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && powershell Add-WindowsPackage -Online -NoRestart -PackagePath .\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
@@ -21,7 +21,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5008882-x64-ndp48.cab `
+    && powershell Add-WindowsPackage -Online -NoRestart -PackagePath C:\patch\windows10.0-kb5008882-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
