@@ -39,7 +39,7 @@ RUN `
     `
 }}{{if PRODUCT_VERSION = "4.8" && (OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "ltsc2022")
 :    # Apply patch to provide support for container limits
-    && curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
+    {{if OS_VERSION_NUMBER != "ltsc2022":&& }}curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
@@ -56,7 +56,7 @@ else
 :    # ngen .NET Fx
     {{if PRODUCT_VERSION != "4.7.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `^    else
 :    # Ngen top of assembly graph to optimize a set of frequently used assemblies
-    {{if PRODUCT_VERSION = "3.5" || (PRODUCT_VERSION = "4.8" && VARIABLES["4.8-is-security-release"] = "false"):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    {{if PRODUCT_VERSION = "3.5" || OS_VERSION_NUMBER = "ltsc2022" || (PRODUCT_VERSION = "4.8" && VARIABLES["4.8-is-security-release"] = "false"):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
     # To optimize 32-bit assemblies, uncomment the next line
     # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `}}
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
