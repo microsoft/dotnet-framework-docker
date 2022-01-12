@@ -65,8 +65,8 @@ Tag | Dockerfile
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
-4.8-20211109-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-ltsc2019/Dockerfile)
-4.7.2-20211109-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.2/windowsservercore-ltsc2019/Dockerfile)
+4.8-20220111-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-ltsc2019/Dockerfile)
+4.7.2-20220111-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.2/windowsservercore-ltsc2019/Dockerfile)
 
 ## Windows Server Core 2016 amd64 Tags
 Tag | Dockerfile
