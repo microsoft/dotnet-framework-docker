@@ -1,9 +1,9 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5-4.7.2":"kb5009546",
-      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/01/windows10.0-kb5009546-x64_d3ab97e9f811d7bf19c268e5e6b5e00e92e110ed.msu",
-      "kb|ltsc2019|3.5-4.7.2": "kb5009557",
-      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/01/windows10.0-kb5009557-x64_ddc44e498763e16196d8a19dbf4ae54078d31c46.msu",
+      "kb|ltsc2016|3.5-4.7.2":"kb5010790",
+      "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/c/msdownload/update/software/updt/2022/01/windows10.0-kb5010790-x64_df441589ce8556dc94d051df30be306266b25828.msu",
+      "kb|ltsc2019|3.5-4.7.2": "kb5010791",
+      "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/d/msdownload/update/software/updt/2022/01/windows10.0-kb5010791-x64_466ad2172d2cc77b2125420c26b7f9ac00e197f4.msu",
 
       "4.8-is-security-release": true,
       "kb|ltsc2016": "kb5008877",
