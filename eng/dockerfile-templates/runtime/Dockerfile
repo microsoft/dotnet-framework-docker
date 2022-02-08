@@ -37,9 +37,11 @@ RUN `
     && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("kb|", OS_VERSION_NUMBER)]}}}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
     && rmdir /S /Q patch `
     `
-}}{{if PRODUCT_VERSION = "4.8" && (OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "ltsc2022")
+}}{{if
+    OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "20H2" &&
+    (PRODUCT_VERSION = "4.8" || (PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019"))
 :    # Apply patch to provide support for container limits
-    {{if OS_VERSION_NUMBER != "ltsc2022":&& }}curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
+    {{if PRODUCT_VERSION = "3.5" || OS_VERSION_NUMBER = "ltsc2019":&& }}curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
