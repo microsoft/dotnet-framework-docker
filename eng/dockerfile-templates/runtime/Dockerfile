@@ -30,7 +30,7 @@ RUN `
     `
 }}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void && !((OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") || (PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2019" &&VARIABLES["4.8-is-security-release"] = "true"))
 :    # Apply latest patch
-    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
+    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "20H2" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `

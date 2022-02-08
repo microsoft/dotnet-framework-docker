@@ -10,7 +10,7 @@ ENV `
 
 RUN `
     # Apply latest patch
-    curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/12/windows10.0-kb5009470-x64-ndp48_bb024317f391de318cc42f12641da9b3253011cf.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/12/windows10.0-kb5009470-x64-ndp48_bb024317f391de318cc42f12641da9b3253011cf.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
