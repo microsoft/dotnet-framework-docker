@@ -41,7 +41,7 @@ RUN `
     OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "20H2" &&
     (PRODUCT_VERSION = "4.8" || (PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019"))
 :    # Apply patch to provide support for container limits
-    {{if PRODUCT_VERSION = "3.5" || OS_VERSION_NUMBER = "ltsc2019":&& }}curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
+    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER != "ltsc2016" && OS_VERSION_NUMBER != "20H2"):&& }}curl -fSLo patch.msu {{VARIABLES[cat("limits-patch|url|", OS_VERSION_NUMBER)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
