@@ -52,7 +52,7 @@ Tag | Dockerfile
 Tag | Dockerfile
 ---------| ---------------
 4.8-20220208-windowsservercore-20H2, 4.8-windowsservercore-20H2, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/4.8/windowsservercore-20H2/Dockerfile)
-3.5-20220208-windowsservercore-20H2, 3.5-windowsservercore-20H2, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-20H2/Dockerfile)
+3.5-20220210-windowsservercore-20H2, 3.5-windowsservercore-20H2, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-20H2/Dockerfile)
 
 ## Windows Server Core 2019 amd64 Tags
 Tag | Dockerfile

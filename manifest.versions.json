@@ -4,6 +4,10 @@
       "lcu|ltsc2016|3.5-4.7.2":"http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/02/windows10.0-kb5010359-x64_f0b427c713754e50609ad0fa7054607a5d404f37.msu",
       "kb|ltsc2019|3.5-4.7.2": "kb5010351",
       "lcu|ltsc2019|3.5-4.7.2": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2022/02/windows10.0-kb5010351-x64_f7ba53f4c410299fc28400f7a21b7f616f635a7c.msu",
+      "kb|20H2|3.5-4.7.2": "kb5010342",
+      "lcu|20H2|3.5-4.7.2": "http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/02/windows10.0-kb5010342-x64_f865479b6847db1aab8d436a37a964f31c853887.msu",
+      "kb|ltsc2022|3.5-4.7.2": "kb5010354",
+      "lcu|ltsc2022|3.5-4.7.2": "http://download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows10.0-kb5010354-x64_5909c5c0780d9ec96adcfb19d6c0bda8ea224379.msu",
 
       "4.8-is-security-release": false,
       "4.8-is-security-release|2016": "$(4.8-is-security-release)",

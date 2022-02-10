@@ -16,6 +16,14 @@ RUN `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
+    # Apply latest 3.5 patch
+    && curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/02/windows10.0-kb5010342-x64_f865479b6847db1aab8d436a37a964f31c853887.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5010342-x64.cab `
+    && rmdir /S /Q patch `
+    `
     # Apply latest patch
     && curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/updt/2021/12/windows10.0-kb5009467-x64-ndp48_ab1964ebea987807639c024f82810bf9518ec752.msu `
     && mkdir patch `

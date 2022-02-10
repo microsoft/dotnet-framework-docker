@@ -16,6 +16,14 @@ RUN `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
+    # Apply latest 3.5 patch
+    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows10.0-kb5010354-x64_5909c5c0780d9ec96adcfb19d6c0bda8ea224379.msu `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del /F /Q patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5010354-x64.cab `
+    && rmdir /S /Q patch `
+    `
     # Apply patch to provide support for container limits
     && curl -fSLo patch.msu https://download.microsoft.com/download/5/a/4/5a4425d3-eb10-47a8-afe0-b07a19b20b1c/Windows10.0-KB9008395-x64-NDP48.msu `
     && mkdir patch `
