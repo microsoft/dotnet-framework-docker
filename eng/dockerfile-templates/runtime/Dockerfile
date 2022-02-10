@@ -1,4 +1,6 @@
-# escape=`
+{{
+    set is48SecurityRelease to (VARIABLES[cat("4.8-is-security-release|", OS_VERSION_NUMBER)] = "true")
+}}# escape=`
 
 FROM mcr.microsoft.com/windows/servercore:{{OS_VERSION_NUMBER}}-amd64
 
@@ -28,7 +30,7 @@ RUN `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void && !((OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") || (PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2019" &&VARIABLES["4.8-is-security-release"] = "true"))
+}}{{if VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void && !((OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") || (((PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2019") || (PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019" && OS_VERSION_NUMBER != "20H2")) && is48SecurityRelease))
 :    # Apply latest patch
     {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
     && mkdir patch `
@@ -58,7 +60,7 @@ else
 :    # ngen .NET Fx
     {{if PRODUCT_VERSION != "4.7.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `^    else
 :    # Ngen top of assembly graph to optimize a set of frequently used assemblies
-    {{if PRODUCT_VERSION = "3.5" || OS_VERSION_NUMBER = "ltsc2022" || (PRODUCT_VERSION = "4.8" && VARIABLES["4.8-is-security-release"] = "false"):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    {{if PRODUCT_VERSION = "3.5" || OS_VERSION_NUMBER = "ltsc2022" || (PRODUCT_VERSION = "4.8" && !is48SecurityRelease):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
     # To optimize 32-bit assemblies, uncomment the next line
     # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `}}
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
