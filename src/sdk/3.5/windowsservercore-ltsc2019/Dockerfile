@@ -38,13 +38,13 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
 # Install VS components
 RUN `
     # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/0b3cf9c7e43023d0601a4d564142eca84d88808251415840b7b1e46d71909371/vs_TestAgent.exe `
+    curl -fSLo vs_TestAgent.exe https://download.visualstudio.microsoft.com/download/pr/c30a4f7e-41da-41a5-afe8-ac56abf2740f/74a913ad7c41f3ffba973b125c1a8241a0ed8571abb418410af92f48d22f649b/vs_TestAgent.exe `
     && start /w vs_TestAgent --quiet --norestart --nocache --wait `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
     # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/7aa16be3-9952-4bd2-8ecf-eae91faa0a06/50fdfb4f652e1d3ab4ec79b65bada583af704480a971e9b05c3a52a60036aa7d/vs_BuildTools.exe `
+    && curl -fSLo vs_BuildTools.exe https://download.visualstudio.microsoft.com/download/pr/c30a4f7e-41da-41a5-afe8-ac56abf2740f/167daa8a4c9c242a49400cb5daae6ed2077a41465b9e817b568c5369127168df/vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
