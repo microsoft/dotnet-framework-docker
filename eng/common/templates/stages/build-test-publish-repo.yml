@@ -168,6 +168,8 @@ stages:
   condition: and(succeeded(), contains(variables['stages'], 'build'))
   jobs:
   - template: ../jobs/post-build.yml
+    parameters:
+      pool: ${{ parameters.linuxAmd64Pool }}
 
 ################################################################################
 # Test Images
@@ -245,6 +247,25 @@ stages:
         matrix: dependencies.GenerateTestMatrix.outputs['matrix.WindowsLtsc2016Amd64']
         testJobTimeout: ${{ parameters.windowsAmdTestJobTimeout }}
         internalProjectName: ${{ parameters.internalProjectName }}
+
+################################################################################
+# Generate SBOM
+################################################################################
+- ${{ if eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
+  - stage: Generate_SBOM
+    dependsOn: Post_Build
+    condition: "
+      and(
+        contains(variables['stages'], 'sbom'),
+        or(
+          and(
+            succeeded(),
+            contains(variables['stages'], 'build')),
+          not(contains(variables['stages'], 'build'))))"
+    jobs:
+    - template: ../jobs/generate-sbom.yml
+      parameters:
+        pool: ${{ parameters.linuxAmd64Pool }}
 
 ################################################################################
 # Publish Images
