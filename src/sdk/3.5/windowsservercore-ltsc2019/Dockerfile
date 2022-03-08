@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20220208-windowsservercore-ltsc2019
+FROM $REPO:3.5-20220308-windowsservercore-ltsc2019
 
 ENV `
     # Do not generate certificate

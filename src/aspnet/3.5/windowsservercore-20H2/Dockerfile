@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20220210-windowsservercore-20H2
+FROM $REPO:3.5-20220308-windowsservercore-20H2
 
 RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /FeatureName:IIS-ASPNET `
     && dism /Online /Quiet /Disable-Feature /FeatureName:IIS-WebServerManagementTools `
