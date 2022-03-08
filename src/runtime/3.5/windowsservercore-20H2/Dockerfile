@@ -17,11 +17,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest 3.5 patch
-    && curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/02/windows10.0-kb5010342-x64_f865479b6847db1aab8d436a37a964f31c853887.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2022/03/windows10.0-kb5011487-x64_2190163dcb84974d93ecdc32bdae277b57ebb95c.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5010342-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5011487-x64.cab `
     && rmdir /S /Q patch `
     `
     # Apply latest patch

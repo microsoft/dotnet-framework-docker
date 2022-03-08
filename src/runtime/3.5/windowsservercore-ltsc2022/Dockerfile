@@ -17,11 +17,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest 3.5 patch
-    && curl -fSLo patch.msu http://download.windowsupdate.com/c/msdownload/update/software/secu/2022/01/windows10.0-kb5010354-x64_5909c5c0780d9ec96adcfb19d6c0bda8ea224379.msu `
+    && curl -fSLo patch.msu http://download.windowsupdate.com/d/msdownload/update/software/secu/2022/03/windows10.0-kb5011497-x64_3e15453734e0a710394694477035bf367237687e.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5010354-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5011497-x64.cab `
     && rmdir /S /Q patch `
     `
     # Apply patch to provide support for container limits
