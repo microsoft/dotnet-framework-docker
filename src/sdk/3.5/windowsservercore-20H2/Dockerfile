@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20220308-windowsservercore-20H2
+FROM $REPO:3.5-20220412-windowsservercore-20H2
 
 ENV `
     # Do not generate certificate
@@ -9,7 +9,7 @@ ENV `
     # Enable correct mode for dotnet watch (only mode supported in a container)
     DOTNET_USE_POLLING_FILE_WATCHER=true `
     # NuGet version to install
-    NUGET_VERSION=6.0.0 `
+    NUGET_VERSION=6.1.0 `
     # Install location of Roslyn
     ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 
