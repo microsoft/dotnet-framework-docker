@@ -58,6 +58,9 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 * [dotnet/samples](https://hub.docker.com/_/microsoft-dotnet-samples/): .NET Samples
 
 {{if !IS_PRODUCT_FAMILY:# Full Tag Listing
+<!--End of generated tags-->
+
+*Tags not listed in the table above should be considered unsupported.*
 
 {{if SHORT_REPO != "samples":# Version Compatibility
 
@@ -77,6 +80,8 @@ Version Tag | OS Version | Supported .NET Versions
 }}}}# Support
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
+
+See detailed support information for .NET Frameworks containers on [tags](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).
 
 # Image Update Policy
 

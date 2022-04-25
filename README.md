@@ -52,6 +52,8 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 
+See detailed support information for .NET Frameworks containers on [tags](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).
+
 # Image Update Policy
 
 * We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:20H2, windows/servercore:ltsc2019, etc.).

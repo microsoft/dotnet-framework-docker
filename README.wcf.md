@@ -78,6 +78,9 @@ Tag | Dockerfile
 4.6.2-20220412-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/wcf at https://mcr.microsoft.com/v2/dotnet/framework/wcf/tags/list.
+<!--End of generated tags-->
+
+*Tags not listed in the table above should be considered unsupported.*
 
 # Version Compatibility
 
@@ -92,6 +95,8 @@ Version Tag | OS Version | Supported .NET Versions
 # Support
 
 See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
+
+See detailed support information for .NET Frameworks containers on [tags](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).
 
 # Image Update Policy
 
