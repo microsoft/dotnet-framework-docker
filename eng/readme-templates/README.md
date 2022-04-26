@@ -60,7 +60,7 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 {{if !IS_PRODUCT_FAMILY:# Full Tag Listing
 <!--End of generated tags-->
 
-*Tags not listed in the table above are not unsupported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
+*Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
 
 {{if SHORT_REPO != "samples":# Version Compatibility
 
