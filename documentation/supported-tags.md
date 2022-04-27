@@ -65,7 +65,7 @@ Tags | Dockerfile | OS Version
 Each tag will be supported for the lifetime of the .NET Framework and Windows Server version referenced by the tag. Once either of these reaches EOL, the tag will be considered unsupported, will no longer be updated and will be removed from the [Tag Listing](#tag-listing). There are two exceptions:
 
 * Tags containing a timestamp are only supported until a newer timestamp is published for that same .NET Framework and Windows Server version. The timeframe for this is typically on a monthly basis on ["Patch Tuesday"](https://www.microsoft.com/msrc/faqs-security-update-guide).
-* Support of the `latest` tag will match the support lifetime of the latest version of .NET Framework.
+* The `latest` tag will always reference the latest version of .NET Framework.
 
 Unsupported tags will be preserved to prevent breaking any references to it.
 
