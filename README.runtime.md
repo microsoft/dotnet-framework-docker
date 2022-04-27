@@ -72,6 +72,9 @@ Tag | Dockerfile
 3.5-20220412-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/runtime at https://mcr.microsoft.com/v2/dotnet/framework/runtime/tags/list.
+<!--End of generated tags-->
+
+*Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
 
 # Version Compatibility
 
@@ -88,14 +91,17 @@ Version Tag | OS Version | Supported .NET Versions
 
 # Support
 
-See the [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
+## Lifecycle
 
-# Image Update Policy
+* [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
+* [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md)
+
+## Image Update Policy
 
 * We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:20H2, windows/servercore:ltsc2019, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
-# Feedback
+## Feedback
 
 * [File an issue](https://github.com/microsoft/dotnet-framework-docker/issues/new/choose)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
