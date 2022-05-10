@@ -10,7 +10,7 @@ ENV `
 
 RUN `
     # Apply patch to provide support for container limits
-    curl -fSLo patch.msu https://download.microsoft.com/download/1/d/1/1d162522-821a-41c6-ba7d-74ff37b0e6c6/Windows10.0-KB9008395-x64-NDP48.msu `
+    curl -fSLo patch.msu https://download.microsoft.com/download/f/8/8/f883b65c-c6fe-4ce5-9c42-3f79aac2a834/Windows10.0-KB9008395-x64-NDP48.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
