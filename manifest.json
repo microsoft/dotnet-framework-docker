@@ -1,6 +1,8 @@
 {
-  "readme": "README.md",
-  "readmeTemplate": "eng/readme-templates/README.md",
+  "readme": {
+    "path": "README.md",
+    "templatePath": "eng/readme-templates/README.md"
+  },
   "registry": "mcr.microsoft.com",
   "includes": [
     "manifest.datestamps.json",
@@ -10,8 +12,16 @@
     {
       "id": "runtime",
       "name": "dotnet/framework/runtime",
-      "readme": "README.runtime.md",
-      "readmeTemplate": "eng/readme-templates/README.md",
+      "readmes": [
+        {
+          "path": "README.runtime.md",
+          "templatePath": "eng/readme-templates/README.md"
+        },
+        {
+          "path": ".mcr/portal/README.runtime.portal.md",
+          "templatePath": "eng/readme-templates/README.mcr.md"
+        }
+      ],
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/runtime-tags.yml",
       "images": [
         {
@@ -257,8 +267,16 @@
     {
       "id": "sdk",
       "name": "dotnet/framework/sdk",
-      "readme": "README.sdk.md",
-      "readmeTemplate": "eng/readme-templates/README.md",
+      "readmes": [
+        {
+          "path": "README.sdk.md",
+          "templatePath": "eng/readme-templates/README.md"
+        },
+        {
+          "path": ".mcr/portal/README.sdk.portal.md",
+          "templatePath": "eng/readme-templates/README.mcr.md"
+        }
+      ],
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/sdk-tags.yml",
       "images": [
         {
@@ -396,8 +414,16 @@
     {
       "id": "aspnet",
       "name": "dotnet/framework/aspnet",
-      "readme": "README.aspnet.md",
-      "readmeTemplate": "eng/readme-templates/README.md",
+      "readmes": [
+        {
+          "path": "README.aspnet.md",
+          "templatePath": "eng/readme-templates/README.md"
+        },
+        {
+          "path": ".mcr/portal/README.aspnet.portal.md",
+          "templatePath": "eng/readme-templates/README.mcr.md"
+        }
+      ],
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/aspnet-tags.yml",
       "images": [
         {
@@ -632,8 +658,16 @@
     {
       "id": "wcf",
       "name": "dotnet/framework/wcf",
-      "readme": "README.wcf.md",
-      "readmeTemplate": "eng/readme-templates/README.md",
+      "readmes": [
+        {
+          "path": "README.wcf.md",
+          "templatePath": "eng/readme-templates/README.md"
+        },
+        {
+          "path": ".mcr/portal/README.wcf.portal.md",
+          "templatePath": "eng/readme-templates/README.mcr.md"
+        }
+      ],
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/wcf-tags.yml",
       "images": [
         {
