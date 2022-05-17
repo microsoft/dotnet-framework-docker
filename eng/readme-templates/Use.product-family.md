@@ -1,4 +1,7 @@
-## Container sample: Run a simple application
+{{
+    _ ARGS:
+      top-header: The string to use as the top-level header.
+}}{{ARGS["top-header"]}}# Container sample: Run a simple application
 
 Type the following command to run a sample console application:
 
@@ -6,7 +9,7 @@ Type the following command to run a sample console application:
 docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 ```
 
-## Container sample: Run a web application
+{{ARGS["top-header"]}}# Container sample: Run a web application
 
 Type the following command to run a sample web application:
 

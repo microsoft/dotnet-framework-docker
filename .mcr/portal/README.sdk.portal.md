@@ -39,7 +39,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
-## Building .NET Framework Apps with Docker
+### Building .NET Framework Apps with Docker
 
 * [.NET Framework Console Docker Sample](dotnetapp/README.md) - This [sample](dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
 * [ASP.NET Web Forms Docker Sample](aspnetapp/README.md) - This [sample](aspnetapp/Dockerfile) demonstrates using Docker with an ASP.NET Web Forms app.

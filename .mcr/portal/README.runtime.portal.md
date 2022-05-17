@@ -30,7 +30,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
-## Container sample: Run a simple application
+### Container sample: Run a simple application
 
 You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the [.NET Framework console sample](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/dotnetapp/README.md).
 
