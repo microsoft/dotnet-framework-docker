@@ -9,7 +9,6 @@
 * `wcfclient`
   * `docker pull mcr.microsoft.com/dotnet/framework/samples:wcfclient`
 
-
 # About
 
 These images contain sample .NET Framework, ASP.NET and WCF applications.
