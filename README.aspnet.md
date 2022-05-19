@@ -93,6 +93,7 @@ Tag | Dockerfile
 3.5-20220510-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/3.5/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/aspnet at https://mcr.microsoft.com/v2/dotnet/framework/aspnet/tags/list.
+<!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
 

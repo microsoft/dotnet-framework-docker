@@ -108,6 +108,7 @@ wcfservice-windowsservercore-ltsc2016, wcfservice | [Dockerfile](https://github.
 wcfclient-windowsservercore-ltsc2016, wcfclient | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/wcfapp/Dockerfile.client)
 
 You can retrieve a list of all available tags for dotnet/framework/samples at https://mcr.microsoft.com/v2/dotnet/framework/samples/tags/list.
+<!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
 
