@@ -16,6 +16,7 @@
 {{InsertTemplate("RelatedRepos.md", headerArgs)}}
 {{if !IS_PRODUCT_FAMILY:
 # Full Tag Listing
+<!--End of generated tags-->
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
 }}
 {{InsertTemplate("Support.md", headerArgs)}}
