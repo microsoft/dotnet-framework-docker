@@ -9,13 +9,13 @@
 * `wcfclient`
   * `docker pull mcr.microsoft.com/dotnet/framework/samples:wcfclient`
 
-# About This Image
+# About
 
 These images contain sample .NET Framework, ASP.NET and WCF applications.
 
-Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
+Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-# How to Use the Image
+# Usage
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 

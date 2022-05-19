@@ -3,13 +3,13 @@
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8`
 
-# About This Image
+# About
 
 The Windows Communication Foundation (WCF) is a framework for building service-oriented applications. Using WCF, you can send data as asynchronous messages from one service endpoint to another. A service endpoint can be part of a continuously available service hosted by IIS, or it can be a service hosted in an application.
 
-Watch [dotnet/announcements](https://github.com/dotnet/announcements/labels/Docker) for Docker-related .NET announcements.
+Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-# How to Use the Image
+# Usage
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
@@ -34,6 +34,16 @@ Type the following Docker command to start a WCF client container, set environme
 ```console
 docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.com/dotnet/framework/samples:wcfclient
 ```
+
+## Version Compatibility
+
+Version Tag | OS Version | Supported .NET Versions
+-- | -- | --
+4.8 | windowsservercore-20H2, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
+4.7.1 | windowsservercore-ltsc2016 | 4.7.1
+4.7 | windowsservercore-ltsc2016 | 4.7
+4.6.2 | windowsservercore-ltsc2016 | 4.6.2
 
 # Related Repos
 
@@ -81,16 +91,6 @@ You can retrieve a list of all available tags for dotnet/framework/wcf at https:
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
-
-# Version Compatibility
-
-Version Tag | OS Version | Supported .NET Versions
--- | -- | --
-4.8 | windowsservercore-20H2, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
-4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
-4.7.1 | windowsservercore-ltsc2016 | 4.7.1
-4.7 | windowsservercore-ltsc2016 | 4.7
-4.6.2 | windowsservercore-ltsc2016 | 4.6.2
 
 # Support
 
