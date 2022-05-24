@@ -1,6 +1,7 @@
 {{
     _ ARGS:
       top-header: The string to use as the top-level header.
+      readme-host: Moniker of the site that will host the readme
 }}{{ARGS["top-header"]}}# Building .NET Framework Apps with Docker
 
 * [.NET Framework Console Docker Sample](dotnetapp/README.md) - This [sample](dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.

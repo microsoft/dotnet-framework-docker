@@ -22,23 +22,23 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 .NET Framework:
 
-* [dotnet/framework/sdk](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/): .NET Framework SDK
-* [dotnet/framework/runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/): .NET Framework Runtime
-* [dotnet/framework/wcf](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/): Windows Communication Foundation (WCF)
-* [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
+* [dotnet/framework/sdk](https://mcr.microsoft.com/product/dotnet/framework/sdk): .NET Framework SDK
+* [dotnet/framework/runtime](https://mcr.microsoft.com/product/dotnet/framework/runtime): .NET Framework Runtime
+* [dotnet/framework/wcf](https://mcr.microsoft.com/product/dotnet/framework/wcf): Windows Communication Foundation (WCF)
+* [dotnet/framework/samples](https://mcr.microsoft.com/product/dotnet/framework/samples): .NET Framework, ASP.NET and WCF Samples
 
 .NET:
 
-* [dotnet](https://hub.docker.com/_/microsoft-dotnet/): .NET
-* [dotnet-nightly](https://hub.docker.com/_/microsoft-dotnet-nightly/): .NET (Preview)
-* [dotnet/samples](https://hub.docker.com/_/microsoft-dotnet-samples/): .NET Samples
+* [dotnet](https://mcr.microsoft.com/catalog?search=dotnet/): .NET
+* [dotnet-nightly](https://mcr.microsoft.com/catalog?search=dotnet/nightly/): .NET (Preview)
+* [dotnet/samples](https://mcr.microsoft.com/product/dotnet/samples): .NET Samples
 
 ## Usage
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
 ### Container sample: Run an ASP.NET application
-You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the [ASP.NET Docker sample].
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://mcr.microsoft.com/product/dotnet/framework/samples), based on the [ASP.NET Docker sample].
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
@@ -80,6 +80,6 @@ Version Tag | OS Version | Supported .NET Versions
 
 ## License
 
-* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://hub.docker.com/_/microsoft-dotnet-framework/)
-* [Microsoft Software Supplemental License for Windows Container Base Image](https://hub.docker.com/_/microsoft-windows-servercore/): applies to all [.NET Framework container images](https://hub.docker.com/_/microsoft-dotnet-framework/)
-* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/)
+* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
+* [Microsoft Software Supplemental License for Windows Container Base Image](https://mcr.microsoft.com/product/windows/servercore): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
+* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://mcr.microsoft.com/product/dotnet/framework/sdk)
