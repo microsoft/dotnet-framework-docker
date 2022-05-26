@@ -1,12 +1,13 @@
 {{
     _ ARGS:
       top-header: The string to use as the top-level header.
+      readme-host: Moniker of the site that will host the readme
 }}{{ARGS["top-header"]}} Usage
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
 {{InsertTemplate(join(filter(["Use", when(IS_PRODUCT_FAMILY, "product-family", SHORT_REPO), "md"], len), "."),
-    [ "top-header": ARGS["top-header"] ])}}{{
+    [ "top-header": ARGS["top-header"], "readme-host": ARGS["readme-host"] ])}}{{
 if !IS_PRODUCT_FAMILY && SHORT_REPO != "samples":
 
 {{ARGS["top-header"]}}# Version Compatibility
