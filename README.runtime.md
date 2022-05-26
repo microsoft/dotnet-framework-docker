@@ -1,5 +1,7 @@
 # Featured Tags
 
+* `4.8.1`
+  * `docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8`
 * `3.5`
@@ -29,7 +31,8 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples:dotnetapp
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-4.8 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.8.1 | windowsservercore-ltsc2022 | 4.8.1
+4.8 | windowsservercore-ltsc2022, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
 4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
@@ -57,6 +60,7 @@ Version Tag | OS Version | Supported .NET Versions
 ## Windows Server Core 2022 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
+4.8.1-20220809-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/4.8.1/windowsservercore-ltsc2022/Dockerfile)
 4.8-20220809-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/4.8/windowsservercore-ltsc2022/Dockerfile)
 3.5-20220809-windowsservercore-ltsc2022, 3.5-windowsservercore-ltsc2022, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/runtime/3.5/windowsservercore-ltsc2022/Dockerfile)
 

@@ -13,6 +13,8 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 ## Featured Tags
 
+* `4.8.1`
+  * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8`
 * `3.5`
@@ -52,7 +54,8 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-4.8 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
+4.8.1 | windowsservercore-ltsc2022 | 4.8.1
+4.8 | windowsservercore-ltsc2022, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8
 4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7

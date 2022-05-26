@@ -27,6 +27,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
+            new RuntimeImageDescriptor { Version = "4.8.1", SdkVersion = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
         };
 
         private readonly ImageTestHelper _imageTestHelper;

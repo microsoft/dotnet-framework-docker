@@ -23,6 +23,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
+            new ImageDescriptor { Version = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
         };
 
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
@@ -44,7 +45,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
         {
-            Version[] allFrameworkVersions = new Version[]
+            List<Version> allFrameworkVersions = new()
             {
                 new Version("4.0"),
                 new Version("4.5"),
@@ -58,6 +59,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new Version("4.7.2"),
                 new Version("4.8")
             };
+
+            if (imageDescriptor.Version == "4.8.1")
+            {
+                allFrameworkVersions.Add(new Version("4.8.1"));
+            }
 
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"targetingpacks-{DateTime.Now.ToFileTime()}";

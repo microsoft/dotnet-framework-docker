@@ -1,4 +1,6 @@
-# escape=`
+{{
+    set sdkVersion to when(PRODUCT_VERSION = "4.8.1", "4.8.1", "4.8")
+}}# escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:{{PRODUCT_VERSION}}-{{VARIABLES[cat(PRODUCT_VERSION, "-", OS_VERSION_NUMBER, "-Runtime-DateStamp")]}}-{{OS_VERSION}}
@@ -15,18 +17,18 @@ ENV `
 {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
 :
 RUN `
-    # Install .NET 4.8 Fx
-    curl -fSLo dotnet-framework-installer.exe {{VARIABLES["4.8|url"]}} `
+    # Install .NET {{sdkVersion}} Fx
+    curl -fSLo dotnet-framework-installer.exe {{VARIABLES[cat(sdkVersion, "|url")]}} `
     && .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|4.8")]}} `
+    && curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|", sdkVersion)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|4.8")]}}-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", sdkVersion)]}}-x64-ndp48{{if PRODUCT_VERSION = "4.8.1":1}}.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
@@ -51,7 +53,7 @@ RUN `
     && start /w vs_BuildTools @^ `
         --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" @^ `
         --add Microsoft.Component.ClickOnce.MSBuild @^ `
-        --add Microsoft.Net.Component.4.8.SDK @^ `
+        --add Microsoft.Net.Component.{{sdkVersion}}.SDK @^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 @^ `
         --add Microsoft.NetCore.Component.Runtime.5.0 @^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 @^ `
@@ -68,8 +70,8 @@ RUN `
     && "%ProgramFiles%\dotnet\dotnet" help `
     `
     # Workaround for issues with 64-bit ngen
-    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
-    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\SecAnnotate.exe" `
+    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\WinMDExp.exe" `
     `
     # ngen assemblies queued by VS installers
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
@@ -87,14 +89,14 @@ RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
 # Install Targeting Packs
 RUN powershell " `
     $ErrorActionPreference = 'Stop'; `
     $ProgressPreference = 'SilentlyContinue'; `
-    @@('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8') `
+    @@('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8', '4.8.1') `
     | %{ `
         Invoke-WebRequest `
             -UseBasicParsing `

@@ -26,7 +26,7 @@ _There is overlap between the tasks here and those for a [Patch Tuesday release]
 1. - [ ] Wait for changes to be mirrored to internal [dotnet-framework-docker repo](https://dev.azure.com/dnceng/internal/_git/Microsoft-dotnet-framework-docker) (internal MSFT link)
 1. - [ ] Queue build of [dotnet-framework-docker pipeline](https://dev.azure.com/dnceng/internal/_build?definitionId=372) (internal MSFT link) with variables:
 
-          imageBuilder.pathArgs: --path 'src/*/3.5/*' --path 'src/*/4.8/*'
+          imageBuilder.pathArgs: --path 'src/*/3.5/*' --path 'src/*/4.8/*' --path 'src/*/4.8.1/*'
 
 1. - [ ] Confirm images have been ingested by MCR
 1. - [ ] Confirm READMEs have been updated in Docker Hub for [microsoft-dotnet-framework](https://hub.docker.com/_/microsoft-dotnet-framework)

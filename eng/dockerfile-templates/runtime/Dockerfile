@@ -3,6 +3,7 @@
     set apply35Patch to (VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void && PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019") ^
     set applyPatch to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void &&
         !(
+            PRODUCT_VERSION = "4.8.1" ||
             (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") ||
             (
                 (
@@ -17,12 +18,12 @@
 FROM mcr.microsoft.com/windows/servercore:{{OS_VERSION_NUMBER}}-amd64
 
 ENV {{
-if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8"
+if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION = "4.8.1"
 :`
     # Enable detection of running in a container
     }}{{ if OS_VERSION_NUMBER != "ltsc2019"
 :DOTNET_RUNNING_IN_CONTAINER=true `
-    }}{{ if PRODUCT_VERSION = "4.8":COMPLUS_RUNNING_IN_CONTAINER=1 `
+    }}{{ if PRODUCT_VERSION = "4.8" || PRODUCT_VERSION = "4.8.1":COMPLUS_RUNNING_IN_CONTAINER=1 `
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
@@ -35,8 +36,8 @@ RUN `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-^elif OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"
-:    # Install .NET Fx 4.8
+^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || PRODUCT_VERSION = "4.8.1"
+:    # Install .NET Fx {{PRODUCT_VERSION}}
     curl -fSLo dotnet-framework-installer.exe {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
     && .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
@@ -70,7 +71,7 @@ else
 :    # ngen .NET Fx
     {{if PRODUCT_VERSION != "4.7.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `^    else
 :    # Ngen top of assembly graph to optimize a set of frequently used assemblies
-    {{if PRODUCT_VERSION = "3.5" || (PRODUCT_VERSION = "4.8" && !is48SecurityRelease):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    {{if PRODUCT_VERSION = "3.5" || ((PRODUCT_VERSION = "4.8" && !is48SecurityRelease) || PRODUCT_VERSION = "4.8.1"):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
     # To optimize 32-bit assemblies, uncomment the next line
     # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `}}
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
