@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20220510-windowsservercore-ltsc2016
+FROM $REPO:3.5-20220614-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
@@ -22,12 +22,12 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/04/windows10.0-kb5013625-x64-ndp48_40571d308318752756c72529207e43e30ed1ae01.msu `
+            -Uri https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/05/windows10.0-kb5014630-x64-ndp48_40426121a84062b95558eec7c795d9e284245e2f.msu `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5013625-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5014630-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
@@ -36,7 +36,7 @@ RUN `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.1.0
+ENV NUGET_VERSION=6.2.0
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
