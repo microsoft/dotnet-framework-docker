@@ -7,7 +7,7 @@
 param(
     [string]$Version,
     [string]$Architecture,
-    [string]$OS,
+    [string[]]$OSVersions,
     [string]$Registry,
     [string]$RepoPrefix,
     [switch]$PullImages,
@@ -41,8 +41,12 @@ $DotnetInstallDir = "$PSScriptRoot/../.dotnet"
 
 $activeOS = docker version -f "{{ .Server.Os }}"
 
+if ($OSVersions.Count -gt 1) {
+    throw "Multiple OS versions are not supported"
+}
+
 # Run Tests
-$env:IMAGE_OS = $OS
+$env:IMAGE_OS = $OSVersions[0]
 $env:IMAGE_VERSION = $Version
 $env:REGISTRY = $Registry
 $env:REPO_PREFIX = $RepoPrefix
