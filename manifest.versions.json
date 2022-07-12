@@ -1,13 +1,13 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5-4.7.2":"kb5014702",
-      "lcu|ltsc2016|3.5-4.7.2":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/06/windows10.0-kb5014702-x64_48f484f06070f3dee90aa62a574d9c1e1b774b2a.msu",
+      "kb|ltsc2016|3.5-4.7.2":"kb5015808",
+      "lcu|ltsc2016|3.5-4.7.2":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/07/windows10.0-kb5015808-x64_eb7156d8c49c8f23fe3a3f0a3f18b827eeae4530.msu",
       "kb|ltsc2019|3.5-4.7.2": "kb5013892",
       "lcu|ltsc2019|3.5-4.7.2": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/04/windows10.0-kb5013892-x64_1cd63ca0b8bfd08afc28d27a945bbe1bed002ebe.msu",
-      "kb|20H2|3.5-4.7.2": "kb5014699",
-      "lcu|20H2|3.5-4.7.2": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/06/windows10.0-kb5014699-x64_1807d6b5df2947669d4cb00d322969ccd43030a3.msu",
-      "kb|ltsc2022|3.5-4.7.2": "kb5014678",
-      "lcu|ltsc2022|3.5-4.7.2": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/06/windows10.0-kb5014678-x64_650f5bf08ed619a16e46c291ca924762fbc688c6.msu",
+      "kb|20H2|3.5-4.7.2": "kb5015807",
+      "lcu|20H2|3.5-4.7.2": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/07/windows10.0-kb5015807-x64_e3e62de3b52802c48fa6b027c49e0951b8575743.msu",
+      "kb|ltsc2022|3.5-4.7.2": "kb5015827",
+      "lcu|ltsc2022|3.5-4.7.2": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/07/windows10.0-kb5015827-x64_77f06603437987aedfeab8fa40242592902f931f.msu",
 
       "4.8-is-security-release": false,
       "4.8-is-security-release|2016": "$(4.8-is-security-release)",
@@ -23,7 +23,7 @@
       "kb|ltsc2022": "kb5013890",
       "lcu|ltsc2022": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/04/windows10.0-kb5013890-x64-ndp48_db897c9c5f7aa545f2a7f214e42a03497d983757.msu",
 
-      "nuget|version": "6.2.0",
+      "nuget|version": "6.2.1",
   
       "vs|version": "17.2",
       "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/129ac716764b517709d969cad9e89c4472451c0c7c746f4f1e3141ddcef885c8/vs_TestAgent.exe",
