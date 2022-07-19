@@ -25,8 +25,8 @@
 
       "nuget|version": "6.2.1",
   
-      "vs|version": "17.2",
-      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/129ac716764b517709d969cad9e89c4472451c0c7c746f4f1e3141ddcef885c8/vs_TestAgent.exe",
-      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/06293b7db26d35bf19253f8059bf9feeb97d34236c02970afd1931f5e4da6da7/vs_BuildTools.exe"
+      "vs|version": "17.3",
+      "vs|testAgentUrl": "https://aka.ms/vs/17/pre/vs_TestAgent.exe",
+      "vs|buildToolsUrl": "https://aka.ms/vs/17/pre/vs_BuildTools.exe"
     }
   }

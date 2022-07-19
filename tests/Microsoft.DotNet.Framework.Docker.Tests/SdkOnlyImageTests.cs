@@ -107,7 +107,10 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"vswhere-{DateTime.Now.ToFileTime()}";
-            const string command = @"cmd /c ""C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"" -products * -latest -format json";
+
+            // Include the prerelease option to allow prerelease versions to be returned. By default they won't be.
+            // This allows this test to seamlessly work when testing against a preview version of VS.
+            const string command = @"cmd /c ""C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe"" -products * -latest -format json -prerelease";
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
             JArray json = (JArray)JsonConvert.DeserializeObject(output);
@@ -115,7 +118,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.Single(json);
             Assert.Equal(@"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools", json[0]["installationPath"]);
 
-            Version actualVsVersion = Version.Parse(json[0]["catalog"]["productDisplayVersion"].ToString());
+            // Get build version instead of a display version or semantic version because it's easier to parse and can
+            // also seamlessly work with preview versions.
+            Version actualVsVersion = Version.Parse(json[0]["catalog"]["buildVersion"].ToString());
 
             Version expectedVsVersion = Config.GetManifestVsVersion();
 
@@ -150,6 +155,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
             // Just verify the output is parseable to a Version object (it will throw if it's not)
+            // When testing preview versions, the .NET version may be a preview version as well so trim the preview
+            // suffix off in that case.
+            int suffixIndex = output.IndexOf("-");
+            if (suffixIndex >= 0)
+            {
+                output = output.Substring(0, suffixIndex);
+            }
+
             Version.Parse(output);
         }
 
