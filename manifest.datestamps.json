@@ -1,9 +1,9 @@
 {
     "variables": {
-      "RuntimeReleaseDateStamp": "20220712",
-      "AspnetReleaseDateStamp": "20220712",
-      "WcfReleaseDateStamp": "20220712",
-      "SdkReleaseDateStamp": "20220712",
+      "RuntimeReleaseDateStamp": "20220809",
+      "AspnetReleaseDateStamp": "20220809",
+      "WcfReleaseDateStamp": "20220809",
+      "SdkReleaseDateStamp": "20220809",
       
       "3.5-ltsc2016-Runtime-DateStamp": "$(RuntimeReleaseDateStamp)",
       "3.5-ltsc2016-Aspnet-DateStamp": "$(AspnetReleaseDateStamp)",
