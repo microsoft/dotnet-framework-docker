@@ -38,13 +38,13 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
 # Install VS components
 RUN `
     # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe https://aka.ms/vs/17/pre/vs_TestAgent.exe `
+    curl -fSLo vs_TestAgent.exe https://aka.ms/vs/17/release/vs_TestAgent.exe `
     && start /w vs_TestAgent --quiet --norestart --nocache --wait --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent" `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
     # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe https://aka.ms/vs/17/pre/vs_BuildTools.exe `
+    && curl -fSLo vs_BuildTools.exe https://aka.ms/vs/17/release/vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
         --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
