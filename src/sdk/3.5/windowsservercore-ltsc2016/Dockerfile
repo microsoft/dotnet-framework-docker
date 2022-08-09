@@ -58,9 +58,9 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/129ac716764b517709d969cad9e89c4472451c0c7c746f4f1e3141ddcef885c8/vs_TestAgent.exe `
+            -Uri https://aka.ms/vs/17/release/vs_TestAgent.exe `
             -OutFile vs_TestAgent.exe `
-    && start /w vs_TestAgent --quiet --norestart --nocache --wait `
+    && start /w vs_TestAgent --quiet --norestart --nocache --wait --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent" `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
@@ -70,9 +70,10 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/06293b7db26d35bf19253f8059bf9feeb97d34236c02970afd1931f5e4da6da7/vs_BuildTools.exe `
+            -Uri https://aka.ms/vs/17/release/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
+        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
@@ -90,21 +91,9 @@ RUN `
     # Trigger dotnet first run experience by running arbitrary cmd
     && "%ProgramFiles%\dotnet\dotnet" help `
     `
-    # Workaround for issues with 32-bit ngen
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net452.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net46.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net461.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net462.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net47.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net471.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net472.arm64.exe" `
-    && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\Extensions\TestPlatform\testhost.net48.arm64.exe" `
-    `
     # Workaround for issues with 64-bit ngen
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\SecAnnotate.exe" `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\WinMDExp.exe" `
-    && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\arm64\MSBuild.exe" `
     `
     # ngen assemblies queued by VS installers
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
