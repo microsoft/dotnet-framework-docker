@@ -8,7 +8,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     {
         public const string WSC_LTSC2016 = "windowsservercore-ltsc2016";
         public const string WSC_LTSC2019 = "windowsservercore-ltsc2019";
-        public const string WSC_20H2 = "windowsservercore-20H2";
         public const string WSC_LTSC2022 = "windowsservercore-ltsc2022";
     }
 }

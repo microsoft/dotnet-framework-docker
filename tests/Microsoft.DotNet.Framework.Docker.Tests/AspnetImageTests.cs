@@ -15,7 +15,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_20H2 },
             new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
             new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
@@ -24,7 +23,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_20H2 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
         };
 

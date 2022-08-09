@@ -7,7 +7,7 @@
             (
                 (
                     (PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2019") ||
-                    (PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019" && OS_VERSION_NUMBER != "20H2")
+                    (PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019")
                 ) &&
                 is48SecurityRelease
             )
@@ -22,7 +22,7 @@ if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8"
     # Enable detection of running in a container
     }}{{ if OS_VERSION_NUMBER != "ltsc2019"
 :DOTNET_RUNNING_IN_CONTAINER=true `
-    }}{{ if PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "20H2":COMPLUS_RUNNING_IN_CONTAINER=1 `
+    }}{{ if PRODUCT_VERSION = "4.8":COMPLUS_RUNNING_IN_CONTAINER=1 `
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
