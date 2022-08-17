@@ -21,16 +21,9 @@ RUN `
     && del microsoft-windows-netfx3.zip `
     && dism /Online /Quiet /Add-Package /PackagePath:C:\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab `
     && rmdir /S /Q microsoft-windows-netfx3 `
-^else:{{
-    if PRODUCT_VERSION = "4.7"
-:            -Uri https://download.visualstudio.microsoft.com/download/pr/2dfcc711-bb60-421a-a17b-76c63f8d1907/e5c0231bd5d51fffe65f8ed7516de46a/ndp47-kb3186497-x86-x64-allos-enu.exe `
-^   elif PRODUCT_VERSION = "4.7.1"
-:            -Uri https://download.visualstudio.microsoft.com/download/pr/4312fa21-59b0-4451-9482-a1376f7f3ba4/9947fce13c11105b48cba170494e787f/ndp471-kb4033342-x86-x64-allos-enu.exe `
-^   elif PRODUCT_VERSION = "4.7.2"
-:            -Uri https://download.visualstudio.microsoft.com/download/pr/1f5af042-d0e4-4002-9c59-9ba66bcf15f6/089f837de42708daacaae7c04b7494db/ndp472-kb4054530-x86-x64-allos-enu.exe `
-^   elif PRODUCT_VERSION = "4.8"
-:            -Uri https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe `
-}}            -OutFile dotnet-framework-installer.exe `
+^else
+:            -Uri {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
+            -OutFile dotnet-framework-installer.exe `
     && start /w .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
 }}    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
