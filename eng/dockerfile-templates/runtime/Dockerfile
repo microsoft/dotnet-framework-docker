@@ -37,7 +37,7 @@ RUN `
     `
 ^elif OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"
 :    # Install .NET Fx 4.8
-    curl -fSLo dotnet-framework-installer.exe https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/abd170b4b0ec15ad0222a809b761a036/ndp48-x86-x64-allos-enu.exe `
+    curl -fSLo dotnet-framework-installer.exe {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
     && .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
