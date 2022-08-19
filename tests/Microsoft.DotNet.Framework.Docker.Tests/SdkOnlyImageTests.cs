@@ -69,15 +69,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             IEnumerable<Version> actualVersions = output.Split(Environment.NewLine)
                 .Select(name => new Version(name.Substring(1))); // Trim the first character (v4.0 => 4.0)
 
-            Version buildVersion = new Version(imageDescriptor.Version);
-
-            IEnumerable<Version> expectedVersions = allFrameworkVersions;
-            if (imageDescriptor.Version != "3.5")
-            {
-                expectedVersions = allFrameworkVersions.Where(version => version <= buildVersion);
-            }
-
-            Assert.Equal(expectedVersions, actualVersions);
+            Assert.Equal(allFrameworkVersions, actualVersions);
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
