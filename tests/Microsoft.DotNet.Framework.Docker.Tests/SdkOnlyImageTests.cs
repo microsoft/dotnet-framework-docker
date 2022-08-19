@@ -57,13 +57,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new Version("4.7"),
                 new Version("4.7.1"),
                 new Version("4.7.2"),
-                new Version("4.8")
+                new Version("4.8"),
+                new Version("4.8.1")
             };
-
-            if (imageDescriptor.Version == "4.8.1")
-            {
-                allFrameworkVersions.Add(new Version("4.8.1"));
-            }
 
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"targetingpacks-{DateTime.Now.ToFileTime()}";
