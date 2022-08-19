@@ -1,7 +1,7 @@
 {{
     set is48SecurityRelease to (VARIABLES[cat("4.8-is-security-release|", OS_VERSION_NUMBER)] = "true") ^
-    set apply35Patch to (VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void && PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019") ^
-    set applyPatch to VARIABLES[cat("kb|", OS_VERSION_NUMBER)] != void &&
+    set apply35Patch to (VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void && PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019") ^
+    set applyPatch to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void &&
         !(
             (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") ||
             (
@@ -44,20 +44,20 @@ RUN `
     `
 }}{{if apply35Patch
 :    # Apply latest 3.5 patch
-    && curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}} `
+    && curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)]}}-x64.cab `
     && rmdir /S /Q patch `
     `
 }}{{if applyPatch
 :    # Apply latest patch
-    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("lcu|", OS_VERSION_NUMBER)]}}}} `
+    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5":{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|3.5-4.7.2")]}}^else:{{VARIABLES[cat("kb|", OS_VERSION_NUMBER)]}}}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
