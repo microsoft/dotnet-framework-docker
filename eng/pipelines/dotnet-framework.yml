@@ -5,7 +5,7 @@ resources:
   repositories:
   - repository: InternalVersionsRepo
     type: github
-    endpoint: dotnet
+    endpoint: public
     name: dotnet/versions
 
 variables:
