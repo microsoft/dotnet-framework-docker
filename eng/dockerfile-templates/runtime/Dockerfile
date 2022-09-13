@@ -54,11 +54,11 @@ RUN `
     `
 }}{{if applyPatch
 :    # Apply latest patch
-    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8"):&& }}curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}} `
+    {{if PRODUCT_VERSION = "3.5" || (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || (OS_VERSION_NUMBER = "ltsc2022" && PRODUCT_VERSION = "4.8.1"):&& }}curl -fSLo patch.msu {{VARIABLES[cat("lcu|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}} `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}{{if PRODUCT_VERSION = "4.8.1":1}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"

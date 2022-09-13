@@ -27,7 +27,7 @@
       "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/06/windows10.0-kb5015731-x64-ndp48_ade9864038087d2d8ccedf421bb45499685d6493.msu",
       "kb|ltsc2022|4.8": "kb5015733",
       "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/06/windows10.0-kb5015733-x64-ndp48_8efae0094a144001533bc4cb8eb8e9a779e2534d.msu",
-      "kb|ltsc2022|4.8.1": "KB5017030",
+      "kb|ltsc2022|4.8.1": "kb5017030",
       "lcu|ltsc2022|4.8.1": "TBD",
 
       // Defines the patch info for the default .NET Fx version installed in the OS
