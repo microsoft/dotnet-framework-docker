@@ -119,7 +119,7 @@ RUN powershell " `
     $ErrorActionPreference = 'Stop'; `
     $ProgressPreference = 'SilentlyContinue'; `
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-    @('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8') `
+    @('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8', '4.8.1') `
     | %{ `
         Invoke-WebRequest `
             -UseBasicParsing `

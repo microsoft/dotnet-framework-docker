@@ -1,5 +1,7 @@
 # Featured Tags
 
+* `4.8.1`
+  * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8`
 * `3.5`
@@ -35,7 +37,8 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
-4.8 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8*
+4.8.1 | windowsservercore-ltsc2022 | 4.8.1*
+4.8 | windowsservercore-ltsc2022, windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.8*
 4.7.2 | windowsservercore-ltsc2019, windowsservercore-ltsc2016 | 4.7.2
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
@@ -43,7 +46,7 @@ Version Tag | OS Version | Supported .NET Versions
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 
-\* The 4.8 SDK is also capable of building 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects.
+\* The 4.8 and 4.8.1 SDKs are also capable of building 4.8.1, 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects.
 
 # Related Repos
 
@@ -65,6 +68,7 @@ Version Tag | OS Version | Supported .NET Versions
 ## Windows Server Core 2022 amd64 Tags
 Tag | Dockerfile
 ---------| ---------------
+4.8.1-20220809-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8.1/windowsservercore-ltsc2022/Dockerfile)
 4.8-20220809-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/4.8/windowsservercore-ltsc2022/Dockerfile)
 3.5-20220809-windowsservercore-ltsc2022, 3.5-windowsservercore-ltsc2022, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/sdk/3.5/windowsservercore-ltsc2022/Dockerfile)
 

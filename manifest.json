@@ -25,6 +25,24 @@
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/runtime-tags.yml",
       "images": [
         {
+          "productVersion": "4.8.1",
+          "sharedTags": {
+            "4.8.1": {}
+          },
+          "platforms": [
+            {
+              "dockerfile": "src/runtime/4.8.1/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/runtime/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8.1-$(4.8.1-ltsc2022-Runtime-DateStamp)-windowsservercore-ltsc2022": {},
+                "4.8.1-windowsservercore-ltsc2022": {}
+              }
+            }
+          ]
+        },
+        {
           "productVersion": "4.8",
           "sharedTags": {
             "4.8": {},
@@ -254,6 +272,27 @@
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/sdk-tags.yml",
       "images": [
         {
+          "productVersion": "4.8.1",
+          "sharedTags": {
+            "4.8.1": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/sdk/4.8.1/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/sdk/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8.1-$(4.8.1-ltsc2022-Sdk-DateStamp)-windowsservercore-ltsc2022": {},
+                "4.8.1-windowsservercore-ltsc2022": {}
+              }
+            }
+          ]
+        },
+        {
           "productVersion": "4.8",
           "sharedTags": {
             "4.8": {},
@@ -368,6 +407,27 @@
       ],
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/aspnet-tags.yml",
       "images": [
+        {
+          "productVersion": "4.8.1",
+          "sharedTags": {
+            "4.8.1": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:runtime)"
+              },
+              "dockerfile": "src/aspnet/4.8.1/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/aspnet/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8.1-$(4.8.1-ltsc2022-Aspnet-DateStamp)-windowsservercore-ltsc2022": {},
+                "4.8.1-windowsservercore-ltsc2022": {}
+              }
+            }
+          ]
+        },
         {
           "productVersion": "4.8",
           "sharedTags": {
@@ -580,6 +640,27 @@
       ],
       "mcrTagsMetadataTemplate": "eng/mcr-tags-metadata-templates/wcf-tags.yml",
       "images": [
+        {
+          "productVersion": "4.8.1",
+          "sharedTags": {
+            "4.8.1": {}
+          },
+          "platforms": [
+            {
+              "buildArgs": {
+                "REPO": "$(Repo:aspnet)"
+              },
+              "dockerfile": "src/wcf/4.8.1/windowsservercore-ltsc2022",
+              "dockerfileTemplate": "eng/dockerfile-templates/wcf/Dockerfile",
+              "os": "windows",
+              "osVersion": "windowsservercore-ltsc2022",
+              "tags": {
+                "4.8.1-$(4.8.1-ltsc2022-Wcf-DateStamp)-windowsservercore-ltsc2022": {},
+                "4.8.1-windowsservercore-ltsc2022": {}
+              }
+            }
+          ]
+        },
         {
           "productVersion": "4.8",
           "sharedTags": {

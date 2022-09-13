@@ -23,6 +23,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
+            new ImageDescriptor { Version = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
         };
 
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
@@ -44,7 +45,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         [MemberData(nameof(GetImageData))]
         public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
         {
-            Version[] allFrameworkVersions = new Version[]
+            List<Version> allFrameworkVersions = new()
             {
                 new Version("4.0"),
                 new Version("4.5"),
@@ -56,7 +57,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 new Version("4.7"),
                 new Version("4.7.1"),
                 new Version("4.7.2"),
-                new Version("4.8")
+                new Version("4.8"),
+                new Version("4.8.1")
             };
 
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
@@ -67,15 +69,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             IEnumerable<Version> actualVersions = output.Split(Environment.NewLine)
                 .Select(name => new Version(name.Substring(1))); // Trim the first character (v4.0 => 4.0)
 
-            Version buildVersion = new Version(imageDescriptor.Version);
-
-            IEnumerable<Version> expectedVersions = allFrameworkVersions;
-            if (imageDescriptor.Version != "3.5")
-            {
-                expectedVersions = allFrameworkVersions.Where(version => version <= buildVersion);
-            }
-
-            Assert.Equal(expectedVersions, actualVersions);
+            Assert.Equal(allFrameworkVersions, actualVersions);
         }
 
         [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
