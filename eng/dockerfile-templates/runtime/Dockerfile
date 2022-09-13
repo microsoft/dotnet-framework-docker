@@ -3,7 +3,6 @@
     set apply35Patch to (VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void && PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019") ^
     set applyPatch to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void &&
         !(
-            PRODUCT_VERSION = "4.8.1" ||
             (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") ||
             (
                 (
