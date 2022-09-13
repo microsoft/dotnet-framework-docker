@@ -77,7 +77,6 @@ RUN `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
-        --add Microsoft.NetCore.Component.Runtime.5.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
