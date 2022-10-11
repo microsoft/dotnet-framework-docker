@@ -1,11 +1,11 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5":"kb5017305",
-      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/09/windows10.0-kb5017305-x64_2c07f36c2861125ecea1098dc29cd03d42c3781b.msu",
-      "kb|ltsc2019|3.5": "kb5016713",
-      "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/07/windows10.0-kb5016713-x64_06795712a9bf5515c671e4f56f41e17b5a77dae5.msu",
-      "kb|ltsc2022|3.5": "kb5017316",
-      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/09/windows10.0-kb5017316-x64_f80e106e113fe039e5dd39e9b7b2c61922983598.msu",
+      "kb|ltsc2016|3.5":"kb5018411",
+      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/10/windows10.0-kb5018411-x64_0ce64987a6675227941fadd950019e447d60ba03.msu",
+      "kb|ltsc2019|3.5": "kb5017270",
+      "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/08/windows10.0-kb5017270-x64_e3b6e098823a0e08110adee9400d44b9c00a824a.msu",
+      "kb|ltsc2022|3.5": "kb5018421",
+      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/10/windows10.0-kb5018421-x64_e29a9445290be21deec74ff0cd0a21e757a74e0d.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
       "kb|ltsc2019|4.7.2": "$(kb|ltsc2019|3.5)",
@@ -17,16 +17,16 @@
       "kb|ltsc2016|4.7": "$(kb|ltsc2016|3.5)",
       "lcu|ltsc2016|4.7": "$(lcu|ltsc2016|3.5)",
 
-      "4.8-is-security-release": true,
+      "4.8-is-security-release": false,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "kb5017035",
-      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/08/windows10.0-kb5017035-x64-ndp48_be1647f3ef227d05c2b120433b34b58998af32ea.msu",
-      "kb|ltsc2019|4.8": "kb5016593",
-      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/07/windows10.0-kb5016593-x64-ndp48_f15bf28d962e2f33576842131f6b6ce38a455d78.msu",
-      "kb|ltsc2022|4.8": "kb5017028",
-      "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/08/windows10.0-kb5017028-x64-ndp48_91c92a44aa0d0ed910f1b993cdff4ab856ce01a0.msu",
-      "kb|ltsc2022|4.8.1": "kb5017030",
-      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/08/windows10.0-kb5017030-x64-ndp481_f5e3190cd43d95de02f227b3fdebc973f85ebe30.msu",
+      "kb|ltsc2016|4.8": "kb5018515",
+      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/09/windows10.0-kb5018515-x64-ndp48_97b7046f4c5cb3b2167f24d0d0eda9039d108930.msu",
+      "kb|ltsc2019|4.8": "kb5017263",
+      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/08/windows10.0-kb5017263-x64-ndp48_bbc9586178ba2f66be2a58ef7c6b4d2362b7bdfe.msu",
+      "kb|ltsc2022|4.8": "kb5017265",
+      "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/08/windows10.0-kb5017265-x64-ndp48_46b2f80bc536319cbca686e16604c7ac82ac39a5.msu",
+      "kb|ltsc2022|4.8.1": "kb5017268",
+      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2022/08/windows10.0-kb5017268-x64-ndp481_684aa04c830ad9b05b4f91c6f4e5b4a3970a0a23.msu",
 
       // Defines the patch info for the default .NET Fx version installed in the OS
       "kb|ltsc2022|default": "$(kb|ltsc2022|4.8)",
@@ -34,7 +34,7 @@
       "kb|ltsc2019|default": "$(kb|ltsc2019|4.7.2)",
       "lcu|ltsc2019|default": "$(lcu|ltsc2019|4.7.2)",
 
-      "nuget|version": "6.2.1",
+      "nuget|version": "6.3.0",
   
       "vs|version": "17.3",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
