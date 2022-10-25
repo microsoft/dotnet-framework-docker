@@ -1,4 +1,4 @@
-# Featured Tags
+# Featured tags
 
 * `4.8.1`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8.1`
@@ -48,7 +48,7 @@ Version Tag | OS Version | Supported .NET Versions
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2
 
-# Related Repos
+# Related repositories
 
 .NET Framework:
 

@@ -1,4 +1,4 @@
-# Featured Tags
+# Featured tags
 
 * `4.8.1`
   * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8.1`
@@ -43,12 +43,13 @@ Version Tag | OS Version | Supported .NET Versions
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2
+3.5 | windowsservercore-ltsc2022 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 
 \* The 4.8 and 4.8.1 SDKs are also capable of building 4.8.1, 4.8, 4.7.2, 4.7.1, 4.7, and 4.6.2 projects.
 
-# Related Repos
+# Related repositories
 
 .NET Framework:
 

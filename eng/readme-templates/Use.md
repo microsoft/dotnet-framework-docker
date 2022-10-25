@@ -20,6 +20,7 @@ Version Tag | OS Version | Supported .NET Versions
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2{{if SHORT_REPO != "wcf":
+3.5 | windowsservercore-ltsc2022 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5}}{{if SHORT_REPO = "sdk":
 

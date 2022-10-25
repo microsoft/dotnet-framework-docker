@@ -1,7 +1,7 @@
 {{
     _ ARGS:
       top-header: The string to use as the top-level header.
-}}{{ARGS["top-header"]}} Featured Tags
+}}{{ARGS["top-header"]}} Featured tags
 
 {{if SHORT_REPO = "samples"
 :* `dotnetapp`
