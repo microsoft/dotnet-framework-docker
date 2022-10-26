@@ -4,14 +4,14 @@ The Windows Communication Foundation (WCF) is a framework for building service-o
 
 Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-## Featured Tags
+## Featured tags
 
 * `4.8.1`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8`
 
-## Related Repos
+## Related repositories
 
 .NET Framework:
 

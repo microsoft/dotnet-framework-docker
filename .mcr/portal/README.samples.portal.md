@@ -4,7 +4,7 @@ These images contain sample .NET Framework, ASP.NET and WCF applications.
 
 Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-## Featured Tags
+## Featured tags
 
 * `dotnetapp`
   * `docker pull mcr.microsoft.com/dotnet/framework/samples:dotnetapp`
@@ -15,7 +15,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 * `wcfclient`
   * `docker pull mcr.microsoft.com/dotnet/framework/samples:wcfclient`
 
-## Related Repos
+## Related repositories
 
 .NET Framework:
 

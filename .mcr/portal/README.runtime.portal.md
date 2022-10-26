@@ -4,7 +4,7 @@ This image contains the .NET Framework runtimes and libraries and is optimized f
 
 Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-## Featured Tags
+## Featured tags
 
 * `4.8.1`
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8.1`
@@ -13,7 +13,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 * `3.5`
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:3.5`
 
-## Related Repos
+## Related repositories
 
 .NET Framework:
 
@@ -52,6 +52,7 @@ Version Tag | OS Version | Supported .NET Versions
 4.7.1 | windowsservercore-ltsc2016 | 4.7.1
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2
+3.5 | windowsservercore-ltsc2022 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 

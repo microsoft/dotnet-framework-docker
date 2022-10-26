@@ -1,4 +1,4 @@
-# Featured Tags
+# Featured tags
 
 * `dotnetapp`
   * `docker pull mcr.microsoft.com/dotnet/framework/samples:dotnetapp`
@@ -58,7 +58,7 @@ Type the following Docker command to start a WCF client container, set environme
 docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 mcr.microsoft.com/dotnet/framework/samples:wcfclient
 ```
 
-# Related Repos
+# Related repositories
 
 .NET Framework:
 
