@@ -56,6 +56,7 @@ RUN `
         --add Microsoft.Net.Component.{{sdkVersion}}.SDK @^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 @^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 @^ `
+        --add Microsoft.NetCore.Component.Runtime.7.0 @^ `
         --add Microsoft.NetCore.Component.SDK @^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
         --add Microsoft.VisualStudio.Component.WebDeploy @^ `

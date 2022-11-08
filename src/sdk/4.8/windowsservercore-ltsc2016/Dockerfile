@@ -1,10 +1,10 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.8-20221011-windowsservercore-ltsc2016
+FROM $REPO:4.8-20221108-windowsservercore-ltsc2016
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.3.0
+ENV NUGET_VERSION=6.3.1
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
@@ -46,6 +46,7 @@ RUN `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
+        --add Microsoft.NetCore.Component.Runtime.7.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `
