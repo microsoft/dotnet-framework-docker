@@ -1,13 +1,13 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20221011-windowsservercore-ltsc2019
+FROM $REPO:3.5-20221108-windowsservercore-ltsc2019
 
 ENV `
     # Do not generate certificate
     DOTNET_GENERATE_ASPNET_CERTIFICATE=false `
     # NuGet version to install
-    NUGET_VERSION=6.3.0 `
+    NUGET_VERSION=6.3.1 `
     # Install location of Roslyn
     ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 
@@ -19,11 +19,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2022/08/windows10.0-kb5017263-x64-ndp48_bbc9586178ba2f66be2a58ef7c6b4d2362b7bdfe.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/10/windows10.0-kb5020615-x64-ndp48_5e59fe45d3327e5653c0060c7ea3d8613b191991.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5017263-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5020615-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
@@ -51,6 +51,7 @@ RUN `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
+        --add Microsoft.NetCore.Component.Runtime.7.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `

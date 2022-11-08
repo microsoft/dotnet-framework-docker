@@ -1,13 +1,13 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.8-20221011-windowsservercore-ltsc2019
+FROM $REPO:4.8-20221108-windowsservercore-ltsc2019
 
 ENV `
     # Do not generate certificate
     DOTNET_GENERATE_ASPNET_CERTIFICATE=false `
     # NuGet version to install
-    NUGET_VERSION=6.3.0 `
+    NUGET_VERSION=6.3.1 `
     # Install location of Roslyn
     ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
 
@@ -32,6 +32,7 @@ RUN `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.3.1 ^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
+        --add Microsoft.NetCore.Component.Runtime.7.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `
