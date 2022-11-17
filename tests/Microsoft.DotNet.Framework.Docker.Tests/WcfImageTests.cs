@@ -8,41 +8,36 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    [Trait("Category", "wcf")]
+    [Trait("Category", ImageTypes.Wcf)]
     public class WcfImageTests : ImageTests
     {
-        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
-        {
-            new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.1", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
-        };
-
         public WcfImageTests(ITestOutputHelper outputHelper)
             : base(outputHelper)
         {
         }
 
-        protected override string ImageType => "wcf";
+        protected override string ImageType => ImageTypes.Wcf;
 
-        [SkippableTheory("3.5")]
+        public static IEnumerable<object[]> GetImageData() =>
+            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Wcf);
+
+        private static bool IsSkippable(ImageDescriptor imageDescriptor) => imageDescriptor.Version == "3.5";
+
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             VerifyCommonEnvironmentVariables(AspnetImageTests.GetEnvironmentVariables(imageDescriptor), imageDescriptor);
         }
 
-        // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
-        [SkippableTheory("3.5")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             List<string> appBuildArgs = new List<string> { };
 
             string baseWCFImage = ImageTestHelper.GetImage("wcf", imageDescriptor.Version, imageDescriptor.OsVariant);
@@ -57,18 +52,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 );
         }
 
-        // Skip the test if it's for 3.5 to avoid empty MemberData (see https://github.com/xunit/xunit/issues/1113)
-        [SkippableTheory("3.5")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyNgenQueuesAreEmpty(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             VerifyCommmonNgenQueuesAreEmpty(imageDescriptor);
         }
 
-        [SkippableTheory("3.5")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string expectedShellValue;
             if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019)
@@ -81,11 +79,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
 
             VerifyCommonShell(imageDescriptor, expectedShellValue);
-        }
-
-        public static IEnumerable<object[]> GetImageData()
-        {
-            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
     }
 }

@@ -44,19 +44,21 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             });
         }
 
-        public static IEnumerable<object[]> ApplyImageDataFilters(IEnumerable<ImageDescriptor> imageDescriptors)
+        public static IEnumerable<object[]> ApplyImageDataFilters(IEnumerable<ImageDescriptor> imageDescriptors, string imageType)
         {
-            string versionPattern =
-                Config.Version != null ? Config.GetFilterRegexPattern(Config.Version) : null;
+            IEnumerable<string> pathPatterns = Config.Paths
+                .Select(path => Config.GetFilterRegexPattern(path));
             string osPattern =
                 Config.OS != null ? Config.GetFilterRegexPattern(Config.OS) : null;
 
-            // Filter out test data that does not match the active os and version filters.
+            // Filter out test data that does not match the active os and path filters.
             return imageDescriptors
-                .Where(imageDescriptor => Config.OS == null
-                    || Regex.IsMatch(imageDescriptor.OsVariant, osPattern, RegexOptions.IgnoreCase))
-                .Where(imageDescriptor => Config.Version == null
-                    || Regex.IsMatch(imageDescriptor.Version, versionPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor =>
+                    Config.OS == null ||
+                    Regex.IsMatch(imageDescriptor.OsVariant, osPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor =>
+                    !pathPatterns.Any() ||
+                    pathPatterns.Any(pathPattern => Regex.IsMatch(imageDescriptor.GetDockerfilePath(imageType), pathPattern, RegexOptions.IgnoreCase)))
                 .Select(imageDescriptor => new object[] { imageDescriptor });
         }
 

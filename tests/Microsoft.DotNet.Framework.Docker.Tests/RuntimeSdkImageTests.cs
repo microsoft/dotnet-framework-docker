@@ -10,26 +10,10 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    [Trait("Category", "runtime")]
-    [Trait("Category", "sdk")]
+    [Trait("Category", ImageTypes.Runtime)]
+    [Trait("Category", ImageTypes.Sdk)]
     public class RuntimeSdkImageTests
     {
-        private static readonly RuntimeImageDescriptor[] s_imageData = new RuntimeImageDescriptor[]
-        {
-            new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
-            new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new RuntimeImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
-            new RuntimeImageDescriptor { Version = "4.6.2", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new RuntimeImageDescriptor { Version = "4.7", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new RuntimeImageDescriptor { Version = "4.7.1", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new RuntimeImageDescriptor { Version = "4.7.2", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new RuntimeImageDescriptor { Version = "4.7.2", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new RuntimeImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
-            new RuntimeImageDescriptor { Version = "4.8.1", SdkVersion = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
-        };
-
         private readonly ImageTestHelper _imageTestHelper;
 
         public RuntimeSdkImageTests(ITestOutputHelper outputHelper)
@@ -37,23 +21,28 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             _imageTestHelper = new ImageTestHelper(outputHelper);
         }
 
+        public static IEnumerable<object[]> GetImageData()
+        {
+            return ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Runtime);
+        }
+
         [Theory]
         [MemberData(nameof(GetImageData))]
-        public void VerifyImagesWithApps(RuntimeImageDescriptor imageDescriptor)
+        public void VerifyImagesWithApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "dotnetapp", "", true);
         }
 
         [Theory]
         [MemberData(nameof(GetImageData))]
-        public void VerifyImagesWithWebApps(RuntimeImageDescriptor imageDescriptor)
+        public void VerifyImagesWithWebApps(ImageDescriptor imageDescriptor)
         {
             VerifyFxImages(imageDescriptor, "webapp", "powershell -command \"dir ./bin/SimpleWebApplication.dll\"", false);
         }
 
         [Theory]
         [MemberData(nameof(GetImageData))]
-        public void ContainerLimits(RuntimeImageDescriptor imageDescriptor)
+        public void ContainerLimits(ImageDescriptor imageDescriptor)
         {
             // Container limits are only supported on 4.8 for Server 2019 and 2022.
             if (imageDescriptor.Version != "4.8" ||
@@ -102,12 +91,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             }
         }
 
-        public static IEnumerable<object[]> GetImageData()
-        {
-            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
-        }
-
-        private string VerifyFxImages(RuntimeImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime, string optionalRunArgs = null)
+        private string VerifyFxImages(ImageDescriptor imageDescriptor, string appDescriptor, string runCommand, bool includeRuntime, string optionalRunArgs = null)
         {
             string baseBuildImage = _imageTestHelper.GetImage("sdk", imageDescriptor.SdkVersion, imageDescriptor.OsVariant);
 

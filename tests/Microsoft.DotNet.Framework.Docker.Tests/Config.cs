@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
@@ -17,7 +16,9 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         public static string RepoPrefix { get; } = Environment.GetEnvironmentVariable("REPO_PREFIX") ?? string.Empty;
         public static string Registry { get; } = Environment.GetEnvironmentVariable("REGISTRY") ?? GetManifestRegistry();
         public static string SourceRepoRoot { get; } = Environment.GetEnvironmentVariable("SOURCE_REPO_ROOT") ?? string.Empty;
-        public static string Version => Environment.GetEnvironmentVariable("IMAGE_VERSION");
+        public static string[] Paths { get; } =
+            Environment.GetEnvironmentVariable("DOCKERFILE_PATHS")?
+                .Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
 
         public static string GetManifestRegistry()
         {
