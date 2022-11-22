@@ -22,24 +22,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         protected override string ImageType => "sdk";
 
-        public static IEnumerable<object[]> GetImageData()
-        {
-            IEnumerable<object[]> imageData =
-                ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Sdk);
-            if (!imageData.Any())
-            {
-                Assert.NotEmpty(Config.Paths);
-                Assert.True(
-                    !Config.Paths.Any(path => path.Contains(ImageTypes.Sdk)),
-                    "Image data filtering incorrectly filtered out SDK test data");
-
-                // XUnit requires MemberData to return a non-empty set: https://github.com/xunit/xunit/issues/1113
-                // Set a null placeholder to all the test to skip the test.
-                imageData = new object[][] { new object[] { null } };
-            }
-
-            return imageData;
-        }
+        public static IEnumerable<object[]> GetImageData() =>
+            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Sdk, allowEmptyResults: true);
 
         private static bool IsSkippable(ImageDescriptor imageDescriptor) =>
             imageDescriptor is null ||

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -19,24 +18,8 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         protected override string ImageType => ImageTypes.Wcf;
 
-        public static IEnumerable<object[]> GetImageData()
-        {
-            IEnumerable<object[]> imageData =
-                ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Wcf);
-            if (!imageData.Any())
-            {
-                Assert.NotEmpty(Config.Paths);
-                Assert.True(
-                    !Config.Paths.Any(path => path.Contains(ImageTypes.Wcf)),
-                    "Image data filtering incorrectly filtered out WCF test data");
-
-                // XUnit requires MemberData to return a non-empty set: https://github.com/xunit/xunit/issues/1113
-                // Set a null placeholder to all the test to skip the test.
-                imageData = new object[][] { new object[] { null } };
-            }
-
-            return imageData;
-        }
+        public static IEnumerable<object[]> GetImageData() =>
+            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Wcf, allowEmptyResults: true);
 
         private static bool IsSkippable(ImageDescriptor imageDescriptor) =>
             imageDescriptor is null || imageDescriptor.Version == "3.5";
