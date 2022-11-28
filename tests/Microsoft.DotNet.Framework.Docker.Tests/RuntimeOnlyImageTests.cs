@@ -8,36 +8,18 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    [Trait("Category", "runtime")]
+    [Trait("Category", ImageTypes.Runtime)]
     public class RuntimeOnlyImageTests : ImageTests
     {
-        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
-        {
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.1", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
-        };
-
         public RuntimeOnlyImageTests(ITestOutputHelper outputHelper)
             : base(outputHelper)
         {
         }
 
-        protected override string ImageType => "runtime";
+        protected override string ImageType => ImageTypes.Runtime;
 
-        public static IEnumerable<object[]> GetImageData()
-        {
-            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
-        }
+        public static IEnumerable<object[]> GetImageData() =>
+            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Runtime);
 
         [Theory]
         [MemberData(nameof(GetImageData))]

@@ -15,17 +15,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     [Trait("Category", "sdk")]
     public class SdkOnlyImageTests : ImageTests
     {
-        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
-        {
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
-        };
-
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
             : base(outputHelper)
         {
@@ -33,18 +22,22 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         protected override string ImageType => "sdk";
 
-        public static IEnumerable<object[]> GetImageData()
-        {
-            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
-        }
+        public static IEnumerable<object[]> GetImageData() =>
+            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Sdk, allowEmptyResults: true);
+
+        private static bool IsSkippable(ImageDescriptor imageDescriptor) =>
+            imageDescriptor is null ||
+            imageDescriptor.Version != imageDescriptor.SdkVersion;
 
         /// <summary>
         /// Verifies the SDK images contain the expected targeting packs.
         /// </summary>
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyTargetingPacks(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             List<Version> allFrameworkVersions = new()
             {
                 new Version("4.0"),
@@ -72,10 +65,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.Equal(allFrameworkVersions, actualVersions);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyEnvironmentVariables(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             List<EnvironmentVariableInfo> variables = new List<EnvironmentVariableInfo>();
 
             variables.AddRange(RuntimeOnlyImageTests.GetEnvironmentVariables(imageDescriptor));
@@ -93,10 +88,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             VerifyCommonEnvironmentVariables(variables, imageDescriptor);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyVsWhereOperability(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"vswhere-{DateTime.Now.ToFileTime()}";
 
@@ -120,11 +117,13 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [Trait("Category", "sdk")]
         [MemberData(nameof(GetImageData))]
         public void VerifyNuGetCli(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"nuget-{DateTime.Now.ToFileTime()}";
             string command = "nuget help";
@@ -137,10 +136,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.Equal(output, latestOutput);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyDotNetCli(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"dotnetcli-{DateTime.Now.ToFileTime()}";
             string command = "dotnet --version";
@@ -158,10 +159,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Version.Parse(output);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyVsTest(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"vstest-{DateTime.Now.ToFileTime()}";
             string command = "vstest.console.exe /?";
@@ -170,10 +173,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.StartsWith("Microsoft (R) Test Execution Command Line Tool", output);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyGacUtil(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"gacutil-{DateTime.Now.ToFileTime()}";
             string command = "gacutil";
@@ -182,10 +187,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.StartsWith("Microsoft (R) .NET Global Assembly Cache Utility", output);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyWebDeploy(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             string appId = $"webdeploy-{DateTime.Now.ToFileTime()}";
 
@@ -198,10 +205,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.StartsWith("Microsoft (R) Web Deployment Command Line Tool (MSDeploy.exe)", output);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyClickOncePublishing(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string baseBuildImage = ImageTestHelper.GetImage("sdk", imageDescriptor.Version, imageDescriptor.OsVariant);
             List<string> buildArgs = new List<string>
             {
@@ -220,10 +229,12 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Assert.Equal($"setup.exe", outputLines[3]);
         }
 
-        [SkippableTheory("4.6.2", "4.7", "4.7.1", "4.7.2")]
+        [SkippableTheory]
         [MemberData(nameof(GetImageData))]
         public void VerifyShell(ImageDescriptor imageDescriptor)
         {
+            Skip.If(IsSkippable(imageDescriptor));
+
             string expectedShellValue;
             if (imageDescriptor.OsVariant == OsVersion.WSC_LTSC2016 ||
                 imageDescriptor.OsVariant == OsVersion.WSC_LTSC2019)

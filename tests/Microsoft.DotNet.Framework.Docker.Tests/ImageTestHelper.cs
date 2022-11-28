@@ -44,20 +44,37 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             });
         }
 
-        public static IEnumerable<object[]> ApplyImageDataFilters(IEnumerable<ImageDescriptor> imageDescriptors)
+        public static IEnumerable<object[]> ApplyImageDataFilters(
+            IEnumerable<ImageDescriptor> imageDescriptors, string imageType, bool allowEmptyResults = false)
         {
-            string versionPattern =
-                Config.Version != null ? Config.GetFilterRegexPattern(Config.Version) : null;
+            IEnumerable<string> pathPatterns = Config.Paths
+                .Select(path => Config.GetFilterRegexPattern(path));
             string osPattern =
                 Config.OS != null ? Config.GetFilterRegexPattern(Config.OS) : null;
 
-            // Filter out test data that does not match the active os and version filters.
-            return imageDescriptors
-                .Where(imageDescriptor => Config.OS == null
-                    || Regex.IsMatch(imageDescriptor.OsVariant, osPattern, RegexOptions.IgnoreCase))
-                .Where(imageDescriptor => Config.Version == null
-                    || Regex.IsMatch(imageDescriptor.Version, versionPattern, RegexOptions.IgnoreCase))
+            // Filter out test data that does not match the active os and path filters.
+            IEnumerable<object[]> imageData = imageDescriptors
+                .Where(imageDescriptor =>
+                    Config.OS == null ||
+                    Regex.IsMatch(imageDescriptor.OsVariant, osPattern, RegexOptions.IgnoreCase))
+                .Where(imageDescriptor =>
+                    !pathPatterns.Any() ||
+                    pathPatterns.Any(pathPattern => Regex.IsMatch(imageDescriptor.GetDockerfilePath(imageType), pathPattern, RegexOptions.IgnoreCase)))
                 .Select(imageDescriptor => new object[] { imageDescriptor });
+
+            if (!imageData.Any() && allowEmptyResults)
+            {
+                Assert.NotEmpty(Config.Paths);
+                Assert.True(
+                    !Config.Paths.Any(path => path.Contains(imageType)),
+                    $"Image data filtering incorrectly filtered out '{imageType}' test data");
+
+                // XUnit requires MemberData to return a non-empty set: https://github.com/xunit/xunit/issues/1113
+                // Set a null placeholder to allow the test implementation to skip the test.
+                imageData = new object[][] { new object[] { null } };
+            }
+
+            return imageData;
         }
 
         public string BuildAndTestImage(

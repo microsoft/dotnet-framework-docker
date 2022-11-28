@@ -5,13 +5,24 @@
 
 [cmdletbinding()]
 param(
-    [string]$Version,
+    [Parameter(ParameterSetName = "Version")]
+    [string]$Version = "*",
+
+    [Parameter(ParameterSetName = "Paths")]
+    [string[]]$Paths = @(),
+
     [string]$Architecture,
-    [string[]]$OSVersions,
+    
+    [string[]]$OSVersions = @(),
+    
     [string]$Registry,
+    
     [string]$RepoPrefix,
+    
     [switch]$PullImages,
+    
     [string]$ImageInfoPath,
+
     [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf', 'pre-build')]
     [string[]]$TestCategories = @("runtime", "sdk", "aspnet", "wcf")
 )
@@ -32,6 +43,12 @@ function Exec {
     }
 }
 
+function GetPath {
+    param ([string] $osVersion)
+
+    return "src/*/$Version/$osVersion"
+}
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
@@ -46,12 +63,27 @@ if ($OSVersions.Count -gt 1) {
 }
 
 # Run Tests
-$env:IMAGE_OS = $OSVersions[0]
-$env:IMAGE_VERSION = $Version
+$env:IMAGE_OS = "*"
+if ($OSVersions.Count -gt 0) {
+    $env:IMAGE_OS = $OSVersions[0]
+}
 $env:REGISTRY = $Registry
 $env:REPO_PREFIX = $RepoPrefix
 $env:IMAGE_INFO_PATH = $ImageInfoPath
 $env:SOURCE_REPO_ROOT = (Get-Item "$PSScriptRoot").Parent.FullName
+
+if ($PSCmdlet.ParameterSetName -eq "Version") {
+    if ($OSVersions -and $OSVersions.Count -gt 0) {
+        foreach ($osVersion in $OSVersions) {
+            $Paths += $(GetPath $osVersion)
+        }
+    }
+    else {
+        $Paths += GetPath "*"
+    }
+}
+
+$env:DOCKERFILE_PATHS = $($Paths -Join ",")
 
 if ($PullImages) {
     $env:PULL_IMAGES = 1

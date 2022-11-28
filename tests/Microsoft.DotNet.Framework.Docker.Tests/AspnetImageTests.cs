@@ -8,31 +8,18 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
-    [Trait("Category", "aspnet")]
+    [Trait("Category", ImageTypes.Aspnet)]
     public class AspnetImageTests : ImageTests
     {
-        private static readonly ImageDescriptor[] s_imageData = new ImageDescriptor[]
-        {
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.6.2", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.1", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.7.2", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
-            new ImageDescriptor { Version = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
-            new ImageDescriptor { Version = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
-        };
-
         public AspnetImageTests(ITestOutputHelper outputHelper)
             : base(outputHelper)
         {
         }
 
-        protected override string ImageType => "aspnet";
+        protected override string ImageType => ImageTypes.Aspnet;
+
+        public static IEnumerable<object[]> GetImageData() =>
+            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Aspnet);
 
         [Theory]
         [MemberData(nameof(GetImageData))]
@@ -99,11 +86,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
                 expectedShellValue = ShellValue_Default;
             }
             VerifyCommonShell(imageDescriptor, expectedShellValue);
-        }
-
-        public static IEnumerable<object[]> GetImageData()
-        {
-            return ImageTestHelper.ApplyImageDataFilters(s_imageData);
         }
     }
 }
