@@ -29,3 +29,9 @@ textarea {
         padding: 0;
     }
 }
+
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #777;
+    border-color: #fff
+}
