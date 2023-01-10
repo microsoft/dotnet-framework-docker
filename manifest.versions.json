@@ -1,11 +1,11 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5":"kb5021235",
-      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows10.0-kb5021235-x64_5d51c0893c43763fff710d3c6bc46feb6446d9f1.msu",
+      "kb|ltsc2016|3.5":"kb5022289",
+      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022289-x64_79d8b59c2bea46d286f2960920c075f416446445.msu",
       "kb|ltsc2019|3.5": "kb5020866",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/10/windows10.0-kb5020866-x64_a4650c85133b62a58d42bddc819ce7d3c1abcbcb.msu",
-      "kb|ltsc2022|3.5": "kb5021249",
-      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows10.0-kb5021249-x64_b9e3f9ac73fd2a45f932ed787b8323e162102799.msu",
+      "kb|ltsc2022|3.5": "kb5022291",
+      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022291-x64_7a517cbbe1288fd246efebc6089d0a4d91818c0e.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
       "kb|ltsc2019|4.7.2": "$(kb|ltsc2019|3.5)",
@@ -34,7 +34,7 @@
       "kb|ltsc2019|default": "$(kb|ltsc2019|4.7.2)",
       "lcu|ltsc2019|default": "$(lcu|ltsc2019|4.7.2)",
 
-      "nuget|version": "6.3.1",
+      "nuget|version": "6.4.0",
   
       "vs|version": "17.4",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",

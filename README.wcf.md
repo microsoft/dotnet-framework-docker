@@ -81,9 +81,9 @@ Tag | Dockerfile
 Tag | Dockerfile
 ---------| ---------------
 4.8-20221213-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.8/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20221213-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20221213-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
-4.7-20221213-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20230110-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20230110-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
+4.7-20230110-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
 4.6.2-20221213-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
 
 You can retrieve a list of all available tags for dotnet/framework/wcf at https://mcr.microsoft.com/v2/dotnet/framework/wcf/tags/list.

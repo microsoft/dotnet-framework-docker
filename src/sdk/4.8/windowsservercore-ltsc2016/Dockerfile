@@ -4,7 +4,7 @@ ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
 FROM $REPO:4.8-20221213-windowsservercore-ltsc2016
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.3.1
+ENV NUGET_VERSION=6.4.0
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
