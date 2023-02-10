@@ -1,11 +1,11 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5":"kb5022289",
-      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022289-x64_79d8b59c2bea46d286f2960920c075f416446445.msu",
-      "kb|ltsc2019|3.5": "kb5020866",
-      "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/10/windows10.0-kb5020866-x64_a4650c85133b62a58d42bddc819ce7d3c1abcbcb.msu",
-      "kb|ltsc2022|3.5": "kb5022291",
-      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022291-x64_7a517cbbe1288fd246efebc6089d0a4d91818c0e.msu",
+      "kb|ltsc2016|3.5":"kb5022838",
+      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/02/windows10.0-kb5022838-x64_459501093357a727a15bd3a1101df5e7213b721c.msu",
+      "kb|ltsc2019|3.5": "kb5022511",
+      "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022511-x64_19dcbf71169b01c6337e5f6b98b937156d6a7a70.msu",
+      "kb|ltsc2022|3.5": "kb5022842",
+      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/02/windows10.0-kb5022842-x64_708d02971c761091c9d978a18588a315c3817343.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
       "kb|ltsc2019|4.7.2": "$(kb|ltsc2019|3.5)",
@@ -19,14 +19,14 @@
 
       "4.8-is-security-release": true,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "kb5020873",
-      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/10/windows10.0-kb5020873-x64-ndp48_fadd94443f1d808ca7599eb3457848885e1a552d.msu",
-      "kb|ltsc2019|4.8": "kb5020874",
-      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/10/windows10.0-kb5020874-x64-ndp48_01a8a26523a2f43e14715e7d33434b094d529233.msu",
-      "kb|ltsc2022|4.8": "kb5020877",
-      "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/10/windows10.0-kb5020877-x64-ndp48_f16f6550da2375d2d9c2ffb0ca61e399d303766d.msu",
-      "kb|ltsc2022|4.8.1": "kb5020883",
-      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows10.0-kb5020883-x64-ndp481_e73af78018fcd37145c3ff4fd6b94dc0d46070fc.msu",
+      "kb|ltsc2016|4.8": "kb5022503",
+      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows10.0-kb5022503-x64-ndp48_d375ad9f6acfae313e74610b43f63ae9f4473c7a.msu",
+      "kb|ltsc2019|4.8": "kb5022504",
+      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/01/windows10.0-kb5022504-x64-ndp48_1febc9659953d8ffa0bd67ee7de672871fab3654.msu",
+      "kb|ltsc2022|4.8": "kb5022507",
+      "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2022/12/windows10.0-kb5022507-x64-ndp48_c738ff11f6b74c8b1e9db4c66676df651b32d8ef.msu",
+      "kb|ltsc2022|4.8.1": "kb5022501",
+      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022501-x64-ndp481_f609707b45c8dd6d6b97c3cec996200d97e95fac.msu",
 
       // Defines the patch info for the default .NET Fx version installed in the OS
       "kb|ltsc2022|default": "$(kb|ltsc2022|4.8)",
