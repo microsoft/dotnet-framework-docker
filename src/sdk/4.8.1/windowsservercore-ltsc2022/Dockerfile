@@ -80,3 +80,4 @@ RUN powershell " `
         Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
         Remove-Item -Force referenceassemblies.zip; `
     }"
+

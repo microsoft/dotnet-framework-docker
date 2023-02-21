@@ -3,7 +3,7 @@
       "RuntimeReleaseDateStamp": "20230214",
       "AspnetReleaseDateStamp": "20230214",
       "WcfReleaseDateStamp": "20230214",
-      "SdkReleaseDateStamp": "20230214",
+      "SdkReleaseDateStamp": "20230221",
       
       "3.5-ltsc2016-Runtime-DateStamp": "$(RuntimeReleaseDateStamp)",
       "3.5-ltsc2016-Aspnet-DateStamp": "$(AspnetReleaseDateStamp)",
