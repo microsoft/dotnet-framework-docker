@@ -1,7 +1,7 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5":"kb5023697",
-      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/03/windows10.0-kb5023697-x64_0cde92f5aaba06c1a1bfd64615010c90180dcb86.msu",
+      "kb|ltsc2016|3.5":"kb5025228",
+      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/04/windows10.0-kb5025228-x64_cd9da61ebd73a46181ba5839bdd59f1fe8e55890.msu",
       "kb|ltsc2019|3.5": "kb5022511",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/01/windows10.0-kb5022511-x64_19dcbf71169b01c6337e5f6b98b937156d6a7a70.msu",
       "kb|ltsc2022|3.5": "kb5022507",
@@ -34,7 +34,7 @@
       "kb|ltsc2019|default": "$(kb|ltsc2019|4.7.2)",
       "lcu|ltsc2019|default": "$(lcu|ltsc2019|4.7.2)",
 
-      "nuget|version": "6.4.0",
+      "nuget|version": "6.5.0",
 
       "vs|version": "17.5",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
