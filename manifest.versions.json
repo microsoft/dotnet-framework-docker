@@ -34,7 +34,7 @@
       "kb|ltsc2019|default": "$(kb|ltsc2019|4.7.2)",
       "lcu|ltsc2019|default": "$(lcu|ltsc2019|4.7.2)",
 
-      "nuget|version": "6.4.0",
+      "nuget|version": "6.5.0",
 
       "vs|version": "17.5",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
