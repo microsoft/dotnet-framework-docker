@@ -130,4 +130,3 @@ RUN powershell " `
     }"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
-
