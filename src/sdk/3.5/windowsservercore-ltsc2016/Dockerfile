@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20230509-windowsservercore-ltsc2016
+FROM $REPO:3.5-20230613-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
@@ -22,12 +22,12 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2022/12/windows10.0-kb5022503-x64-ndp48_d375ad9f6acfae313e74610b43f63ae9f4473c7a.msu `
+            -Uri https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/05/windows10.0-kb5027123-x64-ndp48_de0e0a0349f0c5f0737f7892f242c2c49e8c0bfa.msu `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5022503-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5027123-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
