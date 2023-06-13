@@ -23,7 +23,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/06/windows10.0-kb5027219-x86_a2a4973ee0003c63c5657103686b68cda40cafae.msu `
+            -Uri https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/06/windows10.0-kb5027219-x64_d77bfbf3441425980ce4300486e739ac9b3d0585.msu `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `

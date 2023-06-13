@@ -1,7 +1,7 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5":"kb5027219",
-      "lcu|ltsc2016|3.5":"https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/06/windows10.0-kb5027219-x86_a2a4973ee0003c63c5657103686b68cda40cafae.msu",
+      "kb|ltsc2016|3.5": "kb5027219",
+      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/06/windows10.0-kb5027219-x64_d77bfbf3441425980ce4300486e739ac9b3d0585.msu",
       "kb|ltsc2019|3.5": "kb5027131",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/05/windows10.0-kb5027131-x64_be441d84920ada20e95f41cf500b354d0505fe66.msu",
       "kb|ltsc2022|3.5": "kb5027127",
