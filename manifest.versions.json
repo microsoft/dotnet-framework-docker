@@ -19,14 +19,14 @@
 
       "4.8-is-security-release": true,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "kb5027123",
-      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/05/windows10.0-kb5027123-x64-ndp48_de0e0a0349f0c5f0737f7892f242c2c49e8c0bfa.msu",
-      "kb|ltsc2019|4.8": "kb5027124",
-      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/05/windows10.0-kb5027124-x64-ndp48_c83d3e555cafd96ceece9619e05cd6fc3ce14a23.msu",
-      "kb|ltsc2022|4.8": "kb5027127",
-      "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/05/windows10.0-kb5027127-x64-ndp48_29447fc3099e8ffab3b4a5cf3cd972a640b35934.msu",
-      "kb|ltsc2022|4.8.1": "kb5027121",
-      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/05/windows10.0-kb5027121-x64-ndp481_8c9cf4c36d9b8a85c18529f845a5b3d3698bf788.msu",
+      "kb|ltsc2016|4.8": "kb5028580",
+      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028580-x64-ndp48_145ad3619c82ecd88fbec75e227cbbf1498e983a.msu",
+      "kb|ltsc2019|4.8": "kb5028581",
+      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028581-x64-ndp48_0a1ce606f12d7803fdc60fa74f9c848e5f101f62.msu",
+      "kb|ltsc2022|4.8": "kb5028584",
+      "lcu|ltsc2022|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2023/06/windows10.0-kb5028584-x64-ndp48_445a7d8731089ea920043bb7d864503e82e370b3.msu",
+      "kb|ltsc2022|4.8.1": "kb5028578",
+      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028578-x64-ndp481_544dd283759e7bd851af5d768660fdbc9bba0d2b.msu",
 
       // Defines the patch info for the default .NET Fx version installed in the OS
       "kb|ltsc2022|default": "$(kb|ltsc2022|4.8)",
