@@ -46,6 +46,7 @@ stages:
 - stage: Build
   condition: and(succeeded(), contains(variables['stages'], 'build'))
   jobs:
+  # Temporarily disable prebuild validation. Revert as part of https://github.com/microsoft/dotnet-framework-docker/issues/1075
   # - template: ../jobs/test-images-linux-client.yml
   #   parameters:
   #     name: PreBuildValidation
