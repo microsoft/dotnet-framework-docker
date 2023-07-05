@@ -23,6 +23,20 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
+            -Uri https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/05/windows10.0-kb5027123-x64-ndp48_de0e0a0349f0c5f0737f7892f242c2c49e8c0bfa.msu `
+            -OutFile patch.msu; `
+    && mkdir patch `
+    && expand patch.msu patch -F:* `
+    && del patch.msu `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5027123-x64-ndp48.cab `
+    && rmdir /S /Q patch `
+    `
+    # Apply latest patch
+    && powershell -Command `
+        $ProgressPreference = 'SilentlyContinue'; `
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+        Invoke-WebRequest `
+            -UseBasicParsing `
             -Uri https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028580-x64-ndp48_145ad3619c82ecd88fbec75e227cbbf1498e983a.msu `
             -OutFile patch.msu; `
     && mkdir patch `

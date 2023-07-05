@@ -13,9 +13,12 @@ parameters:
 
 jobs:
 - job: ${{ parameters.name }}
-  condition: and(${{ parameters.matrix }}, not(canceled()), in(dependencies.PreBuildValidation.result, 'Succeeded', 'SucceededWithIssues', 'Skipped'))
+  # Temporarily disable prebuild validation. Revert as part of https://github.com/microsoft/dotnet-framework-docker/issues/1075
+  # condition: and(${{ parameters.matrix }}, not(canceled()), in(dependencies.PreBuildValidation.result, 'Succeeded', 'SucceededWithIssues', 'Skipped'))
+  condition: and(${{ parameters.matrix }}, not(canceled()))
   dependsOn:
-  - PreBuildValidation
+  # Temporarily disable prebuild validation. Revert as part of https://github.com/microsoft/dotnet-framework-docker/issues/1075
+  # - PreBuildValidation
   - CopyBaseImages
   - GenerateBuildMatrix
   pool: ${{ parameters.pool }}
