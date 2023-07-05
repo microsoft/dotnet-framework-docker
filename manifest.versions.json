@@ -17,7 +17,7 @@
       "kb|ltsc2016|4.7": "$(kb|ltsc2016|3.5)",
       "lcu|ltsc2016|4.7": "$(lcu|ltsc2016|3.5)",
 
-      "4.8-is-security-release": true,
+      "4.8-is-security-release": false,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
       "kb|ltsc2016|4.8": "kb5028580",
       "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028580-x64-ndp48_145ad3619c82ecd88fbec75e227cbbf1498e983a.msu",
