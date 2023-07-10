@@ -67,8 +67,7 @@ stages:
       ${{ elseif eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
         vmImage: $(defaultLinuxAmd64PoolImage)
       ${{ elseif eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
-        name: NetCore1ESPool-Internal
-        demands: ImageOverride -equals Build.Ubuntu.1804.Amd64
+        vmImage: $(defaultLinuxAmd64PoolImage)
     
     linuxArm64Pool:
       ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
@@ -80,6 +79,6 @@ stages:
         name: DotNetCoreDocker-Public
       ${{ if eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
         name: Docker-Linux-Arm-Internal
-    windows2016Pool: Docker-2016-${{ variables['System.TeamProject'] }}
+    windows2016Pool: Docker-2016-Public
     windows1809Pool: Docker-1809-${{ variables['System.TeamProject'] }}
     windows2022Pool: Docker-2022-${{ variables['System.TeamProject'] }}

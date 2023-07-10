@@ -8,7 +8,7 @@ parameters:
   customTestInitSteps: []
   customPublishInitSteps: []
   customPublishVariables: []
-  
+   
   linuxAmdBuildJobTimeout: 60
   linuxArmBuildJobTimeout: 60
   windowsAmdBuildJobTimeout: 60
