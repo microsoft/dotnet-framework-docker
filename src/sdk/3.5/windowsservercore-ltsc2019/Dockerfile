@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20230613-windowsservercore-ltsc2019
+FROM $REPO:3.5-20230711-windowsservercore-ltsc2019
 
 ENV `
     # Do not generate certificate
@@ -19,11 +19,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028581-x64-ndp48_0a1ce606f12d7803fdc60fa74f9c848e5f101f62.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2023/06/windows10.0-kb5028855-x64-ndp48_3093cf5889cb53bdec921b7acb0949fc06358616.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5028581-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5028855-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
