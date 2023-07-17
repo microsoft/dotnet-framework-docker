@@ -17,16 +17,16 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 .NET Framework:
 
-* [dotnet/framework/sdk](https://mcr.microsoft.com/en-us/product/dotnet/framework/sdk/about/): .NET Framework SDK
-* [dotnet/framework/aspnet](https://mcr.microsoft.com/en-us/product/dotnet/framework/aspnet/about/): ASP.NET Web Forms and MVC
-* [dotnet/framework/wcf](https://mcr.microsoft.com/en-us/product/dotnet/framework/wcf/about/): Windows Communication Foundation (WCF)
-* [dotnet/framework/samples](https://mcr.microsoft.com/en-us/product/dotnet/framework/samples/about/): .NET Framework, ASP.NET and WCF Samples
+* [dotnet/framework/sdk](https://mcr.microsoft.com/product/dotnet/framework/sdk/about/): .NET Framework SDK
+* [dotnet/framework/aspnet](https://mcr.microsoft.com/product/dotnet/framework/aspnet/about/): ASP.NET Web Forms and MVC
+* [dotnet/framework/wcf](https://mcr.microsoft.com/product/dotnet/framework/wcf/about/): Windows Communication Foundation (WCF)
+* [dotnet/framework/samples](https://mcr.microsoft.com/product/dotnet/framework/samples/about/): .NET Framework, ASP.NET and WCF Samples
 
 .NET:
 
 * [dotnet](https://mcr.microsoft.com/catalog?search=dotnet/): .NET
 * [dotnet-nightly](https://mcr.microsoft.com/catalog?search=dotnet/nightly/): .NET (Preview)
-* [dotnet/samples](https://mcr.microsoft.com/en-us/product/dotnet/samples/about/): .NET Samples
+* [dotnet/samples](https://mcr.microsoft.com/product/dotnet/samples/about/): .NET Samples
 
 ## Usage
 
@@ -34,7 +34,7 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 ### Container sample: Run a simple application
 
-You can quickly run a container with a pre-built [.NET Framework Docker image](https://mcr.microsoft.com/en-us/product/dotnet/framework/samples/about/), based on the [.NET Framework console sample](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/dotnetapp/README.md).
+You can quickly run a container with a pre-built [.NET Framework Docker image](https://mcr.microsoft.com/product/dotnet/framework/samples/about/), based on the [.NET Framework console sample](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/dotnetapp/README.md).
 
 Type the following command to run a sample console application:
 
@@ -76,5 +76,5 @@ Version Tag | OS Version | Supported .NET Versions
 ## License
 
 * [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
-* [Microsoft Software Supplemental License for Windows Container Base Image](https://mcr.microsoft.com/en-us/product/windows/servercore/about/): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
-* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://mcr.microsoft.com/en-us/product/dotnet/framework/sdk/about/)
+* [Microsoft Software Supplemental License for Windows Container Base Image](https://mcr.microsoft.com/product/windows/servercore/about/): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
+* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://mcr.microsoft.com/product/dotnet/framework/sdk/about/)
