@@ -39,7 +39,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|ltsc2016|", PRODUCT_VERSION)]}}-x64{{if PRODUCT_VERSION = "4.8":-ndp48}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|ltsc2016|", PRODUCT_VERSION)]}}-x64.cab `
     && rmdir /S /Q patch `
     `
 }}    # ngen .NET Fx
