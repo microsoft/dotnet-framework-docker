@@ -15,7 +15,7 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2023/09/windows10.0-kb5031010-x64-ndp48_07fd36b9f4a96f012d93f6307d64103ceaa3d8bd.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2023/11/windows10.0-kb5031990-x64-ndp48_19b08056004a54f9450e37e211acb99d1d21e29c.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
