@@ -3,11 +3,11 @@
       "RuntimeReleaseDateStamp": "20231114",
       "AspnetReleaseDateStamp": "20231114",
       "WcfReleaseDateStamp": "20231114",
-      "SdkReleaseDateStamp": "20231211",
+      "SdkReleaseDateStamp": "20231212",
 
-      "12B-RuntimeReleaseDateStamp": "20231211",
-      "12B-AspnetReleaseDateStamp": "20231211",
-      "12B-WcfReleaseDateStamp": "20231211",
+      "12B-RuntimeReleaseDateStamp": "20231212",
+      "12B-AspnetReleaseDateStamp": "20231212",
+      "12B-WcfReleaseDateStamp": "20231212",
 
       "3.5-ltsc2016-Runtime-DateStamp": "$(12B-RuntimeReleaseDateStamp)",
       "3.5-ltsc2016-Aspnet-DateStamp": "$(12B-AspnetReleaseDateStamp)",
