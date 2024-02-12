@@ -36,7 +36,7 @@
 
       "nuget|version": "6.8.0",
 
-      "vs|version": "17.8",
+      "vs|version": "17.9",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
       "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
 
