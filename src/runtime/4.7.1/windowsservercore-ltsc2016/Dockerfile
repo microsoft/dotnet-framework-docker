@@ -23,12 +23,12 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/02/windows10.0-kb5034767-x64_f9031d7e8a8d79d1b6c51ded2dd22527eebacdc2.msu `
+            -Uri https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/03/windows10.0-kb5035855-x64_e8a751d90de714d200f1a1491d4d098323e4c2db.msu `
             -OutFile patch.msu; `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5034767-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5035855-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx

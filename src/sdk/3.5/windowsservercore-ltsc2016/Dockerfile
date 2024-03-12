@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20240213-windowsservercore-ltsc2016
+FROM $REPO:3.5-20240312-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
@@ -36,7 +36,7 @@ RUN `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.8.0
+ENV NUGET_VERSION=6.9.1
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
