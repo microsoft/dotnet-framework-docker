@@ -3,22 +3,37 @@ pr: none
 
 resources:
   repositories:
+  - repository: 1ESPipelineTemplates
+    type: git
+    ref: refs/tags/release
+    name: 1ESPipelineTemplates/1ESPipelineTemplates
   - repository: InternalVersionsRepo
     type: github
     endpoint: dotnet
     name: dotnet/versions
 
 variables:
-- template: variables/common.yml
+- template: /eng/pipelines/variables/common.yml@self
 - name: manifest
   value: manifest.json
 - name: mcrImageIngestionTimeout
   value: "00:30:00"
 
-stages:
-- template: ../common/templates/stages/dotnet/build-test-publish-repo.yml
+extends:
+  template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
-    internalProjectName: ${{ variables.internalProjectName }}
-    publicProjectName: ${{ variables.publicProjectName }}
-    windowsAmdBuildJobTimeout: 240
-    windowsAmdTestJobTimeout: 90
+    sdl:
+      sourceRepositoriesToScan:
+        include:
+        - repository: InternalVersionsRepo
+    pool:
+      name: NetCore1ESPool-Internal
+      image: 1es-windows-2022
+      os: windows
+    stages:
+    - template: /eng/common/templates/stages/dotnet/build-test-publish-repo.yml@self
+      parameters:
+        internalProjectName: ${{ variables.internalProjectName }}
+        publicProjectName: ${{ variables.publicProjectName }}
+        windowsAmdBuildJobTimeout: 240
+        windowsAmdTestJobTimeout: 90
