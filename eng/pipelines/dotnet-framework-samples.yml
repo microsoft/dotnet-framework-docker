@@ -3,10 +3,6 @@ pr: none
 
 resources:
   repositories:
-  - repository: 1ESPipelineTemplates
-    type: git
-    ref: refs/tags/release
-    name: 1ESPipelineTemplates/1ESPipelineTemplates
   - repository: InternalVersionsRepo
     type: github
     endpoint: dotnet
@@ -20,16 +16,8 @@ variables:
   value: "-samples"
 
 extends:
-  template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  template: /eng/common/templates/1es-official.yml@self
   parameters:
-    sdl:
-      sourceRepositoriesToScan:
-        include:
-        - repository: InternalVersionsRepo
-    pool:
-      name: NetCore1ESPool-Internal
-      image: 1es-windows-2022
-      os: windows
     stages:
     - template: /eng/common/templates/stages/dotnet/build-test-publish-repo.yml@self
       parameters:
