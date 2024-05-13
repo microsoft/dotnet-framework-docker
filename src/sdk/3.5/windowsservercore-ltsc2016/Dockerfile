@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20240409-windowsservercore-ltsc2016
+FROM $REPO:3.5-20240514-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
@@ -27,7 +27,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5036609-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5037926-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx

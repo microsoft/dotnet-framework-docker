@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20240409-windowsservercore-ltsc2019
+FROM $REPO:3.5-20240514-windowsservercore-ltsc2019
 
 ENV `
     # Do not generate certificate
@@ -23,7 +23,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5036610-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5037933-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
