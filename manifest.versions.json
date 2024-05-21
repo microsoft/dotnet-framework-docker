@@ -37,8 +37,8 @@
       "nuget|version": "6.9.1",
 
       "vs|version": "17.10",
-      "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
-      "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
+      "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/4bc0c2da-4e6d-4a88-9eaa-0748022737fb/3b76f5a2bf04f9dad1920afd75f0e62c697b26a4666daeb807a40cc5f718ae6f/vs_TestAgent.exe",
+      "vs|buildToolsUrl": "https://download.visualstudio.microsoft.com/download/pr/4bc0c2da-4e6d-4a88-9eaa-0748022737fb/71f8452bdc7437780b80979d84138e9f31fda34e1b28fa523be775a7b82a2a8c/vs_BuildTools.exe",
 
       "4.7|url": "https://download.visualstudio.microsoft.com/download/pr/2dfcc711-bb60-421a-a17b-76c63f8d1907/e5c0231bd5d51fffe65f8ed7516de46a/ndp47-kb3186497-x86-x64-allos-enu.exe",
       "4.7.1|url": "https://download.visualstudio.microsoft.com/download/pr/4312fa21-59b0-4451-9482-a1376f7f3ba4/9947fce13c11105b48cba170494e787f/ndp471-kb4033342-x86-x64-allos-enu.exe",
