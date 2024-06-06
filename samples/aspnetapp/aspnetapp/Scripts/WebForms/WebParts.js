@@ -502,6 +502,7 @@ function WebPartManager_Execute(script) {
     if (this.menu) {
         this.menu.Hide();
     }
+    // CodeQL [SM04509] Code generated from project template
     var scriptReference = new Function(script);
     return (scriptReference() != false);
 }

@@ -88,6 +88,7 @@ function ValidatorHookupEvent(control, eventType, functionPrefix) {
     else {
         ev = "";
     }
+    // CodeQL [SM04509] Code generated from project template
     control[eventType] = new Function("event", functionPrefix + " " + ev);
 }
 function ValidatorGetValue(id) {
@@ -280,6 +281,7 @@ function ValidatorOnLoad() {
     for (i = 0; i < Page_Validators.length; i++) {
         val = Page_Validators[i];
         if (typeof(val.evaluationfunction) == "string") {
+            // CodeQL [SM04509] Code generated from project template
             eval("val.evaluationfunction = " + val.evaluationfunction + ";");
         }
         if (typeof(val.isvalid) == "string") {
@@ -448,6 +450,7 @@ function CustomValidatorEvaluateIsValid(val) {
     }
     var args = { Value:value, IsValid:true };
     if (typeof(val.clientvalidationfunction) == "string") {
+        // CodeQL [SM04509] Code generated from project template
         eval(val.clientvalidationfunction + "(val, args) ;");
     }
     return args.IsValid;

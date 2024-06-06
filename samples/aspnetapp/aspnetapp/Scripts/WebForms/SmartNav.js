@@ -133,6 +133,7 @@ if ((typeof(window.__smartNav) == "undefined") || (window.__smartNav == null))
         }
         if (typeof(window.onload) == "string")
         {
+            // CodeQL [SM04509] Code generated from project template
             try { eval(window.onload) } catch (e) {};
         }
         else if ((typeof(window.onload) != "undefined") && (window.onload != null))
