@@ -34,7 +34,7 @@
       "kb|ltsc2019|default": "$(kb|ltsc2019|4.7.2)",
       "lcu|ltsc2019|default": "$(lcu|ltsc2019|4.7.2)",
 
-      "nuget|version": "6.9.1",
+      "nuget|version": "6.10.0",
 
       "vs|version": "17.10",
       "vs|testAgentUrl": "https://download.visualstudio.microsoft.com/download/pr/4bc0c2da-4e6d-4a88-9eaa-0748022737fb/3b76f5a2bf04f9dad1920afd75f0e62c697b26a4666daeb807a40cc5f718ae6f/vs_TestAgent.exe",
