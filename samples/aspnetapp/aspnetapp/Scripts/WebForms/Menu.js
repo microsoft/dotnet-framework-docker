@@ -170,6 +170,7 @@ function Menu_GetData(item) {
         var a = (item.tagName.toLowerCase() == "a" ? item : WebForm_GetElementByTagName(item, "a"));
         var menu = Menu_FindMenu(a);
         try {
+            // CodeQL [SM04509] Code generated from project template
             item.data = eval(menu.id + "_Data");
         }
         catch(e) {}
