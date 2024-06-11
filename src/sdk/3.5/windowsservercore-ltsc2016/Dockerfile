@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20240514-windowsservercore-ltsc2016
+FROM $REPO:3.5-20240611-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
