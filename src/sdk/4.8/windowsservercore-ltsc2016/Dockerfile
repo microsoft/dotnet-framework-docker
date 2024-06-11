@@ -1,10 +1,10 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.8-20240514-windowsservercore-ltsc2016
+FROM $REPO:4.8-20240611-windowsservercore-ltsc2016
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.9.1
+ENV NUGET_VERSION=6.10.0
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
@@ -26,7 +26,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/4bc0c2da-4e6d-4a88-9eaa-0748022737fb/3b76f5a2bf04f9dad1920afd75f0e62c697b26a4666daeb807a40cc5f718ae6f/vs_TestAgent.exe `
+            -Uri https://aka.ms/vs/17/release/vs_TestAgent.exe `
             -OutFile vs_TestAgent.exe `
     && start /w vs_TestAgent --quiet --norestart --nocache --wait --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent" `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
@@ -38,7 +38,7 @@ RUN `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-            -Uri https://download.visualstudio.microsoft.com/download/pr/4bc0c2da-4e6d-4a88-9eaa-0748022737fb/71f8452bdc7437780b80979d84138e9f31fda34e1b28fa523be775a7b82a2a8c/vs_BuildTools.exe `
+            -Uri https://aka.ms/vs/17/release/vs_BuildTools.exe `
             -OutFile vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
         --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
