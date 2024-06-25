@@ -18,7 +18,7 @@
           "templatePath": "eng/readme-templates/README.md"
         },
         {
-          "path": ".mcr/portal/README.runtime.portal.md",
+          "path": ".portal-docs/mar/README.runtime.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
@@ -265,7 +265,7 @@
           "templatePath": "eng/readme-templates/README.md"
         },
         {
-          "path": ".mcr/portal/README.sdk.portal.md",
+          "path": ".portal-docs/mar/README.sdk.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
@@ -401,7 +401,7 @@
           "templatePath": "eng/readme-templates/README.md"
         },
         {
-          "path": ".mcr/portal/README.aspnet.portal.md",
+          "path": ".portal-docs/mar/README.aspnet.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
@@ -634,7 +634,7 @@
           "templatePath": "eng/readme-templates/README.md"
         },
         {
-          "path": ".mcr/portal/README.wcf.portal.md",
+          "path": ".portal-docs/mar/README.wcf.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
