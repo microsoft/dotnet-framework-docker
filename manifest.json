@@ -1,7 +1,7 @@
 {
   "readme": {
     "path": "README.md",
-    "templatePath": "eng/readme-templates/README.md"
+    "templatePath": "eng/readme-templates/README.github.md"
   },
   "registry": "mcr.microsoft.com",
   "includes": [
@@ -15,10 +15,14 @@
       "readmes": [
         {
           "path": "README.runtime.md",
-          "templatePath": "eng/readme-templates/README.md"
+          "templatePath": "eng/readme-templates/README.github.md"
         },
         {
-          "path": ".mcr/portal/README.runtime.portal.md",
+          "path": ".portal-docs/docker-hub/README.runtime.md",
+          "templatePath": "eng/readme-templates/README.dockerhub.md"
+        },
+        {
+          "path": ".portal-docs/mar/README.runtime.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
@@ -262,10 +266,14 @@
       "readmes": [
         {
           "path": "README.sdk.md",
-          "templatePath": "eng/readme-templates/README.md"
+          "templatePath": "eng/readme-templates/README.github.md"
         },
         {
-          "path": ".mcr/portal/README.sdk.portal.md",
+          "path": ".portal-docs/docker-hub/README.sdk.md",
+          "templatePath": "eng/readme-templates/README.dockerhub.md"
+        },
+        {
+          "path": ".portal-docs/mar/README.sdk.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
@@ -398,10 +406,14 @@
       "readmes": [
         {
           "path": "README.aspnet.md",
-          "templatePath": "eng/readme-templates/README.md"
+          "templatePath": "eng/readme-templates/README.github.md"
         },
         {
-          "path": ".mcr/portal/README.aspnet.portal.md",
+          "path": ".portal-docs/docker-hub/README.aspnet.md",
+          "templatePath": "eng/readme-templates/README.dockerhub.md"
+        },
+        {
+          "path": ".portal-docs/mar/README.aspnet.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
@@ -631,10 +643,14 @@
       "readmes": [
         {
           "path": "README.wcf.md",
-          "templatePath": "eng/readme-templates/README.md"
+          "templatePath": "eng/readme-templates/README.github.md"
         },
         {
-          "path": ".mcr/portal/README.wcf.portal.md",
+          "path": ".portal-docs/docker-hub/README.wcf.md",
+          "templatePath": "eng/readme-templates/README.dockerhub.md"
+        },
+        {
+          "path": ".portal-docs/mar/README.wcf.portal.md",
           "templatePath": "eng/readme-templates/README.mcr.md"
         }
       ],
