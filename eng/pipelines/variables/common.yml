@@ -10,3 +10,5 @@ variables:
   value: tests/Microsoft.DotNet.Framework.Docker.Tests/TestResults/
 - name: publicSourceBranch
   value: main
+- name: additionalPublishMcrDocsArgs
+  value: "--root /repo/.portal-docs"
