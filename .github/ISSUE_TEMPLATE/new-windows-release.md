@@ -27,5 +27,5 @@ assignees: lbussell
 ## Release Day Tasks
 
 1. - [ ] Create a [`microsoft-windows.netfx3-<VERSION>.zip](https://github.com/microsoft/dotnet-framework-docker/blob/1c3dd6638c6b827b81ffb13386b924f6dcdee533/3.5/runtime/windowsservercore-1909/Dockerfile#L11) file containing the .NET Fx 3.5 cab installer file and upload it to the [blob storage location](https://dotnetbinaries.blob.core.windows.net/dockerassets).
-1. - [ ] Follow [Patch Tuesday release](patch-tuesday-release.md) process
+1. - [ ] Release the images by following the [Servicing Release Checklist](https://github.com/dotnet/release/blob/main/.github/ISSUE_TEMPLATE/dotnet-fx-docker-servicing-release.md)
 1. - [ ] Create an announcement (example: [Windows Server, version 1909](https://github.com/microsoft/dotnet-framework-docker/issues/448))
