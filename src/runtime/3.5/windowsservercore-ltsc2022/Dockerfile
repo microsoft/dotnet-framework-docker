@@ -17,11 +17,11 @@ RUN `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
     # Apply latest 3.5 patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/04/windows10.0-kb5037930-x64-ndp48_e382f08375981d3489c408b21e3ab34752d9657d.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/06/windows10.0-kb5039889-x64-ndp48_0db49392a03d2a6dd95d41645805fd3e1309c9b3.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5037930-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5039889-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
