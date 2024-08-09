@@ -38,5 +38,5 @@
 .NET Framework:
 {{InsertTemplate("RepoList.md", [ "readme-host": ARGS["readme-host"], "repos": repos ])}}
 
-.NET:}}
-{{InsertTemplate("RepoList.md", [ "readme-host": ARGS["readme-host"], "repos": dotnetRepos ])}}
+.NET:
+}}{{InsertTemplate("RepoList.md", [ "readme-host": ARGS["readme-host"], "repos": dotnetRepos ])}}

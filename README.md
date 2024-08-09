@@ -46,7 +46,6 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 ## Related repositories
 
-
 * [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
 * [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
 
