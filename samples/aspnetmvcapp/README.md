@@ -54,7 +54,7 @@ Note: The `-p` argument maps port 8000 on your local machine to port 80 in the c
 
 ### View the ASP.NET app in a running container on Windows
 
-After the application starts, navigate to the container IP (as opposed to http://localhost) in your web browser with the the following instructions:
+After the application starts, navigate to the container IP (as opposed to `http://localhost`) in your web browser with the the following instructions:
 
 1. Open up another command prompt.
 1. Run `docker exec aspnetmvc_sample ipconfig`.
