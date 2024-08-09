@@ -4,7 +4,7 @@
 
 {{InsertTemplate("FeaturedTags.md", commonArgs)}}
 
-{{InsertTemplate("RelatedRepos.md", commonArgs)}}
+{{InsertTemplate("ReposProvider.md", union([ "template": "RelatedRepos.md" ], commonArgs))}}
 
 {{InsertTemplate("Use.md", commonArgs)}}
 

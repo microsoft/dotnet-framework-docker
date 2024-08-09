@@ -52,6 +52,7 @@ Version Tag | OS Version | Supported .NET Versions
 
 .NET Framework:
 
+* [dotnet/framework](https://hub.docker.com/r/microsoft/dotnet-framework/): .NET Framework
 * [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
 * [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
 * [dotnet/framework/runtime](https://hub.docker.com/r/microsoft/dotnet-framework-runtime/): .NET Framework Runtime
@@ -60,7 +61,6 @@ Version Tag | OS Version | Supported .NET Versions
 .NET:
 
 * [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
-* [dotnet-nightly](https://hub.docker.com/r/microsoft/dotnet-nightly/): .NET (Preview)
 * [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
 
 # Full Tag Listing

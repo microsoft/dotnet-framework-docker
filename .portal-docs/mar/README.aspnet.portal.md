@@ -24,6 +24,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 .NET Framework:
 
+* [dotnet/framework](https://mcr.microsoft.com/catalog?search=dotnet/framework/): .NET Framework
 * [dotnet/framework/sdk](https://mcr.microsoft.com/product/dotnet/framework/sdk/about/): .NET Framework SDK
 * [dotnet/framework/runtime](https://mcr.microsoft.com/product/dotnet/framework/runtime/about/): .NET Framework Runtime
 * [dotnet/framework/wcf](https://mcr.microsoft.com/product/dotnet/framework/wcf/about/): Windows Communication Foundation (WCF)
@@ -32,7 +33,6 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 .NET:
 
 * [dotnet](https://mcr.microsoft.com/catalog?search=dotnet/): .NET
-* [dotnet-nightly](https://mcr.microsoft.com/catalog?search=dotnet/nightly/): .NET (Preview)
 * [dotnet/samples](https://mcr.microsoft.com/product/dotnet/samples/about/): .NET Samples
 
 ## Usage
