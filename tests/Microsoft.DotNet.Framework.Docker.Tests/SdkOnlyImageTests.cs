@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -13,7 +14,7 @@ using Xunit.Abstractions;
 namespace Microsoft.DotNet.Framework.Docker.Tests
 {
     [Trait("Category", "sdk")]
-    public class SdkOnlyImageTests : ImageTests
+    public partial class SdkOnlyImageTests : ImageTests
     {
         public SdkOnlyImageTests(ITestOutputHelper outputHelper)
             : base(outputHelper)
@@ -170,8 +171,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             string command = "vstest.console.exe /?";
             string output = ImageTestHelper.DockerHelper.Run(image: baseBuildImage, name: appId, command: command);
 
-            Assert.StartsWith("Microsoft (R) Test Execution Command Line Tool", output);
+            Assert.Matches(VsTestOutputRegex(), output);
         }
+
+        [GeneratedRegex(@"^VSTest version \d+\.\d+\.\d+")]
+        private static partial Regex VsTestOutputRegex();
 
         [SkippableTheory]
         [MemberData(nameof(GetImageData))]
