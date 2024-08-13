@@ -1,6 +1,6 @@
 {
     "variables": {
-      "CurrentReleaseDateStamp": "20240808",
+      "CurrentReleaseDateStamp": "20240813",
 
       "RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
