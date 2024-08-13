@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20240709-windowsservercore-ltsc2016
+FROM $REPO:3.5-20240813-windowsservercore-ltsc2016
 
 RUN powershell -Command `
         $ErrorActionPreference = 'Stop'; `
