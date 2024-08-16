@@ -1,6 +1,6 @@
 # .NET Framework
 
-# Featured Repos
+## Featured Repos
 
 * [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
 * [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
@@ -18,7 +18,7 @@ You can use C#, F# and VB to write .NET Framework apps. C# is simple, powerful, 
 
 The .NET Framework was first released by Microsoft in 2001. The latest version is [.NET Framework 4.8](https://www.microsoft.com/net/framework).
 
-> https://docs.microsoft.com/dotnet/framework/
+> [.NET Framework Documentation](https://docs.microsoft.com/dotnet/framework/)
 
 Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 

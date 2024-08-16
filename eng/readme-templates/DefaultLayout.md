@@ -9,7 +9,7 @@
   }}
 
 }}{{if !IS_PRODUCT_FAMILY:{{InsertTemplate("FeaturedTags.md", commonArgs)}}
-^else:# Featured Repos
+^else:{{ARGS["top-header"]}} Featured Repos
 
 * [dotnet/framework/sdk]({{InsertTemplate("Url.md", [ "readme-host": "github", "repo": "dotnet/framework/sdk" ])}}): .NET Framework SDK
 * [dotnet/framework/aspnet]({{InsertTemplate("Url.md", [ "readme-host": "github", "repo": "dotnet/framework/aspnet" ])}}): ASP.NET Web Forms and MVC
