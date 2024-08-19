@@ -1,4 +1,6 @@
-# Featured tags
+# ASP.NET Web Forms and MVC
+
+## Featured tags
 
 * `4.8.1`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8.1`
@@ -7,7 +9,7 @@
 * `3.5`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:3.5`
 
-# About
+## About
 
 ASP.NET is a high productivity framework for building Web Applications using Web Forms, MVC, Web API and SignalR.
 
@@ -20,11 +22,12 @@ This image contains:
 
 Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-# Usage
+## Usage
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
-## Container sample: Run an ASP.NET application
+### Container sample: Run an ASP.NET application
+
 You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [ASP.NET Docker sample].
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
@@ -35,7 +38,7 @@ docker run --name aspnet_sample --rm -it -p 8000:80 mcr.microsoft.com/dotnet/fra
 
 After the application starts, navigate to `http://localhost:8000` in your web browser. You need to navigate to the application via IP address instead of `localhost` for earlier Windows versions, which is demonstrated in [View the ASP.NET app in a running container on Windows](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/aspnetapp/README.md#view-the-aspnet-app-in-a-running-container-on-windows).
 
-## Version Compatibility
+### Version Compatibility
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
@@ -49,10 +52,11 @@ Version Tag | OS Version | Supported .NET Versions
 3.5 | windowsservercore-ltsc2019 | 4.7.2, 3.5, 3.0, 2.5
 3.5 | windowsservercore-ltsc2016 | 4.6.2, 3.5, 3.0, 2.5
 
-# Related repositories
+## Related repositories
 
 .NET Framework:
 
+* [dotnet/framework](https://hub.docker.com/r/microsoft/dotnet-framework/): .NET Framework
 * [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
 * [dotnet/framework/runtime](https://hub.docker.com/r/microsoft/dotnet-framework-runtime/): .NET Framework Runtime
 * [dotnet/framework/wcf](https://hub.docker.com/r/microsoft/dotnet-framework-wcf/): Windows Communication Foundation (WCF)
@@ -61,10 +65,9 @@ Version Tag | OS Version | Supported .NET Versions
 .NET:
 
 * [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
-* [dotnet-nightly](https://hub.docker.com/r/microsoft/dotnet-nightly/): .NET (Preview)
 * [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
 
-# Full Tag Listing
+## Full Tag Listing
 
 ### Windows Server Core 2022 amd64 Tags
 
@@ -94,26 +97,27 @@ Tag | Dockerfile
 3.5-20240813-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/3.5/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
-*Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
+*Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
+See the [full list of tags](https://mcr.microsoft.com/v2/dotnet/framework/aspnet/tags/list) for all supported and unsupported tags.*
 
-# Support
+## Support
 
-## Lifecycle
+### Lifecycle
 
 * [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 * [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md)
 
-## Image Update Policy
+### Image Update Policy
 
 * We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:ltsc2019, windows/servercore:ltsc2022, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
-## Feedback
+### Feedback
 
 * [File an issue](https://github.com/microsoft/dotnet-framework-docker/issues/new/choose)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
-# License
+## License
 
 * [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
 * [Microsoft Software Supplemental License for Windows Container Base Image](https://hub.docker.com/r/microsoft/windows-servercore/): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)

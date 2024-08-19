@@ -1,21 +1,24 @@
-# Featured tags
+# Windows Communication Foundation (WCF)
+
+## Featured tags
 
 * `4.8.1`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/wcf:4.8`
 
-# About
+## About
 
 The Windows Communication Foundation (WCF) is a framework for building service-oriented applications. Using WCF, you can send data as asynchronous messages from one service endpoint to another. A service endpoint can be part of a continuously available service hosted by IIS, or it can be a service hosted in an application.
 
 Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discussions/categories/announcements) for Docker-related .NET announcements.
 
-# Usage
+## Usage
 
 The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/README.md) show various ways to use .NET Framework and Docker together.
 
-## Container sample: Run a WCF application
+### Container sample: Run a WCF application
+
 You can quickly run a container with a pre-built [sample WCF Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the WCF Docker sample.
 
 Type the following [Docker](https://www.docker.com/products/docker) command to start a WCF service container:
@@ -37,7 +40,7 @@ Type the following Docker command to start a WCF client container, set environme
 docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.com/dotnet/framework/samples:wcfclient
 ```
 
-## Version Compatibility
+### Version Compatibility
 
 Version Tag | OS Version | Supported .NET Versions
 -- | -- | --
@@ -48,10 +51,11 @@ Version Tag | OS Version | Supported .NET Versions
 4.7 | windowsservercore-ltsc2016 | 4.7
 4.6.2 | windowsservercore-ltsc2016 | 4.6.2
 
-# Related repositories
+## Related repositories
 
 .NET Framework:
 
+* [dotnet/framework](https://hub.docker.com/r/microsoft/dotnet-framework/): .NET Framework
 * [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
 * [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
 * [dotnet/framework/runtime](https://hub.docker.com/r/microsoft/dotnet-framework-runtime/): .NET Framework Runtime
@@ -60,10 +64,9 @@ Version Tag | OS Version | Supported .NET Versions
 .NET:
 
 * [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
-* [dotnet-nightly](https://hub.docker.com/r/microsoft/dotnet-nightly/): .NET (Preview)
 * [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
 
-# Full Tag Listing
+## Full Tag Listing
 
 ### Windows Server Core 2022 amd64 Tags
 
@@ -90,26 +93,27 @@ Tag | Dockerfile
 4.6.2-20240813-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
-*Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md).*
+*Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
+See the [full list of tags](https://mcr.microsoft.com/v2/dotnet/framework/wcf/tags/list) for all supported and unsupported tags.*
 
-# Support
+## Support
 
-## Lifecycle
+### Lifecycle
 
 * [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 * [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md)
 
-## Image Update Policy
+### Image Update Policy
 
 * We update the supported .NET Framework images within 12 hours of any updates to their base images (e.g. windows/servercore:ltsc2019, windows/servercore:ltsc2022, etc.).
 * We publish .NET Framework images as part of releasing new versions of .NET Framework including major/minor and servicing.
 
-## Feedback
+### Feedback
 
 * [File an issue](https://github.com/microsoft/dotnet-framework-docker/issues/new/choose)
 * [Contact Microsoft Support](https://support.microsoft.com/contactus/)
 
-# License
+## License
 
 * [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
 * [Microsoft Software Supplemental License for Windows Container Base Image](https://hub.docker.com/r/microsoft/windows-servercore/): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
