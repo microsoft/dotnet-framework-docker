@@ -107,4 +107,3 @@ Docs and More Information:
 
 * [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
 * [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
-* [dotnet-nightly](https://hub.docker.com/r/microsoft/dotnet-nightly/): .NET (Preview)
