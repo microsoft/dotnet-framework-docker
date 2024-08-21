@@ -52,7 +52,7 @@ All shared tags [support multiple platforms](https://blog.docker.com/2017/09/doc
 
 ## Tag Listing
 
-Each [Docker Hub repository](https://hub.docker.com/_/microsoft-dotnet-framework) contains a detailed listing of all supported tags. Any tag not included in the listing should be considered unsupported. The listing is broken apart by Windows Server version. Each row represents a single image and contains all of the tags that reference it. For example, the following entry represents the .NET Framework 4.8 image for Windows Server Core 2022 which is referenced by four tags:
+Each [Docker Hub repository](https://hub.docker.com/r/microsoft/dotnet-framework) contains a detailed listing of all supported tags. Any tag not included in the listing should be considered unsupported. The listing is broken apart by Windows Server version. Each row represents a single image and contains all of the tags that reference it. For example, the following entry represents the .NET Framework 4.8 image for Windows Server Core 2022 which is referenced by four tags:
 
 Tags | Dockerfile
 -----------| -------------

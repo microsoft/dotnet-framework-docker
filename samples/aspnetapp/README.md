@@ -2,13 +2,13 @@
 
 This [sample](Dockerfile) demonstrates how to use ASP.NET and Docker together.
 
-The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/). It builds the application and then copies the final build result into a Docker image based on the smaller [ASP.NET Runtime Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-aspnet/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
+The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/). It builds the application and then copies the final build result into a Docker image based on the smaller [ASP.NET Runtime Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
 This sample requires the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
 
 ## Try a pre-built ASP.NET Docker Image
 
-You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/_/microsoft-dotnet-framework-samples/), based on the [ASP.NET Docker sample].
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [ASP.NET Docker sample].
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
@@ -129,14 +129,14 @@ Docs and More Information:
 
 .NET Framework:
 
-* [dotnet/framework/sdk](https://hub.docker.com/_/microsoft-dotnet-framework-sdk/): .NET Framework SDK
-* [dotnet/framework/aspnet](https://hub.docker.com/_/microsoft-dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
-* [dotnet/framework/runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/): .NET Framework Runtime
-* [dotnet/framework/wcf](https://hub.docker.com/_/microsoft-dotnet-framework-wcf/): Windows Communication Foundation (WCF)
-* [dotnet/framework/samples](https://hub.docker.com/_/microsoft-dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
+* [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
+* [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
+* [dotnet/framework/runtime](https://hub.docker.com/r/microsoft/dotnet-framework-runtime/): .NET Framework Runtime
+* [dotnet/framework/wcf](https://hub.docker.com/r/microsoft/dotnet-framework-wcf/): Windows Communication Foundation (WCF)
+* [dotnet/framework/samples](https://hub.docker.com/r/microsoft/dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
 
 .NET:
 
-* [dotnet](https://hub.docker.com/_/microsoft-dotnet/): .NET
-* [dotnet/samples](https://hub.docker.com/_/microsoft-dotnet-samples/): .NET Samples
-* [dotnet-nightly](https://hub.docker.com/_/microsoft-dotnet-nightly/): .NET (Preview)
+* [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
+* [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
+* [dotnet-nightly](https://hub.docker.com/r/microsoft/dotnet-nightly/): .NET (Preview)
