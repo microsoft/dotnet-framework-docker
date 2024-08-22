@@ -8,7 +8,7 @@ This sample requires the [Docker client](https://store.docker.com/editions/commu
 
 ## Try a pre-built ASP.NET Docker Image
 
-You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [ASP.NET Docker sample].
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/).
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 

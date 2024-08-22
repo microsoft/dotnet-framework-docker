@@ -35,9 +35,9 @@ After the application starts, navigate to `http://localhost:8000` in your web br
 
 ## Push Images to a Container Registry
 
-* [Push Docker Images to Azure Container Registry](dotnetapp/push-image-to-acr.md)
-* [Push Docker Images to DockerHub](dotnetapp/push-image-to-dockerhub.md)
-* [Deploy ASP.NET Applications to Azure Container Instances](aspnetapp/deploy-container-to-aci.md)
+* [Push Docker Images to Azure Container Registry](https://github.com/dotnet/dotnet-docker/blob/main/samples/push-image-to-acr.md)
+* [Push Docker Images to DockerHub](https://github.com/dotnet/dotnet-docker/blob/main/samples//push-image-to-dockerhub.md)
+* [Deploy ASP.NET Applications to Azure Container Instances](https://github.com/dotnet/dotnet-docker/blob/main/samples//deploy-container-to-aci.md)
 
 ## .NET Resources
 

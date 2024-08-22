@@ -8,7 +8,7 @@ This sample requires the [Docker client](https://store.docker.com/editions/commu
 
 ## Try a pre-built .NET Framework Docker Image
 
-You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [.NET Framework console sample](dotnetapp/README.md).
+You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/).
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
