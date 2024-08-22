@@ -28,10 +28,10 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 ## Building .NET Framework Apps with Docker
 
-* [.NET Framework Console Docker Sample](dotnetapp/README.md) - This [sample](dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
-* [ASP.NET Web Forms Docker Sample](aspnetapp/README.md) - This [sample](aspnetapp/Dockerfile) demonstrates using Docker with an ASP.NET Web Forms app.
-* [ASP.NET MVC Docker Sample](aspnetmvcapp/README.md) - This [sample](aspnetmvcapp/Dockerfile) demonstrates using Docker with an ASP.NET MVC app.
-* [WCF Docker Sample](wcfapp/README.md) - This [sample](wcfapp/) demonstrates using Docker with a WCF app.
+* [.NET Framework Console Docker Sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/dotnetapp/README.md) - This [sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/dotnetapp/Dockerfile) builds, tests, and runs the sample. It includes and builds multiple projects.
+* [ASP.NET Web Forms Docker Sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/aspnetapp/README.md) - This [sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/aspnetapp/Dockerfile) demonstrates using Docker with an ASP.NET Web Forms app.
+* [ASP.NET MVC Docker Sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/aspnetmvcapp/README.md) - This [sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/aspnetmvcapp/Dockerfile) demonstrates using Docker with an ASP.NET MVC app.
+* [WCF Docker Sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/wcfapp/README.md) - This [sample](https://github.com/microsoft/dotnet-framework-docker/tree/main/samples/wcfapp/) demonstrates using Docker with a WCF app.
 
 ## Version Compatibility
 

@@ -8,7 +8,7 @@ assignees: lbussell
 
 ## Prep Tasks
 
-1. - [ ] Ensure a ["New Windows Release" issue](https://github.com/dotnet/docker-tools/blob/.github/ISSUE_TEMPLATE/releases/new-windows-release.md) exists for docker-tools repo
+1. - [ ] Ensure a ["New Windows Release" issue](https://github.com/dotnet/docker-tools/blob/main/.github/ISSUE_TEMPLATE/releases/new-windows-release.md) exists for docker-tools repo
 1. - [ ] Update [manifest.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.json) to include entries for the new images
 1. - [ ] Update [manifest.samples.json](https://github.com/microsoft/dotnet-framework-docker/blob/main/manifest.samples.json) to include the new Windows version for each of the samples
 1. - [ ] Update the test data for each of the [test classes](https://github.com/microsoft/dotnet-framework-docker/tree/main/tests/Microsoft.DotNet.Framework.Docker.Tests) to include the new Windows version
