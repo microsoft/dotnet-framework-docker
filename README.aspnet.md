@@ -89,12 +89,12 @@ Tag | Dockerfile
 
 Tag | Dockerfile
 ---------| ---------------
-4.8-20240813-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.8/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20240813-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.7.2/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20240813-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.7.1/windowsservercore-ltsc2016/Dockerfile)
-4.7-20240813-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.7/windowsservercore-ltsc2016/Dockerfile)
-4.6.2-20240813-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.6.2/windowsservercore-ltsc2016/Dockerfile)
-3.5-20240813-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/3.5/windowsservercore-ltsc2016/Dockerfile)
+4.8-20240910-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.8/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20240910-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.7.2/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20240910-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.7.1/windowsservercore-ltsc2016/Dockerfile)
+4.7-20240910-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.7/windowsservercore-ltsc2016/Dockerfile)
+4.6.2-20240910-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/4.6.2/windowsservercore-ltsc2016/Dockerfile)
+3.5-20240910-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/main/src/aspnet/3.5/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
