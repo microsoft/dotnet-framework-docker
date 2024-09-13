@@ -7,28 +7,29 @@ trigger:
     - dev
 pr: none
 
+parameters:
+# Setting cgDryRun will run CG but not submit the results
+- name: cgDryRun
+  type: boolean
+  default: false
+  displayName: CG Dry Run
+
 variables:
+- template: /eng/pipelines/variables/common.yml@self
 - name: cgBuildGrepArgs
   value: -v -e 'samples/' -e 'tests/'
+# Skip CG detection (for debugging project builds, etc.)
 - name: skipComponentGovernanceDetection
   value: false
-resources:
-  repositories:
-  - repository: 1ESPipelineTemplates
-    type: git
-    name: 1ESPipelineTemplates/1ESPipelineTemplates
-    ref: refs/tags/release
+
 extends:
-  template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  template: /eng/common/templates/1es-official.yml@self
   parameters:
-    pool:
-      name: NetCore1ESPool-Internal
-      image: 1es-windows-2022
-      os: windows
-    customBuildTags:
-    - ES365AIMigrationTooling
+    cgDryRun: ${{ parameters.cgDryRun }}
     stages:
     - stage: CgDetection
       displayName: CG Detection
       jobs:
       - template: /eng/common/templates/jobs/cg-build-projects.yml@self
+        parameters:
+          cgDryRun: ${{ parameters.cgDryRun }}
