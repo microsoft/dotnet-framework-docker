@@ -26,7 +26,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 .NET Framework:
 
-* [dotnet/framework](https://mcr.microsoft.com/catalog?search=dotnet/framework/): .NET Framework
+* [dotnet/framework](https://mcr.microsoft.com/catalog?search=dotnet/framework): .NET Framework
 * [dotnet/framework/aspnet](https://mcr.microsoft.com/product/dotnet/framework/aspnet/about/): ASP.NET Web Forms and MVC
 * [dotnet/framework/runtime](https://mcr.microsoft.com/product/dotnet/framework/runtime/about/): .NET Framework Runtime
 * [dotnet/framework/wcf](https://mcr.microsoft.com/product/dotnet/framework/wcf/about/): Windows Communication Foundation (WCF)
@@ -34,7 +34,7 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
 
 .NET:
 
-* [dotnet](https://mcr.microsoft.com/catalog?search=dotnet/): .NET
+* [dotnet](https://mcr.microsoft.com/catalog?search=dotnet): .NET
 * [dotnet/samples](https://mcr.microsoft.com/product/dotnet/samples/about/): .NET Samples
 
 ## Usage
@@ -83,6 +83,6 @@ Version Tag | OS Version | Supported .NET Versions
 
 ## License
 
-* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
-* [Microsoft Software Supplemental License for Windows Container Base Image](https://mcr.microsoft.com/product/windows/servercore/about/): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework/)
+* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework)
+* [Microsoft Software Supplemental License for Windows Container Base Image](https://mcr.microsoft.com/product/windows/servercore/about/): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework)
 * [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://mcr.microsoft.com/product/dotnet/framework/sdk/about/)
