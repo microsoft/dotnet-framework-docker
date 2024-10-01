@@ -7,7 +7,7 @@
 }}{{
 when(ARGS["readme-host"] = "mar",
     when(ARGS["is-product-family"],
-        cat("https://mcr.microsoft.com/catalog?search=", ARGS["repo"], "/"),
+        cat("https://mcr.microsoft.com/catalog?search=", ARGS["repo"]),
         cat("https://mcr.microsoft.com/product/", ARGS["repo"], "/about/")),
     when(ARGS["readme-host"] = "github" || ARGS["readme-host"] = "dockerhub",
         cat("https://hub.docker.com/r/microsoft/", join(split(ARGS["repo"], "/"), "-"), "/"),
