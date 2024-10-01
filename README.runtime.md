@@ -21,7 +21,7 @@ The [.NET Framework Docker samples](https://github.com/microsoft/dotnet-framewor
 
 ### Container sample: Run a simple application
 
-You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [.NET Framework console sample](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/dotnetapp/README.md).
+You can quickly run a container with a pre-built [.NET Framework Docker image](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.samples.md), based on the [.NET Framework console sample](https://github.com/microsoft/dotnet-framework-docker/blob/main/samples/dotnetapp/README.md).
 
 Type the following command to run a sample console application:
 
@@ -47,16 +47,16 @@ Version Tag | OS Version | Supported .NET Versions
 
 .NET Framework:
 
-* [dotnet/framework](https://hub.docker.com/r/microsoft/dotnet-framework/): .NET Framework
-* [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
-* [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
-* [dotnet/framework/wcf](https://hub.docker.com/r/microsoft/dotnet-framework-wcf/): Windows Communication Foundation (WCF)
-* [dotnet/framework/samples](https://hub.docker.com/r/microsoft/dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
+* [dotnet/framework](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.md): .NET Framework
+* [dotnet/framework/sdk](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.sdk.md): .NET Framework SDK
+* [dotnet/framework/aspnet](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.aspnet.md): ASP.NET Web Forms and MVC
+* [dotnet/framework/wcf](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.wcf.md): Windows Communication Foundation (WCF)
+* [dotnet/framework/samples](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.samples.md): .NET Framework, ASP.NET and WCF Samples
 
 .NET:
 
-* [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
-* [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
+* [dotnet](https://github.com/dotnet/dotnet-docker/blob/main/README.md): .NET
+* [dotnet/samples](https://github.com/dotnet/dotnet-docker/blob/main/README.samples.md): .NET Samples
 
 ## Full Tag Listing
 
@@ -110,6 +110,6 @@ See the [full list of tags](https://mcr.microsoft.com/v2/dotnet/framework/runtim
 
 ## License
 
-* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
-* [Microsoft Software Supplemental License for Windows Container Base Image](https://hub.docker.com/r/microsoft/windows-servercore/): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
-* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/)
+* [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.md)
+* [Microsoft Software Supplemental License for Windows Container Base Image](https://github.com/dotnet/dotnet-docker/blob/main/README.servercore.md): applies to all [.NET Framework container images](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.md)
+* [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://github.com/microsoft/dotnet-framework-docker/blob/main/README.sdk.md)
