@@ -88,5 +88,5 @@ View the current tags at the [Microsoft Artifact Registry portal](https://mcr.mi
 # License
 
 * [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
-* [Windows base image license](https://learn.microsoft.com/en-us/virtualization/windowscontainers/images-eula): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
+* [Windows Base Image License](https://learn.microsoft.com/en-us/virtualization/windowscontainers/images-eula): applies to all [.NET Framework container images](https://hub.docker.com/r/microsoft/dotnet-framework/)
 * [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/)
