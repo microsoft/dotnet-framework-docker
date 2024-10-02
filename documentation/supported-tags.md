@@ -61,12 +61,16 @@ All shared tags [support multiple platforms](https://blog.docker.com/2017/09/doc
 
 ## Tag Lifecycle
 
-Each tag will be supported for the lifetime of the .NET Framework and Windows Server version referenced by the tag. Once either of these reaches EOL, the tag will be considered unsupported, will no longer be updated and will be removed from the [Tag Listing](#tag-listing). There are two exceptions:
+Each tag will be supported for the lifetime of the .NET and OS version referenced by the tag. There are two exceptions:.
 
 * Tags containing a timestamp are only supported until a newer timestamp is published for that same .NET Framework and Windows Server version. The timeframe for this is typically on a monthly basis on ["Patch Tuesday"](https://www.microsoft.com/msrc/faqs-security-update-guide).
 * The `latest` tag will always reference the latest version of .NET Framework.
 
-Unsupported tags will be preserved to prevent breaking any references to it.
+When an OS version reaches End-of-Life (EOL), its tags will no longer be maintained.
+
+When a .NET version reaches EOL, its tags will continue to be maintained (rebuilt for base image updates) until the next .NET servicing date (typically on "Patch Tuesday", the 2nd Tuesday of the month).
+
+Once a tag is no longer maintained, it will be considered unsupported, will no longer be updated. Unsupported tags will continue to exist in the container registry to prevent breaking any references to it.
 
 ### Examples
 
