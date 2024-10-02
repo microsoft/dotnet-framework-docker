@@ -16,7 +16,7 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples
 
 ## Try a pre-built ASP.NET Docker Image
 
-You can quickly run a container with a pre-built [sample ASP.NET Docker image](../README.samples.md), based on the [ASP.NET Docker sample].
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](../README.samples.md), based on the [ASP.NET Docker sample](aspnetapp/README.md).
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
