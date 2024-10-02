@@ -1,8 +1,17 @@
 # Supported Tags
 
-This document describes the tagging practices used with the official .NET Framework Docker images.
+This document describes the tagging patterns and policies that are used for the official .NET Framework container images.
+.NET tags are intended to closely match the tagging patterns used by [Official Images on Docker Hub](https://hub.docker.com/search?q=&type=image&image_filter=official).
+ Please [log an issue](https://github.com/dotnet/dotnet-docker/issues/new/choose) if you encounter problems using .NET images or applying these tagging patterns.
 
-The .NET image tags strive to align with the tagging practices utilized by the [Official Images on Docker Hub](https://hub.docker.com/search?q=&type=image&image_filter=official).
+Complete tag lists:
+
+* [sdk](../README.sdk.md#full-tag-listing): .NET Framework SDK
+* [aspnet](../README.aspnet.md#full-tag-listing): ASP.NET Web Forms and MVC
+* [runtime](../README.runtime.md#full-tag-listing): .NET Framework Runtime
+* [wcf](../README.wcf.md#full-tag-listing): Windows Communication Foundation (WCF)
+* [samples](../README.samples.md#full-tag-listing): .NET Framework, ASP.NET and WCF Samples
+* [Microsoft Artifact Registry](https://mcr.microsoft.com/en-us/catalog?search=dotnet/framework)
 
 ## Simple Tags
 
@@ -49,14 +58,6 @@ All shared tags [support multiple platforms](https://blog.docker.com/2017/09/doc
 * `<TimeStamp>` - The timestamp of when the .NET components of the image were last changed.  The timestamp does not change when only the base OS is updated.
 
 * `<OS>` - The name of the OS release and variant the image is based upon.  The image the tag references is updated whenever a new OS patch is released.  The OS release name does support pinning to specific OS patches.  If OS patch pinning is required then the image digest should be used (e.g. `mcr.microsoft.com/dotnet/framework/runtime@sha256:c2310f61b429d6e9780c56068e4e9d35ab8a36deae03eff0e5b3d276f707e5b8`).
-
-## Tag Listing
-
-Each [Docker Hub repository](https://hub.docker.com/r/microsoft/dotnet-framework) contains a detailed listing of all supported tags. Any tag not included in the listing should be considered unsupported. The listing is broken apart by Windows Server version. Each row represents a single image and contains all of the tags that reference it. For example, the following entry represents the .NET Framework 4.8 image for Windows Server Core 2022 which is referenced by four tags:
-
-Tags | Dockerfile
------------| -------------
-4.8-20220412-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](https://github.com/microsoft/dotnet-framework-docker/blob/228ad35840777951381456d3f89392c3a8fe8a89/src/sdk/4.8/windowsservercore-ltsc2022/Dockerfile)
 
 ## Tag Lifecycle
 

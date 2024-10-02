@@ -14,11 +14,11 @@ These are the guiding principles for the content, tagging and production of the 
     1. If support for a new version of Windows is added for a particular .NET Framework version, then support will be added across all `runtime`, `aspnet`, `wcf`, and `sdk` image variants.
     1. If a new component is added, it should be available across all supported OS versions.
 
-1. Windows Server Core is the only Windows SKU supported by the official .NET Framework images.  Windows Server Core is the best Windows SKU to run .NET Framework apps from a performance perspective.  Windows Server Core doesn't have support for every scenario.  For these cases, it is expected that consumers will need to manage their own custom .NET Framework images based on the [Windows](https://hub.docker.com/r/microsoft/windows) base image.
+1. Windows Server Core is the only Windows SKU supported by the official .NET Framework images.  Windows Server Core is the best Windows SKU to run .NET Framework apps from a performance perspective.  Windows Server Core doesn't have support for every scenario.  For these cases, it is expected that consumers will need to manage their own custom .NET Framework images based on the [Windows](https://mcr.microsoft.com/en-us/product/windows/about) base image.
 
 ## Image Tagging
 
-The .NET Framework image tags strive to align with the tagging practices utilized by the [Official Images on Docker Hub](https://hub.docker.com/search?q=&type=image&image_filter=official).  The [Supported Tags](supported-tags.md) document describe this in detail.
+See the [supported tags](supported-tags.md) for the tagging practices and policies used by the .NET team.
 
 ## Engineering
 
@@ -26,7 +26,7 @@ The .NET Framework image tags strive to align with the tagging practices utilize
 
 1. Images will be rebuilt within hours of base image changes. For example, suppose a particular version of Windows is patched.  The .NET Framework images based on this version of Windows will be rebuilt with this new base image within hours of its release.
 
-1. Images will never be deleted from the [official Docker repositories](https://hub.docker.com/r/microsoft/dotnet-framework/).
+1. Images will never be deleted from the [official .NET Framework Docker repositories on the Microsoft Artifact Registry](https://mcr.microsoft.com/en-us/catalog?search=dotnet/framework).
 
 1. The [Dockerfiles](https://github.com/microsoft/dotnet-framework-docker/search?q=filename%3ADockerfile) used to produce all of the images will be publicly available. Customers will be able to take the Dockerfiles and build them to produce their own equivalent images.  No special build steps or permissions should be needed to build the Dockerfiles.
 
