@@ -93,5 +93,5 @@ docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 mcr.microsoft
 ## License
 
 * [Microsoft Container Images Legal Notice](https://aka.ms/mcr/osslegalnotice): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework)
-* [Microsoft Software Supplemental License for Windows Container Base Image](https://mcr.microsoft.com/product/windows/servercore/about): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework)
+* [Windows base image license](https://learn.microsoft.com/en-us/virtualization/windowscontainers/images-eula): applies to all [.NET Framework container images](https://mcr.microsoft.com/catalog?search=dotnet/framework)
 * [Visual Studio Tools License](https://visualstudio.microsoft.com/license-terms/mlt031519/): applies to all [.NET Framework SDK container images](https://mcr.microsoft.com/product/dotnet/framework/sdk/about)
