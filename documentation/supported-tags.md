@@ -11,7 +11,6 @@ Complete tag lists:
 * [runtime](../README.runtime.md#full-tag-listing): .NET Framework Runtime
 * [wcf](../README.wcf.md#full-tag-listing): Windows Communication Foundation (WCF)
 * [samples](../README.samples.md#full-tag-listing): .NET Framework, ASP.NET and WCF Samples
-* [Microsoft Artifact Registry](https://mcr.microsoft.com/en-us/catalog?search=dotnet/framework)
 
 ## Simple Tags
 
