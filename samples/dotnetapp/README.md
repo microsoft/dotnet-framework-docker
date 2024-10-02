@@ -2,13 +2,13 @@
 
 This [sample](Dockerfile) demonstrates how to use .NET Framework and Docker together.
 
-The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/).
+The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](../../README.sdk.md).
 
-This sample requires the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+This sample requires the [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/).
 
 ## Try a pre-built .NET Framework Docker Image
 
-You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/).
+You can quickly run a container with a pre-built [.NET Framework Docker image](../../README.samples.md).
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
@@ -77,7 +77,7 @@ msbuild /p:Configuration=Release
 dotnetapp\bin\Release\net48\dotnetapp.exe
 ```
 
-Note: The `/p:Configuration=Release` argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/en-us/library/ms164311.aspx) for more information on commandline parameters.
+Note: The `/p:Configuration=Release` argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/library/ms164311.aspx) for more information on commandline parameters.
 
 ## .NET Resources
 
@@ -97,13 +97,13 @@ Docs and More Information:
 
 .NET Framework:
 
-* [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
-* [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
-* [dotnet/framework/runtime](https://hub.docker.com/r/microsoft/dotnet-framework-runtime/): .NET Framework Runtime
-* [dotnet/framework/wcf](https://hub.docker.com/r/microsoft/dotnet-framework-wcf/): Windows Communication Foundation (WCF)
-* [dotnet/framework/samples](https://hub.docker.com/r/microsoft/dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
+* [dotnet/framework/sdk](../../README.sdk.md): .NET Framework SDK
+* [dotnet/framework/aspnet](../../README.aspnet.md): ASP.NET Web Forms and MVC
+* [dotnet/framework/runtime](../../README.runtime.md): .NET Framework Runtime
+* [dotnet/framework/wcf](../../README.wcf.md): Windows Communication Foundation (WCF)
+* [dotnet/framework/samples](../../README.samples.md): .NET Framework, ASP.NET and WCF Samples
 
 .NET:
 
-* [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
-* [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
+* [dotnet](https://github.com/dotnet/dotnet-docker/blob/main/README.md): .NET
+* [dotnet/samples](https://github.com/dotnet/dotnet-docker/blob/main/README.samples.md): .NET Samples

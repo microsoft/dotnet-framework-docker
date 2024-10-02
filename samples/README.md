@@ -6,7 +6,7 @@ The samples demonstrate basic functionality. The [.NET Docker Samples](https://g
 
 ## Try a pre-built .NET Framework Docker Image
 
-You can quickly run a container with a pre-built [.NET Framework Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [.NET Framework console sample](dotnetapp/README.md).
+You can quickly run a container with a pre-built [.NET Framework Docker image](../README.samples.md), based on the [.NET Framework console sample](dotnetapp/README.md).
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
@@ -16,7 +16,7 @@ docker run --rm mcr.microsoft.com/dotnet/framework/samples
 
 ## Try a pre-built ASP.NET Docker Image
 
-You can quickly run a container with a pre-built [sample ASP.NET Docker image](https://hub.docker.com/r/microsoft/dotnet-framework-samples/), based on the [ASP.NET Docker sample].
+You can quickly run a container with a pre-built [sample ASP.NET Docker image](../README.samples.md), based on the [ASP.NET Docker sample](aspnetapp/README.md).
 
 Type the following [Docker](https://www.docker.com/products/docker) command:
 
@@ -57,13 +57,13 @@ Docs and More Information:
 
 .NET Framework:
 
-* [dotnet/framework/sdk](https://hub.docker.com/r/microsoft/dotnet-framework-sdk/): .NET Framework SDK
-* [dotnet/framework/aspnet](https://hub.docker.com/r/microsoft/dotnet-framework-aspnet/): ASP.NET Web Forms and MVC
-* [dotnet/framework/runtime](https://hub.docker.com/r/microsoft/dotnet-framework-runtime/): .NET Framework Runtime
-* [dotnet/framework/wcf](https://hub.docker.com/r/microsoft/dotnet-framework-wcf/): Windows Communication Foundation (WCF)
-* [dotnet/framework/samples](https://hub.docker.com/r/microsoft/dotnet-framework-samples/): .NET Framework, ASP.NET and WCF Samples
+* [dotnet/framework/sdk](../README.sdk.md): .NET Framework SDK
+* [dotnet/framework/aspnet](../README.aspnet.md): ASP.NET Web Forms and MVC
+* [dotnet/framework/runtime](../README.runtime.md): .NET Framework Runtime
+* [dotnet/framework/wcf](../README.wcf.md): Windows Communication Foundation (WCF)
+* [dotnet/framework/samples](../README.samples.md): .NET Framework, ASP.NET and WCF Samples
 
 .NET:
 
-* [dotnet](https://hub.docker.com/r/microsoft/dotnet/): .NET
-* [dotnet/samples](https://hub.docker.com/r/microsoft/dotnet-samples/): .NET Samples
+* [dotnet](https://github.com/dotnet/dotnet-docker/blob/main/README.md): .NET
+* [dotnet/samples](https://github.com/dotnet/dotnet-docker/blob/main/README.samples.md): .NET Samples

@@ -96,7 +96,7 @@ $testFilter = ""
 if ($TestCategories) {
     # Construct an expression that filters the test to each of the
     # selected TestCategories (using an OR operator between each category).
-    # See https://docs.microsoft.com/en-us/dotnet/core/testing/selective-unit-tests
+    # See https://docs.microsoft.com/dotnet/core/testing/selective-unit-tests
     $TestCategories | foreach {
         # Skip pre-build tests on Windows because of missing pre-reqs (https://github.com/dotnet/dotnet-docker/issues/2261)
         if ($_ -eq "pre-build" -and $activeOS -eq "windows") {
