@@ -4,7 +4,7 @@ This [sample](Dockerfile) demonstrates how to use ASP.NET and Docker together.
 
 The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](../../README.sdk.md). It builds the application and then copies the final build result into a Docker image based on the smaller [ASP.NET Runtime Docker image](../../README.aspnet.md). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
-This sample requires the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+This sample requires the [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/).
 
 ## Try a pre-built ASP.NET Docker Image
 

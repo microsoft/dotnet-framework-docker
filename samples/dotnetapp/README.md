@@ -4,7 +4,7 @@ This [sample](Dockerfile) demonstrates how to use .NET Framework and Docker toge
 
 The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](../../README.sdk.md).
 
-This sample requires the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+This sample requires the [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/).
 
 ## Try a pre-built .NET Framework Docker Image
 
@@ -77,7 +77,7 @@ msbuild /p:Configuration=Release
 dotnetapp\bin\Release\net48\dotnetapp.exe
 ```
 
-Note: The `/p:Configuration=Release` argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/en-us/library/ms164311.aspx) for more information on commandline parameters.
+Note: The `/p:Configuration=Release` argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/library/ms164311.aspx) for more information on commandline parameters.
 
 ## .NET Resources
 

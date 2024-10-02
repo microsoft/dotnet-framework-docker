@@ -4,7 +4,7 @@ This sample demonstrates how to dockerize WCF services, either IIS-hosted or sel
 
 The sample builds the application in a container based on the larger [.NET Framework SDK Docker image](../../README.sdk.md). It builds the application and then copies the final build result into a Docker image based on the smaller [WCF Runtime Docker image](../../README.wcf.md) or [.NET Framework Runtime Docker image](../../README.runtime.md). It uses Docker [multi-stage build](https://github.com/dotnet/announcements/issues/18) and [multi-arch tags](https://github.com/dotnet/announcements/issues/14).
 
-This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://store.docker.com/editions/community/docker-ce-desktop-windows).
+This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/).
 
 ## Try pre-built WCF Docker Images
 
@@ -132,7 +132,7 @@ cd wcfapp
 msbuild wcfapp.sln /p:Configuration=Release
 ```
 
-Note: The /p:Configuration=Release argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/en-us/library/ms164311.aspx) for more information on commandline parameters.
+Note: The /p:Configuration=Release argument builds the application in release mode (the default is debug mode). See the [MSBuild Command-Line reference](https://msdn.microsoft.com/library/ms164311.aspx) for more information on commandline parameters.
 You can also build, test and debug the application with [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
 
 ## .NET Resources
