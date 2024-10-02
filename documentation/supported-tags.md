@@ -61,7 +61,7 @@ All shared tags [support multiple platforms](https://blog.docker.com/2017/09/doc
 
 ## Tag Lifecycle
 
-Each tag will be supported for the lifetime of the .NET and OS version referenced by the tag. There are two exceptions:.
+Each tag will be supported for the lifetime of the .NET and OS version referenced by the tag. There are two exceptions:
 
 * Tags containing a timestamp are only supported until a newer timestamp is published for that same .NET Framework and Windows Server version. The timeframe for this is typically on a monthly basis on ["Patch Tuesday"](https://www.microsoft.com/msrc/faqs-security-update-guide).
 * The `latest` tag will always reference the latest version of .NET Framework.
