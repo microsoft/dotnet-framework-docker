@@ -45,7 +45,7 @@ WCF service is supported on .NET Framework, which can run in Windows Server Core
 
 ### Build a Container with IIS-hosted WCF Service
 
-Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](Dockerfile.web) is added to the project. We use a [WCF image](../README.wcf.md) as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use the WCF image with tag `4.8` for .NET Framework 4.8 in this example, but you can change it to use other tags (eg. `4.7.2`) for WCF images with different versions of .NET Framework. The [WCF Tag Listing](../../README.wcf.md#full-tag-listing) has the complete list of supported WCF tags.
+Project `WcfServiceWebApp` is created from 'WCF Service Application' template in Visual Studio. A [Dockerfile](Dockerfile.web) is added to the project. We use a [WCF image](../../README.wcf.md) as the base image, which has both HTTP and NET.TCP protocols enabled in IIS and exposes ports 80 (for HTTP) and 808 (for NET.TCP) for the container. We use the WCF image with tag `4.8` for .NET Framework 4.8 in this example, but you can change it to use other tags (eg. `4.7.2`) for WCF images with different versions of .NET Framework. The [WCF Tag Listing](../../README.wcf.md#full-tag-listing) has the complete list of supported WCF tags.
 
 Run commands below to build the container image with name `iishostedwcfservice` and start an instance of it named `myservice1`. Docker parameter `-d` will run the container in background (detached mode).
 
@@ -65,7 +65,7 @@ docker inspect --format="{{.NetworkSettings.Networks.nat.IPAddress}}" myservice1
 
 ### Build a Container with Self-hosted WCF Service
 
-Project `WcfServiceConsoleApp` is created from Windows Classic Desktop 'Console App' template in Visual Studio. We added a [Dockerfile](Dockerfile.console) to the project. We use the [.NET Framework runtime image](../README.runtime.md) as the base image and expose ports 80 (for HTTP) and 808 (for NET.TCP) for the container.
+Project `WcfServiceConsoleApp` is created from Windows Classic Desktop 'Console App' template in Visual Studio. We added a [Dockerfile](Dockerfile.console) to the project. We use the [.NET Framework runtime image](../../README.runtime.md) as the base image and expose ports 80 (for HTTP) and 808 (for NET.TCP) for the container.
 
 Run commands below to build the container image with name `selfhostedwcfservice` and start an instance of it named `myservice2`.
 
