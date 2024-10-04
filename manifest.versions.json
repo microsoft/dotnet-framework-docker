@@ -1,10 +1,10 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "kb5043051",
+      "kb|ltsc2016|3.5": "kb5044293",
       "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/09/windows10.0-kb5043051-x64_ff608963c67034a9f1b7ec352e94b2a0e631ec98.msu",
-      "kb|ltsc2019|3.5": "kb5041913",
+      "kb|ltsc2019|3.5": "kb5044016",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/07/windows10.0-kb5041913-x64_b00cd2de1915f11b56c21d7001962f67854afe07.msu",
-      "kb|ltsc2022|3.5": "kb5041948",
+      "kb|ltsc2022|3.5": "kb5044025",
       "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/07/windows10.0-kb5041948-x64-ndp48_527a7c3a58fc633435eaba0ef450ebd57750fb66.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
@@ -19,13 +19,13 @@
 
       "4.8-is-security-release": true,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "kb5041951",
+      "kb|ltsc2016|4.8": "kb5044021",
       "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/07/windows10.0-kb5041951-x64-ndp48_706969d72176ff42bdbab0611933b462ce375411.msu",
-      "kb|ltsc2019|4.8": "kb5041974",
+      "kb|ltsc2019|4.8": "kb5044022",
       "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/07/windows10.0-kb5041974-x64-ndp48_e8660214346c8ac124e2f99aa21eef697fff307d.msu",
       "kb|ltsc2022|4.8": "$(kb|ltsc2022|3.5)",
       "lcu|ltsc2022|4.8": "$(lcu|ltsc2022|3.5)",
-      "kb|ltsc2022|4.8.1": "kb5041964",
+      "kb|ltsc2022|4.8.1": "kb5044035",
       "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/07/windows10.0-kb5041964-x64-ndp481_3873cce49bce0a36d85ceb34513073cd22b88d46.msu",
 
       // Defines the patch info for the default .NET Fx version installed in the OS
