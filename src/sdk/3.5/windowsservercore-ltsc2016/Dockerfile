@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20240910-windowsservercore-ltsc2016
+FROM $REPO:3.5-20241008-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
@@ -27,7 +27,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5041951-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-kb5044021-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
@@ -36,7 +36,7 @@ RUN `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.11.0
+ENV NUGET_VERSION=6.11.1
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
