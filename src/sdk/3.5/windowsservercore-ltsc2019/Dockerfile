@@ -51,6 +51,7 @@ RUN `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.8.0 ^ `
+        --add Microsoft.NetCore.Component.Runtime.9.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `
