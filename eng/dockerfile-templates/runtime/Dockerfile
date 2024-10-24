@@ -1,20 +1,45 @@
 {{
+    set isServer2025 to OS_VERSION_NUMBER = "ltsc2025" ^
+    set isServer2022 to OS_VERSION_NUMBER = "ltsc2022" ^
+    set isServer2019 to OS_VERSION_NUMBER = "ltsc2019" ^
+    set isServer2016 to OS_VERSION_NUMBER = "ltsc2016" ^
+    set isNet35 to PRODUCT_VERSION = "3.5" ^
+    set isNet462 to PRODUCT_VERSION = "4.6.2" ^
+    set isNet472 to PRODUCT_VERSION = "4.7.2" ^
+    set isNet48 to PRODUCT_VERSION = "4.8" ^
+    set isNet481 to PRODUCT_VERSION = "4.8.1" ^
+
+    set kbExists to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void ^
     set is48SecurityRelease to (VARIABLES[cat("4.8-is-security-release|", OS_VERSION_NUMBER)] = "true") ^
-    set apply35Patch to (VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void && PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019") ^
-    set applyPatch to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void &&
-        !(
-            (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") ||
-            (
+
+    set apply35Patch to kbExists && isNet35 && !isServer2019 ^
+    set applyPatch to kbExists
+        && !(isServer2025 && isNet481)
+        && !(isServer2019 && isNet472)
+        && !(
+                (isServer2019 && isNet472) ||
                 (
-                    (PRODUCT_VERSION = "4.8" && OS_VERSION_NUMBER != "ltsc2019") ||
-                    (PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019")
-                ) &&
-                is48SecurityRelease
-            )
-        )
+                    (
+                        (isNet48 && !isServer2019) ||
+                        (isNet35 && !isServer2019)
+                    ) &&
+                    is48SecurityRelease
+                )
+            ) ^
+
+    set repo to "mcr.microsoft.com/windows/servercore" ^
+    set tag to cat(OS_VERSION_NUMBER, "-amd64") ^
+
+    if isServer2025:{{
+        set repo to cat(repo, "/insider") ^
+        set tag to VARIABLES[cat("windowsservercore|", OS_VERSION_NUMBER, "|insider|tag")]
+    }}^
+
+    set fromImage to cat(repo, ":", tag)
+
 }}# escape=`
 
-FROM mcr.microsoft.com/windows/servercore:{{OS_VERSION_NUMBER}}-amd64
+FROM {{fromImage}}
 
 ENV {{
 if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION = "4.8.1"
@@ -35,7 +60,7 @@ RUN `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || PRODUCT_VERSION = "4.8.1"
+^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || (!isServer2025 && PRODUCT_VERSION = "4.8.1")
 :    # Install .NET Fx {{PRODUCT_VERSION}}
     curl -fSLo dotnet-framework-installer.exe {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
     && .\dotnet-framework-installer.exe /q `

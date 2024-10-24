@@ -68,6 +68,12 @@ Version Tag | OS Version | Supported .NET Versions
 
 ## Full Tag Listing
 
+### Windows Server Core 2025 amd64 Tags
+
+Tag | Dockerfile
+---------| ---------------
+4.8.1-20241114-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/wcf/4.8.1/windowsservercore-ltsc2025/Dockerfile)
+
 ### Windows Server Core 2022 amd64 Tags
 
 Tag | Dockerfile
