@@ -12,3 +12,5 @@ variables:
   value: main
 - name: additionalPublishMcrDocsArgs
   value: "--root /repo/.portal-docs"
+- name: publishEolAnnotations
+  value: true
