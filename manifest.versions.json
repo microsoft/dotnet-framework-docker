@@ -1,10 +1,10 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "kb5044293",
+      "kb|ltsc2016|3.5": "kb5046612",
       "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/10/windows10.0-kb5044293-x64_a77416569fda84f586ea79df98afe3e83000bb3f.msu",
-      "kb|ltsc2019|3.5": "kb5044016",
+      "kb|ltsc2019|3.5": "kb5046615",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/09/windows10.0-kb5044016-x64_64b2bcbd9edcc7fc1dd860751fdb537c947cf037.msu",
-      "kb|ltsc2022|3.5": "kb5044025",
+      "kb|ltsc2022|3.5": "kb5046616",
       "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/09/windows10.0-kb5044025-x64-ndp48_076f88ac9074f6626dc5fbce564e01bbfd0ffba1.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
@@ -19,13 +19,13 @@
 
       "4.8-is-security-release": true,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "kb5044021",
+      "kb|ltsc2016|4.8": "kb5046266",
       "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/09/windows10.0-kb5044021-x64-ndp48_0e9b502a28ea72f175fc40f2ef25a8bba9563cbf.msu",
-      "kb|ltsc2019|4.8": "kb5044022",
+      "kb|ltsc2019|4.8": "kb5046269",
       "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/09/windows10.0-kb5044022-x64-ndp48_5ded8ec41ba58c1de2ab4d98c480f190087a96c3.msu",
       "kb|ltsc2022|4.8": "$(kb|ltsc2022|3.5)",
       "lcu|ltsc2022|4.8": "$(lcu|ltsc2022|3.5)",
-      "kb|ltsc2022|4.8.1": "kb5044035",
+      "kb|ltsc2022|4.8.1": "kb5046264",
       "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2024/09/windows10.0-kb5044035-x64-ndp481_c6081dbdbc8365ec4426585520f58038decdfb56.msu",
 
       // Defines the patch info for the default .NET Fx version installed in the OS
@@ -36,7 +36,7 @@
 
       "nuget|version": "6.11.1",
 
-      "vs|version": "17.11",
+      "vs|version": "17.12",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
       "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
 
