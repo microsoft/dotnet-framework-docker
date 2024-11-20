@@ -30,6 +30,10 @@
     set repo to "mcr.microsoft.com/windows/servercore" ^
     set tag to cat(OS_VERSION_NUMBER, "-amd64") ^
 
+    set netfx3CabFilename to when(isServer2025,
+        "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~en-us~.cab"
+        "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab") ^
+
     set fromImage to cat(repo, ":", tag)
 
 }}# escape=`
@@ -51,7 +55,7 @@ RUN `
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-{{OS_VERSION_NUMBER}}.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\{{netfx3CabFilename}} `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
