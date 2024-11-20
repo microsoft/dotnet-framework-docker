@@ -30,11 +30,6 @@
     set repo to "mcr.microsoft.com/windows/servercore" ^
     set tag to cat(OS_VERSION_NUMBER, "-amd64") ^
 
-    if isServer2025:{{
-        set repo to cat(repo, "/insider") ^
-        set tag to VARIABLES[cat("windowsservercore|", OS_VERSION_NUMBER, "|insider|tag")]
-    }}^
-
     set fromImage to cat(repo, ":", tag)
 
 }}# escape=`
