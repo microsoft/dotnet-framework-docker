@@ -61,7 +61,11 @@ if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-{{if PRODUCT_VERSION = "3.5"
+{{if PRODUCT_VERSION = "3.5" && isServer2025
+:    # Install .NET Fx 3.5
+    dism /Online /Add-Capability /CapabilityName:NetFx3 `
+    `
+^elif PRODUCT_VERSION = "3.5"
 :    # Install .NET Fx 3.5
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-{{OS_VERSION_NUMBER}}.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
