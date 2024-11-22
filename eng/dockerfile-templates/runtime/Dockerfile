@@ -12,7 +12,10 @@
     set kbExists to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void ^
     set is48SecurityRelease to (VARIABLES[cat("4.8-is-security-release|", OS_VERSION_NUMBER)] = "true") ^
 
-    set apply35Patch to kbExists && isNet35 && !isServer2019 ^
+    set apply35Patch to kbExists && isNet35
+        && !isServer2019
+        && !isServer2025 ^
+
     set applyPatch to kbExists
         && !(isServer2025 && isNet481)
         && !(isServer2019 && isNet472)
@@ -26,6 +29,14 @@
                     is48SecurityRelease
                 )
             ) ^
+
+    set winver to when(
+        isServer2016 || isServer2019 || isServer2022,
+        "windows10.0",
+        "windows11.0") ^
+
+    _ set applyPatch to when(isServer2025, isServer2025, applyPatch) ^
+    _ set apply35Patch to when(isServer2025, !isServer2025, apply35Patch) ^
 
     set repo to "mcr.microsoft.com/windows/servercore" ^
     set tag to cat(OS_VERSION_NUMBER, "-amd64") ^
@@ -72,7 +83,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)]}}-x64{{if OS_VERSION_NUMBER = "ltsc2022":-ndp48}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\{{winver}}-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)]}}-x64{{if OS_VERSION_NUMBER = "ltsc2022":-ndp48}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if applyPatch
@@ -81,7 +92,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}{{if PRODUCT_VERSION = "4.8.1":1}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\{{winver}}-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}{{if isServer2025 || isNet481:1}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
