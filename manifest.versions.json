@@ -6,6 +6,8 @@
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/10/windows10.0-kb5046268-x64_cd2f14649df2343f1b4692c50644f22b863ed408.msu",
       "kb|ltsc2022|3.5": "KB5046265",
       "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/10/windows10.0-kb5046265-x64-ndp48_cfcc472170dde9e73e2702f786f4f766864310e4.msu",
+      "kb|ltsc2025|3.5": "KB5046617",
+      "lcu|ltsc2025|3.5": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/2b6cbd69-2d74-4f43-ad64-12f7fd0a9ce6/public/windows11.0-kb5046617-x64_1e5d7b716c0747592ae80c218f1d81bbb7b0c7ab.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
       "kb|ltsc2019|4.7.2": "$(kb|ltsc2019|3.5)",

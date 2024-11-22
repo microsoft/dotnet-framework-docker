@@ -56,7 +56,7 @@ RUN `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
     && dism /Online /Quiet /Add-Package /PackagePath:.\{{netfx3CabFilename}} `
-    && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && del {{netfx3CabFilename}} `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
 ^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || (!isServer2025 && PRODUCT_VERSION = "4.8.1")
