@@ -18,7 +18,6 @@
         && !isServer2025 ^
 
     set applyPatch to kbExists
-        && !(isServer2025 && isNet481)
         && !(isServer2019 && isNet472)
         && !(
                 (isServer2019 && isNet472) ||
@@ -100,7 +99,7 @@ else
 :    # ngen .NET Fx
     {{if PRODUCT_VERSION != "4.7.2":&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen uninstall "Microsoft.Tpm.Commands, Version=10.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=amd64" `^    else
 :    # Ngen top of assembly graph to optimize a set of frequently used assemblies
-    {{if isNet35 || ((isNet48 && !is48SecurityRelease) || (isNet481 && !isServer2025)):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
+    {{if isNet35 || ((isNet48 && !is48SecurityRelease) || isNet481):&& }}%windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `
     # To optimize 32-bit assemblies, uncomment the next line
     # && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen install "Microsoft.PowerShell.Utility.Activities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" `}}
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
