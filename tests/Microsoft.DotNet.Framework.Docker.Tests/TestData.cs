@@ -12,6 +12,7 @@ internal static class TestData
             new ImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2022 },
+            new ImageDescriptor { Version = "3.5", SdkVersion = "3.5", OsVariant = OsVersion.WSC_LTSC2025 },
             new ImageDescriptor { Version = "4.6.2", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
             new ImageDescriptor { Version = "4.7.1", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2016 },
@@ -21,6 +22,7 @@ internal static class TestData
             new ImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2019 },
             new ImageDescriptor { Version = "4.8", SdkVersion = "4.8", OsVariant = OsVersion.WSC_LTSC2022 },
             new ImageDescriptor { Version = "4.8.1", SdkVersion = "4.8.1", OsVariant = OsVersion.WSC_LTSC2022 },
+            new ImageDescriptor { Version = "4.8.1", SdkVersion = "4.8.1", OsVariant = OsVersion.WSC_LTSC2025 },
         };
 
     public static IEnumerable<ImageDescriptor> GetImageData() => s_imageData;

@@ -1,6 +1,12 @@
 {{
+    set kbExists to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void ^
     set is48SecurityRelease to (VARIABLES[cat("4.8-is-security-release|", OS_VERSION_NUMBER)] = "true") ^
-    set apply35Patch to (VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void && PRODUCT_VERSION = "3.5" && OS_VERSION_NUMBER != "ltsc2019") ^
+
+    set apply35Patch to kbExists
+        && PRODUCT_VERSION = "3.5"
+        && OS_VERSION_NUMBER != "ltsc2019"
+        && OS_VERSION_NUMBER != "ltsc2025" ^
+
     set applyPatch to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void &&
         !(
             (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.7.2") ||
@@ -11,7 +17,15 @@
                 ) &&
                 is48SecurityRelease
             )
-        )
+        ) ^
+
+    set installNet35UsingWU to OS_VERSION_NUMBER = "ltsc2025" ^
+
+    set winver to when(
+        OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "ltsc2022",
+        "windows10.0",
+        "windows11.0")
+
 }}# escape=`
 
 FROM mcr.microsoft.com/windows/servercore:{{OS_VERSION_NUMBER}}-amd64
@@ -26,7 +40,11 @@ if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-{{if PRODUCT_VERSION = "3.5"
+{{if PRODUCT_VERSION = "3.5" && installNet35UsingWU
+:    # Install .NET Fx 3.5
+    dism /Online /Add-Capability /CapabilityName:NetFx3 `
+    `
+^elif PRODUCT_VERSION = "3.5"
 :    # Install .NET Fx 3.5
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-{{OS_VERSION_NUMBER}}.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
@@ -35,7 +53,7 @@ RUN `
     && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
-^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || PRODUCT_VERSION = "4.8.1"
+^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || (OS_VERSION_NUMBER != "ltsc2025" && PRODUCT_VERSION = "4.8.1")
 :    # Install .NET Fx {{PRODUCT_VERSION}}
     curl -fSLo dotnet-framework-installer.exe {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
     && .\dotnet-framework-installer.exe /q `
@@ -48,7 +66,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)]}}-x64{{if OS_VERSION_NUMBER = "ltsc2022":-ndp48}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\{{winver}}-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)]}}-x64{{if OS_VERSION_NUMBER = "ltsc2022":-ndp48}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if applyPatch
@@ -57,7 +75,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}{{if PRODUCT_VERSION = "4.8.1":1}}.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\{{winver}}-{{VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", when(PRODUCT_VERSION = "3.5", "default", PRODUCT_VERSION))]}}-x64{{if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8":-ndp48}}{{if OS_VERSION_NUMBER = "ltsc2025" || PRODUCT_VERSION = "4.8.1":1}}.cab `
     && rmdir /S /Q patch `
     `
 }}{{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
