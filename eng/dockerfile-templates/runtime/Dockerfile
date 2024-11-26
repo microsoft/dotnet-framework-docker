@@ -12,7 +12,8 @@
     set kbExists to VARIABLES[cat("kb|", OS_VERSION_NUMBER, "|", PRODUCT_VERSION)] != void ^
     set is48SecurityRelease to (VARIABLES[cat("4.8-is-security-release|", OS_VERSION_NUMBER)] = "true") ^
 
-    set apply35Patch to kbExists && isNet35
+    set apply35Patch to kbExists
+        && isNet35
         && !isServer2019
         && !isServer2025 ^
 
@@ -30,23 +31,16 @@
                 )
             ) ^
 
+    set installNet35UsingWU to isServer2025 ^
+
     set winver to when(
         isServer2016 || isServer2019 || isServer2022,
         "windows10.0",
-        "windows11.0") ^
-
-    set repo to "mcr.microsoft.com/windows/servercore" ^
-    set tag to cat(OS_VERSION_NUMBER, "-amd64") ^
-
-    set netfx3CabFilename to when(isServer2025,
-        "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~en-us~.cab"
-        "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab") ^
-
-    set fromImage to cat(repo, ":", tag)
+        "windows11.0")
 
 }}# escape=`
 
-FROM {{fromImage}}
+FROM mcr.microsoft.com/windows/servercore:{{OS_VERSION_NUMBER}}-amd64
 
 ENV {{
 if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION = "4.8.1"
@@ -58,7 +52,7 @@ if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-{{if PRODUCT_VERSION = "3.5" && isServer2025
+{{if isNet35 && installNet35UsingWU
 :    # Install .NET Fx 3.5
     dism /Online /Add-Capability /CapabilityName:NetFx3 `
     `
@@ -67,8 +61,8 @@ RUN `
     curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-{{OS_VERSION_NUMBER}}.zip `
     && tar -zxf microsoft-windows-netfx3.zip `
     && del /F /Q microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:.\{{netfx3CabFilename}} `
-    && del {{netfx3CabFilename}} `
+    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
+    && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
     && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
     `
 ^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || (!isServer2025 && PRODUCT_VERSION = "4.8.1")
