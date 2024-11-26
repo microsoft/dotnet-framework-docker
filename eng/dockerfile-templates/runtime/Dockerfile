@@ -35,9 +35,6 @@
         "windows10.0",
         "windows11.0") ^
 
-    _ set applyPatch to when(isServer2025, isServer2025, applyPatch) ^
-    _ set apply35Patch to when(isServer2025, !isServer2025, apply35Patch) ^
-
     set repo to "mcr.microsoft.com/windows/servercore" ^
     set tag to cat(OS_VERSION_NUMBER, "-amd64") ^
 
