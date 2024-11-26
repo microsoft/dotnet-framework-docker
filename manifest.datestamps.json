@@ -1,7 +1,7 @@
 {
     "variables": {
       "CurrentReleaseDateStamp": "20241112",
-      "ltsc2025-DateStamp": "20241114",
+      "ltsc2025-DateStamp": "20250106",
 
       "RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",

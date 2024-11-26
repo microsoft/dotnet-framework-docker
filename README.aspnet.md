@@ -73,8 +73,8 @@ Version Tag | OS Version | Supported .NET Versions
 
 Tag | Dockerfile
 ---------| ---------------
-4.8.1-20241114-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/aspnet/4.8.1/windowsservercore-ltsc2025/Dockerfile)
-3.5-20241114-windowsservercore-ltsc2025, 3.5-windowsservercore-ltsc2025, 3.5 | [Dockerfile](src/aspnet/3.5/windowsservercore-ltsc2025/Dockerfile)
+4.8.1-20250106-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/aspnet/4.8.1/windowsservercore-ltsc2025/Dockerfile)
+3.5-20250106-windowsservercore-ltsc2025, 3.5-windowsservercore-ltsc2025, 3.5 | [Dockerfile](src/aspnet/3.5/windowsservercore-ltsc2025/Dockerfile)
 
 ### Windows Server Core 2022 amd64 Tags
 
