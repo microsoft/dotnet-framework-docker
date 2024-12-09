@@ -87,9 +87,9 @@ Tag | Dockerfile
 Tag | Dockerfile
 ---------| ---------------
 4.8-20241112-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20241112-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20241112-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
-4.7-20241112-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20241210-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20241210-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
+4.7-20241210-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
 4.6.2-20241112-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
