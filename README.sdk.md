@@ -88,7 +88,7 @@ Tag | Dockerfile
 Tag | Dockerfile
 ---------| ---------------
 4.8-20241112-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/sdk/4.8/windowsservercore-ltsc2016/Dockerfile)
-3.5-20241112-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](src/sdk/3.5/windowsservercore-ltsc2016/Dockerfile)
+3.5-20241210-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](src/sdk/3.5/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
