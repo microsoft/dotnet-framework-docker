@@ -49,7 +49,7 @@ function WebPart(webPartElement, webPartTitleElement, zone, zoneIndex, allowZone
     this.Dispose = WebPart_Dispose;
 }
 function WebPart_Dispose() {
-    this.webPartElement.__webPart = null    
+    this.webPartElement.__webPart = null
 }
 function WebPart_OnMouseDown() {
     var currentEvent = window.event;
@@ -502,6 +502,7 @@ function WebPartManager_Execute(script) {
     if (this.menu) {
         this.menu.Hide();
     }
+    // CodeQL [SM04509] Code generated from project template
     var scriptReference = new Function(script);
     return (scriptReference() != false);
 }

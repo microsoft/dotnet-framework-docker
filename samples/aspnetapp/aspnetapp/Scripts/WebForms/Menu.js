@@ -170,6 +170,7 @@ function Menu_GetData(item) {
         var a = (item.tagName.toLowerCase() == "a" ? item : WebForm_GetElementByTagName(item, "a"));
         var menu = Menu_FindMenu(a);
         try {
+            // CodeQL [SM04509] Code generated from project template
             item.data = eval(menu.id + "_Data");
         }
         catch(e) {}
@@ -247,7 +248,7 @@ function Menu_HoverDisabled(item) {
     if (data.disappearAfter >= 200) {
         __disappearAfter = data.disappearAfter;
     }
-    Menu_Expand(node, data.horizontalOffset, data.verticalOffset); 
+    Menu_Expand(node, data.horizontalOffset, data.verticalOffset);
 }
 function Menu_HoverDynamic(item) {
     var node = (item.tagName.toLowerCase() == "td") ?
@@ -268,7 +269,7 @@ function Menu_HoverDynamic(item) {
     if (data.disappearAfter >= 200) {
         __disappearAfter = data.disappearAfter;
     }
-    Menu_Expand(node, data.horizontalOffset, data.verticalOffset); 
+    Menu_Expand(node, data.horizontalOffset, data.verticalOffset);
 }
 function Menu_HoverRoot(item) {
     var node = (item.tagName.toLowerCase() == "td") ?
@@ -295,7 +296,7 @@ function Menu_HoverStatic(item) {
     var data = Menu_GetData(item);
     if (!data) return;
     __disappearAfter = data.disappearAfter;
-    Menu_Expand(node, data.horizontalOffset, data.verticalOffset); 
+    Menu_Expand(node, data.horizontalOffset, data.verticalOffset);
 }
 function Menu_IsHorizontal(item) {
     if (item) {
@@ -320,7 +321,7 @@ function Menu_Key(item) {
         item = event.currentTarget;
     }
     else {
-        event = window.event;        
+        event = window.event;
     }
     var key = (event ? event.keyCode : -1);
     var data = Menu_GetData(item);
@@ -344,7 +345,7 @@ function Menu_Key(item) {
     if ((!horizontal && key == 40) || (horizontal && key == 39)) {
         if (horizontal) {
             var subMenu = Menu_FindSubMenu(a);
-            if (subMenu && subMenu.style && subMenu.style.visibility && 
+            if (subMenu && subMenu.style && subMenu.style.visibility &&
                 subMenu.style.visibility.toLowerCase() == "hidden") {
                 Menu_Expand(a, data.horizontalOffset, data.verticalOffset, true);
                 event.cancelBubble = true;
@@ -682,10 +683,10 @@ function PopOut_Position(panel, hideScrollers) {
     var overflow;
     if (position.indexOf("top") != -1) {
         y -= panelHeight;
-        WebForm_SetElementY(panel, y); 
+        WebForm_SetElementY(panel, y);
         if (y < -panelParentCoordinates.y) {
             y = -panelParentCoordinates.y;
-            WebForm_SetElementY(panel, y); 
+            WebForm_SetElementY(panel, y);
             if (panelHeight > clientHeight - 2) {
                 clip = true;
                 PopOut_SetPanelHeight(panel, clientHeight - 2);
@@ -695,15 +696,15 @@ function PopOut_Position(panel, hideScrollers) {
     else {
         if (position.indexOf("bottom") != -1) {
             y += relCoordinates.height;
-            WebForm_SetElementY(panel, y); 
+            WebForm_SetElementY(panel, y);
         }
         overflow = y + panelParentCoordinates.y + panelHeight - bottomWindowBorder;
         if (overflow > 0) {
             y -= overflow;
-            WebForm_SetElementY(panel, y); 
+            WebForm_SetElementY(panel, y);
             if (y < -panelParentCoordinates.y) {
                 y = 2 - panelParentCoordinates.y + scrollTop;
-                WebForm_SetElementY(panel, y); 
+                WebForm_SetElementY(panel, y);
                 clip = true;
                 PopOut_SetPanelHeight(panel, clientHeight - 2);
             }

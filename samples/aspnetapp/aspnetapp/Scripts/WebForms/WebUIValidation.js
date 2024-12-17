@@ -49,7 +49,7 @@ function ValidatorHookupControlID(controlID, val) {
 }
 function ValidatorHookupControl(control, val) {
     if (typeof(control.tagName) != "string") {
-        return;  
+        return;
     }
     if (control.tagName != "INPUT" && control.tagName != "TEXTAREA" && control.tagName != "SELECT") {
         var i;
@@ -72,7 +72,7 @@ function ValidatorHookupControl(control, val) {
             }
             ValidatorHookupEvent(control, eventType, "ValidatorOnChange(event); ");
             if (Page_TextTypes.test(control.type)) {
-                ValidatorHookupEvent(control, "onkeypress", 
+                ValidatorHookupEvent(control, "onkeypress",
                     "event = event || window.event; if (!ValidatedTextBoxOnKeyPress(event)) { event.cancelBubble = true; if (event.stopPropagation) event.stopPropagation(); return false; } ");
             }
         }
@@ -88,6 +88,7 @@ function ValidatorHookupEvent(control, eventType, functionPrefix) {
     else {
         ev = "";
     }
+    // CodeQL [SM04509] Code generated from project template
     control[eventType] = new Function("event", functionPrefix + " " + ev);
 }
 function ValidatorGetValue(id) {
@@ -229,7 +230,7 @@ function ValidatorSetFocus(val, event) {
         ctrl = document.getElementById(val.controltovalidate);
     }
     if ((typeof(ctrl) != "undefined") && (ctrl != null) &&
-        (ctrl.tagName.toLowerCase() != "table" || (typeof(event) == "undefined") || (event == null)) && 
+        (ctrl.tagName.toLowerCase() != "table" || (typeof(event) == "undefined") || (event == null)) &&
         ((ctrl.tagName.toLowerCase() != "input") || (ctrl.type.toLowerCase() != "hidden")) &&
         (typeof(ctrl.disabled) == "undefined" || ctrl.disabled == null || ctrl.disabled == false) &&
         (typeof(ctrl.visible) == "undefined" || ctrl.visible == null || ctrl.visible != false) &&
@@ -280,6 +281,7 @@ function ValidatorOnLoad() {
     for (i = 0; i < Page_Validators.length; i++) {
         val = Page_Validators[i];
         if (typeof(val.evaluationfunction) == "string") {
+            // CodeQL [SM04509] Code generated from project template
             eval("val.evaluationfunction = " + val.evaluationfunction + ";");
         }
         if (typeof(val.isvalid) == "string") {
@@ -448,6 +450,7 @@ function CustomValidatorEvaluateIsValid(val) {
     }
     var args = { Value:value, IsValid:true };
     if (typeof(val.clientvalidationfunction) == "string") {
+        // CodeQL [SM04509] Code generated from project template
         eval(val.clientvalidationfunction + "(val, args) ;");
     }
     return args.IsValid;
