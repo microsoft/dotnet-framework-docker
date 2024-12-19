@@ -49,7 +49,7 @@ function WebPart(webPartElement, webPartTitleElement, zone, zoneIndex, allowZone
     this.Dispose = WebPart_Dispose;
 }
 function WebPart_Dispose() {
-    this.webPartElement.__webPart = null    
+    this.webPartElement.__webPart = null
 }
 function WebPart_OnMouseDown() {
     var currentEvent = window.event;

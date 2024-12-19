@@ -1,18 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetapp", "aspnetapp\aspnetapp.csproj", "{8C2399E7-5551-49FD-8C0C-CCAA2FA8C528}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8569ED5-912E-43BB-AD73-3B9DBB56EC52}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		deploy-container-to-aci.md = deploy-container-to-aci.md
-		Dockerfile = Dockerfile
-		Dockerfile.windowsservercore-ltsc2016 = Dockerfile.windowsservercore-ltsc2016
-		README.md = README.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetapp", "aspnetapp\aspnetapp.csproj", "{0EBC2182-864F-47B6-B3D2-219EB6C92DEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,15 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8C2399E7-5551-49FD-8C0C-CCAA2FA8C528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C2399E7-5551-49FD-8C0C-CCAA2FA8C528}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C2399E7-5551-49FD-8C0C-CCAA2FA8C528}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C2399E7-5551-49FD-8C0C-CCAA2FA8C528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBC2182-864F-47B6-B3D2-219EB6C92DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBC2182-864F-47B6-B3D2-219EB6C92DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBC2182-864F-47B6-B3D2-219EB6C92DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBC2182-864F-47B6-B3D2-219EB6C92DEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {594D2B7F-0B98-470D-978A-0214E48CF075}
 	EndGlobalSection
 EndGlobal
