@@ -18,5 +18,5 @@ $onDockerfilesGenerated = {
 }
 
 & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
-    -ImageBuilderArgs "generateDockerfiles --architecture '*' --os-type '*' --optional-templates $customImageBuilderArgs" `
+    -ImageBuilderArgs "generateDockerfiles --optional-templates $customImageBuilderArgs" `
     -OnCommandExecuted $onDockerfilesGenerated
