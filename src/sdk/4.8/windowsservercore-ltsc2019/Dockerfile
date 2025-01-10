@@ -30,7 +30,6 @@ RUN `
         --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
-        --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.8.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.9.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
