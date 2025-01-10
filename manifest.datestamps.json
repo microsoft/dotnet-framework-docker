@@ -2,6 +2,7 @@
     "variables": {
       "CurrentReleaseDateStamp": "20241210",
       "11B-ReleaseDateStamp": "20241112",
+      "ltsc2025-DateStamp": "20250106",
 
       "RuntimeReleaseDateStamp": "$(11B-ReleaseDateStamp)",
       "AspnetReleaseDateStamp": "$(11B-ReleaseDateStamp)",
@@ -11,6 +12,10 @@
       "ltsc2016-AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "ltsc2016-WcfReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "ltsc2016-SdkReleaseDateStamp": "$(CurrentReleaseDateStamp)",
+      "ltsc2025-RuntimeReleaseDateStamp": "$(ltsc2025-DateStamp)",
+      "ltsc2025-AspnetReleaseDateStamp": "$(ltsc2025-DateStamp)",
+      "ltsc2025-WcfReleaseDateStamp": "$(ltsc2025-DateStamp)",
+      "ltsc2025-SdkReleaseDateStamp": "$(ltsc2025-DateStamp)",
 
       "3.5-ltsc2016-Runtime-DateStamp": "$(ltsc2016-RuntimeReleaseDateStamp)",
       "3.5-ltsc2016-Aspnet-DateStamp": "$(ltsc2016-AspnetReleaseDateStamp)",
@@ -21,6 +26,9 @@
       "3.5-ltsc2022-Runtime-DateStamp": "$(RuntimeReleaseDateStamp)",
       "3.5-ltsc2022-Aspnet-DateStamp": "$(AspnetReleaseDateStamp)",
       "3.5-ltsc2022-Sdk-DateStamp": "$(SdkReleaseDateStamp)",
+      "3.5-ltsc2025-Runtime-DateStamp": "$(ltsc2025-RuntimeReleaseDateStamp)",
+      "3.5-ltsc2025-Aspnet-DateStamp": "$(ltsc2025-AspnetReleaseDateStamp)",
+      "3.5-ltsc2025-Sdk-DateStamp": "$(ltsc2025-SdkReleaseDateStamp)",
       "4.6.2-ltsc2016-Runtime-DateStamp": "$(RuntimeReleaseDateStamp)",
       "4.6.2-ltsc2016-Aspnet-DateStamp": "$(AspnetReleaseDateStamp)",
       "4.6.2-ltsc2016-Wcf-DateStamp": "$(WcfReleaseDateStamp)",
@@ -51,6 +59,10 @@
       "4.8.1-ltsc2022-Runtime-DateStamp": "$(RuntimeReleaseDateStamp)",
       "4.8.1-ltsc2022-Aspnet-DateStamp": "$(AspnetReleaseDateStamp)",
       "4.8.1-ltsc2022-Wcf-DateStamp": "$(WcfReleaseDateStamp)",
-      "4.8.1-ltsc2022-Sdk-DateStamp": "$(SdkReleaseDateStamp)"
+      "4.8.1-ltsc2022-Sdk-DateStamp": "$(SdkReleaseDateStamp)",
+      "4.8.1-ltsc2025-Runtime-DateStamp": "$(ltsc2025-RuntimeReleaseDateStamp)",
+      "4.8.1-ltsc2025-Aspnet-DateStamp": "$(ltsc2025-AspnetReleaseDateStamp)",
+      "4.8.1-ltsc2025-Wcf-DateStamp": "$(ltsc2025-WcfReleaseDateStamp)",
+      "4.8.1-ltsc2025-Sdk-DateStamp": "$(ltsc2025-SdkReleaseDateStamp)"
   }
 }
