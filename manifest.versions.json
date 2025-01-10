@@ -40,7 +40,7 @@
       "kb|ltsc2025|default": "$(kb|ltsc2025|4.8.1)",
       "lcu|ltsc2025|default": "$(lcu|ltsc2025|4.8.1)",
 
-      "nuget|version": "6.11.1",
+      "nuget|version": "6.12.2",
 
       "vs|version": "17.12",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
