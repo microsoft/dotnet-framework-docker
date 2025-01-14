@@ -68,29 +68,35 @@ Version Tag | OS Version | Supported .NET Versions
 
 ## Full Tag Listing
 
+### Windows Server Core 2025 amd64 Tags
+
+Tag | Dockerfile
+---------| ---------------
+4.8.1-20250114-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/wcf/4.8.1/windowsservercore-ltsc2025/Dockerfile)
+
 ### Windows Server Core 2022 amd64 Tags
 
 Tag | Dockerfile
 ---------| ---------------
-4.8.1-20241112-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](src/wcf/4.8.1/windowsservercore-ltsc2022/Dockerfile)
-4.8-20241112-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2022/Dockerfile)
+4.8.1-20250114-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](src/wcf/4.8.1/windowsservercore-ltsc2022/Dockerfile)
+4.8-20250114-windowsservercore-ltsc2022, 4.8-windowsservercore-ltsc2022, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2022/Dockerfile)
 
 ### Windows Server Core 2019 amd64 Tags
 
 Tag | Dockerfile
 ---------| ---------------
-4.8-20241112-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2019/Dockerfile)
-4.7.2-20241112-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](src/wcf/4.7.2/windowsservercore-ltsc2019/Dockerfile)
+4.8-20250114-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2019/Dockerfile)
+4.7.2-20250114-windowsservercore-ltsc2019, 4.7.2-windowsservercore-ltsc2019, 4.7.2 | [Dockerfile](src/wcf/4.7.2/windowsservercore-ltsc2019/Dockerfile)
 
 ### Windows Server Core 2016 amd64 Tags
 
 Tag | Dockerfile
 ---------| ---------------
-4.8-20241112-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20241210-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20241210-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
-4.7-20241210-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
-4.6.2-20241112-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
+4.8-20250114-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/wcf/4.8/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20250114-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](src/wcf/4.7.2/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20250114-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](src/wcf/4.7.1/windowsservercore-ltsc2016/Dockerfile)
+4.7-20250114-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](src/wcf/4.7/windowsservercore-ltsc2016/Dockerfile)
+4.6.2-20250114-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](src/wcf/4.6.2/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
