@@ -1,13 +1,13 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "KB5049993",
-      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2025/01/windows10.0-kb5049993-x64_6a123d9d7dba130d2a5ebfaa38ce380680ff52ed.msu",
+      "kb|ltsc2016|3.5": "KB5052006",
+      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2025/02/windows10.0-kb5052006-x64_426f068f41aef283b2581b941fb34b45855df223.msu",
       "kb|ltsc2019|3.5": "KB5049608",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049608-x64_1a94518425035b7c11ccd554c89ae09752db511c.msu",
       "kb|ltsc2022|3.5": "KB5049617",
       "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049617-x64-ndp48_5adfae2ccbb4743d93898ff35010c77daa8f130f.msu",
-      "kb|ltsc2025|3.5": "KB5049622",
-      "lcu|ltsc2025|3.5": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/8dbe7535-1d3a-450a-8f67-984c0206fb5b/public/windows11.0-kb5049622-x64-ndp481_afb8c71d1958d98de4082ff732762242e9460fad.msu",
+      "kb|ltsc2025|3.5": "KB5050577",
+      "lcu|ltsc2025|3.5": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/6ce99b67-e730-4486-8380-935d60b274e7/public/windows11.0-kb5050577-x64-ndp481_587d1c1f9937f98d194e97ceff613dab9606f7f4.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
       "kb|ltsc2016|4.7.2": "$(kb|ltsc2016|3.5)",
@@ -42,7 +42,7 @@
 
       "nuget|version": "6.12.2",
 
-      "vs|version": "17.12",
+      "vs|version": "17.13",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
       "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
 

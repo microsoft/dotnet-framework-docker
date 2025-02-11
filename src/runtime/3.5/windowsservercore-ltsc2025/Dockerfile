@@ -12,11 +12,11 @@ RUN `
     dism /Online /Add-Capability /CapabilityName:NetFx3 `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/8dbe7535-1d3a-450a-8f67-984c0206fb5b/public/windows11.0-kb5049622-x64-ndp481_afb8c71d1958d98de4082ff732762242e9460fad.msu `
+    && curl -fSLo patch.msu https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/6ce99b67-e730-4486-8380-935d60b274e7/public/windows11.0-kb5050577-x64-ndp481_587d1c1f9937f98d194e97ceff613dab9606f7f4.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows11.0-KB5049622-x64-ndp481.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows11.0-KB5050577-x64-ndp481.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
