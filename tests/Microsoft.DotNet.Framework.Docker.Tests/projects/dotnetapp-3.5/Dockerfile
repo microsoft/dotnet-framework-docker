@@ -5,7 +5,7 @@ ARG BASE_RUNTIME_IMAGE
 FROM $BASE_BUILD_IMAGE as builder
 WORKDIR /app
 COPY . ./
-RUN ["msbuild.exe", "dotnetapp-3.5.csproj", "/p:Configuration=Release"]
+RUN ["msbuild.exe", "dotnetapp-3.5.sln", "/p:Configuration=Release"]
 
 
 FROM $BASE_RUNTIME_IMAGE
