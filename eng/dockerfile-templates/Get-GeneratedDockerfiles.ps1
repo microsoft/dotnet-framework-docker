@@ -3,13 +3,15 @@ param(
     [switch]$Validate
 )
 
+$dockerOs = docker version -f "{{ .Server.Os }}"
+
+$imageBuilderArgs = "generateDockerfiles --optional-templates"
 if ($Validate) {
-    $customImageBuilderArgs = " --validate"
+    $imageBuilderArgs += " --validate"
 }
 
 $repoRoot = (Get-Item "$PSScriptRoot").Parent.Parent.FullName
-
-$onDockerfilesGenerated = {
+$onDockerfilesGeneratedLinux = {
     param($ContainerName)
 
     if (-Not $Validate) {
@@ -17,6 +19,13 @@ $onDockerfilesGenerated = {
     }
 }
 
-& $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
-    -ImageBuilderArgs "generateDockerfiles --optional-templates $customImageBuilderArgs" `
-    -OnCommandExecuted $onDockerfilesGenerated
+# On Windows, ImageBuilder is run locally due to limitations with running Docker client within a container.
+# Remove when https://github.com/dotnet/docker-tools/issues/159 is resolved
+if ($dockerOs -eq "windows") {
+    & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+        -ImageBuilderArgs $imageBuilderArgs
+} else {
+    & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+        -ImageBuilderArgs $imageBuilderArgs `
+        -OnCommandExecuted $onDockerfilesGeneratedLinux
+}

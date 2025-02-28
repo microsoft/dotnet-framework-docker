@@ -5,6 +5,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+$dockerOs = docker version -f "{{ .Server.Os }}"
+
 if ($Validate) {
     $customImageBuilderArgs = " --validate"
 }
@@ -16,7 +18,7 @@ function CopyReadme([string]$containerName, [string]$readmeRelativePath) {
     Exec "docker cp ${containerName}:/repo/$readmeRelativePath $repoRoot/$readmeDir"
 }
 
-$onDockerfilesGenerated = {
+$onDockerfilesGeneratedLinux = {
     param($ContainerName)
 
     if (-Not $Validate) {
@@ -44,10 +46,18 @@ $onDockerfilesGenerated = {
 function Invoke-GenerateReadme {
     param ([string] $Manifest)
 
-    & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
-        -ImageBuilderArgs `
-            "generateReadmes --manifest $Manifest --source-branch 'main'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'" `
-        -OnCommandExecuted $onDockerfilesGenerated `
+    $imageBuilderArgs = "generateReadmes --manifest $Manifest --source-branch 'main'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'"
+
+    # On Windows, ImageBuilder is run locally due to limitations with running Docker client within a container.
+    # Remove when https://github.com/dotnet/docker-tools/issues/159 is resolved
+    if ($dockerOs -eq "windows") {
+        & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+            -ImageBuilderArgs $imageBuilderArgs
+    } else {
+        & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+            -ImageBuilderArgs $imageBuilderArgs `
+            -OnCommandExecuted $onDockerfilesGeneratedLinux
+    }
 }
 
 Invoke-GenerateReadme "manifest.json"
