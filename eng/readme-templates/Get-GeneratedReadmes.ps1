@@ -5,9 +5,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-if (!$IsWindows) {
-    $IsWindows = $PSVersionTable.PSEdition -eq "Desktop"
-}
+$dockerOs = docker version -f "{{ .Server.Os }}"
 
 if ($Validate) {
     $customImageBuilderArgs = " --validate"
@@ -50,7 +48,9 @@ function Invoke-GenerateReadme {
 
     $imageBuilderArgs = "generateReadmes --manifest $Manifest --source-branch 'main'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'"
 
-    if ($IsWindows) {
+    # On Windows, ImageBuilder is run locally due to limitations with running Docker client within a container.
+    # Remove when https://github.com/dotnet/docker-tools/issues/159 is resolved
+    if ($dockerOs -eq "windows") {
         & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
             -ImageBuilderArgs $imageBuilderArgs
     } else {

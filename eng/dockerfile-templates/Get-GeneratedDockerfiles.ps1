@@ -3,9 +3,7 @@ param(
     [switch]$Validate
 )
 
-if (!$IsWindows) {
-    $IsWindows = $PSVersionTable.PSEdition -eq "Desktop"
-}
+$dockerOs = docker version -f "{{ .Server.Os }}"
 
 $imageBuilderArgs = "generateDockerfiles --optional-templates"
 if ($Validate) {
@@ -21,7 +19,9 @@ $onDockerfilesGeneratedLinux = {
     }
 }
 
-if ($IsWindows) {
+# On Windows, ImageBuilder is run locally due to limitations with running Docker client within a container.
+# Remove when https://github.com/dotnet/docker-tools/issues/159 is resolved
+if ($dockerOs -eq "windows") {
     & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
         -ImageBuilderArgs $imageBuilderArgs
 } else {
