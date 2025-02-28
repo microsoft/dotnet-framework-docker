@@ -3,13 +3,17 @@ param(
     [switch]$Validate
 )
 
+if (!$IsWindows) {
+    $IsWindows = $PSVersionTable.PSEdition -eq "Desktop"
+}
+
+$imageBuilderArgs = "generateDockerfiles --optional-templates"
 if ($Validate) {
-    $customImageBuilderArgs = " --validate"
+    $imageBuilderArgs += " --validate"
 }
 
 $repoRoot = (Get-Item "$PSScriptRoot").Parent.Parent.FullName
-
-$onDockerfilesGenerated = {
+$onDockerfilesGeneratedLinux = {
     param($ContainerName)
 
     if (-Not $Validate) {
@@ -17,6 +21,11 @@ $onDockerfilesGenerated = {
     }
 }
 
-& $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
-    -ImageBuilderArgs "generateDockerfiles --optional-templates $customImageBuilderArgs" `
-    -OnCommandExecuted $onDockerfilesGenerated
+if ($IsWindows) {
+    & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+        -ImageBuilderArgs $imageBuilderArgs
+} else {
+    & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+        -ImageBuilderArgs $imageBuilderArgs `
+        -OnCommandExecuted $onDockerfilesGeneratedLinux
+}

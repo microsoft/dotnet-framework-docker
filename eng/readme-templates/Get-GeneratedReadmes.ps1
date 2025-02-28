@@ -5,6 +5,10 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+if (!$IsWindows) {
+    $IsWindows = $PSVersionTable.PSEdition -eq "Desktop"
+}
+
 if ($Validate) {
     $customImageBuilderArgs = " --validate"
 }
@@ -16,7 +20,7 @@ function CopyReadme([string]$containerName, [string]$readmeRelativePath) {
     Exec "docker cp ${containerName}:/repo/$readmeRelativePath $repoRoot/$readmeDir"
 }
 
-$onDockerfilesGenerated = {
+$onDockerfilesGeneratedLinux = {
     param($ContainerName)
 
     if (-Not $Validate) {
@@ -44,10 +48,16 @@ $onDockerfilesGenerated = {
 function Invoke-GenerateReadme {
     param ([string] $Manifest)
 
-    & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
-        -ImageBuilderArgs `
-            "generateReadmes --manifest $Manifest --source-branch 'main'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'" `
-        -OnCommandExecuted $onDockerfilesGenerated `
+    $imageBuilderArgs = "generateReadmes --manifest $Manifest --source-branch 'main'$customImageBuilderArgs 'https://github.com/microsoft/dotnet-framework-docker'"
+
+    if ($IsWindows) {
+        & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+            -ImageBuilderArgs $imageBuilderArgs
+    } else {
+        & $PSScriptRoot/../common/Invoke-ImageBuilder.ps1 `
+            -ImageBuilderArgs $imageBuilderArgs `
+            -OnCommandExecuted $onDockerfilesGeneratedLinux
+    }
 }
 
 Invoke-GenerateReadme "manifest.json"
