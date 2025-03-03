@@ -9,12 +9,7 @@ ENV `
 
 RUN `
     # Install .NET Fx 3.5
-    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2022.zip `
-    && tar -zxf microsoft-windows-netfx3.zip `
-    && del /F /Q microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
-    && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+    dism /Online /Add-Capability /CapabilityName:NetFx3 `
     `
     # Apply latest 3.5 patch
     && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049617-x64-ndp48_5adfae2ccbb4743d93898ff35010c77daa8f130f.msu `
