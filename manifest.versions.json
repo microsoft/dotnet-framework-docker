@@ -42,6 +42,9 @@
 
       "nuget|version": "6.12.2",
 
+      "servicemonitor|version": "2.0.1.10",
+      "servicemonitor|url": "https://dotnetbinaries.blob.core.windows.net/servicemonitor/$(servicemonitor|version)/ServiceMonitor.exe",
+
       "vs|version": "17.13",
       "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
       "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
