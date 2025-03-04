@@ -11,7 +11,7 @@ RUN powershell -Command `
         Remove-Item -Recurse C:\inetpub\wwwroot\*; `
 {{if OS_VERSION_NUMBER = "ltsc2016"
 :        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-}}        Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe `
+}}        Invoke-WebRequest -Uri {{VARIABLES["servicemonitor|url"]}} -OutFile C:\ServiceMonitor.exe `
     && %windir%\System32\inetsrv\appcmd set apppool /apppool.name:DefaultAppPool /managedRuntimeVersion:v2.0 `
 {{if OS_VERSION_NUMBER = "ltsc2016" || OS_VERSION_NUMBER = "ltsc2019"
 :    && %windir%\Microsoft.NET\Framework64\v2.0.50727\ngen update `
