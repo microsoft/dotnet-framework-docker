@@ -1,0 +1,32 @@
+{{
+
+    _ ARGS:
+        usePowerShell: whether to use PowerShell ^
+
+    set version to "v0" ^
+
+    set url to cat(
+        "https://github.com/lbussell/dotnet-framework-docker/releases/download/referenceassemblies-",
+        version,
+        "/referenceassemblies.",
+        version,
+        ".zip"
+    )
+
+}}# Install Targeting Packs{{
+if ARGS.usePowerShell:
+RUN powershell " `
+    $ErrorActionPreference = 'Stop'; `
+    $ProgressPreference = 'SilentlyContinue'; `
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+    Invoke-WebRequest `
+        -UseBasicParsing `
+        -Uri {{url}} `
+        -OutFile referenceassemblies.zip; `
+    Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
+    Remove-Item -Force referenceassemblies.zip"^
+else:
+RUN curl -fSLo referenceassemblies.zip {{url}} `
+    && mkdir "%ProgramFiles(x86)%\Reference Assemblies\Microsoft\Framework\.NETFramework" `
+    && tar -xzf referenceassemblies.zip -C "%ProgramFiles(x86)%\Reference Assemblies\Microsoft\Framework\.NETFramework" `
+    && del referenceassemblies.zip}}

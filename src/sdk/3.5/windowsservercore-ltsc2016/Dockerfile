@@ -120,14 +120,11 @@ RUN powershell " `
     $ErrorActionPreference = 'Stop'; `
     $ProgressPreference = 'SilentlyContinue'; `
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-    @('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8', '4.8.1') `
-    | %{ `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip `
-            -OutFile referenceassemblies.zip; `
-        Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
-        Remove-Item -Force referenceassemblies.zip; `
-    }"
+    Invoke-WebRequest `
+        -UseBasicParsing `
+        -Uri https://github.com/lbussell/dotnet-framework-docker/releases/download/referenceassemblies-v0/referenceassemblies.v0.zip `
+        -OutFile referenceassemblies.zip; `
+    Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
+    Remove-Item -Force referenceassemblies.zip"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
