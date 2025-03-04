@@ -5,29 +5,23 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2016-amd64
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-{{if PRODUCT_VERSION != "4.6.2"
+{{
+if PRODUCT_VERSION != "4.6.2":{{
+if PRODUCT_VERSION = "3.5"
+:    {{InsertTemplate("Dockerfile.install-netfx3", [], "    ")}} `
+^else
 :    # Install .NET Fx {{PRODUCT_VERSION}}
     powershell -Command `
-{{if PRODUCT_VERSION = "3.5"
-:        $ErrorActionPreference = 'Stop'; `
-}}        $ProgressPreference = 'SilentlyContinue'; `
+        $ProgressPreference = 'SilentlyContinue'; `
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
         Invoke-WebRequest `
             -UseBasicParsing `
-{{if PRODUCT_VERSION = "3.5"
-:            -Uri https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2016.zip `
-            -OutFile microsoft-windows-netfx3.zip; `
-        Expand-Archive microsoft-windows-netfx3.zip; `
-    && del microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\microsoft-windows-netfx3\microsoft-windows-netfx3-ondemand-package.cab `
-    && rmdir /S /Q microsoft-windows-netfx3 `
-^else
-:            -Uri {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
+            -Uri {{VARIABLES[cat(PRODUCT_VERSION, "|url")]}} `
             -OutFile dotnet-framework-installer.exe `
     && start /w .\dotnet-framework-installer.exe /q `
     && del .\dotnet-framework-installer.exe `
-}}    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
-    `
+    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+}}    `
     # Apply latest patch
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
