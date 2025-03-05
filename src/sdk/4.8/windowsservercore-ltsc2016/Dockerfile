@@ -89,9 +89,9 @@ RUN powershell -Command "`
     foreach ($version in @('net40', 'net45', 'net451', 'net452', 'net46', 'net461', 'net462', 'net47', 'net471', 'net472', 'net48', 'net481')) { `
         # Download reference assembly NuGet package `
         $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
-        NuGet install \"${package}\" -DirectDownload -ExcludeVersion -Version 1.0.3 -OutputDirectory ${Env:TEMP}\Packages; `
+        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version 1.0.3 -OutputDirectory ${Env:TEMP}\Packages; `
         $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
-        # Remove Intellisense files `
+        # Remove IntelliSense files `
         Get-ChildItem -File -Recurse -Path \"${contents}\" | `
             Where-Object { $_.FullName -match '^(?!.*\\\\(PermissionSets|RedistList)\\\\).*\\.xml$' } | `
             Remove-Item; `
