@@ -117,7 +117,8 @@ RUN powershell setx /M PATH $(${Env:PATH} `
 
 # Install Targeting Packs
 RUN powershell -Command "`
-    New-Item -ItemType Directory -Path \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
+    $referenceAssembliesPath = \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\"; `
+    New-Item -ItemType Directory -Path ${referenceAssembliesPath}; `
     foreach ($version in @('net40', 'net45', 'net451', 'net452', 'net46', 'net461', 'net462', 'net47', 'net471', 'net472', 'net48', 'net481')) { `
         # Download reference assembly NuGet package `
         $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
@@ -127,7 +128,7 @@ RUN powershell -Command "`
         Get-ChildItem -File -Recurse -Path \"${contents}\" | `
             Where-Object { $_.FullName -match '^(?!.*\\\\(PermissionSets|RedistList)\\\\).*\\.xml$' } | `
             Remove-Item; `
-        Copy-Item -Recurse -Force -Container -Path ${contents} -Destination \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\"; `
+        Copy-Item -Recurse -Force -Container -Path ${contents} -Destination ${referenceAssembliesPath}; `
     } `
     Remove-Item -Force -Recurse ${Env:TEMP}\\*;"
 
