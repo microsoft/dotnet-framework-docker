@@ -96,7 +96,7 @@ RUN powershell -Command "`
             Where-Object { $_.FullName -match '^(?!.*\\\\(PermissionSets|RedistList)\\\\).*\\.xml$' } | `
             Remove-Item; `
         Copy-Item -Recurse -Force -Container -Path ${contents} -Destination \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\"; `
-        Remove-Item -Force -Recurse ${Env:TEMP}\\*; `
-    }"
+    } `
+    Remove-Item -Force -Recurse ${Env:TEMP}\\*;"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
