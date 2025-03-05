@@ -13,9 +13,9 @@ RUN powershell -Command "`
     foreach ($version in @@({{join(versions, ", ")}})) { `
         # Download reference assembly NuGet package `
         $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
-        NuGet install \"${package}\" -DirectDownload -ExcludeVersion -Version {{packageVersion}} -OutputDirectory ${Env:TEMP}\Packages; `
+        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version {{packageVersion}} -OutputDirectory ${Env:TEMP}\Packages; `
         $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
-        # Remove Intellisense files `
+        # Remove IntelliSense files `
         Get-ChildItem -File -Recurse -Path \"${contents}\" | `
             Where-Object { $_.FullName -match '@^(?!.*\\\\(PermissionSets|RedistList)\\\\).*\\.xml$' } | `
             Remove-Item; `
