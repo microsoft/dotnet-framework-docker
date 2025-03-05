@@ -91,7 +91,7 @@ RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
-{{InsertTemplate("Dockerfile.install-refassemblies")}}{{
+{{InsertTemplate("Dockerfile.install-reference-assemblies")}}{{
 if OS_VERSION_NUMBER = "ltsc2019"
 :
 
