@@ -40,7 +40,7 @@
       "kb|ltsc2025|default": "$(kb|ltsc2025|4.8.1)",
       "lcu|ltsc2025|default": "$(lcu|ltsc2025|4.8.1)",
 
-      "nuget|version": "6.12.2",
+      "nuget|version": "6.13.2",
 
       "servicemonitor|version": "2.0.1.10",
       "servicemonitor|url": "https://dotnetbinaries.blob.core.windows.net/servicemonitor/$(servicemonitor|version)/ServiceMonitor.exe",

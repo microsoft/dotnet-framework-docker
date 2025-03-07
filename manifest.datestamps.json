@@ -2,14 +2,17 @@
     "variables": {
       "PreviousReleaseDateStamp": "20250114",
       "CurrentReleaseDateStamp": "20250211",
+      "3B-ReleaseDateStamp": "20250307",
 
       "RuntimeReleaseDateStamp": "$(PreviousReleaseDateStamp)",
       "AspnetReleaseDateStamp": "$(PreviousReleaseDateStamp)",
       "WcfReleaseDateStamp": "$(PreviousReleaseDateStamp)",
-      "SdkReleaseDateStamp": "$(CurrentReleaseDateStamp)",
+      "SdkReleaseDateStamp": "$(3B-ReleaseDateStamp)",
+
       "2016-RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "2016-AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "2016-WcfReleaseDateStamp": "$(CurrentReleaseDateStamp)",
+
       "2025-RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "2025-AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "2025-WcfReleaseDateStamp": "$(CurrentReleaseDateStamp)",
