@@ -48,22 +48,7 @@ RUN `
     && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
     && del vs_TestAgent.exe `
     `
-    # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe {{VARIABLES["vs|buildToolsUrl"]}} `
-    && start /w vs_BuildTools @^ `
-        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" @^ `
-        --add Microsoft.Component.ClickOnce.MSBuild @^ `
-        --add Microsoft.Net.Component.{{sdkVersion}}.SDK @^ `
-        --add Microsoft.NetCore.Component.Runtime.8.0 @^ `
-        --add Microsoft.NetCore.Component.Runtime.9.0 @^ `
-        --add Microsoft.NetCore.Component.SDK @^ `
-        --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
-        --add Microsoft.VisualStudio.Component.WebDeploy @^ `
-        --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup @^ `
-        --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
-        --quiet --norestart --nocache --wait `
-    && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
-    && del vs_BuildTools.exe `
+    {{InsertTemplate("Dockerfile.install-vs-buildtools", [], "    ")}}
     `
     # Trigger dotnet first run experience by running arbitrary cmd
     && "%ProgramFiles%\dotnet\dotnet" help `

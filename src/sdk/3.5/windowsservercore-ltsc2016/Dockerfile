@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:3.5-20250211-windowsservercore-ltsc2016
+FROM $REPO:3.5-20250311-windowsservercore-ltsc2016
 
 RUN `
     # Install .NET 4.8 Fx
@@ -36,7 +36,7 @@ RUN `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install NuGet CLI
-ENV NUGET_VERSION=6.12.2
+ENV NUGET_VERSION=6.13.2
 RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && powershell -Command `
         $ProgressPreference = 'SilentlyContinue'; `
@@ -76,7 +76,6 @@ RUN `
         --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
-        --add Microsoft.NetCore.Component.Runtime.6.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.8.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.9.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
