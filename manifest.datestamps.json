@@ -2,7 +2,7 @@
     "variables": {
       "1B-ReleaseDateStamp": "20250114",
       "2B-ReleaseDateStamp": "20250211",
-      "3B-ReleaseDateStamp": "20250307",
+      "3B-ReleaseDateStamp": "20250311",
 
       "RuntimeReleaseDateStamp": "$(1B-ReleaseDateStamp)",
       "AspnetReleaseDateStamp": "$(1B-ReleaseDateStamp)",
