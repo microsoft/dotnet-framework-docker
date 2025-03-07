@@ -87,12 +87,12 @@ Tag | Dockerfile
 
 Tag | Dockerfile
 ---------| ---------------
-4.8-20250211-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/runtime/4.8/windowsservercore-ltsc2016/Dockerfile)
-4.7.2-20250211-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](src/runtime/4.7.2/windowsservercore-ltsc2016/Dockerfile)
-4.7.1-20250211-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](src/runtime/4.7.1/windowsservercore-ltsc2016/Dockerfile)
-4.7-20250211-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](src/runtime/4.7/windowsservercore-ltsc2016/Dockerfile)
-4.6.2-20250211-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](src/runtime/4.6.2/windowsservercore-ltsc2016/Dockerfile)
-3.5-20250211-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](src/runtime/3.5/windowsservercore-ltsc2016/Dockerfile)
+4.8-20250307-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/runtime/4.8/windowsservercore-ltsc2016/Dockerfile)
+4.7.2-20250307-windowsservercore-ltsc2016, 4.7.2-windowsservercore-ltsc2016, 4.7.2 | [Dockerfile](src/runtime/4.7.2/windowsservercore-ltsc2016/Dockerfile)
+4.7.1-20250307-windowsservercore-ltsc2016, 4.7.1-windowsservercore-ltsc2016, 4.7.1 | [Dockerfile](src/runtime/4.7.1/windowsservercore-ltsc2016/Dockerfile)
+4.7-20250307-windowsservercore-ltsc2016, 4.7-windowsservercore-ltsc2016, 4.7 | [Dockerfile](src/runtime/4.7/windowsservercore-ltsc2016/Dockerfile)
+4.6.2-20250307-windowsservercore-ltsc2016, 4.6.2-windowsservercore-ltsc2016, 4.6.2 | [Dockerfile](src/runtime/4.6.2/windowsservercore-ltsc2016/Dockerfile)
+3.5-20250307-windowsservercore-ltsc2016, 3.5-windowsservercore-ltsc2016, 3.5 | [Dockerfile](src/runtime/3.5/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).

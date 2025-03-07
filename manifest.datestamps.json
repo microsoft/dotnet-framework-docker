@@ -1,21 +1,22 @@
 {
     "variables": {
-      "PreviousReleaseDateStamp": "20250114",
-      "CurrentReleaseDateStamp": "20250211",
+      "1B-ReleaseDateStamp": "20250114",
+      "2B-ReleaseDateStamp": "20250211",
       "3B-ReleaseDateStamp": "20250307",
 
-      "RuntimeReleaseDateStamp": "$(PreviousReleaseDateStamp)",
-      "AspnetReleaseDateStamp": "$(PreviousReleaseDateStamp)",
-      "WcfReleaseDateStamp": "$(PreviousReleaseDateStamp)",
+      "RuntimeReleaseDateStamp": "$(1B-ReleaseDateStamp)",
+      "AspnetReleaseDateStamp": "$(1B-ReleaseDateStamp)",
+      "WcfReleaseDateStamp": "$(1B-ReleaseDateStamp)",
+
       "SdkReleaseDateStamp": "$(3B-ReleaseDateStamp)",
 
-      "2016-RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
-      "2016-AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
-      "2016-WcfReleaseDateStamp": "$(CurrentReleaseDateStamp)",
+      "2016-RuntimeReleaseDateStamp": "$(3B-ReleaseDateStamp)",
+      "2016-AspnetReleaseDateStamp": "$(3B-ReleaseDateStamp)",
+      "2016-WcfReleaseDateStamp": "$(3B-ReleaseDateStamp)",
 
-      "2025-RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
-      "2025-AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
-      "2025-WcfReleaseDateStamp": "$(CurrentReleaseDateStamp)",
+      "2025-RuntimeReleaseDateStamp": "$(2B-ReleaseDateStamp)",
+      "2025-AspnetReleaseDateStamp": "$(2B-ReleaseDateStamp)",
+      "2025-WcfReleaseDateStamp": "$(2B-ReleaseDateStamp)",
 
       "3.5-ltsc2016-Runtime-DateStamp": "$(2016-RuntimeReleaseDateStamp)",
       "3.5-ltsc2016-Aspnet-DateStamp": "$(2016-AspnetReleaseDateStamp)",
