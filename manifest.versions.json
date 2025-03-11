@@ -1,7 +1,7 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "KB5052006",
-      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2025/02/windows10.0-kb5052006-x64_426f068f41aef283b2581b941fb34b45855df223.msu",
+      "kb|ltsc2016|3.5": "KB5053594",
+      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2025/03/windows10.0-kb5053594-x64_d126a8ab63952fdac4b4de0672f75fe453c884d2.msu",
       "kb|ltsc2019|3.5": "KB5049608",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049608-x64_1a94518425035b7c11ccd554c89ae09752db511c.msu",
       "kb|ltsc2022|3.5": "KB5049617",
@@ -40,7 +40,7 @@
       "kb|ltsc2025|default": "$(kb|ltsc2025|4.8.1)",
       "lcu|ltsc2025|default": "$(lcu|ltsc2025|4.8.1)",
 
-      "nuget|version": "6.12.2",
+      "nuget|version": "6.13.2",
 
       "servicemonitor|version": "2.0.1.10",
       "servicemonitor|url": "https://dotnetbinaries.blob.core.windows.net/servicemonitor/$(servicemonitor|version)/ServiceMonitor.exe",
