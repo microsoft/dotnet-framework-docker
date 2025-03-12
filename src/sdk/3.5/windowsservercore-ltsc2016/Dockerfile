@@ -125,7 +125,7 @@ RUN powershell -Command "`
         $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
         # Remove IntelliSense files `
         Get-ChildItem -File -Recurse -Path \"${contents}\" | `
-            Where-Object { $_.FullName -match '^(?!.*\\\\(PermissionSets|RedistList)\\\\).*\\.xml$' } | `
+            Where-Object { $_.FullName -match '^(?!.*(PermissionSets|RedistList)).*\.xml$' } | `
             Remove-Item; `
         Copy-Item -Recurse -Force -Container -Path ${contents} -Destination ${referenceAssembliesPath}; `
     } `
