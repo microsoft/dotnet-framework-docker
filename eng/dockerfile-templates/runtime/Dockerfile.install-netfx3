@@ -1,0 +1,24 @@
+{{
+
+    _ Features on Demand (FoDs) are supported on Windows Server 2022 and later.
+        Using DISM /add-package to add FODs is deprecated.
+        It is best practice to add all FODs with DISM /Add-Capability. ^
+    _ https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-v2--capabilities#overview ^
+
+    set useCapability to
+        OS_VERSION_NUMBER != "ltsc2016" &&
+        OS_VERSION_NUMBER != "ltsc2019" ^
+
+    set enableWindowsUpdate to !useCapability ^
+    set dismArgs to when(useCapability,
+        "/Add-Capability /CapabilityName:NetFx3",
+        "/Enable-Feature /FeatureName:NetFx3 /All")
+
+}}{{
+if enableWindowsUpdate:# Enable Windows Update service
+sc config wuauserv start= auto `
+}}# Install .NET Fx 3.5
+{{if enableWindowsUpdate:&& }}dism /Online {{dismArgs}}{{
+if enableWindowsUpdate: `
+# Disable Windows Update service
+&& sc config wuauserv start= disabled}}
