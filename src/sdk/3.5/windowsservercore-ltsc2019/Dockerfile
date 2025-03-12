@@ -86,17 +86,20 @@ RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
 # Install Targeting Packs
-RUN powershell " `
-    $ErrorActionPreference = 'Stop'; `
-    $ProgressPreference = 'SilentlyContinue'; `
-    @('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8', '4.8.1') `
-    | %{ `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip `
-            -OutFile referenceassemblies.zip; `
-        Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
-        Remove-Item -Force referenceassemblies.zip; `
-    }"
+RUN powershell -Command "`
+    $referenceAssembliesPath = \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\"; `
+    New-Item -ItemType Directory -Path ${referenceAssembliesPath}; `
+    foreach ($version in @('net40', 'net45', 'net451', 'net452', 'net46', 'net461', 'net462', 'net47', 'net471', 'net472', 'net48', 'net481')) { `
+        # Download reference assembly NuGet package `
+        $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
+        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version 1.0.3 -OutputDirectory ${Env:TEMP}\Packages; `
+        $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
+        # Remove IntelliSense files `
+        Get-ChildItem -File -Recurse -Path \"${contents}\" | `
+            Where-Object { $_.FullName -match '^(?!.*(PermissionSets|RedistList)).*\.xml$' } | `
+            Remove-Item; `
+        Copy-Item -Recurse -Force -Container -Path ${contents} -Destination ${referenceAssembliesPath}; `
+    } `
+    Remove-Item -Force -Recurse ${Env:TEMP}\\*;"
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]

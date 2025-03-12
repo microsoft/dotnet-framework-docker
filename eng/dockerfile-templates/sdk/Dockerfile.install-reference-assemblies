@@ -1,0 +1,25 @@
+{{
+    set wrap(s) to:{{return cat("'", s, "'")}} ^
+
+    set versions to ["net40", "net45", "net451", "net452", "net46", "net461", "net462", "net47", "net471", "net472", "net48", "net481"] ^
+    set versions to map(versions, wrap) ^
+
+    set packageVersion to VARIABLES["referenceassemblies|version"] ^
+    set packageInstallDir to "packages"
+
+}}# Install Targeting Packs
+RUN powershell -Command "`
+    $referenceAssembliesPath = \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\"; `
+    New-Item -ItemType Directory -Path ${referenceAssembliesPath}; `
+    foreach ($version in @@({{join(versions, ", ")}})) { `
+        # Download reference assembly NuGet package `
+        $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
+        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version {{packageVersion}} -OutputDirectory ${Env:TEMP}\Packages; `
+        $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
+        # Remove IntelliSense files `
+        Get-ChildItem -File -Recurse -Path \"${contents}\" | `
+            Where-Object { $_.FullName -match '@^(?!.*(PermissionSets|RedistList)).*\.xml$' } | `
+            Remove-Item; `
+        Copy-Item -Recurse -Force -Container -Path ${contents} -Destination ${referenceAssembliesPath}; `
+    } `
+    Remove-Item -Force -Recurse ${Env:TEMP}\\*;"

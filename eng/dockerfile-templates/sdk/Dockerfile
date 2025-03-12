@@ -76,19 +76,7 @@ RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
-# Install Targeting Packs
-RUN powershell " `
-    $ErrorActionPreference = 'Stop'; `
-    $ProgressPreference = 'SilentlyContinue'; `
-    @@('4.0', '4.5.2', '4.6.2', '4.7.2', '4.8', '4.8.1') `
-    | %{ `
-        Invoke-WebRequest `
-            -UseBasicParsing `
-            -Uri https://dotnetbinaries.blob.core.windows.net/referenceassemblies/v${_}.zip `
-            -OutFile referenceassemblies.zip; `
-        Expand-Archive referenceassemblies.zip -DestinationPath \"${Env:ProgramFiles(x86)}\Reference Assemblies\Microsoft\Framework\.NETFramework\"; `
-        Remove-Item -Force referenceassemblies.zip; `
-    }"{{
+{{InsertTemplate("Dockerfile.install-reference-assemblies")}}{{
 if OS_VERSION_NUMBER = "ltsc2019"
 :
 
