@@ -10,11 +10,6 @@
 
 ## About
 
-> [!CAUTION]
-> .NET Framework 3.5 images for Windows Server 2025 will no longer be published after May 13th.
-> Guidance for installing .NET Framework 3.5 in your own container images can be found [here](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/install-netfx3.md#windows-server-core-2022-and-later).
-> See the [announcement](https://github.com/dotnet/announcements/issues/349) for more details.
-
 The [.NET Framework](https://www.microsoft.com/net/framework) is a general purpose development platform maintained by Microsoft. It is the most popular way to build client and server applications for Windows and Windows Server. It is included with Windows, Windows Server and Windows Server Core. It includes server technologies such as ASP.NET Web Forms, ASP.NET MVC and Windows Communication Foundation (WCF) applications, which you can run in Docker containers.
 
 .NET has several capabilities that make development easier, including automatic memory management, (runtime) generic types, reflection, asynchrony, concurrency, and native interop. Millions of developers take advantage of these capabilities to efficiently build high-quality web and client applications.

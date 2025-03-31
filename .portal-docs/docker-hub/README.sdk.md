@@ -9,10 +9,6 @@
 
 # About
 
-> **NOTICE**: .NET Framework 3.5 images for Windows Server 2025 will no longer be published after May 13th.
-> Guidance for installing .NET Framework 3.5 in your own container images can be found [here](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/install-netfx3.md#windows-server-core-2022-and-later).
-> See the [announcement](https://github.com/dotnet/announcements/issues/349) for more details.
-
 This image contains the .NET Framework SDK which is comprised of the following parts:
 
 1. .NET Framework Runtime
