@@ -2,7 +2,7 @@
 
 ## Windows Server Core 2022 and later
 
-Windows Server Core 2022 and later container images can install [.NET Framework 3.5](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11#-net-framework) as a [Feature on Demand](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-v2--capabilities?view=windows-11).
+Windows Server Core 2022 and later container images can install [.NET Framework 3.5](https://learn.microsoft.com/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11#-net-framework) as a [Feature on Demand](https://learn.microsoft.com/windows-hardware/manufacture/desktop/features-on-demand-v2--capabilities?view=windows-11).
 
 ```Dockerfile
 # escape=`
