@@ -27,3 +27,12 @@ RUN `
     # Disable Windows Update service
     && sc config wuauserv start= disabled
 ```
+
+## Important note about security updates
+
+.NET Framework 3.5 security updates are included in the base Windows Server Core container image. To ensure you have the latest security updates for .NET 3.5, make sure that you re-build your image whenever there is a new version of the Windows Server Core or .NET Framework base image. Information about the latest Windows Server updates can be found here:
+
+- [Windows Server 2025 Update History](https://support.microsoft.com/topic/windows-server-2025-update-history-10f58da7-e57b-4a9d-9c16-9f1dcd72d7d7)
+- [Windows Server 2022 Update History](https://support.microsoft.com/topic/windows-server-2022-update-history-e1caa597-00c5-4ab9-9f3e-8212fe80b2ee)
+- [Windows Server 2019 Update History](https://support.microsoft.com/topic/windows-10-and-windows-server-2019-update-history-725fc2e1-4443-6831-a5ca-51ff5cbcb059)
+- [Windows Server 2016 Update History](https://support.microsoft.com/topic/windows-10-and-windows-server-2016-update-history-4acfbc84-a290-1b54-536a-1c0430e9f3fd)
