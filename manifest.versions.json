@@ -41,6 +41,7 @@
       "lcu|ltsc2025|default": "$(lcu|ltsc2025|4.8.1)",
 
       "nuget|version": "6.13.2",
+      "referenceassemblies|version": "1.0.3",
 
       "servicemonitor|version": "2.0.1.10",
       "servicemonitor|url": "https://dotnetbinaries.blob.core.windows.net/servicemonitor/$(servicemonitor|version)/ServiceMonitor.exe",
