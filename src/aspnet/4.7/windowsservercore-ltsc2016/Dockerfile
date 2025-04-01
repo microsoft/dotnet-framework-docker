@@ -10,7 +10,7 @@ RUN Add-WindowsFeature Web-Server; `
     Add-WindowsFeature Web-Asp-Net45; `
     Remove-Item -Recurse C:\inetpub\wwwroot\*; `
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-    Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe; `
+    Invoke-WebRequest -Uri https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe; `
     &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen update; `
     &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen update
 
