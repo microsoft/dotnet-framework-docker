@@ -7,7 +7,7 @@ RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /Fea
     && dism /Online /Quiet /Disable-Feature /FeatureName:IIS-WebServerManagementTools `
     && del /q "C:\inetpub\wwwroot\*" `
     && for /D %p IN ("C:\inetpub\wwwroot\*") DO rmdir "%p" /s /q `
-    && curl -fSLo ServiceMonitor.exe https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe `
+    && curl -fSLo ServiceMonitor.exe https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v2.0.1.10/ServiceMonitor.exe `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
