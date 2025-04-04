@@ -11,11 +11,16 @@ Install the .NET Core SDK at the specified path.
 .PARAMETER InstallPath
 The path where the .NET Core SDK is to be installed.
 
+.PARAMETER Channel
+The version of the .NET Core SDK to be installed.
+
 #>
 [cmdletbinding()]
 param(
     [string]
-    $InstallPath
+    $InstallPath,
+    [string]
+    $Channel = "9.0"
 )
 
 Set-StrictMode -Version Latest
@@ -37,10 +42,10 @@ $DotnetInstallScriptPath = Join-Path -Path $InstallPath -ChildPath $DotnetInstal
 
 if (!(Test-Path $DotnetInstallScriptPath)) {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
-    & "$PSScriptRoot/Invoke-WithRetry.ps1" "Invoke-WebRequest 'https://dot.net/v1/$DotnetInstallScript' -OutFile $DotnetInstallScriptPath"
+    & "$PSScriptRoot/Invoke-WithRetry.ps1" "Invoke-WebRequest 'https://builds.dotnet.microsoft.com/dotnet/scripts/v1/$DotnetInstallScript' -OutFile $DotnetInstallScriptPath"
 }
 
-$DotnetChannel = "9.0"
+$DotnetChannel = $Channel
 
 $InstallFailed = $false
 if ($IsRunningOnUnix) {
