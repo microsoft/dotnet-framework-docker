@@ -19,8 +19,6 @@
             )
         ) ^
 
-    set installNet35UsingWU to OS_VERSION_NUMBER = "ltsc2025" ^
-
     set winver to when(
         OS_VERSION_NUMBER = "ltsc2019" || OS_VERSION_NUMBER = "ltsc2022",
         "windows10.0",
@@ -40,18 +38,8 @@ if OS_VERSION_NUMBER != "ltsc2019" || PRODUCT_VERSION = "4.8" || PRODUCT_VERSION
     }}COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
-{{if PRODUCT_VERSION = "3.5" && installNet35UsingWU
-:    # Install .NET Fx 3.5
-    dism /Online /Add-Capability /CapabilityName:NetFx3 `
-    `
-^elif PRODUCT_VERSION = "3.5"
-:    # Install .NET Fx 3.5
-    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-{{OS_VERSION_NUMBER}}.zip `
-    && tar -zxf microsoft-windows-netfx3.zip `
-    && del /F /Q microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
-    && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+{{if PRODUCT_VERSION = "3.5"
+:    {{InsertTemplate("Dockerfile.install-netfx3", [], "    ")}} `
     `
 ^elif (OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "4.8") || (OS_VERSION_NUMBER != "ltsc2025" && PRODUCT_VERSION = "4.8.1")
 :    # Install .NET Fx {{PRODUCT_VERSION}}

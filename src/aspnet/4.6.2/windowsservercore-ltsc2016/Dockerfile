@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.6.2-20250311-windowsservercore-ltsc2016
+FROM $REPO:4.6.2-20250408-windowsservercore-ltsc2016
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -10,7 +10,7 @@ RUN Add-WindowsFeature Web-Server; `
     Add-WindowsFeature Web-Asp-Net45; `
     Remove-Item -Recurse C:\inetpub\wwwroot\*; `
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
-    Invoke-WebRequest -Uri https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe; `
+    Invoke-WebRequest -Uri https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v2.0.1.10/ServiceMonitor.exe -OutFile C:\ServiceMonitor.exe; `
     &$Env:windir\Microsoft.NET\Framework64\v4.0.30319\ngen update; `
     &$Env:windir\Microsoft.NET\Framework\v4.0.30319\ngen update
 

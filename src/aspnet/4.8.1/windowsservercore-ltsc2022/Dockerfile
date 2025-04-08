@@ -1,13 +1,13 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.8.1-20250114-windowsservercore-ltsc2022
+FROM $REPO:4.8.1-20250408-windowsservercore-ltsc2022
 
 RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /FeatureName:NetFx4Extended-ASPNET45 /FeatureName:IIS-ASPNET45 `
     && dism /Online /Quiet /Disable-Feature /FeatureName:IIS-WebServerManagementTools `
     && del /q "C:\inetpub\wwwroot\*" `
     && for /D %p IN ("C:\inetpub\wwwroot\*") DO rmdir "%p" /s /q `
-    && curl -fSLo ServiceMonitor.exe https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.10/ServiceMonitor.exe `
+    && curl -fSLo ServiceMonitor.exe https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v2.0.1.10/ServiceMonitor.exe `
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen update `
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 

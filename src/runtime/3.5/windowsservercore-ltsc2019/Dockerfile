@@ -5,20 +5,19 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019-amd64
 ENV COMPLUS_NGenProtectedProcess_FeatureEnabled=0
 
 RUN `
+    # Enable Windows Update service
+    sc config wuauserv start= auto `
     # Install .NET Fx 3.5
-    curl -fSLo microsoft-windows-netfx3.zip https://dotnetbinaries.blob.core.windows.net/dockerassets/microsoft-windows-netfx3-ltsc2019.zip `
-    && tar -zxf microsoft-windows-netfx3.zip `
-    && del /F /Q microsoft-windows-netfx3.zip `
-    && dism /Online /Quiet /Add-Package /PackagePath:.\microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
-    && del microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab `
-    && powershell Remove-Item -Force -Recurse ${Env:TEMP}\* `
+    && dism /Online /Enable-Feature /FeatureName:NetFx3 /All `
+    # Disable Windows Update service
+    && sc config wuauserv start= disabled `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049608-x64_1a94518425035b7c11ccd554c89ae09752db511c.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/03/windows10.0-kb5054695-x64_afdd257a714567eef1c721a9b16b04396d9975a0.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-KB5049608-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-KB5054695-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
