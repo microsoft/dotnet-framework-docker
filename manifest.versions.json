@@ -1,12 +1,12 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "KB5055521",
+      "kb|ltsc2016|3.5": "KB5053594",
       "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2025/03/windows10.0-kb5053594-x64_d126a8ab63952fdac4b4de0672f75fe453c884d2.msu",
-      "kb|ltsc2019|3.5": "KB5054695",
+      "kb|ltsc2019|3.5": "KB5049608",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049608-x64_1a94518425035b7c11ccd554c89ae09752db511c.msu",
-      "kb|ltsc2022|3.5": "KB5055169",
+      "kb|ltsc2022|3.5": "KB5049617",
       "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049617-x64-ndp48_5adfae2ccbb4743d93898ff35010c77daa8f130f.msu",
-      "kb|ltsc2025|3.5": "KB5054979",
+      "kb|ltsc2025|3.5": "KB5050577",
       "lcu|ltsc2025|3.5": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/6ce99b67-e730-4486-8380-935d60b274e7/public/windows11.0-kb5050577-x64-ndp481_587d1c1f9937f98d194e97ceff613dab9606f7f4.msu",
 
       // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
@@ -21,13 +21,13 @@
 
       "4.8-is-security-release": true,
       "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "KB5055170",
+      "kb|ltsc2016|4.8": "KB5049614",
       "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049614-x64-ndp48_6b669fcabe33be49d6f762019ad3c1c564148aff.msu",
-      "kb|ltsc2019|4.8": "KB5055175",
+      "kb|ltsc2019|4.8": "KB5049615",
       "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049615-x64-ndp48_17bbac9f33539f6515297a7e2183d20b3b165424.msu",
       "kb|ltsc2022|4.8": "$(kb|ltsc2022|3.5)",
       "lcu|ltsc2022|4.8": "$(lcu|ltsc2022|3.5)",
-      "kb|ltsc2022|4.8.1": "KB5054693",
+      "kb|ltsc2022|4.8.1": "KB5049625",
       "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5049625-x64-ndp481_cced48b8de758c3d5407c0fc62f198fca222c5b4.msu",
       "kb|ltsc2025|4.8.1": "$(kb|ltsc2025|3.5)",
       "lcu|ltsc2025|4.8.1": "$(lcu|ltsc2025|3.5)",
