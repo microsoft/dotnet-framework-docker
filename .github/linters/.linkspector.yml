@@ -7,6 +7,5 @@ dirs:
 excludedDirs:
   - eng/readme-templates
 ignorePatterns:
-  - pattern: "^https://dotnetbinaries.blob.core.windows.net/dockerassets"
-  - pattern: "^https://github.com/dotnet/release/blob/main/.github/ISSUE_TEMPLATE/dotnet-fx-docker-servicing-release.md"
+  - pattern: "^https://github.com/dotnet/release/.*$"
 useGitIgnore: true
