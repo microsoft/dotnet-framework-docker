@@ -6,7 +6,7 @@ name: "Labeler: Cache Retention"
 
 on:
   schedule:
-    - cron: "42 18 * * *" # 18:42 every day (arbitrary time daily)
+    - cron: "8 20 * * *" # 20:08 every day (arbitrary time daily)
 
   workflow_dispatch:
     inputs:
@@ -20,8 +20,8 @@ env:
 
 jobs:
   restore-cache:
-    # Do not automatically run the workflow on forks outside the 'dotnet' org
-    if: ${{ github.event_name == 'workflow_dispatch' || github.repository_owner == 'dotnet' }}
+    # Do not automatically run the workflow on forks outside the 'microsoft' org
+    if: ${{ github.event_name == 'workflow_dispatch' || github.repository_owner == 'microsoft' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
