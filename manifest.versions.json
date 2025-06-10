@@ -1,6 +1,6 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "KB5058383",
+      "kb|ltsc2016|3.5": "KB5061010",
       "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2025/05/windows10.0-kb5058383-x64_f2e34deb03d8284d2bc746589ec83fd20747edd0.msu",
       "kb|ltsc2019|3.5": "KB5054695",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/03/windows10.0-kb5054695-x64_afdd257a714567eef1c721a9b16b04396d9975a0.msu",
