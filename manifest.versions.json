@@ -1,7 +1,7 @@
 {
     "variables": {
-      "kb|ltsc2016|3.5": "KB5058383",
-      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2025/05/windows10.0-kb5058383-x64_f2e34deb03d8284d2bc746589ec83fd20747edd0.msu",
+      "kb|ltsc2016|3.5": "KB5061010",
+      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2025/06/windows10.0-kb5061010-x64_eecf3345e48b71c4bf16917e4ab18b6ae2ba3c7d.msu",
       "kb|ltsc2019|3.5": "KB5054695",
       "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/03/windows10.0-kb5054695-x64_afdd257a714567eef1c721a9b16b04396d9975a0.msu",
       "kb|ltsc2022|3.5": "KB5055169",
@@ -40,7 +40,7 @@
       "kb|ltsc2025|default": "$(kb|ltsc2025|4.8.1)",
       "lcu|ltsc2025|default": "$(lcu|ltsc2025|4.8.1)",
 
-      "nuget|version": "6.13.2",
+      "nuget|version": "6.14.0",
       "referenceassemblies|version": "1.0.3",
 
       "servicemonitor|version": "2.0.1.10",
