@@ -6,7 +6,7 @@
       "RuntimeReleaseDateStamp": "$(PreviousReleaseDateStamp)",
       "AspnetReleaseDateStamp": "$(PreviousReleaseDateStamp)",
       "WcfReleaseDateStamp": "$(PreviousReleaseDateStamp)",
-      "SdkReleaseDateStamp": "$(PreviousReleaseDateStamp)",
+      "SdkReleaseDateStamp": "$(CurrentReleaseDateStamp)",
 
       "ltsc2016-RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
       "ltsc2016-AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
