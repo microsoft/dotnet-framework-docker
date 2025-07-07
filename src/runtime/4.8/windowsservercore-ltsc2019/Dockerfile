@@ -19,7 +19,7 @@ RUN `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-KB5055175-x64-ndp48.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-KB5062068-x64-ndp48.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
