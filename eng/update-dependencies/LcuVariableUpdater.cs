@@ -11,12 +11,12 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies;
 /// Updates Latest Cumulative Update (LCU) download URLs variables by fetching
 /// the most recent update information from the Microsoft Update Catalog.
 /// </summary>
-internal sealed partial class LcuVariableUpdater : IVariableUpdater
+internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDisposable
 {
     private static readonly BrowserNewContextOptions s_newBrowserOptions = new() { Locale = "en-US" };
 
-    private Lazy<Task<IPlaywright>> _playwright;
-    private Lazy<Task<IBrowser>> _browser;
+    private readonly Lazy<Task<IPlaywright>> _playwright;
+    private readonly Lazy<Task<IBrowser>> _browser;
 
     public LcuVariableUpdater()
     {
@@ -104,6 +104,21 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater
         Console.WriteLine($"{kb} download URL: {url}");
 
         return url ?? "";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_browser.IsValueCreated)
+        {
+            var browser = await _browser.Value;
+            await browser.DisposeAsync();
+        }
+
+        if (_playwright.IsValueCreated)
+        {
+            var playwright = await _playwright.Value;
+            playwright.Dispose();
+        }
     }
 
     private static readonly PageGetByRoleOptions s_getDownloadLinkOptions = new()
