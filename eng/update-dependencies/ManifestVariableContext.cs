@@ -90,7 +90,7 @@ internal partial class ManifestVariableContext : IVariableContext
     {
         foreach (string variableName in AllVariables)
         {
-            if (variableUpdater.ShouldUpdate(variableName, this))
+            if (variableUpdater.ShouldUpdate(variableName, this) && !ReferencesOtherVariable(variableName))
             {
                 string newValue = await variableUpdater.GetNewValueAsync(variableName, this);
                 this[variableName] = newValue;
@@ -144,16 +144,18 @@ internal partial class ManifestVariableContext : IVariableContext
     }
 
     /// <summary>
-    /// Checks if a string is a variable reference of the format
-    /// $(variableName).
+    /// Tells whether or not the specified variable is a direct reference to
+    /// another variable.
     /// </summary>
+    /// <param name="key">Name of the variable to check.</param>
     /// <returns>
-    /// True if the string is a reference to another variable.
+    /// True if the variable references another variable, false if it doesn't
+    /// exist or has its own value.
     /// </returns>
-    public static bool IsVariable(string s)
+    private bool ReferencesOtherVariable(string key)
     {
-        // Check if the variable name matches the $(variableName) pattern
-        return VariableRegex.IsMatch(s);
+        string rawVariableValue = _variables[key]?.ToString() ?? "";
+        return VariableRegex.IsMatch(rawVariableValue);
     }
 
     /// <summary>

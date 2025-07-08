@@ -21,7 +21,6 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater
     public LcuVariableUpdater()
     {
         _playwright = new Lazy<Task<IPlaywright>>(Playwright.Playwright.CreateAsync);
-
         _browser = new(
             async () =>
             {
@@ -50,32 +49,26 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater
     /// <inheritdoc/>
     public async Task<string> GetNewValueAsync(string variableKey, IVariableContext variables)
     {
-        // If the value already references another variable, then don't
-        // overwrite it.
-        var oldValue = variables[variableKey];
-        if (ManifestVariableContext.IsVariable(oldValue))
-        {
-            return oldValue;
-        }
-
         string kbVariableName = variableKey.Replace("lcu|", "kb|");
         string kbNumber = variables[kbVariableName];
 
-        // Some windows versions require a more precise regex to match the
-        // correct LCU in on the update catalog page. By convention, the
-        // Windows version is the second part of the version name.
         var windowsVersion = variableKey.Split('|')[1];
-        var windowsVersionRegex = windowsVersion switch
-        {
-            "ltsc2022" => Server2022TableRowRegex,
-            _ => WindowsServerTableRowRegex
-        };
 
-        string kbDownloadUrl = await GetKbDownloadUrlAsync(kbNumber, windowsVersionRegex);
+        string kbDownloadUrl = await GetKbDownloadUrlAsync(kbNumber, windowsVersion);
         return kbDownloadUrl;
     }
 
-    private async Task<string> GetKbDownloadUrlAsync(string kb, Regex windowsVersionTableRowRegex)
+    /// <summary>
+    /// Fetches the download URL for a given KB number from the Microsoft
+    /// Update Catalog.
+    /// </summary>
+    /// <param name="kb">The KB article to get the URL for.</param>
+    /// <param name="windowsVersion">
+    /// The Windows version to get the download URL for, since KB articles can
+    /// have versions for different Windows versions.
+    /// </param>
+    /// <returns>KB article download URL</returns>
+    private async Task<string> GetKbDownloadUrlAsync(string kb, string windowsVersion)
     {
         var browser = await _browser.Value;
         var context = await browser.NewContextAsync(s_newBrowserOptions);
@@ -83,14 +76,20 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater
 
         await page.GotoAsync($"https://catalog.update.microsoft.com/Search.aspx?q={kb}");
 
+        // Some windows versions require a more precise regex to match the
+        // correct LCU in on the update catalog page. By convention, the
+        // Windows version is the second part of the version name.
+        var tableRowRegex = windowsVersion switch
+        {
+            "ltsc2022" => Server2022TableRowRegex,
+            _ => WindowsServerTableRowRegex
+        };
+
         var downloadPopUpPage = await page.RunAndWaitForPopupAsync(
             async () =>
             {
                 await page
-                    .GetByRole(
-                        AriaRole.Row,
-                        new PageGetByRoleOptions() { NameRegex = windowsVersionTableRowRegex, Exact = true }
-                    )
+                    .GetByRole(AriaRole.Row, new PageGetByRoleOptions() { NameRegex = tableRowRegex, Exact = true })
                     .GetByRole(AriaRole.Button)
                     .ClickAsync();
             }
