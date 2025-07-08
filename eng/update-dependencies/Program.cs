@@ -36,16 +36,12 @@ updateLcusCommand.SetAction(
         var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
         var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
 
-        await using var lcuUpdater = new LcuVariableUpdater();
-        try
+        await using (var lcuUpdater = new LcuVariableUpdater())
         {
             await manifestVersionsContext.ApplyAsync(lcuUpdater);
-            await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
         }
-        finally
-        {
-            await lcuUpdater.DisposeAsync();
-        }
+
+        await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
     }
 );
 
