@@ -163,6 +163,6 @@ internal partial class ManifestVariableContext : IVariableContext
     /// recursive resolution. Has one named group, "name" which captures the
     /// variable name inside the parentheses.
     /// </summary>
-    [GeneratedRegex(@"\$\((?<name>.*)\)")]
+    [GeneratedRegex(@"\$\((?<name>.*?)\)")]
     private static partial Regex VariableRegex { get; }
 }
