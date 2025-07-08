@@ -49,10 +49,16 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDispo
     /// <inheritdoc/>
     public async Task<string> GetNewValueAsync(string variableKey, IVariableContext variables)
     {
-        string kbVariableName = variableKey.Replace("lcu|", "kb|");
+        // Assuming that variableKey is in a format like "lcu|ltsc2019|4.8", we
+        // want to look at the variable "kb|ltsc2019|4.8".
+        string[] variableNameParts = variableKey.Split('|');
+        variableNameParts[0] = "kb";
+        string kbVariableName = string.Join('|', variableNameParts);
         string kbNumber = variables[kbVariableName];
 
-        var windowsVersion = variableKey.Split('|')[1];
+        // By convention, the second/middle part of the variable name contains
+        // the Windows version.
+        var windowsVersion = variableNameParts[1];
 
         string kbDownloadUrl = await GetKbDownloadUrlAsync(kbNumber, windowsVersion);
         return kbDownloadUrl;
@@ -65,7 +71,8 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDispo
     /// <param name="kb">The KB article to get the URL for.</param>
     /// <param name="windowsVersion">
     /// The Windows version to get the download URL for, since KB articles can
-    /// have versions for different Windows versions.
+    /// have versions for different Windows versions. It should be a string
+    /// like "ltsc2016", "ltsc2019", "ltsc2022" etc.
     /// </param>
     /// <returns>KB article download URL</returns>
     private async Task<string> GetKbDownloadUrlAsync(string kb, string windowsVersion)
