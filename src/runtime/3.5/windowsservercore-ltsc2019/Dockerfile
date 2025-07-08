@@ -13,11 +13,11 @@ RUN `
     && sc config wuauserv start= disabled `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/03/windows10.0-kb5054695-x64_afdd257a714567eef1c721a9b16b04396d9975a0.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/06/windows10.0-kb5062070-x64_73462c4700dd2c386548f3c61e79e60eef0eab92.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-KB5054695-x64.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows10.0-KB5062070-x64.cab `
     && rmdir /S /Q patch `
     `
     # ngen .NET Fx
