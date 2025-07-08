@@ -144,6 +144,19 @@ internal partial class ManifestVariableContext : IVariableContext
     }
 
     /// <summary>
+    /// Checks if a string is a variable reference of the format
+    /// $(variableName).
+    /// </summary>
+    /// <returns>
+    /// True if the string is a reference to another variable.
+    /// </returns>
+    public static bool IsVariable(string s)
+    {
+        // Check if the variable name matches the $(variableName) pattern
+        return VariableRegex.IsMatch(s);
+    }
+
+    /// <summary>
     /// Matches variable reference patterns in the format $(variableName) for
     /// recursive resolution. Has one named group, "name" which captures the
     /// variable name inside the parentheses.

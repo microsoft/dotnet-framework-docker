@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.RegularExpressions;
+using Microsoft.Playwright;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies;
 
@@ -12,6 +13,26 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies;
 /// </summary>
 internal sealed partial class LcuVariableUpdater : IVariableUpdater
 {
+    private static readonly BrowserNewContextOptions s_newBrowserOptions = new() { Locale = "en-US" };
+
+    private Lazy<Task<IPlaywright>> _playwright;
+    private Lazy<Task<IBrowser>> _browser;
+
+    public LcuVariableUpdater()
+    {
+        _playwright = new Lazy<Task<IPlaywright>>(Playwright.Playwright.CreateAsync);
+
+        _browser = new(
+            async () =>
+            {
+                var playwright = await _playwright.Value;
+                return await playwright.Chromium.LaunchAsync(
+                    new BrowserTypeLaunchOptions { Headless = true }
+                );
+            }
+        );
+    }
+
     /// <summary>
     /// Matches LCU variable names in the format "lcu|{version}|{framework}"
     /// where version contains digits and periods. Examples:
@@ -29,6 +50,74 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater
     /// <inheritdoc/>
     public async Task<string> GetNewValueAsync(string variableKey, IVariableContext variables)
     {
-        throw new NotImplementedException();
+        // If the value already references another variable, then don't
+        // overwrite it.
+        var oldValue = variables[variableKey];
+        if (ManifestVariableContext.IsVariable(oldValue))
+        {
+            return oldValue;
+        }
+
+        string kbVariableName = variableKey.Replace("lcu|", "kb|");
+        string kbNumber = variables[kbVariableName];
+
+        // Some windows versions require a more precise regex to match the
+        // correct LCU in on the update catalog page. By convention, the
+        // Windows version is the second part of the version name.
+        var windowsVersion = variableKey.Split('|')[1];
+        var windowsVersionRegex = windowsVersion switch
+        {
+            "ltsc2022" => Server2022TableRowRegex,
+            _ => WindowsServerTableRowRegex
+        };
+
+        string kbDownloadUrl = await GetKbDownloadUrlAsync(kbNumber, windowsVersionRegex);
+        return kbDownloadUrl;
     }
+
+    private async Task<string> GetKbDownloadUrlAsync(string kb, Regex windowsVersionTableRowRegex)
+    {
+        var browser = await _browser.Value;
+        var context = await browser.NewContextAsync(s_newBrowserOptions);
+        var page = await context.NewPageAsync();
+
+        await page.GotoAsync($"https://catalog.update.microsoft.com/Search.aspx?q={kb}");
+
+        var downloadPopUpPage = await page.RunAndWaitForPopupAsync(
+            async () =>
+            {
+                await page
+                    .GetByRole(
+                        AriaRole.Row,
+                        new PageGetByRoleOptions() { NameRegex = windowsVersionTableRowRegex, Exact = true }
+                    )
+                    .GetByRole(AriaRole.Button)
+                    .ClickAsync();
+            }
+        );
+
+        var url = await downloadPopUpPage
+            .GetByRole(AriaRole.Link, s_getDownloadLinkOptions)
+            .GetAttributeAsync("href");
+
+        await context.CloseAsync();
+
+        Console.WriteLine($"{kb} download URL: {url}");
+
+        return url ?? "";
+    }
+
+    private static readonly PageGetByRoleOptions s_getDownloadLinkOptions = new()
+    {
+        NameRegex = DownloadLinkRegex,
+    };
+
+    [GeneratedRegex(@"^windows.*\.msu$")]
+    private static partial Regex DownloadLinkRegex { get; }
+
+    [GeneratedRegex(@"server.*x64", RegexOptions.IgnoreCase, "en-US")]
+    private static partial Regex WindowsServerTableRowRegex { get; }
+
+    [GeneratedRegex(@"server.*21H2.*x64", RegexOptions.IgnoreCase, "en-US")]
+    private static partial Regex Server2022TableRowRegex { get; }
 }
