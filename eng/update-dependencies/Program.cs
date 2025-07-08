@@ -2,47 +2,45 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using Microsoft.DotNet.Framework.UpdateDependencies;
 using System.CommandLine;
-using System.CommandLine.Invocation;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Framework.UpdateDependencies
+// Command-line tool for updating dependency variables in .NET Framework Docker
+// manifest files.
+//
+// Usage: dotnet run -- --help
+
+var manifestFileOption = new Argument<string>("manifest file path")
 {
-    public static class Program
+    DefaultValueFactory = _ => "manifest.versions.json",
+};
+
+var updateLcusCommand = new Command(
+    name: "update-lcus",
+    description: "Update all LCU variables in the specified manifest file.")
+{
+    manifestFileOption
+};
+
+var rootCommand = new RootCommand() { updateLcusCommand };
+
+updateLcusCommand.SetAction(
+    async parseResult =>
     {
-        public static string RepoRoot { get; } = Directory.GetCurrentDirectory();
+        string manifestFilePath = parseResult.GetValue(manifestFileOption) ??
+            throw new ArgumentException("Manifest file path is required.");
 
-        public static Task Main(string[] args)
+        var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
+        var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
+
+        List<IVariableUpdater> variableUpdaters = [new LcuVariableUpdater()];
+        foreach (var updater in variableUpdaters)
         {
-            RootCommand command = new RootCommand();
-            foreach (Symbol symbol in Options.GetCliSymbols())
-            {
-                command.Add(symbol);
-            };
-
-            command.Handler = CommandHandler.Create<Options>(ExecuteAsync);
-
-            return command.InvokeAsync(args);
+            manifestVersionsContext.Apply(updater);
         }
 
-        private static async Task ExecuteAsync(Options options)
-        {
-            try
-            {
-                Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-
-                await new DependencyUpdater(options).ExecuteAsync();
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine($"Failed to update dependencies:{Environment.NewLine}{e.ToString()}");
-                Environment.Exit(1);
-            }
-
-            Environment.Exit(0);
-        }
+        await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
     }
-}
+);
+
+return rootCommand.Parse(args).Invoke();
