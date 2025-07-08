@@ -86,13 +86,13 @@ internal partial class ManifestVariableContext : IVariableContext
     /// The updater that defines which variables to modify and calculates their
     /// new values.
     /// </param>
-    public void Apply(IVariableUpdater variableUpdater)
+    public async Task ApplyAsync(IVariableUpdater variableUpdater)
     {
         foreach (string variableName in AllVariables)
         {
             if (variableUpdater.ShouldUpdate(variableName, this))
             {
-                string newValue = variableUpdater.GetNewValue(variableName, this);
+                string newValue = await variableUpdater.GetNewValueAsync(variableName, this);
                 this[variableName] = newValue;
             }
         }

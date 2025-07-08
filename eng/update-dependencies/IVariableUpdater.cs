@@ -36,5 +36,5 @@ internal interface IVariableUpdater
     /// <returns>
     /// The new value that should be assigned to the variable.
     /// </returns>
-    string GetNewValue(string variableKey, IVariableContext variables);
+    Task<string> GetNewValueAsync(string variableKey, IVariableContext variables);
 }

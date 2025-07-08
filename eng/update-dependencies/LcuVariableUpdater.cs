@@ -27,7 +27,7 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater
     }
 
     /// <inheritdoc/>
-    public string GetNewValue(string variableKey, IVariableContext variables)
+    public async Task<string> GetNewValueAsync(string variableKey, IVariableContext variables)
     {
         throw new NotImplementedException();
     }

@@ -8,6 +8,9 @@ using System.CommandLine;
 // Command-line tool for updating dependency variables in .NET Framework Docker
 // manifest files.
 //
+// Before running, you may need to build the app and then run:
+// pwsh bin/Debug/net*/playwright.ps1 install
+//
 // Usage: dotnet run -- --help
 
 var manifestFileOption = new Argument<string>("manifest file path")
@@ -36,7 +39,7 @@ updateLcusCommand.SetAction(
         List<IVariableUpdater> variableUpdaters = [new LcuVariableUpdater()];
         foreach (var updater in variableUpdaters)
         {
-            manifestVersionsContext.Apply(updater);
+            await manifestVersionsContext.ApplyAsync(updater);
         }
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
