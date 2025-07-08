@@ -37,7 +37,7 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDispo
     /// where version contains digits and periods. Examples:
     /// "lcu|ltsc2019|4.8", "lcu|ltsc2022|3.5".
     /// </summary>
-    [GeneratedRegex(@"lcu\|.*\|\d+(\.\d+)+?")]
+    [GeneratedRegex(@"lcu\|[^|]+\|\d+(\.\d+)+?")]
     private partial Regex LcuVariablePattern { get; }
 
     /// <inheritdoc/>
