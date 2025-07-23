@@ -1,59 +1,22 @@
 {
-    "variables": {
-      "kb|ltsc2016|3.5": "KB5065427",
-      "lcu|ltsc2016|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2025/09/windows10.0-kb5065427-x64_b341c6fc803e28fc7257524e5f5de44551766bcf.msu",
-      "kb|ltsc2019|3.5": "KB5065744",
-      "lcu|ltsc2019|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065744-x64_d4daa3834e9c78ada62fa139bcf156ec63728eaa.msu",
-      "kb|ltsc2022|3.5": "KB5065748",
-      "lcu|ltsc2022|3.5": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065748-x64-ndp48_594caaa5fc001f8968a575759286cbc987760ff5.msu",
-      "kb|ltsc2025|3.5": "KB5064401",
-      "lcu|ltsc2025|3.5": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/e7d2c572-7ce6-4df1-b2c9-0b341f438299/public/windows11.0-kb5064401-x64-ndp481_03d42dc42df2db6f1812c2fa3d768780c079a843.msu",
-
-      // All of these versions are patched by the same corresponding KB labeled as 3.5 above.
-      "kb|ltsc2016|4.7.2": "$(kb|ltsc2016|3.5)",
-      "lcu|ltsc2016|4.7.2": "$(lcu|ltsc2016|3.5)",
-      "kb|ltsc2016|4.7.1": "$(kb|ltsc2016|3.5)",
-      "lcu|ltsc2016|4.7.1": "$(lcu|ltsc2016|3.5)",
-      "kb|ltsc2016|4.7": "$(kb|ltsc2016|3.5)",
-      "lcu|ltsc2016|4.7": "$(lcu|ltsc2016|3.5)",
-      "kb|ltsc2019|4.7.2": "$(kb|ltsc2019|3.5)",
-      "lcu|ltsc2019|4.7.2": "$(lcu|ltsc2019|3.5)",
-
-      "4.8-is-security-release": true,
-      "4.8-is-security-release|ltsc2022": "$(4.8-is-security-release)",
-      "kb|ltsc2016|4.8": "KB5065749",
-      "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065749-x64-ndp48_ed97d60cc8a54f8686064ad25ff578f734b21f98.msu",
-      "kb|ltsc2019|4.8": "KB5065755",
-      "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065755-x64-ndp48_e2eca38cf55b429c435d3fe98e4742c6e52bfd00.msu",
-      "kb|ltsc2022|4.8": "$(kb|ltsc2022|3.5)",
-      "lcu|ltsc2022|4.8": "$(lcu|ltsc2022|3.5)",
-      "kb|ltsc2022|4.8.1": "KB5065753",
-      "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065753-x64-ndp481_1e27c546762083659a59800379a6730b2bde4bc7.msu",
-      "kb|ltsc2025|4.8.1": "$(kb|ltsc2025|3.5)",
-      "lcu|ltsc2025|4.8.1": "$(lcu|ltsc2025|3.5)",
-
-      // Defines the patch info for the default .NET Fx version installed in the OS
-      "kb|ltsc2019|default": "$(kb|ltsc2019|4.7.2)",
-      "lcu|ltsc2019|default": "$(lcu|ltsc2019|4.7.2)",
-      "kb|ltsc2022|default": "$(kb|ltsc2022|4.8)",
-      "lcu|ltsc2022|default": "$(lcu|ltsc2022|4.8)",
-      "kb|ltsc2025|default": "$(kb|ltsc2025|4.8.1)",
-      "lcu|ltsc2025|default": "$(lcu|ltsc2025|4.8.1)",
-
-      "nuget|version": "6.14.0",
-      "referenceassemblies|version": "1.0.3",
-
-      "servicemonitor|version": "2.0.1.10",
-      "servicemonitor|url": "https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v$(servicemonitor|version)/ServiceMonitor.exe",
-
-      "vs|version": "17.14",
-      "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
-      "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
-
-      "4.7|url": "https://download.visualstudio.microsoft.com/download/pr/2dfcc711-bb60-421a-a17b-76c63f8d1907/e5c0231bd5d51fffe65f8ed7516de46a/ndp47-kb3186497-x86-x64-allos-enu.exe",
-      "4.7.1|url": "https://download.visualstudio.microsoft.com/download/pr/4312fa21-59b0-4451-9482-a1376f7f3ba4/9947fce13c11105b48cba170494e787f/ndp471-kb4033342-x86-x64-allos-enu.exe",
-      "4.7.2|url": "https://download.visualstudio.microsoft.com/download/pr/1f5af042-d0e4-4002-9c59-9ba66bcf15f6/089f837de42708daacaae7c04b7494db/ndp472-kb4054530-x86-x64-allos-enu.exe",
-      "4.8|url": "https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe",
-      "4.8.1|url": "https://download.visualstudio.microsoft.com/download/pr/6f083c7e-bd40-44d4-9e3f-ffba71ec8b09/3951fd5af6098f2c7e8ff5c331a0679c/ndp481-x86-x64-allos-enu.exe"
-    }
+  "variables": {
+    "4.8-is-security-release": true,
+    "kb|ltsc2016|4.8": "KB5065749",
+    "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065749-x64-ndp48_ed97d60cc8a54f8686064ad25ff578f734b21f98.msu",
+    "kb|ltsc2019|4.8": "KB5065755",
+    "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065755-x64-ndp48_e2eca38cf55b429c435d3fe98e4742c6e52bfd00.msu",
+    "kb|ltsc2022|4.8.1": "KB5065753",
+    "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065753-x64-ndp481_1e27c546762083659a59800379a6730b2bde4bc7.msu",
+    "kb|ltsc2025|4.8.1": "KB5064401",
+    "lcu|ltsc2025|4.8.1": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/e7d2c572-7ce6-4df1-b2c9-0b341f438299/public/windows11.0-kb5064401-x64-ndp481_03d42dc42df2db6f1812c2fa3d768780c079a843.msu",
+    "nuget|version": "6.14.0",
+    "referenceassemblies|version": "1.0.3",
+    "servicemonitor|version": "2.0.1.10",
+    "servicemonitor|url": "https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v$(servicemonitor|version)/ServiceMonitor.exe",
+    "vs|version": "17.14",
+    "vs|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
+    "vs|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
+    "4.8|url": "https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe",
+    "4.8.1|url": "https://download.visualstudio.microsoft.com/download/pr/6f083c7e-bd40-44d4-9e3f-ffba71ec8b09/3951fd5af6098f2c7e8ff5c331a0679c/ndp481-x86-x64-allos-enu.exe"
+  }
 }
