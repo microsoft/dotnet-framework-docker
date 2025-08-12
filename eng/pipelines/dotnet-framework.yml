@@ -3,7 +3,7 @@ pr: none
 
 resources:
   repositories:
-  - repository: InternalVersionsRepo
+  - repository: VersionsRepo
     type: github
     endpoint: dotnet
     name: dotnet/versions
@@ -42,6 +42,7 @@ extends:
       parameters:
         internalProjectName: ${{ variables.internalProjectName }}
         publicProjectName: ${{ variables.publicProjectName }}
+        versionsRepoRef: VersionsRepo
         sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
         windowsAmdBuildJobTimeout: 240
         windowsAmdTestJobTimeout: 90

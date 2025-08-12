@@ -10,7 +10,7 @@ pr:
 
 resources:
   repositories:
-  - repository: PublicVersionsRepo
+  - repository: VersionsRepo
     type: github
     endpoint: public
     name: dotnet/versions
@@ -25,6 +25,7 @@ stages:
   parameters:
     internalProjectName: ${{ variables.internalProjectName }}
     publicProjectName: ${{ variables.publicProjectName }}
+    versionsRepoRef: VersionsRepo
     buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
     windowsAmdBuildJobTimeout: 330
     noCache: true
