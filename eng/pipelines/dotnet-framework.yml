@@ -22,6 +22,7 @@ variables:
 - template: /eng/pipelines/variables/common.yml@self
   parameters:
     sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
+- template: /eng/common/templates/variables/dotnet/secrets.yml@self
 - name: manifest
   value: manifest.json
 - name: mcrImageIngestionTimeout
