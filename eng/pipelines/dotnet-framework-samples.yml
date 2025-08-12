@@ -3,7 +3,7 @@ pr: none
 
 resources:
   repositories:
-  - repository: InternalVersionsRepo
+  - repository: VersionsRepo
     type: github
     endpoint: dotnet
     name: dotnet/versions
@@ -42,5 +42,6 @@ extends:
       parameters:
         internalProjectName: ${{ variables.internalProjectName }}
         publicProjectName: ${{ variables.publicProjectName }}
+        versionsRepoRef: VersionsRepo
         ${{ if eq(variables['System.TeamProject'], 'public') }}:
           buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
