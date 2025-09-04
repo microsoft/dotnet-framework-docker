@@ -39,6 +39,9 @@ stages:
 
 - template: /eng/common/templates/stages/dotnet/build-test-publish-repo.yml@self
   parameters:
+    publishConfig: ${{ parameters.publishConfig }}
+    internalProjectName: ${{ parameters.internalProjectName }}
+    publicProjectName: ${{ parameters.publicProjectName }}
     versionsRepoRef: ${{ parameters.versionsRepoRef }}
     sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
     noCache: ${{ parameters.noCache }}
