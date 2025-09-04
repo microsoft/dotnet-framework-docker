@@ -1,6 +1,13 @@
 trigger: none
 pr: none
 
+resources:
+  repositories:
+  - repository: VersionsRepo
+    type: github
+    endpoint: dotnet
+    name: dotnet/versions
+
 parameters:
 - name: sourceBuildPipelineRunId
   displayName: >
@@ -26,13 +33,6 @@ variables:
   value: manifest.json
 - name: mcrImageIngestionTimeout
   value: "00:30:00"
-
-resources:
-  repositories:
-  - repository: VersionsRepo
-    type: github
-    endpoint: dotnet
-    name: dotnet/versions
 
 extends:
   template: /eng/common/templates/1es.yml@self
