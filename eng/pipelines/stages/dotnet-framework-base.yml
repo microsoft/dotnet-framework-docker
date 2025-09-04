@@ -1,0 +1,46 @@
+parameters:
+- name: publishConfig
+  type: object
+- name: internalProjectName
+  type: string
+- name: publicProjectName
+  type: string
+
+- name: sourceBuildPipelineRunId
+  type: string
+  default: $(Build.BuildId)
+- name: versionsRepoRef
+  type: string
+  default: ""
+- name: noCache
+  type: boolean
+  default: false
+- name: windowsAmdBuildJobTimeout
+  default: 240
+- name: windowsAmdTestJobTimeout
+  default: 90
+# Additional service connections needed by this pipeline that are not included
+# in the publishConfig.
+- name: additionalServiceConnections
+  type: object
+  default: []
+
+
+stages:
+- ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+  - template: /eng/common/templates/stages/setup-service-connections.yml@self
+    parameters:
+      serviceConnections:
+      - name: ${{ parameters.publishConfig.internalMirrorAcr.serviceConnection.name }}
+      - name: ${{ parameters.publishConfig.buildAcr.serviceConnection.name }}
+      - name: ${{ parameters.publishConfig.publishAcr.serviceConnection.name }}
+      - ${{ each serviceConnection in parameters.additionalServiceConnections }}:
+        - name: ${{ serviceConnection.name }}
+
+- template: /eng/common/templates/stages/dotnet/build-test-publish-repo.yml@self
+  parameters:
+    versionsRepoRef: ${{ parameters.versionsRepoRef }}
+    sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
+    noCache: ${{ parameters.noCache }}
+    windowsAmdBuildJobTimeout: ${{ parameters.windowsAmdBuildJobTimeout }}
+    windowsAmdTestJobTimeout: ${{ parameters.windowsAmdTestJobTimeout }}
