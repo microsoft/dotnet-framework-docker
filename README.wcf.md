@@ -43,7 +43,7 @@ docker run --name wcfclientsample --rm -it -e HOST=172.26.236.119 mcr.microsoft.
 ### Version Compatibility
 
 If you created your app using an earlier version of .NET Framework, you can generally upgrade it to .NET Framework 4.8+ easily.
-Additionally, .NET Framework 4.8 and 4.8.1 can typically run apps that were built targeting any version of .NET Framework 4.
+Additionally, .NET Framework 4.8 and 4.8.1 can run apps that were built targeting any version of .NET Framework 4.
 
 * [.NET Framework migration guide](https://learn.microsoft.com/en-us/dotnet/framework/migration-guide/)
 * [Application compatibility in .NET Framework](https://learn.microsoft.com/dotnet/framework/migration-guide/application-compatibility).
