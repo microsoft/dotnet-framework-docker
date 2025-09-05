@@ -1,16 +1,15 @@
 {
     "variables": {
-      "7BReleaseDateStamp": "20250708",
-      "8BReleaseDateStamp": "20250812",
+      "9BReleaseDateStamp": "20250909",
 
-      "RuntimeReleaseDateStamp": "$(7BReleaseDateStamp)",
-      "AspnetReleaseDateStamp": "$(7BReleaseDateStamp)",
-      "WcfReleaseDateStamp": "$(7BReleaseDateStamp)",
-      "SdkReleaseDateStamp": "$(7BReleaseDateStamp)",
-      "ltsc2016-RuntimeReleaseDateStamp": "$(8BReleaseDateStamp)",
-      "ltsc2016-AspnetReleaseDateStamp": "$(8BReleaseDateStamp)",
-      "ltsc2016-WcfReleaseDateStamp": "$(8BReleaseDateStamp)",
-      "ltsc2016-SdkReleaseDateStamp": "$(8BReleaseDateStamp)",
+      "RuntimeReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "AspnetReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "WcfReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "SdkReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "ltsc2016-RuntimeReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "ltsc2016-AspnetReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "ltsc2016-WcfReleaseDateStamp": "$(9BReleaseDateStamp)",
+      "ltsc2016-SdkReleaseDateStamp": "$(9BReleaseDateStamp)",
 
       "3.5-ltsc2016-Runtime-DateStamp": "$(ltsc2016-RuntimeReleaseDateStamp)",
       "3.5-ltsc2016-Aspnet-DateStamp": "$(ltsc2016-AspnetReleaseDateStamp)",
