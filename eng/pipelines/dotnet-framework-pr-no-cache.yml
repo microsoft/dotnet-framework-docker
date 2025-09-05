@@ -20,6 +20,7 @@ variables:
 - name: manifest
   value: manifest.json
 
+stages:
 - template: /eng/common/templates/stages/dotnet/publish-config-nonprod.yml@self
   parameters:
     stagesTemplate: /eng/pipelines/stages/dotnet-framework-base.yml@self
