@@ -1,0 +1,55 @@
+parameters:
+- name: publishConfig
+  type: object
+- name: internalProjectName
+  type: string
+- name: publicProjectName
+  type: string
+
+- name: sourceBuildPipelineRunId
+  type: string
+  default: $(Build.BuildId)
+- name: versionsRepoRef
+  type: string
+  default: ""
+- name: noCache
+  type: boolean
+  default: false
+# Additional service connections needed by this pipeline that are not included
+# in the publishConfig.
+- name: additionalServiceConnections
+  type: object
+  default: []
+
+
+stages:
+- ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+  - template: /eng/common/templates/stages/setup-service-connections.yml@self
+    parameters:
+      serviceConnections:
+      - name: ${{ parameters.publishConfig.internalMirrorAcr.serviceConnection.name }}
+      - name: ${{ parameters.publishConfig.buildAcr.serviceConnection.name }}
+      - name: ${{ parameters.publishConfig.publishAcr.serviceConnection.name }}
+      - ${{ each serviceConnection in parameters.additionalServiceConnections }}:
+        - name: ${{ serviceConnection.name }}
+
+- template: /eng/common/templates/stages/dotnet/build-test-publish-repo.yml@self
+  parameters:
+    publishConfig: ${{ parameters.publishConfig }}
+    internalProjectName: ${{ parameters.internalProjectName }}
+    publicProjectName: ${{ parameters.publicProjectName }}
+    versionsRepoRef: ${{ parameters.versionsRepoRef }}
+    sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
+    noCache: ${{ parameters.noCache }}
+
+    ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+      windowsAmdBuildJobTimeout: 330
+    ${{ else }}:
+      windowsAmdBuildJobTimeout: 240
+    windowsAmdTestJobTimeout: 90
+
+    ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+      buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
+
+    ${{ if eq(variables['System.TeamProject'], variables.publicProjectName) }}:
+      buildMatrixType: platformVersionedOs
