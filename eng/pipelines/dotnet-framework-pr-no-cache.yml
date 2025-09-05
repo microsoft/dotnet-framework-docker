@@ -16,18 +16,13 @@ resources:
     name: dotnet/versions
 
 variables:
-- template: variables/common.yml
+- template: /eng/pipelines/variables/common.yml@self
 - name: manifest
   value: manifest.json
 
-stages:
-- template: ../common/templates/stages/dotnet/build-test-publish-repo.yml
+- template: /eng/common/templates/stages/dotnet/publish-config-nonprod.yml@self
   parameters:
-    internalProjectName: ${{ variables.internalProjectName }}
-    publicProjectName: ${{ variables.publicProjectName }}
-    versionsRepoRef: VersionsRepo
-    buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build
-    windowsAmdBuildJobTimeout: 330
-    noCache: true
-    ${{ if eq(variables['System.TeamProject'], variables.publicProjectName) }}:
-      buildMatrixType: platformVersionedOs
+    stagesTemplate: /eng/pipelines/stages/dotnet-framework-base.yml@self
+    stagesTemplateParameters:
+      versionsRepoRef: VersionsRepo
+      noCache: true
