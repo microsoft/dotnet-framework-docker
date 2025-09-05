@@ -3,7 +3,7 @@ pr: none
 
 resources:
   repositories:
-  - repository: InternalVersionsRepo
+  - repository: VersionsRepo
     type: github
     endpoint: dotnet
     name: dotnet/versions
@@ -22,6 +22,7 @@ variables:
 - template: /eng/pipelines/variables/common.yml@self
   parameters:
     sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
+- template: /eng/common/templates/variables/dotnet/secrets.yml@self
 - name: manifest
   value: manifest.samples.json
 - name: imageInfoVariant
@@ -41,5 +42,6 @@ extends:
       parameters:
         internalProjectName: ${{ variables.internalProjectName }}
         publicProjectName: ${{ variables.publicProjectName }}
+        versionsRepoRef: VersionsRepo
         ${{ if eq(variables['System.TeamProject'], 'public') }}:
           buildMatrixCustomBuildLegGroupArgs: --custom-build-leg-group pr-build

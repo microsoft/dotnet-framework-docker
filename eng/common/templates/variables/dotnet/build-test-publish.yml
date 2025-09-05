@@ -1,16 +1,7 @@
 # Common variables for building/testing/publishing in the .NET team's pipelines
-parameters:
-# sourceBuildPipelineRunId should be overridden when skipping a build to run
-# tests or publish images that were produced in a different pipeline run.
-# Defaults to $(Build.BuildId) which refers to the current pipeline run.
-- name: sourceBuildPipelineRunId
-  type: string
-  default: ""
 
 variables:
 - template: /eng/common/templates/variables/dotnet/common.yml@self
-  parameters:
-    sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
 
 - name: commonVersionsImageInfoPath
   value: build-info/docker
@@ -20,14 +11,11 @@ variables:
   value: ./tests/run-tests.ps1
 - name: testResultsDirectory
   value: tests/Microsoft.DotNet.Docker.Tests/TestResults/
+
 - name: officialRepoPrefixes
   value: public/,internal/private/,unlisted/
+  readonly: true
 
-- name: mcrDocsRepoInfo.authArgs
-  value: >-
-    --gh-private-key '$(GitHubApp-NET-Docker-MAR-Docs-Updater-PrivateKey)'
-    --gh-app-client-id '$(gitHubApp.marDocsUpdater.clientId)'
-    --gh-app-installation-id '$(gitHubApp.marDocsUpdater.microsoft.installationId)'
 - name: mcrDocsRepoInfo.userName
   value: $(gitHubApp.marDocsUpdater.userName)
 - name: mcrDocsRepoInfo.email
@@ -39,8 +27,12 @@ variables:
   value: dotnet
 - name: gitHubNotificationsRepoInfo.repo
   value: dotnet-docker-internal
+# $(gitHubNotificationsRepoInfo.authArgs) is needed by the "Post Publish
+# Notification" step in eng/common/templates/jobs/publish.yml#L271, even during
+# a dry-run. This value is a placeholder that gets replaced when referencing
+# the secrets.yml variable template.
 - name: gitHubNotificationsRepoInfo.authArgs
-  value: --gh-token '$(BotAccount-dotnet-docker-bot-PAT)'
+  value: --gh-token 'placeholder'
 
 - name: gitHubVersionsRepoInfo.org
   value: dotnet
@@ -50,8 +42,6 @@ variables:
   value: main
 - name: gitHubVersionsRepoInfo.path
   value: ${{ variables.commonVersionsImageInfoPath }}
-- name: gitHubVersionsRepoInfo.authArgs
-  value: --gh-token '$(BotAccount-dotnet-docker-bot-PAT)'
 - name: gitHubVersionsRepoInfo.userName
   value: $(dotnetDockerBot.userName)
 - name: gitHubVersionsRepoInfo.email

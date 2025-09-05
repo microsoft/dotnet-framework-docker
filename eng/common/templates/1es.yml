@@ -7,25 +7,25 @@
 #
 # If the pipeline is not using a separate repository resource, ensure that there is no source code checked out in
 # `$(Build.SourcesDirectory)/versions`, as it will not be scanned.
-#
-# The `cgDryRun` parameter will run CG but not submit the results, for testing purposes.
 
 parameters:
-- name: cgDryRun
-  type: boolean
-  default: false
 - name: stages
   type: stageList
   default: []
-- name: serviceConnections
+# List of repositories that will be excluded from SDL scanning. This should
+# only be used when including other repos without building their source code.
+# E.g. for the dotnet/versions repo.
+- name: reposToExcludeFromScanning
   type: object
   default: []
+# The pool that will be used for initializing service connections.
 - name: pool
   type: object
   default:
     name: $(default1ESInternalPoolName)
     image: $(default1ESInternalPoolImage)
     os: linux
+# The pool that will be used for SDL jobs.
 - name: sourceAnalysisPool
   type: object
   default:
@@ -43,28 +43,28 @@ resources:
 extends:
   template: /eng/common/templates/task-prefix-decorator.yml@self
   parameters:
-    baseTemplate: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+    baseTemplate: v1/1ES.${{ iif(contains(variables['Build.DefinitionName'], '-official'), 'Official', 'Unofficial') }}.PipelineTemplate.yml@1ESPipelineTemplates
     templateParameters:
       pool: ${{ parameters.pool }}
       sdl:
+        # Required for unofficial pipelines because we rely on the ManifestGeneratorTask that is
+        # automatically installed by 1ES pipeline templates
+        sbom:
+          enabled: true
         binskim:
           enabled: true
         componentgovernance:
           ignoreDirectories: $(Build.SourcesDirectory)/versions
-          whatIf: ${{ parameters.cgDryRun }}
           showAlertLink: true
         policheck:
           enabled: true
-        sourceRepositoriesToScan:
-          exclude:
-          - repository: VersionsRepo
+        ${{ if ne(length(parameters.reposToExcludeFromScanning), 0) }}:
+          sourceRepositoriesToScan:
+            exclude:
+            - ${{ each repo in parameters.reposToExcludeFromScanning }}:
+              - repository: ${{ repo }}
         sourceAnalysisPool: ${{ parameters.sourceAnalysisPool }}
         tsa:
           enabled: true
     stages:
-    - ${{ if gt(length(parameters.serviceConnections), 0) }}:
-      - template: /eng/common/templates/stages/setup-service-connections.yml@self
-        parameters:
-          pool: ${{ parameters.pool }}
-          serviceConnections: ${{ parameters.serviceConnections }}
     - ${{ parameters.stages }}

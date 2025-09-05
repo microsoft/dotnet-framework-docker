@@ -6,6 +6,10 @@
 parameters:
 - name: pool
   type: object
+  default:
+    name: $(default1ESInternalPoolName)
+    image: $(default1ESInternalPoolImage)
+    os: linux
 # serviceConnections object shape:
 # - name: string
 - name: serviceConnections
@@ -22,7 +26,7 @@ stages:
     displayName: Setup service connections
     pool: ${{ parameters.pool }}
     steps:
-
+    - checkout: none
     - ${{ each serviceConnection in parameters.serviceConnections }}:
       - task: AzureCLI@2
         displayName: Setup ${{ serviceConnection.name }}
