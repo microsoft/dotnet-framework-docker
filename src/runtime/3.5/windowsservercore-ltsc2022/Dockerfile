@@ -12,7 +12,7 @@ RUN `
     dism /Online /Add-Capability /CapabilityName:NetFx3 `
     `
     # Apply latest 3.5 patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/06/windows10.0-kb5062063-x64-ndp48_72cc83da771f25d2ec68a4565fe7711e99e47d19.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065748-x64-ndp48_594caaa5fc001f8968a575759286cbc987760ff5.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `

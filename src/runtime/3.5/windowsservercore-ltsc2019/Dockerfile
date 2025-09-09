@@ -13,7 +13,7 @@ RUN `
     && sc config wuauserv start= disabled `
     `
     # Apply latest patch
-    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2025/06/windows10.0-kb5062070-x64_73462c4700dd2c386548f3c61e79e60eef0eab92.msu `
+    && curl -fSLo patch.msu https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065744-x64_d4daa3834e9c78ada62fa139bcf156ec63728eaa.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
