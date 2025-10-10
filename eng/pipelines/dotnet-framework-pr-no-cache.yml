@@ -20,7 +20,7 @@ variables:
 - name: manifest
   value: manifest.json
 - name: imageBuilder.pathArgs
-  value: "*"
+  value: ""
   readonly: true
 
 stages:
