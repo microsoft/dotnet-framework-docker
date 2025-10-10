@@ -19,6 +19,9 @@ variables:
 - template: /eng/pipelines/variables/common.yml@self
 - name: manifest
   value: manifest.json
+- name: imageBuilder.pathArgs
+  value: "*"
+  readonly: true
 
 stages:
 - template: /eng/common/templates/stages/dotnet/publish-config-nonprod.yml@self
