@@ -24,7 +24,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected override string ImageType => "sdk";
 
         public static IEnumerable<object[]> GetImageData() =>
-            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Sdk, allowEmptyResults: true);
+            ImageTestHelper.ApplyImageDataFilters(TestData.ImageData, ImageTypes.Sdk, allowEmptyResults: true);
 
         private static bool IsSkippable(ImageDescriptor imageDescriptor) =>
             imageDescriptor is null ||

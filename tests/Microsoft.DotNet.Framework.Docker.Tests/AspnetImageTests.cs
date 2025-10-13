@@ -19,7 +19,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected override string ImageType => ImageTypes.Aspnet;
 
         public static IEnumerable<object[]> GetImageData() =>
-            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Aspnet);
+            ImageTestHelper.ApplyImageDataFilters(TestData.ImageData, ImageTypes.Aspnet);
 
         [Theory]
         [MemberData(nameof(GetImageData))]

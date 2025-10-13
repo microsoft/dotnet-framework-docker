@@ -19,7 +19,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected override string ImageType => ImageTypes.Runtime;
 
         public static IEnumerable<object[]> GetImageData() =>
-            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Runtime);
+            ImageTestHelper.ApplyImageDataFilters(TestData.ImageData, ImageTypes.Runtime);
 
         [Theory]
         [MemberData(nameof(GetImageData))]
