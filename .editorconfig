@@ -12,7 +12,7 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 
-[project.json]
+[*.json]
 indent_size = 2
 
 # C# files

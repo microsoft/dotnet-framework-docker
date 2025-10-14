@@ -19,7 +19,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         protected override string ImageType => ImageTypes.Wcf;
 
         public static IEnumerable<object[]> GetImageData() =>
-            ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Wcf, allowEmptyResults: true);
+            ImageTestHelper.ApplyImageDataFilters(TestData.ImageData, ImageTypes.Wcf, allowEmptyResults: true);
 
         private static bool IsSkippable(ImageDescriptor imageDescriptor) =>
             imageDescriptor is null || imageDescriptor.Version == "3.5";

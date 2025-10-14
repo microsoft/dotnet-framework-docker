@@ -23,7 +23,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
 
         public static IEnumerable<object[]> GetImageData()
         {
-            return ImageTestHelper.ApplyImageDataFilters(TestData.GetImageData(), ImageTypes.Runtime);
+            return ImageTestHelper.ApplyImageDataFilters(TestData.ImageData, ImageTypes.Runtime);
         }
 
         [Theory]
