@@ -1,13 +1,13 @@
 {
   "variables": {
     "4.8-is-security-release": true,
-    "kb|ltsc2016|4.8": "KB5065749",
+    "kb|ltsc2016|4.8": "KB5066136",
     "lcu|ltsc2016|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065749-x64-ndp48_ed97d60cc8a54f8686064ad25ff578f734b21f98.msu",
-    "kb|ltsc2019|4.8": "KB5065755",
+    "kb|ltsc2019|4.8": "KB5066137",
     "lcu|ltsc2019|4.8": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065755-x64-ndp48_e2eca38cf55b429c435d3fe98e4742c6e52bfd00.msu",
-    "kb|ltsc2022|4.8.1": "KB5065753",
+    "kb|ltsc2022|4.8.1": "KB5066134",
     "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2025/08/windows10.0-kb5065753-x64-ndp481_1e27c546762083659a59800379a6730b2bde4bc7.msu",
-    "kb|ltsc2025|4.8.1": "KB5064401",
+    "kb|ltsc2025|4.8.1": "KB5066131",
     "lcu|ltsc2025|4.8.1": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/e7d2c572-7ce6-4df1-b2c9-0b341f438299/public/windows11.0-kb5064401-x64-ndp481_03d42dc42df2db6f1812c2fa3d768780c079a843.msu",
     "nuget|version": "6.14.0",
     "referenceassemblies|version": "1.0.3",
