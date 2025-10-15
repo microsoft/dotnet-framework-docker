@@ -1,6 +1,8 @@
 {{ARGS["top-header"]}} Support
 
-{{ARGS["top-header"]}}# Lifecycle
+{{if match(SHORT_REPO, "samples"):These sample images are not intended for production use and may be subject to breaking changes or removal at any time. They are provided as a starting point for developers to experiment with and learn about .NET Framework in a containerized environment.
+
+}}{{ARGS["top-header"]}}# Lifecycle
 
 * [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
 * [Supported Tags Policy](https://github.com/microsoft/dotnet-framework-docker/blob/main/documentation/supported-tags.md)

@@ -29,22 +29,6 @@
             {
               "dockerfile": "samples/dotnetapp",
               "os": "windows",
-              "osVersion": "windowsservercore-ltsc2016",
-              "tags": {
-                "dotnetapp-windowsservercore-ltsc2016": {}
-              }
-            },
-            {
-              "dockerfile": "samples/dotnetapp",
-              "os": "windows",
-              "osVersion": "windowsservercore-ltsc2019",
-              "tags": {
-                "dotnetapp-windowsservercore-ltsc2019": {}
-              }
-            },
-            {
-              "dockerfile": "samples/dotnetapp",
-              "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
                 "dotnetapp-windowsservercore-ltsc2022": {}
@@ -57,22 +41,6 @@
             "aspnetapp": {}
           },
           "platforms": [
-            {
-              "dockerfile": "samples/aspnetapp",
-              "os": "windows",
-              "osVersion": "windowsservercore-ltsc2016",
-              "tags": {
-                "aspnetapp-windowsservercore-ltsc2016": {}
-              }
-            },
-            {
-              "dockerfile": "samples/aspnetapp",
-              "os": "windows",
-              "osVersion": "windowsservercore-ltsc2019",
-              "tags": {
-                "aspnetapp-windowsservercore-ltsc2019": {}
-              }
-            },
             {
               "dockerfile": "samples/aspnetapp",
               "os": "windows",
@@ -91,22 +59,6 @@
             {
               "dockerfile": "samples/wcfapp/Dockerfile.web",
               "os": "windows",
-              "osVersion": "windowsservercore-ltsc2016",
-              "tags": {
-                "wcfservice-windowsservercore-ltsc2016": {}
-              }
-            },
-            {
-              "dockerfile": "samples/wcfapp/Dockerfile.web",
-              "os": "windows",
-              "osVersion": "windowsservercore-ltsc2019",
-              "tags": {
-                "wcfservice-windowsservercore-ltsc2019": {}
-              }
-            },
-            {
-              "dockerfile": "samples/wcfapp/Dockerfile.web",
-              "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
                 "wcfservice-windowsservercore-ltsc2022": {}
@@ -119,22 +71,6 @@
             "wcfclient":{}
           },
           "platforms": [
-            {
-              "dockerfile": "samples/wcfapp/Dockerfile.client",
-              "os": "windows",
-              "osVersion": "windowsservercore-ltsc2016",
-              "tags": {
-                "wcfclient-windowsservercore-ltsc2016": {}
-              }
-            },
-            {
-              "dockerfile": "samples/wcfapp/Dockerfile.client",
-              "os": "windows",
-              "osVersion": "windowsservercore-ltsc2019",
-              "tags": {
-                "wcfclient-windowsservercore-ltsc2019": {}
-              }
-            },
             {
               "dockerfile": "samples/wcfapp/Dockerfile.client",
               "os": "windows",

@@ -85,30 +85,14 @@ dotnetapp-windowsservercore-ltsc2022, dotnetapp, latest | [Dockerfile](samples/d
 aspnetapp-windowsservercore-ltsc2022, aspnetapp | [Dockerfile](samples/aspnetapp/Dockerfile)
 wcfservice-windowsservercore-ltsc2022, wcfservice | [Dockerfile](samples/wcfapp/Dockerfile.web)
 wcfclient-windowsservercore-ltsc2022, wcfclient | [Dockerfile](samples/wcfapp/Dockerfile.client)
-
-### Windows Server Core 2019 amd64 Tags
-
-Tag | Dockerfile
----------| ---------------
-dotnetapp-windowsservercore-ltsc2019, dotnetapp, latest | [Dockerfile](samples/dotnetapp/Dockerfile)
-aspnetapp-windowsservercore-ltsc2019, aspnetapp | [Dockerfile](samples/aspnetapp/Dockerfile)
-wcfservice-windowsservercore-ltsc2019, wcfservice | [Dockerfile](samples/wcfapp/Dockerfile.web)
-wcfclient-windowsservercore-ltsc2019, wcfclient | [Dockerfile](samples/wcfapp/Dockerfile.client)
-
-### Windows Server Core 2016 amd64 Tags
-
-Tag | Dockerfile
----------| ---------------
-dotnetapp-windowsservercore-ltsc2016, dotnetapp, latest | [Dockerfile](samples/dotnetapp/Dockerfile)
-aspnetapp-windowsservercore-ltsc2016, aspnetapp | [Dockerfile](samples/aspnetapp/Dockerfile)
-wcfservice-windowsservercore-ltsc2016, wcfservice | [Dockerfile](samples/wcfapp/Dockerfile.web)
-wcfclient-windowsservercore-ltsc2016, wcfclient | [Dockerfile](samples/wcfapp/Dockerfile.client)
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
 See the [full list of tags](https://mcr.microsoft.com/v2/dotnet/framework/samples/tags/list) for all supported and unsupported tags.*
 
 ## Support
+
+These sample images are not intended for production use and may be subject to breaking changes or removal at any time. They are provided as a starting point for developers to experiment with and learn about .NET Framework in a containerized environment.
 
 ### Lifecycle
 
