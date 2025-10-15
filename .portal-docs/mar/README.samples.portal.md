@@ -75,6 +75,8 @@ docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 mcr.microsoft
 
 ## Support
 
+These sample images are not intended for production use and may be subject to breaking changes or removal at any time. They are provided as a starting point for developers to experiment with and learn about .NET Framework in a containerized environment.
+
 ### Lifecycle
 
 * [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)

@@ -79,6 +79,8 @@ View the current tags at the [Microsoft Artifact Registry portal](https://mcr.mi
 
 # Support
 
+These sample images are not intended for production use and may be subject to breaking changes or removal at any time. They are provided as a starting point for developers to experiment with and learn about .NET Framework in a containerized environment.
+
 ## Lifecycle
 
 * [.NET Framework Lifecycle FAQ](https://support.microsoft.com/help/17455/lifecycle-faq-net-framework)
