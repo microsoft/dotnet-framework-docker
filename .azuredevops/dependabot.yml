@@ -1,0 +1,6 @@
+# Disable Dependabot updates in Azure DevOps since this repository is managed
+# on GitHub and mirrored to Azure DevOps.
+# https://eng.ms/docs/products/dependabot/configuration/disable-features
+version: 2
+enable-security-updates: false
+enable-campaigned-updates: false
