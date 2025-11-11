@@ -1,9 +1,10 @@
 {
   "variables": {
-    "CurrentReleaseDateStamp": "20251014",
-    "RuntimeReleaseDateStamp": "$(CurrentReleaseDateStamp)",
-    "AspnetReleaseDateStamp": "$(CurrentReleaseDateStamp)",
-    "WcfReleaseDateStamp": "$(CurrentReleaseDateStamp)",
+    "CurrentReleaseDateStamp": "20251111",
+    "PreviousReleaseDateStamp": "20251014",
+    "RuntimeReleaseDateStamp": "$(PreviousReleaseDateStamp)",
+    "AspnetReleaseDateStamp": "$(PreviousReleaseDateStamp)",
+    "WcfReleaseDateStamp": "$(PreviousReleaseDateStamp)",
     "SdkReleaseDateStamp": "$(CurrentReleaseDateStamp)",
 
     "4.8-ltsc2016-Runtime-DateStamp": "$(RuntimeReleaseDateStamp)",
