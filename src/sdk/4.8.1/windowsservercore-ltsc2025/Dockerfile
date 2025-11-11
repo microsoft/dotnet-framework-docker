@@ -26,6 +26,7 @@ RUN curl -fSLo vs_BuildTools.exe https://aka.ms/vs/stable/vs_BuildTools.exe `
         --add Microsoft.Net.Component.4.8.1.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.8.0 ^ `
         --add Microsoft.NetCore.Component.Runtime.9.0 ^ `
+        --add Microsoft.NetCore.Component.Runtime.10.0 ^ `
         --add Microsoft.NetCore.Component.SDK ^ `
         --add Microsoft.VisualStudio.Component.NuGet.BuildTools ^ `
         --add Microsoft.VisualStudio.Component.WebDeploy ^ `

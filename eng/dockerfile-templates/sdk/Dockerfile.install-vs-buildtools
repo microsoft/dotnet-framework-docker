@@ -32,6 +32,7 @@ else:curl -fSLo vs_BuildTools.exe {{vsBuildToolsUrl}} `}}
     --add Microsoft.Net.Component.{{sdkVersion}}.SDK @^ `
     --add Microsoft.NetCore.Component.Runtime.8.0 @^ `
     --add Microsoft.NetCore.Component.Runtime.9.0 @^ `
+    --add Microsoft.NetCore.Component.Runtime.10.0 @^ `
     --add Microsoft.NetCore.Component.SDK @^ `
     --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
     --add Microsoft.VisualStudio.Component.WebDeploy @^ `
