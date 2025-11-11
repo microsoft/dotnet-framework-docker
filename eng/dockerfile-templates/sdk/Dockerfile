@@ -41,14 +41,7 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS components
-RUN `
-    # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe {{VARIABLES["vs|testAgentUrl"]}} `
-    && start /w vs_TestAgent --quiet --norestart --nocache --wait --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent" `
-    && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
-    && del vs_TestAgent.exe `
-    `
-    {{InsertTemplate("Dockerfile.install-vs-buildtools", [], "    ")}}
+RUN {{InsertTemplate("Dockerfile.install-vs-buildtools", [], "    ")}}
     `
     # Trigger dotnet first run experience by running arbitrary cmd
     && "%ProgramFiles%\dotnet\dotnet" help `
@@ -65,14 +58,12 @@ RUN `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
     && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
-    && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
-    && rmdir /S /Q "%ProgramData%\Package Cache"
+    && powershell Remove-Item -Force -Recurse "%TEMP%\*"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\amd64\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 

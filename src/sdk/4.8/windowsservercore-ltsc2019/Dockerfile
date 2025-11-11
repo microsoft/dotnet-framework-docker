@@ -17,17 +17,9 @@ RUN mkdir "%ProgramFiles%\NuGet\latest" `
     && mklink "%ProgramFiles%\NuGet\latest\nuget.exe" "%ProgramFiles%\NuGet\nuget.exe"
 
 # Install VS components
-RUN `
-    # Install VS Test Agent
-    curl -fSLo vs_TestAgent.exe https://aka.ms/vs/17/release/vs_TestAgent.exe `
-    && start /w vs_TestAgent --quiet --norestart --nocache --wait --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\TestAgent" `
-    && powershell -Command "if ($err = dir $Env:TEMP -Filter dd_setup_*_errors.log | where Length -gt 0 | Get-Content) { throw $err }" `
-    && del vs_TestAgent.exe `
-    `
-    # Install VS Build Tools
-    && curl -fSLo vs_BuildTools.exe https://aka.ms/vs/17/release/vs_BuildTools.exe `
+RUN curl -fSLo vs_BuildTools.exe https://aka.ms/vs/stable/vs_BuildTools.exe `
     && start /w vs_BuildTools ^ `
-        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
+        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\18\BuildTools" ^ `
         --add Microsoft.Component.ClickOnce.MSBuild ^ `
         --add Microsoft.Net.Component.4.8.SDK ^ `
         --add Microsoft.NetCore.Component.Runtime.8.0 ^ `
@@ -55,14 +47,12 @@ RUN `
     # Cleanup
     && (for /D %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do rmdir /S /Q "%i") `
     && (for %i in ("%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\*") do if not "%~nxi" == "vswhere.exe" del "%~i") `
-    && powershell Remove-Item -Force -Recurse "%TEMP%\*" `
-    && rmdir /S /Q "%ProgramData%\Package Cache"
+    && powershell Remove-Item -Force -Recurse "%TEMP%\*"
 
 # Set PATH in one layer to keep image size down.
 RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\TestAgent\Common7\IDE\CommonExtensions\Microsoft\TestWindow\" `
-    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\amd64\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
