@@ -112,8 +112,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             // Get build version instead of a display version or semantic version because it's easier to parse and can
             // also seamlessly work with preview versions.
             Version actualVsVersion = Version.Parse(json[0]["catalog"]["buildVersion"].ToString());
-
-            Version expectedVsVersion = Config.GetManifestVsVersion();
+            Version expectedVsVersion = imageDescriptor.GetExpectedVsVersion();
 
             Assert.Equal(expectedVsVersion.Major, actualVsVersion.Major);
             Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);

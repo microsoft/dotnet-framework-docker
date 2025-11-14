@@ -2,6 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using Newtonsoft.Json.Linq;
+
 namespace Microsoft.DotNet.Framework.Docker.Tests;
 
 internal static class ImageDescriptorExtensions
@@ -12,6 +15,23 @@ internal static class ImageDescriptorExtensions
     /// <param name="imageType">"sdk", "runtime", "aspnet", or "wcf".</param>
     public static string GetDockerfilePath(this ImageDescriptor imageDescriptor, string imageType) =>
         $"src/{imageType}/{imageDescriptor.Version}/{imageDescriptor.OsVariant}";
+
+    /// <summary>
+    /// The expected Visual Studio version installed inside the image.
+    /// </summary>
+    public static Version GetExpectedVsVersion(this ImageDescriptor imageDescriptor)
+    {
+        JObject manifestVariables = Config.ManifestVariables;
+        string vsVersionVariable = imageDescriptor.OsVariant switch
+        {
+            // Visual Studio 2026/dev18 does not support Windows Server 2016.
+            // See https://learn.microsoft.com/visualstudio/releases/2026/compatibility
+            OsVersion.WSC_LTSC2016 => "vs|ltsc2016|version",
+            _ =>                      "vs|version",
+        };
+
+        return Version.Parse((string)manifestVariables[vsVersionVariable]);
+    }
 
     /// <summary>
     /// The expected Visual Studio installation path inside the image.

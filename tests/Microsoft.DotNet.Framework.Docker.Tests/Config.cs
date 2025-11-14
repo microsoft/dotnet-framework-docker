@@ -20,6 +20,18 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Environment.GetEnvironmentVariable("DOCKERFILE_PATHS")?
                 .Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
 
+        #nullable enable
+        private static JObject? _manifestVariables = null;
+        public static JObject ManifestVariables
+        {
+            get
+            {
+                _manifestVariables ??= GetManifestVariables();
+                return _manifestVariables;
+            }
+        }
+        #nullable disable
+
         public static string GetManifestRegistry()
         {
             string manifestJson = File.ReadAllText("manifest.json");
@@ -27,11 +39,11 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             return (string)manifest["registry"];
         }
 
-        public static Version GetManifestVsVersion()
+        private static JObject GetManifestVariables()
         {
             string manifestJson = File.ReadAllText("manifest.versions.json");
             JObject manifest = JObject.Parse(manifestJson);
-            return System.Version.Parse((string)(manifest["variables"]["vs|version"]));
+            return (JObject)manifest["variables"];
         }
 
         public static string GetFilterRegexPattern(string filter)
