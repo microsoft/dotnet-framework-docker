@@ -28,7 +28,7 @@ See the [supported tags](supported-tags.md) for the tagging practices and polici
 
 1. Images will never be deleted from the [official .NET Framework Docker repositories on the Microsoft Artifact Registry](https://mcr.microsoft.com/catalog?search=dotnet/framework).
 
-1. The [Dockerfiles](https://github.com/microsoft/dotnet-framework-docker/search?q=filename%3ADockerfile) used to produce all of the images will be publicly available. Customers will be able to take the Dockerfiles and build them to produce their own equivalent images.  No special build steps or permissions should be needed to build the Dockerfiles.
+1. The [Dockerfiles](https://github.com/search?q=repo%3Amicrosoft%2Fdotnet-framework-docker+path%3Asrc%2F**%2FDockerfile&type=code) used to produce all of the images will be publicly available. Customers will be able to take the Dockerfiles and build them to produce their own equivalent images.  No special build steps or permissions should be needed to build the Dockerfiles.
 
 1. If a change is ever made to the tagging patterns, all of the old tags will be serviced appropriately through its original lifetime.  All old tags will no longer be documented within the tag details section of the readme.
 
