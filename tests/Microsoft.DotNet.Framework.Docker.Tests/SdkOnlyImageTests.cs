@@ -72,13 +72,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
         {
             Skip.If(IsSkippable(imageDescriptor));
 
-            List<EnvironmentVariableInfo> variables = new List<EnvironmentVariableInfo>();
+            string vsPath = imageDescriptor.GetExpectedVsInstallationPath();
 
-            variables.AddRange(RuntimeOnlyImageTests.GetEnvironmentVariables(imageDescriptor));
-
-            variables.Add(new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION",
-                @"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"));
-            variables.Add(new EnvironmentVariableInfo("DOTNET_GENERATE_ASPNET_CERTIFICATE", "false"));
+            List<EnvironmentVariableInfo> variables =
+            [
+                ..RuntimeOnlyImageTests.GetEnvironmentVariables(imageDescriptor),
+                new EnvironmentVariableInfo("ROSLYN_COMPILER_LOCATION", $@"{vsPath}\MSBuild\Current\Bin\Roslyn"),
+                new EnvironmentVariableInfo("DOTNET_GENERATE_ASPNET_CERTIFICATE", "false"),
+            ];
 
             if (imageDescriptor.OsVariant != OsVersion.WSC_LTSC2016 &&
                 imageDescriptor.OsVariant != OsVersion.WSC_LTSC2019)
@@ -106,16 +107,7 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             JArray json = (JArray)JsonConvert.DeserializeObject(output);
 
             Assert.Single(json);
-
-            string expectedPath = imageDescriptor.OsVariant switch
-            {
-                // Visual Studio 2026/dev18 does not support Windows Server 2016.
-                // See https://learn.microsoft.com/visualstudio/releases/2026/compatibility
-                OsVersion.WSC_LTSC2016 => @"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools",
-                _ =>                      @"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools",
-            };
-
-            Assert.Equal(expectedPath, json[0]["installationPath"]);
+            Assert.Equal(imageDescriptor.GetExpectedVsInstallationPath(), json[0]["installationPath"]);
 
             // Get build version instead of a display version or semantic version because it's easier to parse and can
             // also seamlessly work with preview versions.

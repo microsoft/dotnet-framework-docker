@@ -8,10 +8,6 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
     {
         public string Version { get; set; }
         public string OsVariant { get; set; }
-
-        public string GetDockerfilePath(string imageType) =>
-            $"src/{imageType}/{Version}/{OsVariant}";
-
         public string SdkVersion { get; set; }
     }
 }
