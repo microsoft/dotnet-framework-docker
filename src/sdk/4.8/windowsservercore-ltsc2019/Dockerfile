@@ -9,7 +9,7 @@ ENV `
     # NuGet version to install
     NUGET_VERSION=6.14.0 `
     # Install location of Roslyn
-    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\Roslyn"
 
 # Install NuGet CLI
 RUN mkdir "%ProgramFiles%\NuGet\latest" `

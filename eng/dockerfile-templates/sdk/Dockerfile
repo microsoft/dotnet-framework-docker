@@ -13,7 +13,7 @@ ENV `
     }}# NuGet version to install
     NUGET_VERSION={{VARIABLES[cat("nuget|version")]}} `
     # Install location of Roslyn
-    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Roslyn"
+    ROSLYN_COMPILER_LOCATION="C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\Roslyn"
 {{if OS_VERSION_NUMBER = "ltsc2019" && PRODUCT_VERSION = "3.5"
 :
 RUN `
