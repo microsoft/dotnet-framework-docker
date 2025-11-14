@@ -35,7 +35,8 @@ else:curl -fSLo vs_BuildTools.exe {{vsBuildToolsUrl}} `}}
     --add Microsoft.NetCore.Component.Runtime.10.0 @^ `
     --add Microsoft.NetCore.Component.SDK @^ `
     --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
-    --add Microsoft.VisualStudio.Component.WebDeploy @^ `
+    --add Microsoft.VisualStudio.Component.WebDeploy @^ `{{if !is2016:
+    --add Microsoft.VisualStudio.Component.TestTools.BuildTools @^ `}}
     --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup @^ `
     --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
     --quiet --norestart --nocache --wait `

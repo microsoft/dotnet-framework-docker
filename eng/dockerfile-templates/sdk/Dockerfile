@@ -64,6 +64,7 @@ RUN {{InsertTemplate("Dockerfile.install-vs-buildtools", [], "    ")}}
 RUN powershell setx /M PATH $(${Env:PATH} `
     + \";${Env:ProgramFiles}\NuGet\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\18\BuildTools\MSBuild\Current\Bin\amd64\" `
+    + \";${Env:ProgramFiles(x86)}\Microsoft Visual Studio\18\BuildTools\Common7\IDE\Extensions\TestPlatform\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX {{sdkVersion}} Tools\" `
     + \";${Env:ProgramFiles(x86)}\Microsoft SDKs\ClickOnce\SignTool\")
 
