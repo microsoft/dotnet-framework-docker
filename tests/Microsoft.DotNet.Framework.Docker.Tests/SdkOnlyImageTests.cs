@@ -106,7 +106,16 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             JArray json = (JArray)JsonConvert.DeserializeObject(output);
 
             Assert.Single(json);
-            Assert.Equal(@"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools", json[0]["installationPath"]);
+
+            string expectedPath = imageDescriptor.OsVariant switch
+            {
+                // Visual Studio 2026/dev18 does not support Windows Server 2016.
+                // See https://learn.microsoft.com/visualstudio/releases/2026/compatibility
+                OsVersion.WSC_LTSC2016 => @"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools",
+                _ =>                      @"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools",
+            };
+
+            Assert.Equal(expectedPath, json[0]["installationPath"]);
 
             // Get build version instead of a display version or semantic version because it's easier to parse and can
             // also seamlessly work with preview versions.
