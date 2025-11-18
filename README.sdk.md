@@ -15,7 +15,6 @@ This image contains the .NET Framework SDK which is comprised of the following p
 
 1. .NET Framework Runtime
 1. Visual Studio Build Tools
-1. Visual Studio Test Agent
 1. NuGet CLI
 1. .NET Framework Targeting Packs
 1. ASP.NET Web Targets
@@ -65,25 +64,25 @@ Additionally, .NET Framework 4.8 and 4.8.1 can run apps that were built targetin
 
 Tag | Dockerfile
 ---------| ---------------
-4.8.1-20251014-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/sdk/4.8.1/windowsservercore-ltsc2025/Dockerfile)
+4.8.1-20251118-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/sdk/4.8.1/windowsservercore-ltsc2025/Dockerfile)
 
 ### Windows Server Core 2022 amd64 Tags
 
 Tag | Dockerfile
 ---------| ---------------
-4.8.1-20251014-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](src/sdk/4.8.1/windowsservercore-ltsc2022/Dockerfile)
+4.8.1-20251118-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](src/sdk/4.8.1/windowsservercore-ltsc2022/Dockerfile)
 
 ### Windows Server Core 2019 amd64 Tags
 
 Tag | Dockerfile
 ---------| ---------------
-4.8-20251014-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](src/sdk/4.8/windowsservercore-ltsc2019/Dockerfile)
+4.8-20251118-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](src/sdk/4.8/windowsservercore-ltsc2019/Dockerfile)
 
 ### Windows Server Core 2016 amd64 Tags
 
 Tag | Dockerfile
 ---------| ---------------
-4.8-20251014-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/sdk/4.8/windowsservercore-ltsc2016/Dockerfile)
+4.8-20251118-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/sdk/4.8/windowsservercore-ltsc2016/Dockerfile)
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).

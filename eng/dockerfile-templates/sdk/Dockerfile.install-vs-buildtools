@@ -3,28 +3,40 @@
     _ ARGS:
         usePowerShell: whether to use PowerShell to download and remove files ^
 
-    set sdkVersion to when(PRODUCT_VERSION = "4.8.1", "4.8.1", "4.8")
+    set sdkVersion to when(PRODUCT_VERSION = "4.8.1", "4.8.1", "4.8") ^
+    set is2016 to OS_VERSION_NUMBER = "ltsc2016" ^
 
-}}# Install VS Build Tools{{
-if ARGS.usePowerShell:
-&& powershell -Command `
+    _ VS 2026 does not support Windows Server LTSC 2016
+      https://learn.microsoft.com/en-us/visualstudio/releases/2026/vs-system-requirements ^
+    set vsBuildToolsUrl to
+        when(is2016,
+            VARIABLES["vs|ltsc2016|buildToolsUrl"],
+            VARIABLES["vs|buildToolsUrl"]) ^
+    set vsPath to
+        when(is2016,
+            "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools",
+            "%ProgramFiles(x86)%\Microsoft Visual Studio\18\BuildTools")
+
+}}{{
+if ARGS.usePowerShell:powershell -Command `
     $ProgressPreference = 'SilentlyContinue'; `
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
     Invoke-WebRequest `
         -UseBasicParsing `
-        -Uri {{VARIABLES["vs|buildToolsUrl"]}} `
+        -Uri {{vsBuildToolsUrl}} `
         -OutFile vs_BuildTools.exe `^
-else:
-&& curl -fSLo vs_BuildTools.exe {{VARIABLES["vs|buildToolsUrl"]}} `}}
+else:curl -fSLo vs_BuildTools.exe {{vsBuildToolsUrl}} `}}
 && start /w vs_BuildTools @^ `
-    --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" @^ `
+    --installPath "{{vsPath}}" @^ `
     --add Microsoft.Component.ClickOnce.MSBuild @^ `
     --add Microsoft.Net.Component.{{sdkVersion}}.SDK @^ `
     --add Microsoft.NetCore.Component.Runtime.8.0 @^ `
     --add Microsoft.NetCore.Component.Runtime.9.0 @^ `
+    --add Microsoft.NetCore.Component.Runtime.10.0 @^ `
     --add Microsoft.NetCore.Component.SDK @^ `
     --add Microsoft.VisualStudio.Component.NuGet.BuildTools @^ `
-    --add Microsoft.VisualStudio.Component.WebDeploy @^ `
+    --add Microsoft.VisualStudio.Component.WebDeploy @^ `{{if !is2016:
+    --add Microsoft.VisualStudio.Component.TestTools.BuildTools @^ `}}
     --add Microsoft.VisualStudio.Web.BuildTools.ComponentGroup @^ `
     --add Microsoft.VisualStudio.Workload.MSBuildTools @^ `
     --quiet --norestart --nocache --wait `
