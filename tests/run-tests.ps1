@@ -12,15 +12,15 @@ param(
     [string[]]$Paths = @(),
 
     [string]$Architecture,
-    
+
     [string[]]$OSVersions = @(),
-    
+
     [string]$Registry,
-    
+
     [string]$RepoPrefix,
-    
+
     [switch]$PullImages,
-    
+
     [string]$ImageInfoPath,
 
     [ValidateSet('runtime', 'sdk', 'aspnet', 'wcf', 'pre-build')]
@@ -54,7 +54,7 @@ $ErrorActionPreference = 'Stop'
 
 # Install the .NET Core SDK
 $DotnetInstallDir = "$PSScriptRoot/../.dotnet"
-& $PSScriptRoot/../eng/common/Install-DotNetSdk.ps1 $dotnetInstallDir
+& $PSScriptRoot/../eng/docker-tools/Install-DotNetSdk.ps1 $dotnetInstallDir
 
 $activeOS = docker version -f "{{ .Server.Os }}"
 

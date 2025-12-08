@@ -24,14 +24,14 @@ if ($Repos.Count -eq 0) {
 else {
     $Paths = @()
     $Repos | foreach {
-        
+
         $Paths += "src/$_/$Version/$OS"
     }
     $testCategories = $Repos
 }
 
 if ($Mode -eq "BuildAndTest" -or $Mode -eq "Build") {
-    & ./eng/common/build.ps1 `
+    & ./eng/docker-tools/build.ps1 `
         -Version $Version `
         -OS $OS `
         -Paths $Paths `
