@@ -28,19 +28,19 @@ parameters:
 
 variables:
 - template: /eng/pipelines/variables/common.yml@self
-- template: /eng/common/templates/variables/dotnet/secrets${{ iif(contains(variables['Build.DefinitionName'], '-official'), '', '-unofficial') }}.yml@self
+- template: /eng/docker-tools/templates/variables/dotnet/secrets${{ iif(contains(variables['Build.DefinitionName'], '-official'), '', '-unofficial') }}.yml@self
 - name: manifest
   value: manifest.samples.json
 - name: imageInfoVariant
   value: "-samples"
 
 extends:
-  template: /eng/common/templates/1es.yml@self
+  template: /eng/docker-tools/templates/1es.yml@self
   parameters:
     reposToExcludeFromScanning:
     - VersionsRepo
     stages:
-    - template: /eng/common/templates/stages/dotnet/publish-config-${{ iif(contains(variables['Build.DefinitionName'], '-official'), 'prod', 'nonprod') }}.yml@self
+    - template: /eng/docker-tools/templates/stages/dotnet/publish-config-${{ iif(contains(variables['Build.DefinitionName'], '-official'), 'prod', 'nonprod') }}.yml@self
       parameters:
         sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
         stagesTemplate: /eng/pipelines/stages/dotnet-framework-base.yml@self
