@@ -9,7 +9,7 @@
     "lcu|ltsc2022|4.8.1": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2025/09/windows10.0-kb5066134-x64-ndp481_103b0d4cef1c6b42632f1cb043725ded0fce0ed3.msu",
     "kb|ltsc2025|4.8.1": "KB5066131",
     "lcu|ltsc2025|4.8.1": "https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/035cd7e9-5769-4168-80e4-d73bc6b746c8/public/windows11.0-kb5066131-x64-ndp481_b2ab1290d276d5cb9c9d03dce5ad2d6e2b66f615.msu",
-    "nuget|version": "6.14.0",
+    "nuget|version": "7.0.1",
     "referenceassemblies|version": "1.0.3",
     "servicemonitor|version": "2.0.1.10",
     "servicemonitor|url": "https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v$(servicemonitor|version)/ServiceMonitor.exe",
