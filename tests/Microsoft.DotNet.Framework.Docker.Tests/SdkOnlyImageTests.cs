@@ -114,8 +114,14 @@ namespace Microsoft.DotNet.Framework.Docker.Tests
             Version actualVsVersion = Version.Parse(json[0]["catalog"]["buildVersion"].ToString());
             Version expectedVsVersion = imageDescriptor.GetExpectedVsVersion();
 
+            // For VS 18 and later, only verify the major version since new minor versions release monthly.
+            // See https://learn.microsoft.com/visualstudio/releases/2026/release-notes#december-update-1810
             Assert.Equal(expectedVsVersion.Major, actualVsVersion.Major);
-            Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);
+            // For VS versions < 18, continue to verify the minor version.
+            if (expectedVsVersion.Major < 18 || actualVsVersion.Major < 18)
+            {
+                Assert.Equal(expectedVsVersion.Minor, actualVsVersion.Minor);
+            }
         }
 
         [SkippableTheory]

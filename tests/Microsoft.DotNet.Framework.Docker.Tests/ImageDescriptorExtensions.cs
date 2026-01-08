@@ -30,7 +30,16 @@ internal static class ImageDescriptorExtensions
             _ =>                      "vs|version",
         };
 
-        return Version.Parse((string)manifestVariables[vsVersionVariable]);
+        string versionString = (string)manifestVariables[vsVersionVariable];
+
+        // Version.Parse requires at least major.minor format.
+        // If the version string is just a single number, append ".0".
+        if (!versionString.Contains('.'))
+        {
+            versionString += ".0";
+        }
+
+        return Version.Parse(versionString);
     }
 
     /// <summary>
