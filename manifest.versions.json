@@ -13,7 +13,7 @@
     "referenceassemblies|version": "1.0.3",
     "servicemonitor|version": "2.0.1.10",
     "servicemonitor|url": "https://github.com/microsoft/IIS.ServiceMonitor/releases/download/v$(servicemonitor|version)/ServiceMonitor.exe",
-    "vs|version": "18.0",
+    "vs|version": "18",
     "vs|buildToolsUrl": "https://aka.ms/vs/stable/vs_BuildTools.exe",
     "vs|ltsc2016|version": "17.14",
     "vs|ltsc2016|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
