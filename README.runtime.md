@@ -6,8 +6,6 @@
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8`
-* `3.5`
-  * `docker pull mcr.microsoft.com/dotnet/framework/runtime:3.5`
 
 ## About
 

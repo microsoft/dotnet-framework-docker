@@ -18,8 +18,6 @@ Watch [discussions](https://github.com/microsoft/dotnet-framework-docker/discuss
   * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8`
-* `3.5`
-  * `docker pull mcr.microsoft.com/dotnet/framework/sdk:3.5`
 
 ## Related repositories
 

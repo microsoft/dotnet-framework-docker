@@ -4,8 +4,6 @@
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8.1`
 * `4.8`
   * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8`
-* `3.5`
-  * `docker pull mcr.microsoft.com/dotnet/framework/aspnet:3.5`
 
 # About
 
