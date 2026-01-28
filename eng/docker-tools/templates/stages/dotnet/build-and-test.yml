@@ -4,6 +4,9 @@
 parameters:
   linuxAmd64Pool: ""
 
+  # Custom init steps for all jobs
+  customInitSteps: []
+
   # (Optional) This service connection should be an Azure Resource Manager
   # service connection to a storage account that's needed during image builds.
   # It can be used to build images with access to private/internal bits.
@@ -52,6 +55,7 @@ stages:
     testMatrixCustomBuildLegGroupArgs: ${{ parameters.testMatrixCustomBuildLegGroupArgs }}
     customCopyBaseImagesInitSteps: ${{ parameters.customCopyBaseImagesInitSteps}}
     customBuildInitSteps: ${{ parameters.customBuildInitSteps }}
+    customInitSteps: ${{ parameters.customInitSteps }}
     customTestInitSteps: ${{ parameters.customTestInitSteps }}
     windowsAmdBuildJobTimeout: ${{ parameters.windowsAmdBuildJobTimeout }}
     windowsAmdTestJobTimeout: ${{ parameters.windowsAmdTestJobTimeout }}
@@ -70,7 +74,9 @@ stages:
       ${{ if ne(parameters.linuxAmd64Pool, '') }}:
         ${{ parameters.linuxAmd64Pool }}
       ${{ elseif eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
-        vmImage: $(defaultLinuxAmd64PoolImage)
+        name: $(linuxAmd64PublicPoolName)
+        demands: ImageOverride -equals $(linuxAmd64PublicPoolImage)
+        os: linux
       ${{ elseif eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
         name: $(linuxAmd64InternalPoolName)
         image: $(linuxAmd64InternalPoolImage)
@@ -80,21 +86,23 @@ stages:
     linuxArm64Pool:
       os: linux
       hostArchitecture: Arm64
-      image: $(linuxArm64PoolImage)
       ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
         name: $(linuxArm64PublicPoolName)
+        demands: ImageOverride -equals $(linuxArm64PublicPoolImage)
       ${{ if eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
         name: $(linuxArm64InternalPoolName)
+        image: $(linuxArm64InternalPoolImage)
 
     # Linux Arm32
     linuxArm32Pool:
       os: linux
       hostArchitecture: Arm64
-      image: $(linuxArm32PoolImage)
       ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
         name: $(linuxArm32PublicPoolName)
+        demands: ImageOverride -equals $(linuxArm32PublicPoolImage)
       ${{ if eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
         name: $(linuxArm32InternalPoolName)
+        image: $(linuxArm32InternalPoolImage)
 
     # Windows Server 2016
     windows2016Pool:

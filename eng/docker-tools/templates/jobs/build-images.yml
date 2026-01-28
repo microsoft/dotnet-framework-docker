@@ -4,9 +4,9 @@ parameters:
   matrix: {}
   dockerClientOS: null
   buildJobTimeout: 60
-  commonInitStepsForMatrixAndBuild: []
   customInitSteps: []
   publishConfig: null
+  versionsRepoRef: ""
   noCache: false
   internalProjectName: null
   publicProjectName: null
@@ -29,12 +29,13 @@ jobs:
     imageInfoHostDir: $(Build.ArtifactStagingDirectory)/imageInfo
     imageInfoContainerDir: $(artifactsPath)/imageInfo
   steps:
-  - ${{ parameters.commonInitStepsForMatrixAndBuild }}
-  - template: /eng/docker-tools/templates/jobs/${{ format('../steps/init-docker-{0}.yml', parameters.dockerClientOS) }}@self
+  - template: /eng/docker-tools/templates/steps/init-common.yml@self
     parameters:
+      dockerClientOS: ${{ parameters.dockerClientOS }}
       publishConfig: ${{ parameters.publishConfig }}
+      versionsRepoRef: ${{ parameters.versionsRepoRef }}
       cleanupDocker: true
-  - ${{ parameters.customInitSteps }}
+      customInitSteps: ${{ parameters.customInitSteps }}
   - template: /eng/docker-tools/templates/steps/set-image-info-path-var.yml@self
     parameters:
       publicSourceBranch: $(publicSourceBranch)
@@ -115,6 +116,7 @@ jobs:
     - template: /eng/docker-tools/templates/jobs/${{ format('../steps/test-images-{0}-client.yml', parameters.dockerClientOS) }}@self
       parameters:
         condition: ne(variables.testScriptPath, '')
+        skipCommonInit: true
   - ${{ if and(eq(variables['System.TeamProject'], parameters.internalProjectName), ne(variables['Build.Reason'], 'PullRequest'), eq(parameters.dockerClientOS, 'linux')) }}:
     - template: /eng/docker-tools/templates/steps/publish-artifact.yml@self
       parameters:

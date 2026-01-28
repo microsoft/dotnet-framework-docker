@@ -17,6 +17,9 @@ parameters:
 - name: continueOnError
   type: string
   default: false
+- name: versionsRepoRef
+  type: string
+  default: ""
 
 jobs:
 - template: /eng/docker-tools/templates/jobs/copy-base-images.yml@self
@@ -27,3 +30,4 @@ jobs:
     customInitSteps: ${{ parameters.customInitSteps }}
     additionalOptions: ${{ parameters.additionalOptions }}
     acr: ${{ parameters.publishConfig.InternalMirrorRegistry }}
+    versionsRepoRef: ${{ parameters.versionsRepoRef }}
