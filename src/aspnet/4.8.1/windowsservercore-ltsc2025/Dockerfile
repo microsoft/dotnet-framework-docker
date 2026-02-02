@@ -12,7 +12,7 @@ RUN dism /Online /Quiet /Enable-Feature /All /FeatureName:IIS-WebServerRole /Fea
     && %windir%\Microsoft.NET\Framework\v4.0.30319\ngen update
 
 # Install 2.9.0 Roslyn compilers
-RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/microsoft.net.compilers.2.9.0.nupkg `
+RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/flat2/microsoft.net.compilers/2.9.0/microsoft.net.compilers.2.9.0.nupkg `
     && mkdir C:\RoslynCompilers `
     && tar -C C:\RoslynCompilers -zxf microsoft.net.compilers.2.9.0.zip `
     && del microsoft.net.compilers.2.9.0.zip `
@@ -21,7 +21,7 @@ RUN curl -fSLo microsoft.net.compilers.2.9.0.zip https://api.nuget.org/packages/
     && %windir%\Microsoft.NET\Framework64\v4.0.30319\ngen install C:\RoslynCompilers\tools\VBCSCompiler.exe /ExeConfig:C:\RoslynCompilers\tools\VBCSCompiler.exe
 
 # Install 3.6.0 Roslyn compilers
-RUN curl -fSLo microsoft.net.compilers.3.6.0.zip https://api.nuget.org/packages/microsoft.net.compilers.3.6.0.nupkg `
+RUN curl -fSLo microsoft.net.compilers.3.6.0.zip https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/flat2/microsoft.net.compilers/3.6.0/microsoft.net.compilers.3.6.0.nupkg `
     && mkdir C:\RoslynCompilers-3.6.0 `
     && tar -C C:\RoslynCompilers-3.6.0 -zxf microsoft.net.compilers.3.6.0.zip `
     && del microsoft.net.compilers.3.6.0.zip `
