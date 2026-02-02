@@ -8,6 +8,7 @@ parameters:
   pool: ""
   isStandalonePublish: false
   customPublishInitSteps: []
+  customInitSteps: []
   sourceBuildPipelineDefinitionId: ''
   sourceBuildPipelineRunId: ''
   versionsRepoRef: null
@@ -20,6 +21,7 @@ stages:
     publicProjectName: ${{ parameters.publicProjectName }}
     publishConfig: ${{ parameters.publishConfig }}
     isStandalonePublish: ${{ parameters.isStandalonePublish }}
+    customInitSteps: ${{ parameters.customInitSteps }}
     sourceBuildPipelineDefinitionId: ${{ parameters.sourceBuildPipelineDefinitionId }}
     sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
     versionsRepoRef: ${{ parameters.versionsRepoRef }}
@@ -49,7 +51,9 @@ stages:
       ${{ if ne(parameters.pool, '') }}:
         ${{ parameters.pool }}
       ${{ elseif eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
-        vmImage: $(defaultLinuxAmd64PoolImage)
+        name: $(linuxAmd64PublicPoolName)
+        demands: ImageOverride -equals $(linuxAmd64PublicPoolImage)
+        os: linux
       ${{ elseif eq(variables['System.TeamProject'], parameters.internalProjectName) }}:
         name: $(linuxAmd64InternalPoolName)
         image: $(linuxAmd64InternalPoolImage)
