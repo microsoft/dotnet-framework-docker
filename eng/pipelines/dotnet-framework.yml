@@ -39,10 +39,6 @@ extends:
   parameters:
     reposToExcludeFromScanning:
     - VersionsRepo
-    # Use "Permissive" network policy because .NET Framework image builds
-    # reach out to nuget.org. Remove this parameter when the following issue is
-    # resolved: https://github.com/microsoft/dotnet-framework-docker/issues/1286
-    networkIsolationPolicy: Permissive
     stages:
     - template: /eng/docker-tools/templates/stages/dotnet/publish-config-${{ iif(contains(variables['Build.DefinitionName'], '-official'), 'prod', 'nonprod') }}.yml@self
       parameters:
