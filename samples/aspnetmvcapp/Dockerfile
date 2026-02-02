@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8.1 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-COPY *.sln .
+COPY *.sln NuGet.config ./
 COPY aspnetmvcapp/*.csproj ./aspnetmvcapp/
 COPY aspnetmvcapp/*.config ./aspnetmvcapp/
 RUN nuget restore
