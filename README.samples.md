@@ -77,14 +77,15 @@ docker run --name wcfclient_sample --rm -it -e HOST=172.26.236.119 mcr.microsoft
 
 ## Full Tag Listing
 
-### Windows Server Core 2022 amd64 Tags
+### Windows amd64 Tags
 
-Tag | Dockerfile
----------| ---------------
-dotnetapp-windowsservercore-ltsc2022, dotnetapp, latest | [Dockerfile](samples/dotnetapp/Dockerfile)
-aspnetapp-windowsservercore-ltsc2022, aspnetapp | [Dockerfile](samples/aspnetapp/Dockerfile)
-wcfservice-windowsservercore-ltsc2022, wcfservice | [Dockerfile](samples/wcfapp/Dockerfile.web)
-wcfclient-windowsservercore-ltsc2022, wcfclient | [Dockerfile](samples/wcfapp/Dockerfile.client)
+Tags | Dockerfile | OS Version
+---- | ---------- | ----------
+dotnetapp-windowsservercore-ltsc2022, dotnetapp, latest | [Dockerfile](samples/dotnetapp/Dockerfile) | Windows Server Core 2022
+aspnetapp-windowsservercore-ltsc2022, aspnetapp | [Dockerfile](samples/aspnetapp/Dockerfile) | Windows Server Core 2022
+wcfservice-windowsservercore-ltsc2022, wcfservice | [Dockerfile](samples/wcfapp/Dockerfile.web) | Windows Server Core 2022
+wcfclient-windowsservercore-ltsc2022, wcfclient | [Dockerfile](samples/wcfapp/Dockerfile.client) | Windows Server Core 2022
+
 <!--End of generated tags-->
 
 *Tags not listed in the table above are not supported. See the [Supported Tags Policy](https://github.com/dotnet/dotnet-docker/blob/main/documentation/supported-tags.md).
