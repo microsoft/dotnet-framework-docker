@@ -14,7 +14,7 @@ RUN powershell -Command "`
     foreach ($version in @@({{join(versions, ", ")}})) { `
         # Download reference assembly NuGet package `
         $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
-        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version {{packageVersion}} -OutputDirectory ${Env:TEMP}\Packages; `
+        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version {{packageVersion}} -OutputDirectory ${Env:TEMP}\Packages -Source {{VARIABLES["dotnet-public|source"]}}; `
         $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
         # Remove IntelliSense files `
         Get-ChildItem -File -Recurse -Path \"${contents}\" | `

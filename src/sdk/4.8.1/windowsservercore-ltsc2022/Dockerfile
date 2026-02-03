@@ -67,7 +67,7 @@ RUN powershell -Command "`
     foreach ($version in @('net40', 'net45', 'net451', 'net452', 'net46', 'net461', 'net462', 'net47', 'net471', 'net472', 'net48', 'net481')) { `
         # Download reference assembly NuGet package `
         $package = \"Microsoft.NETFramework.ReferenceAssemblies.${version}\"; `
-        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version 1.0.3 -OutputDirectory ${Env:TEMP}\Packages; `
+        nuget install \"${package}\" -DirectDownload -ExcludeVersion -Version 1.0.3 -OutputDirectory ${Env:TEMP}\Packages -Source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json; `
         $contents = \"${Env:TEMP}\Packages\${package}\build\.NETFramework\"; `
         # Remove IntelliSense files `
         Get-ChildItem -File -Recurse -Path \"${contents}\" | `
