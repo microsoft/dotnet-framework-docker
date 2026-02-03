@@ -19,6 +19,9 @@
     "vs|ltsc2016|testAgentUrl": "https://aka.ms/vs/17/release/vs_TestAgent.exe",
     "vs|ltsc2016|buildToolsUrl": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
     "4.8|url": "https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/8494001c276a4b96804cde7829c04d7f/ndp48-x86-x64-allos-enu.exe",
-    "4.8.1|url": "https://download.visualstudio.microsoft.com/download/pr/6f083c7e-bd40-44d4-9e3f-ffba71ec8b09/3951fd5af6098f2c7e8ff5c331a0679c/ndp481-x86-x64-allos-enu.exe"
+    "4.8.1|url": "https://download.visualstudio.microsoft.com/download/pr/6f083c7e-bd40-44d4-9e3f-ffba71ec8b09/3951fd5af6098f2c7e8ff5c331a0679c/ndp481-x86-x64-allos-enu.exe",
+    "dotnet-public|source": "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json",
+    "roslyn|2.9.0|url": "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/flat2/microsoft.net.compilers/2.9.0/microsoft.net.compilers.2.9.0.nupkg",
+    "roslyn|3.6.0|url": "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/flat2/microsoft.net.compilers/3.6.0/microsoft.net.compilers.3.6.0.nupkg"
   }
 }
