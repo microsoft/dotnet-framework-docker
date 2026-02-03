@@ -1,4 +1,4 @@
-# Copilot Instructions for dotnet-framework-docker
+# Coding Agent Instructions for dotnet-framework-docker
 
 This repository contains the official Docker images for .NET Framework, published to Microsoft Container Registry (mcr.microsoft.com).
 
