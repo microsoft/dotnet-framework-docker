@@ -23,18 +23,6 @@ parameters:
 
 
 stages:
-- ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
-  - template: /eng/docker-tools/templates/stages/setup-service-connections.yml@self
-    parameters:
-      publishConfig: ${{ parameters.publishConfig }}
-      usesRegistries:
-        - ${{ parameters.publishConfig.InternalMirrorRegistry.server }}
-        - ${{ parameters.publishConfig.BuildRegistry.server }}
-        - ${{ parameters.publishConfig.PublishRegistry.server }}
-      serviceConnections:
-        - ${{ each serviceConnection in parameters.additionalServiceConnections }}:
-          - name: ${{ serviceConnection.name }}
-
 - template: /eng/docker-tools/templates/stages/dotnet/build-test-publish-repo.yml@self
   parameters:
     publishConfig: ${{ parameters.publishConfig }}
@@ -43,6 +31,7 @@ stages:
     versionsRepoRef: ${{ parameters.versionsRepoRef }}
     sourceBuildPipelineRunId: ${{ parameters.sourceBuildPipelineRunId }}
     noCache: ${{ parameters.noCache }}
+    additionalServiceConnections: ${{ parameters.additionalServiceConnections }}
 
     ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
       windowsAmdBuildJobTimeout: 330
