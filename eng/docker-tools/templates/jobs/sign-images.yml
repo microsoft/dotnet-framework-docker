@@ -30,6 +30,12 @@ jobs:
       publishConfig: ${{ parameters.publishConfig }}
       envFilePath: $(signingEnvFilePath)
 
+  - template: /eng/docker-tools/templates/steps/reference-service-connections.yml@self
+    parameters:
+      publishConfig: ${{ parameters.publishConfig }}
+      usesRegistries:
+        - ${{ parameters.publishConfig.BuildRegistry.server }}
+
   # Download merged image-info artifact from Post_Build stage (or from a previous pipeline run)
   - template: /eng/docker-tools/templates/steps/download-build-artifact.yml@self
     parameters:
