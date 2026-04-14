@@ -24,3 +24,6 @@
 
 # Visual Studio debug profile
 **/launchSettings.json
+
+# C# DevKit language server cache
+*.lscache

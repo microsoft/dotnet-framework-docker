@@ -89,6 +89,7 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDispo
         var tableRowRegex = windowsVersion switch
         {
             "ltsc2022" => Server2022TableRowRegex,
+            "ltsc2025" => Server2025TableRowRegex,
             _ => WindowsServerTableRowRegex
         };
 
@@ -141,4 +142,7 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDispo
 
     [GeneratedRegex(@"server.*21H2.*x64", RegexOptions.IgnoreCase, "en-US")]
     private static partial Regex Server2022TableRowRegex { get; }
+
+    [GeneratedRegex(@"24H2.*x64", RegexOptions.IgnoreCase, "en-US")]
+    private static partial Regex Server2025TableRowRegex { get; }
 }

@@ -57,10 +57,10 @@ Additionally, .NET Framework 4.8 and 4.8.1 can run apps that were built targetin
 
 Tags | Dockerfile | OS Version
 ---- | ---------- | ----------
-4.8.1-20251014-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/runtime/4.8.1/windowsservercore-ltsc2025/Dockerfile) | Windows Server Core 2025
-4.8.1-20251014-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](src/runtime/4.8.1/windowsservercore-ltsc2022/Dockerfile) | Windows Server Core 2022
-4.8-20251014-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](src/runtime/4.8/windowsservercore-ltsc2019/Dockerfile) | Windows Server Core 2019
-4.8-20251014-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/runtime/4.8/windowsservercore-ltsc2016/Dockerfile) | Windows Server Core 2016
+4.8.1-20260414-windowsservercore-ltsc2025, 4.8.1-windowsservercore-ltsc2025, 4.8.1 | [Dockerfile](src/runtime/4.8.1/windowsservercore-ltsc2025/Dockerfile) | Windows Server Core 2025
+4.8.1-20260414-windowsservercore-ltsc2022, 4.8.1-windowsservercore-ltsc2022, 4.8.1 | [Dockerfile](src/runtime/4.8.1/windowsservercore-ltsc2022/Dockerfile) | Windows Server Core 2022
+4.8-20260414-windowsservercore-ltsc2019, 4.8-windowsservercore-ltsc2019, 4.8, latest | [Dockerfile](src/runtime/4.8/windowsservercore-ltsc2019/Dockerfile) | Windows Server Core 2019
+4.8-20260414-windowsservercore-ltsc2016, 4.8-windowsservercore-ltsc2016, 4.8, latest | [Dockerfile](src/runtime/4.8/windowsservercore-ltsc2016/Dockerfile) | Windows Server Core 2016
 
 <!--End of generated tags-->
 
