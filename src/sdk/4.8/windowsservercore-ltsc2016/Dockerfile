@@ -1,7 +1,7 @@
 # escape=`
 
 ARG REPO=mcr.microsoft.com/dotnet/framework/runtime
-FROM $REPO:4.8-20251014-windowsservercore-ltsc2016
+FROM $REPO:4.8-20260414-windowsservercore-ltsc2016
 
 # Install NuGet CLI
 ENV NUGET_VERSION=7.3.0
