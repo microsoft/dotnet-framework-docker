@@ -10,11 +10,11 @@ ENV `
 
 RUN `
     # Apply latest patch
-    curl -fSLo patch.msu https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/9e7e9e65-f8e1-4c58-895a-03a4e4b27b16/public/windows11.0-kb5082420-x64-ndp481_e669d8241160acba1ade1a111a50a5702f15706e.msu `
+    curl -fSLo patch.msu https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/cc8ce9c1-fa92-4562-92ca-1fab4911143a/public/windows11.0-kb5087054-x64-ndp481_9f992b2552fd55390be19470a8fcfa2047952a43.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
-    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows11.0-KB5082420-x64-ndp481.cab `
+    && dism /Online /Quiet /Add-Package /PackagePath:C:\patch\windows11.0-KB5087054-x64-ndp481.cab `
     && rmdir /S /Q patch `
     `
     # Ngen top of assembly graph to optimize a set of frequently used assemblies
