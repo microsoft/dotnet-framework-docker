@@ -29,6 +29,10 @@ parameters:
   # token access during publish (e.g., kusto, marStatus). Shape: [{ name: string }]
   additionalServiceConnections: []
 
+  # When true, the merged image info is published as an OCI artifact to the publish
+  # registry instead of being committed to the GitHub versions repo.
+  useOciArtifactForImageInfo: false
+
 ################################################################################
 # Publish Images
 ################################################################################
@@ -86,3 +90,4 @@ stages:
       versionsRepoPath: ${{ parameters.versionsRepoPath }}
       overrideImageInfoCommit: ${{ parameters.overrideImageInfoCommit }}
       additionalServiceConnections: ${{ parameters.additionalServiceConnections }}
+      useOciArtifactForImageInfo: ${{ parameters.useOciArtifactForImageInfo }}

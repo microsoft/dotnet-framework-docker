@@ -15,6 +15,11 @@ parameters:
   # Service connections not in publishConfig.RegistryAuthentication that need OIDC
   # token access during publish (e.g., kusto, marStatus). Shape: [{ name: string }]
   additionalServiceConnections: []
+  # When true, the merged image info is published as an OCI artifact to the publish
+  # registry instead of being committed to the GitHub versions repo. Note that the
+  # `publishImageInfo` variable must also be set to 'true' for either form of image
+  # info publishing to run.
+  useOciArtifactForImageInfo: false
 
 jobs:
 - job: Publish
@@ -217,20 +222,32 @@ jobs:
       acr: ${{ parameters.publishConfig.PublishRegistry }}
       dataFile: $(artifactsPath)/eol-annotation-data/eol-annotation-data.json
 
-  - script: >
-      $(runImageBuilderCmd) publishImageInfo
-      '$(imageInfoContainerDir)/full-image-info-new.json'
-      '$(gitHubVersionsRepoInfo.userName)'
-      '$(gitHubVersionsRepoInfo.email)'
-      $(gitHubVersionsRepoInfo.authArgs)
-      --git-owner '$(gitHubVersionsRepoInfo.org)'
-      --git-repo '$(gitHubVersionsRepoInfo.repo)'
-      --git-branch '$(gitHubVersionsRepoInfo.branch)'
-      --git-path '$(gitHubImageInfoVersionsPath)'
-      $(dryRunArg)
-      $(imageBuilder.commonCmdArgs)
-    condition: and(succeeded(), eq(variables['publishImageInfo'], 'true'))
-    displayName: Publish Image Info
+  - ${{ if eq(parameters.useOciArtifactForImageInfo, true) }}:
+    - script: >
+        $(runAuthedImageBuilderCmd) publishImageInfoArtifact
+        '$(imageInfoContainerDir)/full-image-info-new.json'
+        $(dryRunArg)
+        $(imageBuilder.commonCmdArgs)
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        SYSTEM_OIDCREQUESTURI: $(System.OidcRequestUri)
+      condition: and(succeeded(), eq(variables['publishImageInfo'], 'true'))
+      displayName: Publish Image Info
+  - ${{ else }}:
+    - script: >
+        $(runImageBuilderCmd) publishImageInfo
+        '$(imageInfoContainerDir)/full-image-info-new.json'
+        '$(gitHubVersionsRepoInfo.userName)'
+        '$(gitHubVersionsRepoInfo.email)'
+        $(gitHubVersionsRepoInfo.authArgs)
+        --git-owner '$(gitHubVersionsRepoInfo.org)'
+        --git-repo '$(gitHubVersionsRepoInfo.repo)'
+        --git-branch '$(gitHubVersionsRepoInfo.branch)'
+        --git-path '$(gitHubImageInfoVersionsPath)'
+        $(dryRunArg)
+        $(imageBuilder.commonCmdArgs)
+      condition: and(succeeded(), eq(variables['publishImageInfo'], 'true'))
+      displayName: Publish Image Info
 
   # Task displayNames names are hardcoded to reference the task prefix used by 1ES official
   # pipelines in eng/docker-tools/templates/1es-official.yml.
