@@ -54,7 +54,7 @@ resources:
   - repository: 1ESPipelineTemplates
     type: git
     name: 1ESPipelineTemplates/1ESPipelineTemplates
-    ref: refs/tags/release
+    ref: refs/tags/release-3.12.2026-05-30-1
 
 extends:
   template: /eng/docker-tools/templates/task-prefix-decorator.yml@self
