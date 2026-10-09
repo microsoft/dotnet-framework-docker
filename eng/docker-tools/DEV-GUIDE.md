@@ -302,7 +302,7 @@ The publish stage does more than just push images. Here's the sequence:
 5. **Wait for Doc Ingestion** — Ensures README changes are live
 6. **Merge & Publish Image Info** — Updates the versions repo with new image metadata
 7. **Ingest Kusto Image Info** — Sends telemetry to Kusto for analytics
-8. **Generate & Apply EOL Annotations** — Marks images with end-of-life dates
+8. **Attach Lifecycle Metadata** - `attachLifecycleMetadata unsupported` marks unsupported images with end-of-life dates
 9. **Post Publish Notification** — Creates GitHub issues/notifications about the publish
 
 ### Dry-Run Mode
@@ -352,12 +352,10 @@ The system has built-in retry logic but requires manual intervention after repea
 
 Once you've fixed the underlying problem (Dockerfile change, test fix, etc.) and have a successful build:
 
-1. Navigate to the successful pipeline run in Azure DevOps
-2. Add the `autobuilder` label to that run
-3. This signals to the infrastructure that a successful build has occurred
-4. The system will resume automatic rebuilds for that image as needed
+1. Manually queue a build for the affected image paths
+2. After the build succeeds, the system will resume automatic rebuilds for that image as needed
 
-The `autobuilder` label is how the infrastructure tracks that the failure cycle has been broken and normal operations can resume.
+The infrastructure considers the three most recent pipeline runs, so any successful run breaks the failure cycle.
 
 ---
 
@@ -390,6 +388,22 @@ To force a rebuild regardless of cache state, set the `noCache` parameter to `tr
 ---
 
 ## Common Customization Patterns
+
+### Pattern: Staging Files into Docker Build Contexts
+
+Use `customPreImageBuilderBuildSteps` to modify repository content immediately before the
+repository is copied into the Linux ImageBuilder image. For example, a repository can stage
+shared `eng/common` files next to Dockerfiles whose build contexts cannot access the repository
+root:
+
+```yaml
+customPreImageBuilderBuildSteps:
+- powershell: ./eng/Stage-EngCommon.ps1
+  displayName: Stage eng/common in Docker Build Contexts
+```
+
+The steps run once per Linux build job, after ImageBuilder is available and before the
+`Dockerfile.WithRepo` image is built.
 
 ### Pattern: Adding Build Arguments
 
