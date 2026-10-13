@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Microsoft.DotNet.Framework.UpdateDependencies;
+using Microsoft.DotNet.Framework.UpdateDependencies.NuGet;
 using Microsoft.DotNet.Framework.UpdateDependencies.UpdateCatalog;
 using System.CommandLine;
 
@@ -23,7 +24,14 @@ var updateLcusCommand = new Command(
     manifestFileOption
 };
 
-var rootCommand = new RootCommand() { updateLcusCommand };
+var updateNuGetCommand = new Command(
+    name: "update-nuget",
+    description: "Update the NuGet version variable in the specified manifest file.")
+{
+    manifestFileOption
+};
+
+var rootCommand = new RootCommand() { updateLcusCommand, updateNuGetCommand };
 
 updateLcusCommand.SetAction(
     async parseResult =>
@@ -38,6 +46,23 @@ updateLcusCommand.SetAction(
         var catalog = new UpdateCatalogClient(httpClient);
         var lcuUpdater = new LcuVariableUpdater(catalog);
         await manifestVersionsContext.ApplyAsync(lcuUpdater);
+
+        await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
+    }
+);
+
+updateNuGetCommand.SetAction(
+    async parseResult =>
+    {
+        string manifestFilePath = parseResult.GetRequiredValue(manifestFileOption);
+
+        var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
+        var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
+
+        using var httpClient = new HttpClient();
+        var nuget = new NuGetClient(httpClient);
+        var nugetUpdater = new NuGetVariableUpdater(nuget);
+        await manifestVersionsContext.ApplyAsync(nugetUpdater);
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
     }
