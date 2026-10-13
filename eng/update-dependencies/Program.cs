@@ -31,7 +31,19 @@ var updateNuGetCommand = new Command(
     manifestFileOption
 };
 
-var rootCommand = new RootCommand() { updateLcusCommand, updateNuGetCommand };
+var updateReferenceAssembliesCommand = new Command(
+    name: "update-referenceassemblies",
+    description: "Update the reference assemblies version variable in the specified manifest file.")
+{
+    manifestFileOption
+};
+
+var rootCommand = new RootCommand()
+{
+    updateLcusCommand,
+    updateNuGetCommand,
+    updateReferenceAssembliesCommand
+};
 
 updateLcusCommand.SetAction(
     async parseResult =>
@@ -63,6 +75,23 @@ updateNuGetCommand.SetAction(
         var nuget = new NuGetClient(httpClient);
         var nugetUpdater = new NuGetVariableUpdater(nuget);
         await manifestVersionsContext.ApplyAsync(nugetUpdater);
+
+        await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
+    }
+);
+
+updateReferenceAssembliesCommand.SetAction(
+    async parseResult =>
+    {
+        string manifestFilePath = parseResult.GetRequiredValue(manifestFileOption);
+
+        var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
+        var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
+
+        using var httpClient = new HttpClient();
+        var feed = new NuGetFeedClient(httpClient);
+        var updater = new ReferenceAssembliesVariableUpdater(feed);
+        await manifestVersionsContext.ApplyAsync(updater);
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
     }
