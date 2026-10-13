@@ -10,7 +10,7 @@ ENV `
 
 RUN `
     # Apply latest patch
-    curl -fSLo patch.msu https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/aa6d5327-d621-4af8-8340-5a291e597f6b/public/windows11.0-kb5126052-x64-ndp481_082cfd5816914c794b261ea68bf6c91419fc32a8.msu `
+    curl -fSLo patch.msu https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/160d2d32-f1f8-42d8-8c04-db9b7c3cdb71/public/windows11.0-kb5127690-x64-ndp481_2799c97224d973d4b106f7b02cf27a493c38ed95.msu `
     && mkdir patch `
     && expand patch.msu patch -F:* `
     && del /F /Q patch.msu `
