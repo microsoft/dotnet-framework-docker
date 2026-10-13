@@ -3,13 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using Microsoft.DotNet.Framework.UpdateDependencies;
+using Microsoft.DotNet.Framework.UpdateDependencies.UpdateCatalog;
 using System.CommandLine;
 
 // Command-line tool for updating dependency variables in .NET Framework Docker
 // manifest files.
-//
-// Before running, you may need to build the app and then run:
-// pwsh bin/Debug/net*/playwright.ps1 install
 //
 // Usage: dotnet run -- --help
 
@@ -36,10 +34,10 @@ updateLcusCommand.SetAction(
         var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
         var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
 
-        await using (var lcuUpdater = new LcuVariableUpdater())
-        {
-            await manifestVersionsContext.ApplyAsync(lcuUpdater);
-        }
+        using var httpClient = new HttpClient();
+        var catalog = new UpdateCatalogClient(httpClient);
+        var lcuUpdater = new LcuVariableUpdater(catalog);
+        await manifestVersionsContext.ApplyAsync(lcuUpdater);
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
     }
