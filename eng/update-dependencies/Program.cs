@@ -4,6 +4,7 @@
 
 using Microsoft.DotNet.Framework.UpdateDependencies;
 using Microsoft.DotNet.Framework.UpdateDependencies.NuGet;
+using Microsoft.DotNet.Framework.UpdateDependencies.ServiceMonitor;
 using Microsoft.DotNet.Framework.UpdateDependencies.UpdateCatalog;
 using System.CommandLine;
 
@@ -38,11 +39,19 @@ var updateReferenceAssembliesCommand = new Command(
     manifestFileOption
 };
 
+var updateServiceMonitorCommand = new Command(
+    name: "update-servicemonitor",
+    description: "Update the ServiceMonitor version variable in the specified manifest file.")
+{
+    manifestFileOption
+};
+
 var rootCommand = new RootCommand()
 {
     updateLcusCommand,
     updateNuGetCommand,
-    updateReferenceAssembliesCommand
+    updateReferenceAssembliesCommand,
+    updateServiceMonitorCommand
 };
 
 updateLcusCommand.SetAction(
@@ -91,6 +100,22 @@ updateReferenceAssembliesCommand.SetAction(
         using var httpClient = new HttpClient();
         var feed = new NuGetFeedClient(httpClient);
         var updater = new ReferenceAssembliesVariableUpdater(feed);
+        await manifestVersionsContext.ApplyAsync(updater);
+
+        await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
+    }
+);
+
+updateServiceMonitorCommand.SetAction(
+    async parseResult =>
+    {
+        string manifestFilePath = parseResult.GetRequiredValue(manifestFileOption);
+
+        var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
+        var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
+
+        var serviceMonitor = new ServiceMonitorClient();
+        var updater = new ServiceMonitorVariableUpdater(serviceMonitor);
         await manifestVersionsContext.ApplyAsync(updater);
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);

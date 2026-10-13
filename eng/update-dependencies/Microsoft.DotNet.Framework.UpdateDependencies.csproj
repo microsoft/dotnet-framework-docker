@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="NuGet.Versioning" Version="7.9.0" />
+    <PackageReference Include="Octokit" Version="14.0.0" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta5.25306.1" />
   </ItemGroup>
 
