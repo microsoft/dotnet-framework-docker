@@ -4,7 +4,6 @@
 
 using Microsoft.DotNet.Framework.UpdateDependencies;
 using Microsoft.DotNet.Framework.UpdateDependencies.NuGet;
-using Microsoft.DotNet.Framework.UpdateDependencies.ServiceMonitor;
 using Microsoft.DotNet.Framework.UpdateDependencies.UpdateCatalog;
 using System.CommandLine;
 
@@ -81,8 +80,7 @@ updateNuGetCommand.SetAction(
         var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
 
         using var httpClient = new HttpClient();
-        var nuget = new NuGetClient(httpClient);
-        var nugetUpdater = new NuGetVariableUpdater(nuget);
+        var nugetUpdater = new NuGetVariableUpdater(httpClient);
         await manifestVersionsContext.ApplyAsync(nugetUpdater);
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
@@ -114,8 +112,7 @@ updateServiceMonitorCommand.SetAction(
         var manifestVersionsContent = await File.ReadAllTextAsync(manifestFilePath);
         var manifestVersionsContext = new ManifestVariableContext(manifestVersionsContent);
 
-        var serviceMonitor = new ServiceMonitorClient();
-        var updater = new ServiceMonitorVariableUpdater(serviceMonitor);
+        var updater = new ServiceMonitorVariableUpdater();
         await manifestVersionsContext.ApplyAsync(updater);
 
         await File.WriteAllTextAsync(manifestFilePath, manifestVersionsContext.Content);
