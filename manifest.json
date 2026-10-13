@@ -40,8 +40,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2022-Runtime-DateStamp)-windowsservercore-ltsc2022": {},
-                "4.8.1-windowsservercore-ltsc2022": {}
+                "4.8.1-windowsservercore-ltsc2022": {},
+                "4.8.1-$(4.8.1-ltsc2022-Runtime-DateStamp)-windowsservercore-ltsc2022": {}
               }
             },
             {
@@ -50,8 +50,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2025",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2025-Runtime-DateStamp)-windowsservercore-ltsc2025": {},
-                "4.8.1-windowsservercore-ltsc2025": {}
+                "4.8.1-windowsservercore-ltsc2025": {},
+                "4.8.1-$(4.8.1-ltsc2025-Runtime-DateStamp)-windowsservercore-ltsc2025": {}
               }
             }
           ]
@@ -69,8 +69,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(4.8-ltsc2016-Runtime-DateStamp)-windowsservercore-ltsc2016": {},
-                "4.8-windowsservercore-ltsc2016": {}
+                "4.8-windowsservercore-ltsc2016": {},
+                "4.8-$(4.8-ltsc2016-Runtime-DateStamp)-windowsservercore-ltsc2016": {}
               }
             },
             {
@@ -79,8 +79,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(4.8-ltsc2019-Runtime-DateStamp)-windowsservercore-ltsc2019": {},
-                "4.8-windowsservercore-ltsc2019": {}
+                "4.8-windowsservercore-ltsc2019": {},
+                "4.8-$(4.8-ltsc2019-Runtime-DateStamp)-windowsservercore-ltsc2019": {}
               }
             }
           ]
@@ -121,8 +121,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2022-Sdk-DateStamp)-windowsservercore-ltsc2022": {},
-                "4.8.1-windowsservercore-ltsc2022": {}
+                "4.8.1-windowsservercore-ltsc2022": {},
+                "4.8.1-$(4.8.1-ltsc2022-Sdk-DateStamp)-windowsservercore-ltsc2022": {}
               }
             },
             {
@@ -134,8 +134,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2025",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2025-Sdk-DateStamp)-windowsservercore-ltsc2025": {},
-                "4.8.1-windowsservercore-ltsc2025": {}
+                "4.8.1-windowsservercore-ltsc2025": {},
+                "4.8.1-$(4.8.1-ltsc2025-Sdk-DateStamp)-windowsservercore-ltsc2025": {}
               }
             }
           ]
@@ -156,8 +156,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(4.8-ltsc2016-Sdk-DateStamp)-windowsservercore-ltsc2016": {},
-                "4.8-windowsservercore-ltsc2016": {}
+                "4.8-windowsservercore-ltsc2016": {},
+                "4.8-$(4.8-ltsc2016-Sdk-DateStamp)-windowsservercore-ltsc2016": {}
               }
             },
             {
@@ -169,8 +169,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(4.8-ltsc2019-Sdk-DateStamp)-windowsservercore-ltsc2019": {},
-                "4.8-windowsservercore-ltsc2019": {}
+                "4.8-windowsservercore-ltsc2019": {},
+                "4.8-$(4.8-ltsc2019-Sdk-DateStamp)-windowsservercore-ltsc2019": {}
               }
             }
           ]
@@ -211,8 +211,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2022-Aspnet-DateStamp)-windowsservercore-ltsc2022": {},
-                "4.8.1-windowsservercore-ltsc2022": {}
+                "4.8.1-windowsservercore-ltsc2022": {},
+                "4.8.1-$(4.8.1-ltsc2022-Aspnet-DateStamp)-windowsservercore-ltsc2022": {}
               }
             },
             {
@@ -224,8 +224,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2025",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2025-Aspnet-DateStamp)-windowsservercore-ltsc2025": {},
-                "4.8.1-windowsservercore-ltsc2025": {}
+                "4.8.1-windowsservercore-ltsc2025": {},
+                "4.8.1-$(4.8.1-ltsc2025-Aspnet-DateStamp)-windowsservercore-ltsc2025": {}
               }
             }
           ]
@@ -246,8 +246,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(4.8-ltsc2016-Aspnet-DateStamp)-windowsservercore-ltsc2016": {},
-                "4.8-windowsservercore-ltsc2016": {}
+                "4.8-windowsservercore-ltsc2016": {},
+                "4.8-$(4.8-ltsc2016-Aspnet-DateStamp)-windowsservercore-ltsc2016": {}
               }
             },
             {
@@ -259,8 +259,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(4.8-ltsc2019-Aspnet-DateStamp)-windowsservercore-ltsc2019": {},
-                "4.8-windowsservercore-ltsc2019": {}
+                "4.8-windowsservercore-ltsc2019": {},
+                "4.8-$(4.8-ltsc2019-Aspnet-DateStamp)-windowsservercore-ltsc2019": {}
               }
             }
           ]
@@ -301,8 +301,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2022",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2022-Wcf-DateStamp)-windowsservercore-ltsc2022": {},
-                "4.8.1-windowsservercore-ltsc2022": {}
+                "4.8.1-windowsservercore-ltsc2022": {},
+                "4.8.1-$(4.8.1-ltsc2022-Wcf-DateStamp)-windowsservercore-ltsc2022": {}
               }
             },
             {
@@ -314,8 +314,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2025",
               "tags": {
-                "4.8.1-$(4.8.1-ltsc2025-Wcf-DateStamp)-windowsservercore-ltsc2025": {},
-                "4.8.1-windowsservercore-ltsc2025": {}
+                "4.8.1-windowsservercore-ltsc2025": {},
+                "4.8.1-$(4.8.1-ltsc2025-Wcf-DateStamp)-windowsservercore-ltsc2025": {}
               }
             }
           ]
@@ -336,8 +336,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2016",
               "tags": {
-                "4.8-$(4.8-ltsc2016-Wcf-DateStamp)-windowsservercore-ltsc2016": {},
-                "4.8-windowsservercore-ltsc2016": {}
+                "4.8-windowsservercore-ltsc2016": {},
+                "4.8-$(4.8-ltsc2016-Wcf-DateStamp)-windowsservercore-ltsc2016": {}
               }
             },
             {
@@ -349,8 +349,8 @@
               "os": "windows",
               "osVersion": "windowsservercore-ltsc2019",
               "tags": {
-                "4.8-$(4.8-ltsc2019-Wcf-DateStamp)-windowsservercore-ltsc2019": {},
-                "4.8-windowsservercore-ltsc2019": {}
+                "4.8-windowsservercore-ltsc2019": {},
+                "4.8-$(4.8-ltsc2019-Wcf-DateStamp)-windowsservercore-ltsc2019": {}
               }
             }
           ]
