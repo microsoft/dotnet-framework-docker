@@ -118,6 +118,6 @@ internal sealed partial class LcuVariableUpdater(UpdateCatalogClient catalog) : 
     [GeneratedRegex(@"server.*21H2.*x64", RegexOptions.IgnoreCase, "en-US")]
     private static partial Regex Server2022TitleRegex { get; }
 
-    [GeneratedRegex(@"24H2.*x64", RegexOptions.IgnoreCase, "en-US")]
+    [GeneratedRegex(@"server.*24H2.*x64", RegexOptions.IgnoreCase, "en-US")]
     private static partial Regex Server2025TitleRegex { get; }
 }
