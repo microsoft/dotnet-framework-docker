@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.RegularExpressions;
-using Microsoft.Playwright;
+using Microsoft.DotNet.Framework.UpdateDependencies.UpdateCatalog;
 
 namespace Microsoft.DotNet.Framework.UpdateDependencies;
 
@@ -11,27 +11,8 @@ namespace Microsoft.DotNet.Framework.UpdateDependencies;
 /// Updates Latest Cumulative Update (LCU) download URLs variables by fetching
 /// the most recent update information from the Microsoft Update Catalog.
 /// </summary>
-internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDisposable
+internal sealed partial class LcuVariableUpdater(UpdateCatalogClient catalog) : IVariableUpdater
 {
-    private static readonly BrowserNewContextOptions s_newBrowserOptions = new() { Locale = "en-US" };
-
-    private readonly Lazy<Task<IPlaywright>> _playwright;
-    private readonly Lazy<Task<IBrowser>> _browser;
-
-    public LcuVariableUpdater()
-    {
-        _playwright = new Lazy<Task<IPlaywright>>(Playwright.Playwright.CreateAsync);
-        _browser = new(
-            async () =>
-            {
-                var playwright = await _playwright.Value;
-                return await playwright.Chromium.LaunchAsync(
-                    new BrowserTypeLaunchOptions { Headless = true }
-                );
-            }
-        );
-    }
-
     /// <summary>
     /// Matches LCU variable names in the format "lcu|{version}|{framework}"
     /// where version contains digits and periods. Examples:
@@ -77,72 +58,66 @@ internal sealed partial class LcuVariableUpdater : IVariableUpdater, IAsyncDispo
     /// <returns>KB article download URL</returns>
     private async Task<string> GetKbDownloadUrlAsync(string kb, string windowsVersion)
     {
-        var browser = await _browser.Value;
-        var context = await browser.NewContextAsync(s_newBrowserOptions);
-        var page = await context.NewPageAsync();
-
-        await page.GotoAsync($"https://catalog.update.microsoft.com/Search.aspx?q={kb}");
-
         // Some windows versions require a more precise regex to match the
         // correct LCU in on the update catalog page. By convention, the
         // Windows version is the second part of the version name.
-        var tableRowRegex = windowsVersion switch
+        Regex titleRegex = windowsVersion switch
         {
-            "ltsc2022" => Server2022TableRowRegex,
-            "ltsc2025" => Server2025TableRowRegex,
-            _ => WindowsServerTableRowRegex
+            "ltsc2022" => Server2022TitleRegex,
+            "ltsc2025" => Server2025TitleRegex,
+            _ => WindowsServerTitleRegex
         };
 
-        var downloadPopUpPage = await page.RunAndWaitForPopupAsync(
-            async () =>
-            {
-                await page
-                    .GetByRole(AriaRole.Row, new PageGetByRoleOptions() { NameRegex = tableRowRegex, Exact = true })
-                    .GetByRole(AriaRole.Button)
-                    .ClickAsync();
-            }
-        );
+        // A KB has an update for each Windows version and architecture.
+        IReadOnlyList<CatalogUpdate> results = await catalog.SearchAsync(kb);
+        CatalogUpdate[] matchingUpdates = results
+            .Where(result => titleRegex.IsMatch(result.Title))
+            .ToArray();
 
-        var url = await downloadPopUpPage
-            .GetByRole(AriaRole.Link, s_getDownloadLinkOptions)
-            .GetAttributeAsync("href");
+        CatalogUpdate update = matchingUpdates switch
+        {
+            [var match] => match,
 
-        await context.CloseAsync();
+            [] => throw new InvalidOperationException(
+                $"No Update Catalog result for {kb} matches {windowsVersion}. "
+                    + $"Results: [{string.Join("; ", results.Select(result => result.Title))}]"),
 
-        Console.WriteLine($"{kb} download URL: {url}");
+            _ => throw new InvalidOperationException(
+                $"Multiple Update Catalog results for {kb} match {windowsVersion}: "
+                    + $"[{string.Join("; ", matchingUpdates.Select(match => match.Title))}]"),
+        };
 
-        return url ?? "";
+        IReadOnlyList<string> downloadUrls = await catalog.GetDownloadUrlsAsync(update);
+        string[] msuUrls = downloadUrls
+            .Where(url => MsuUrlRegex.IsMatch(url))
+            .ToArray();
+
+        string msuUrl = msuUrls switch
+        {
+            [var url] => url,
+
+            [] => throw new InvalidOperationException(
+                $"No MSU download URL for '{update.Title}'. URLs: [{string.Join("; ", downloadUrls)}]"),
+
+            _ => throw new InvalidOperationException(
+                $"Multiple MSU download URLs for '{update.Title}': [{string.Join("; ", msuUrls)}]"),
+        };
+
+        Console.WriteLine($"{kb} download URL: {msuUrl}");
+
+        return msuUrl;
     }
 
-    public async ValueTask DisposeAsync()
-    {
-        if (_browser.IsValueCreated)
-        {
-            var browser = await _browser.Value;
-            await browser.DisposeAsync();
-        }
-
-        if (_playwright.IsValueCreated)
-        {
-            var playwright = await _playwright.Value;
-            playwright.Dispose();
-        }
-    }
-
-    private static readonly PageGetByRoleOptions s_getDownloadLinkOptions = new()
-    {
-        NameRegex = DownloadLinkRegex,
-    };
-
-    [GeneratedRegex(@"^windows.*\.msu$")]
-    private static partial Regex DownloadLinkRegex { get; }
+    // The file name at the end of the URL, e.g. ".../windows10.0-kb5126422-x64-ndp481_1e92b2.msu".
+    [GeneratedRegex(@"/windows[^/]*\.msu$")]
+    private static partial Regex MsuUrlRegex { get; }
 
     [GeneratedRegex(@"server.*x64", RegexOptions.IgnoreCase, "en-US")]
-    private static partial Regex WindowsServerTableRowRegex { get; }
+    private static partial Regex WindowsServerTitleRegex { get; }
 
     [GeneratedRegex(@"server.*21H2.*x64", RegexOptions.IgnoreCase, "en-US")]
-    private static partial Regex Server2022TableRowRegex { get; }
+    private static partial Regex Server2022TitleRegex { get; }
 
-    [GeneratedRegex(@"24H2.*x64", RegexOptions.IgnoreCase, "en-US")]
-    private static partial Regex Server2025TableRowRegex { get; }
+    [GeneratedRegex(@"server.*24H2.*x64", RegexOptions.IgnoreCase, "en-US")]
+    private static partial Regex Server2025TitleRegex { get; }
 }
